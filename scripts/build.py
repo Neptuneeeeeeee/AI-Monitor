@@ -149,8 +149,8 @@ def main() -> int:
         if channel == 'local' and (project/'tests').is_dir():
             run([sys.executable,'-m','unittest','discover','-s','tests','-v'],project,env,180)
         run(['/usr/bin/swift','run','--package-path',str(PUBLIC),'--scratch-path',str(cache/'CoreChecks'),'-j',jobs,'MonitorCoreChecks'],PUBLIC,env,900)
-    run(['/usr/bin/swift','build','--package-path',str(project),'--scratch-path',str(cache/'SwiftPM'),'-c','release','--product',profile['executableName'],'-j',jobs],project,env,1200)
-    bin_path = Path(run(['/usr/bin/swift','build','--package-path',str(project),'--scratch-path',str(cache/'SwiftPM'),'-c','release','--show-bin-path'],project,env,120,True))
+    run(['/usr/bin/swift','build','--disable-build-manifest-caching','--package-path',str(project),'--scratch-path',str(cache/'SwiftPM'),'-c','release','--product',profile['executableName'],'-j',jobs],project,env,1200)
+    bin_path = Path(run(['/usr/bin/swift','build','--disable-build-manifest-caching','--package-path',str(project),'--scratch-path',str(cache/'SwiftPM'),'-c','release','--show-bin-path'],project,env,120,True))
     stamp = dt.datetime.now(dt.timezone.utc).strftime('%Y%m%dT%H%M%SZ')
     stage = cache/'Packaging'/uuid.uuid4().hex;stage.mkdir(parents=True,mode=0o700)
     app = stage/(profile['displayName']+'.app')

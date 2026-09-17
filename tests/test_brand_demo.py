@@ -46,3 +46,7 @@ class BrandDemoTests(unittest.TestCase):
         text=(ROOT/'Sources/MonitorShared/BrandStyle.swift').read_text()
         self.assertIn('image.isTemplate = false',text)
         self.assertIn('renderingMode(.original)',text)
+
+    def test_shared_new_files_are_replanned(self):
+        text=(ROOT/"scripts/build.py").read_text()
+        self.assertEqual(text.count("--disable-build-manifest-caching"),2)
