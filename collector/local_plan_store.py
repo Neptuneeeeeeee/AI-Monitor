@@ -4,12 +4,38 @@ from contextlib import closing
 from pathlib import Path
 import shutil
 import sqlite3
+import subprocess
+import sys
 import tempfile
 from core import MonitorError
 
 ALLOWED_KEYS = {'cursorAuth/accessToken', 'windsurf.settings.cachedPlanInfo'}
-MAX_DATABASE_BYTES = 128 * 1024 * 1024
+# Cursor's state database may include large unrelated app state. On APFS we
+# clone blocks, then query only one allowlisted row in the disposable clone.
+MAX_DATABASE_BYTES = 2 * 1024 * 1024 * 1024
+MAX_FALLBACK_COPY_BYTES = 128 * 1024 * 1024
 MAX_VALUE_BYTES = 256 * 1024
+
+
+def snapshot_copy(source, target):
+    if source.is_symlink():
+        raise MonitorError('unavailable', '拒绝符号链接形式的应用数据库。')
+    if sys.platform == 'darwin':
+        # cp -c requests an APFS copy-on-write clone; no source sidecars are opened.
+        try:
+            done = subprocess.run(['/bin/cp', '-c', str(source), str(target)],
+                                  stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL, timeout=15)
+            if done.returncode == 0:
+                os.chmod(target, 0o600)
+                return
+        except (OSError, subprocess.TimeoutExpired):
+            pass
+        if target.exists():
+            target.unlink()
+    if source.stat().st_size > MAX_FALLBACK_COPY_BYTES:
+        raise MonitorError('unavailable', '当前磁盘不支持快速快照且应用数据库较大，未读取聊天内容或改写原数据库。')
+    shutil.copyfile(source, target)
+    os.chmod(target, 0o600)
 
 
 def file_state(paths):
@@ -46,8 +72,7 @@ def read_app_value(database, key):
                 for source, state, suffix in zip(paths, before, ('', '-wal')):
                     if state:
                         target = Path(str(copy) + suffix)
-                        shutil.copyfile(source, target)
-                        os.chmod(target, 0o600)
+                        snapshot_copy(source, target)
                 if before != file_state(paths):
                     continue
                 with closing(sqlite3.connect(str(copy), timeout=0.25)) as connection:

@@ -26,6 +26,12 @@ PUBLIC_KEYS = {'id', 'name', 'status', 'source', 'message', 'plan', 'fetchedAt',
 
 
 def generation(pid, region):
+    if pid == 'cursor':
+        # App DB mtime also changes for unrelated UI/chat state. Track only the
+        # selected session credential digest; never serialize the token itself.
+        from local_plan_store import read_app_value
+        token, _ = read_app_value(HOME / DB_PATHS['cursor'], 'cursorAuth/accessToken')
+        return hashlib.sha256(token.encode()).hexdigest() if token else None
     # File metadata is a conservative cache-invalidation guard, not proof of identity.
     # Unknown or local Antigravity identity: never reuse a failed fetch as current data.
     if pid == 'antigravity':

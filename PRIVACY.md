@@ -19,3 +19,7 @@ Cursor reads only the selected application's `cursorAuth/accessToken` row and se
 MiniMax's subscription key is stored in this edition's Keychain helper with separate China/international service names. `plan-connections.json` contains only the selected region and a random credential revision. A key is never automatically retried against another region. Key changes invalidate the affected cached context without clearing rate-limit gates or API balance accounts.
 
 Kiro runs the exact official `kiro-cli chat --no-interactive /usage` command with a deadline, no prompt and no tool-trust escalation. Kiro CLI can refresh its own authentication; installing custom CLI hooks/settings is outside this app's control. No new adapter is enabled automatically. Usage returned as an estimate or local cache is marked accordingly.
+
+### Large local application databases
+
+On macOS/APFS, the collector uses copy-on-write database/WAL snapshots in an owner-only temporary directory, then queries only the allowlisted login or quota row. The snapshot can contain unrelated database blocks, but chat rows are not queried or uploaded. Source databases are never checkpointed or modified by the collector. Snapshots have a 2 GiB ceiling; without clone support, byte-copy fallback remains capped at 128 MiB. Temporary files are removed after each read.

@@ -118,6 +118,16 @@ public enum MenuBarMapping {
             }
             var candidates = provider.windows.filter { $0.durationMinutes == 300 && !$0.isExtra && $0.unit != "MCP" }
             var period = "5h", label = "5 小时"
+            if candidates.isEmpty && id == "codex" {
+                // Free and other account types may expose an official primary
+                // window other than five hours (observed: 30 days). Keep its
+                // actual period/label; never relabel a monthly quota as Session.
+                candidates = provider.windows.filter {
+                    $0.id == "primary" && $0.safePercent != nil &&
+                    ($0.durationMinutes.map { $0.isFinite && $0 > 0 } ?? false)
+                }
+                if let primary = candidates.first { period = "provider"; label = primary.label }
+            }
             if candidates.isEmpty && id == "copilot" {
                 candidates = provider.windows.filter { $0.id == "premium_interactions" && $0.safePercent != nil }
                 period = "month"; label = "每月 Premium"

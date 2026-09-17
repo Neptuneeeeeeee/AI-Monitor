@@ -123,18 +123,18 @@ def csrf_for(command, executable):
 
 
 def local_servers():
-    rc, out = run(['/bin/ps', '-U', str(os.getuid()), '-ww', '-o', 'pid=,comm='], timeout=4)
+    rc, out = run(['/bin/ps', '-U', str(os.getuid()), '-ww', '-o', 'pid=,comm='], timeout=12)
     if rc:
         raise MonitorError('unavailable', '无法检查当前用户的 Antigravity 进程，请稍后重试。')
     processes = official_processes(out.decode('utf-8', 'replace'))
     servers, missing_auth = [], False
     for pid, executable in processes[:3]:
-        rc, args = run(['/bin/ps', '-p', str(pid), '-ww', '-o', 'command='], timeout=4)
+        rc, args = run(['/bin/ps', '-p', str(pid), '-ww', '-o', 'command='], timeout=12)
         csrf = csrf_for(args.decode('utf-8', 'replace'), executable) if rc == 0 else None
         if not csrf:
             missing_auth = True
             continue
-        rc, listeners = run(['/usr/sbin/lsof', '-nP', '-a', '-p', str(pid), '-iTCP', '-sTCP:LISTEN', '-Fn'], timeout=4)
+        rc, listeners = run(['/usr/sbin/lsof', '-nP', '-a', '-p', str(pid), '-iTCP', '-sTCP:LISTEN', '-Fn'], timeout=12)
         if rc not in (0, 1):
             continue
         for port in parse_listeners(listeners.decode('utf-8', 'replace'))[:4]:

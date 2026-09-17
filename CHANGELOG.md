@@ -1,5 +1,13 @@
 # 1.9.1 — Official-source icons and disconnected interactive preview
 
+## 1.9.2 — Real-client compatibility fixes
+
+- Allow bounded APFS copy-on-write snapshots for larger Cursor state databases; only the selected login row is queried, never chat rows. Large byte-copy fallbacks remain disallowed.
+- Scope Cursor cache generation to its login-session digest instead of unrelated application database modification times.
+- Keep Codex app-server and Antigravity local process discovery bounded, while allowing cold-start delays on a busy Mac.
+- Display an official non-five-hour Codex primary window with its own label; a real zero is not treated as missing data.
+- These changes do not alter credentials, the private Local boundary, or release permissions.
+
 Four new plan logos are bundled from vendor sources. A labelled --demo window uses production views with isolated preferences and denies real account/keychain/system actions.
 
 # Changelog
