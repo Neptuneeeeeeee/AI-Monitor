@@ -53,7 +53,7 @@ import MonitorCore
         let icon = MenuBarIcon.make(slots: store.iconSlots, style: store.preferences.iconStyle, threshold: store.preferences.lowThreshold)
         try png(Image(nsImage: icon).padding(6).background(Color.white).environment(\.colorScheme, .light), output.appendingPathComponent("menu-icon-\(source).png"))
         if fixture {
-            for count in 0...6 {
+            for count in 0...ProviderInfo.all.count {
                 let testSlots = ProviderInfo.defaultOrder.prefix(count).map { MenuBarSlot(providerID: $0, name: $0, percent: 100, state: "known", reason: "synthetic count test") }
                 let testIcon = MenuBarIcon.make(slots: testSlots, style: "mono", threshold: 25)
                 try png(Image(nsImage: testIcon).padding(6).background(Color.white).environment(\.colorScheme, .light), output.appendingPathComponent("menu-count-\(count).png"))
@@ -87,6 +87,22 @@ import MonitorCore
             store.api.editingID = store.api.accounts.first(where:{$0.provider == .openai})?.id
             try png(MonitorPanel(store: store), output.appendingPathComponent("api-editor-fixture.png"))
             store.api.editingID = nil; store.showSettings = false; store.apiMode = false
+            let savedSnapshot = store.snapshot; let savedEnabled = store.enabled
+            store.enabled = ["cursor", "minimax", "windsurf", "kiro"]
+            store.snapshot = Snapshot(generatedAt: stamp, providers: [
+                ProviderResult(id:"cursor",name:"Cursor",plan:"pro",fetchedAt:stamp,windows:[
+                    QuotaWindow(id:"cursor-monthly",label:"套餐 · 本月",remainingPercent:68,resetAt:stamp+12*86400,kind:"monthly")]),
+                ProviderResult(id:"minimax",name:"MiniMax",plan:"Max",fetchedAt:stamp,windows:[
+                    QuotaWindow(id:"minimax-0-5h",label:"general · 当前窗口",remainingPercent:42,resetAt:stamp+7200,durationMinutes:300),
+                    QuotaWindow(id:"minimax-0-weekly",label:"general · 每周",remainingPercent:73,resetAt:stamp+4*86400,durationMinutes:10080)]),
+                ProviderResult(id:"windsurf",name:"Windsurf",status:"stale",plan:"pro",fetchedAt:stamp-1800,windows:[
+                    QuotaWindow(id:"windsurf-daily",label:"每日额度 · 缓存",remainingPercent:80,resetAt:stamp+8*3600,durationMinutes:1440),
+                    QuotaWindow(id:"windsurf-weekly",label:"每周额度 · 缓存",remainingPercent:60,resetAt:stamp+3*86400,durationMinutes:10080)],note:"仅为模拟缓存，非实时读数。"),
+                ProviderResult(id:"kiro",name:"Kiro",plan:"KIRO PRO",fetchedAt:stamp,windows:[
+                    QuotaWindow(id:"kiro-monthly",label:"套餐 Credits · 本月",remainingPercent:37.5,unit:"credits",remaining:375,limit:1000,kind:"monthly")])])
+            try png(MonitorPanel(store:store), output.appendingPathComponent("expanded-plans-fixture.png"))
+            try png(MiniMaxConnectionEditor(store:store).padding(16).frame(width:340).background(Color.white), output.appendingPathComponent("minimax-editor-fixture.png"))
+            store.snapshot=savedSnapshot; store.enabled=savedEnabled
             try UIInteractionChecks.run(output: output)
         } else {
             store.apiMode = true; store.showSettings = false

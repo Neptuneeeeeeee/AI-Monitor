@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.9.0 — Expanded plan adapters (development candidate)
+
+Added Cursor monthly usage, MiniMax Token Plan China/international windows, Windsurf explicitly cached local quotas, and Kiro official CLI monthly credits. Removed standalone Kimi Code and GLM Coding Plan key cards without removing their provider support or stored credentials. Added per-provider menu-window mapping, ten-provider geometry, new synthetic protocol/security/UI checks and dated market evidence. No live-account verification or formal distribution is implied by this entry.
+
 ## 1.8.0 — development candidate
 
 Split the shared core/UI from the public executable. Centralized per-edition runtime profiles for Swift, Python and credential helpers. Public build is independent of adjacent private packages. Removed implicit use of legacy Monitor paths and live helper reuse. Builds and installations are separate, with explicit edition-scoped install opt-in and rollback of replaced same-edition apps.

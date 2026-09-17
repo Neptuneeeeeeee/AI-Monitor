@@ -36,7 +36,7 @@ struct BrandStyle {
 }
 
 enum BrandAssets {
-    static let ids = ProviderInfo.defaultOrder + ["gemini"]
+    static let ids = ["kimi", "codex", "claude", "glm", "copilot", "antigravity", "gemini"]
     private static let images: [String: NSImage] = {
         var output: [String: NSImage] = [:]
         for id in ids {

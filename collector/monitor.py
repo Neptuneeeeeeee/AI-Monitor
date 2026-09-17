@@ -16,11 +16,12 @@ from kimi_provider import collect_kimi, kimi_home
 from codex_provider import collect_codex
 from other_providers import collect_claude, collect_glm, collect_copilot
 from antigravity_provider import collect_antigravity, official_processes
+from extended_plans import collect_cursor, collect_minimax, collect_windsurf, collect_kiro, DB_PATHS, NEW_IDS
 from scheduling import GateBook, interval_for
 from rate_limits import RATE_MESSAGE
 from last_good import choose, historical, update_record, TRANSIENT, measured
 
-NAMES = {'kimi': 'Kimi Code', 'codex': 'Codex', 'claude': 'Claude Code', 'glm': 'GLM Coding Plan', 'copilot': 'GitHub Copilot', 'antigravity': 'Antigravity'}
+NAMES = {'kimi': 'Kimi Code', 'codex': 'Codex', 'claude': 'Claude Code', 'glm': 'GLM Coding Plan', 'copilot': 'GitHub Copilot', 'antigravity': 'Antigravity', 'cursor': 'Cursor', 'minimax': 'MiniMax', 'windsurf': 'Windsurf', 'kiro': 'Kiro'}
 PUBLIC_KEYS = {'id', 'name', 'status', 'source', 'message', 'plan', 'fetchedAt', 'attemptedAt', 'windows', 'note', 'nextQueryAt', 'pollIntervalSeconds', 'queryStatus', 'liveStatus', 'historical'}
 
 
@@ -38,6 +39,10 @@ def generation(pid, region):
         'claude': [HOME / '.claude/.credentials.json'],
         'copilot': [HOME / '.config/gh/hosts.yml'],
         'glm': [], 'antigravity': [],
+        'cursor': [HOME / DB_PATHS['cursor'], Path(str(HOME / DB_PATHS['cursor']) + '-wal')],
+        'windsurf': [HOME / DB_PATHS['windsurf'], Path(str(HOME / DB_PATHS['windsurf']) + '-wal')],
+        'minimax': [SUPPORT / 'plan-connections.json'],
+        'kiro': [],
     }[pid]
     # Unrelated Keychain writes must not invalidate quota observations.
     if pid == 'glm':
@@ -75,6 +80,11 @@ def collect_one(pid, region, previous, state, force=False, *, gates, requested=3
     record = state.get(pid) or {}
     saved = choose(record, previous) if record.get('region', region) == region and not record.get('authBlocked') else None
     same = before is not None and record.get('generation') == before and record.get('region', region) == region
+    # Do not carry new-provider results across an unknown/changed account context.
+    # Kiro has no local identity proof, so transient failures omit its cached balance.
+    if pid in NEW_IDS and not same:
+        saved = None
+        record = {}
     # Reserve/persist the gate BEFORE touching credentials or spawning an adapter.
     # --force means check which sources are due, not bypass their protection.
     allowed, gate = gates.reserve(pid, requested)
@@ -99,7 +109,8 @@ def collect_one(pid, region, previous, state, force=False, *, gates, requested=3
         value['attemptedAt'] = gate.get('lastAttempt') or (saved or {}).get('attemptedAt')
         return with_schedule(value, gate, pid, requested, query_status), record
     functions = {'kimi': collect_kimi, 'codex': collect_codex, 'claude': collect_claude,
-                 'glm': lambda: collect_glm(region), 'copilot': collect_copilot, 'antigravity': collect_antigravity}
+                 'glm': lambda: collect_glm(region), 'copilot': collect_copilot, 'antigravity': collect_antigravity,
+                 'cursor': collect_cursor, 'minimax': collect_minimax, 'windsurf': collect_windsurf, 'kiro': collect_kiro}
     try:
         value = public_result(functions[pid]())
         updated = gates.success(pid, requested)
@@ -107,6 +118,10 @@ def collect_one(pid, region, previous, state, force=False, *, gates, requested=3
         value = with_schedule(value, updated, pid, requested, 'updated')
         try: after = generation(pid, region)
         except MonitorError: after = None
+        if pid in NEW_IDS and before is not None and before != after:
+            value = error_result(pid, MonitorError('unavailable', '查询期间账号状态发生变化；未保存可能属于旧账号的额度。'))
+            value = with_schedule(value, updated, pid, requested, 'scheduled')
+            return value, {'generation': after, 'region': region, 'authBlocked': True, 'status': 'unavailable'}
         return value, update_record(record, value, generation=after, region=region, success=True)
     except MonitorError as error: pass_error = error
     except Exception as error:
@@ -148,7 +163,7 @@ def main():
     signal.signal(signal.SIGTERM, shutdown)
     signal.signal(signal.SIGINT, shutdown)
     signal.signal(signal.SIGALRM, shutdown)
-    signal.alarm(75)
+    signal.alarm(150)
     old = read_json(SUPPORT / 'snapshot.json', {})
     previous = {p['id']: p for p in old.get('providers', []) if isinstance(p, dict) and p.get('id') in NAMES}
     state = read_json(SUPPORT / 'provider-state.json', {})

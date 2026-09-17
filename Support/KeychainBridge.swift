@@ -6,7 +6,7 @@ import LocalAuthentication
 // Own entries are separate; official Claude Code credentials remain upstream-owned.
 // Grant/status operations never return credential bytes.
 let prefix = "__KEYCHAIN_PREFIX__"
-let own = Set(["kimi", "glm-cn", "glm-global", "copilot"])
+let own = Set(["kimi", "glm-cn", "glm-global", "copilot", "minimax-cn", "minimax-global"])
 let claudeService = "Claude Code-credentials"
 let allowed = Set(own.map { prefix + $0 }).union([claudeService])
 

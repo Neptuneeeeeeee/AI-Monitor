@@ -16,6 +16,17 @@ func checkNil<T>(_ value: T?, file: String = #filePath, line: UInt = #line) {
     static func main() {
         let suite = MonitorCoreTests()
         let cases: [(String, () throws -> Void)] = [
+            ("testExpandedRegistryKeepsOriginalOrder", suite.testExpandedRegistryKeepsOriginalOrder),
+            ("testExpandedGeometryIsReadable", suite.testExpandedGeometryIsReadable),
+            ("testCursorMonthlyIsNotFiveHours", suite.testCursorMonthlyIsNotFiveHours),
+            ("testCursorSeparatePoolsNotAverage", suite.testCursorSeparatePoolsNotAverage),
+            ("testKiroUsesRealMonthlyCredits", suite.testKiroUsesRealMonthlyCredits),
+            ("testWindsurfAlwaysMarkedCache", suite.testWindsurfAlwaysMarkedCache),
+            ("testWindsurfWeekNeverPretendsDaily", suite.testWindsurfWeekNeverPretendsDaily),
+            ("testMiniMaxWindowKeepsQuotaName", suite.testMiniMaxWindowKeepsQuotaName),
+            ("testExpandedOrderDoesNotEnableAccounts", suite.testExpandedOrderDoesNotEnableAccounts),
+            ("testEmptyExpandedProviderNotFullAllowance", suite.testEmptyExpandedProviderNotFullAllowance),
+
             ("testRuntimePublicIdentity", suite.testRuntimePublicIdentity),
             ("testRuntimeLocalIdentitySeparate", suite.testRuntimeLocalIdentitySeparate),
             ("testRuntimeCrossChannelRejected", suite.testRuntimeCrossChannelRejected),

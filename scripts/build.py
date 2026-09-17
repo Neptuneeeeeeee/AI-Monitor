@@ -18,7 +18,7 @@ import uuid
 from git_provenance import repository_state
 
 PUBLIC = Path(__file__).resolve().parents[1]
-PROVIDERS = {'claude','kimi','codex','glm','copilot','antigravity'}
+PROVIDERS = {'claude','kimi','codex','glm','copilot','antigravity','cursor','minimax','windsurf','kiro'}
 
 def digest(path: Path) -> str:
     return hashlib.sha256(path.read_bytes()).hexdigest()

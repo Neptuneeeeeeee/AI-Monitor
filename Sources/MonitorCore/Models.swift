@@ -23,6 +23,7 @@ public struct QuotaWindow: Codable, Identifiable, Equatable {
     public var isScoped: Bool { kind == "model" || id.hasPrefix("seven_day_") || id.hasPrefix("model-") }
     public var shortLabel: String {
         if isExtra { return "Extra Usage" }
+        if id.hasPrefix("minimax-") || id.hasPrefix("windsurf-") { return label }
         if id.hasPrefix("seven_day_") { return "Weekly · " + id.replacingOccurrences(of: "seven_day_", with: "").replacingOccurrences(of: "_", with: " ").capitalized }
         if durationMinutes == 300 { return id.hasPrefix("group-") ? label.replacingOccurrences(of: "Claude / GPT", with: "Claude") : "Session" }
         if durationMinutes == 10080 { return id.hasPrefix("group-") ? label.replacingOccurrences(of: "Claude / GPT", with: "Claude") : "Weekly" }
@@ -100,7 +101,7 @@ public struct ProviderResult: Codable, Identifiable, Equatable {
         switch status {
         case "ok": return "已连接"
         case "partial": return "部分数据"
-        case "stale": return "上次读数"
+        case "stale": return id == "windsurf" ? "本地缓存" : "上次读数"
         case "auth_required": return "需要登录"
         case "permission_required": return "需要授权"
         case "network_error": return "暂时离线"
@@ -113,7 +114,7 @@ public struct ProviderResult: Codable, Identifiable, Equatable {
     public var lastValueLabel: String {
         guard let fetchedAt else { return "暂无历史数据" }
         let f = DateFormatter(); f.locale = Locale(identifier:"zh_CN"); f.dateFormat = "M/d HH:mm"
-        return "上次 " + f.string(from: Date(timeIntervalSince1970:fetchedAt))
+        return (id == "windsurf" ? "缓存文件 " : "上次 ") + f.string(from: Date(timeIntervalSince1970:fetchedAt))
     }
     public func queryScheduleText(now: Double) -> String {
         guard let deadline = nextQueryAt, deadline.isFinite else { return "" }
@@ -158,7 +159,22 @@ public struct ProviderInfo: Identifiable, Equatable {
         ProviderInfo(id: "claude", name: "Claude", symbol: "sun.max", website: "https://claude.ai/settings/usage"),
         ProviderInfo(id: "glm", name: "GLM", symbol: "square.stack.3d.up", website: "https://bigmodel.cn/coding-plan/personal/usage"),
         ProviderInfo(id: "copilot", name: "Copilot", symbol: "chevron.left.forwardslash.chevron.right", website: "https://github.com/settings/billing"),
-        ProviderInfo(id: "antigravity", name: "Antigravity", symbol: "a.circle", website: "https://antigravity.google/")
+        ProviderInfo(id: "antigravity", name: "Antigravity", symbol: "a.circle", website: "https://antigravity.google/"),
+        ProviderInfo(id: "cursor", name: "Cursor", symbol: "cursorarrow", website: "https://cursor.com/dashboard"),
+        ProviderInfo(id: "minimax", name: "MiniMax", symbol: "waveform", website: "https://platform.minimax.cn/subscribe/token-plan"),
+        ProviderInfo(id: "windsurf", name: "Windsurf", symbol: "wind", website: "https://windsurf.com/subscription"),
+        ProviderInfo(id: "kiro", name: "Kiro", symbol: "k.square", website: "https://app.kiro.dev/account/usage")
     ]
+    public var connectionHint: String {
+        switch id {
+        case "cursor": return "先在 Cursor 应用登录；仅提取其登录状态并查询官方月度额度，不读取浏览器 Cookie。"
+        case "minimax": return "展开后选择中国/国际区域并保存 Token Plan 订阅 Key；普通 API 余额与此独立。"
+        case "windsurf": return "只读取 Windsurf 应用的套餐缓存，始终标为非实时；请先打开官方应用更新。"
+        case "kiro": return "先运行 kiro-cli login；查询仅使用官方 /usage 命令。官方 CLI 可能自行续期登录。"
+        case "kimi": return "使用官方 Kimi CLI 登录；已有本机订阅 Key 保持可用。"
+        case "glm": return "使用本机已有套餐凭据或对应区域的环境变量；原独立 Key 配置块已移除。"
+        default: return "只读取你已启用的套餐。没有可量化额度时不显示猜测值。"
+        }
+    }
     public static var defaultOrder: [String] { all.map(\.id) }
 }

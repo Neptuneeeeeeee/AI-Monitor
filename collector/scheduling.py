@@ -11,7 +11,7 @@ import time
 from pathlib import Path
 from core import atomic_json, read_json, number
 
-MIN_INTERVAL = {'claude': 600, 'kimi': 300, 'codex': 300, 'glm': 300, 'copilot': 600, 'antigravity': 300}
+MIN_INTERVAL = {'cursor': 600, 'minimax': 600, 'windsurf': 300, 'kiro': 900, 'claude': 600, 'kimi': 300, 'codex': 300, 'glm': 300, 'copilot': 600, 'antigravity': 300}
 POLICY_VERSION = 1
 
 

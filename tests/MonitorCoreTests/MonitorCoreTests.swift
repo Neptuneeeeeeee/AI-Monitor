@@ -36,7 +36,7 @@ final class MonitorCoreTests {
     }
     func testMCPNeverUsedForMainFiveHours() { var p=provider("glm");p.windows[0].unit="MCP";checkNil(slots([p])[0].percent) }
     func testOrderNormalizesDuplicateAndUnknownIDs() {
-        checkEqual(DisplayPreferences.normalizedOrder(["claude","unknown","claude","kimi"]),["claude","kimi","codex","glm","copilot","antigravity"])
+        checkEqual(DisplayPreferences.normalizedOrder(["claude","unknown","claude","kimi"]),["claude","kimi","codex","glm","copilot","antigravity","cursor","minimax","windsurf","kiro"])
     }
     func testMoveUpAndDown() {
         var p=DisplayPreferences();p.move("claude",by:-2);checkEqual(p.providerOrder.first,"claude")
@@ -45,7 +45,7 @@ final class MonitorCoreTests {
     func testDragDestinationReorders() {
         var p=DisplayPreferences();p.move("kimi",to:"claude")
         checkEqual(Array(p.providerOrder.prefix(3)),["codex","claude","kimi"])
-        p.move("unknown",to:"kimi");checkEqual(p.providerOrder.count,6)
+        p.move("unknown",to:"kimi");checkEqual(p.providerOrder.count,ProviderInfo.all.count)
     }
     func testPreferencesPersistWithoutChangingEnabledAccounts() {
         let suite="MonitorCoreTests."+UUID().uuidString;let d=UserDefaults(suiteName:suite)!
@@ -59,7 +59,7 @@ final class MonitorCoreTests {
         let suite="MonitorCoreTests."+UUID().uuidString;let d=UserDefaults(suiteName:suite)!
         defer { d.removePersistentDomain(forName:suite) }
         d.set(Data("{\"panelWidth\":320,\"providerOrder\":[\"claude\"]}".utf8),forKey:DisplayPreferences.storageKey)
-        let p=DisplayPreferences.load(from:d);checkEqual(p.panelWidth,320);checkTrue(p.showExtra);checkEqual(p.providerOrder.count,6)
+        let p=DisplayPreferences.load(from:d);checkEqual(p.panelWidth,320);checkTrue(p.showExtra);checkEqual(p.providerOrder.count,ProviderInfo.all.count)
     }
     func testUnsafeSettingsNormalize() { var p=DisplayPreferences();p.panelWidth=10000;p.iconStyle="bad";p.lowThreshold=100;p.normalize();checkEqual(p.panelWidth,340);checkEqual(p.iconStyle,"mono");checkEqual(p.lowThreshold,50) }
     func testHideExtraAndScopedModels() {
@@ -101,14 +101,14 @@ final class MonitorCoreTests {
     func testUnknownMembershipCodeIsNotShownAsPlanName() { var p=provider("kimi");p.plan="LEVEL_INTERMEDIATE";checkNil(p.friendlyPlan);p.plan="pro";checkEqual(p.friendlyPlan,"Pro") }
 
     func testAllSelectionCountsFollowExactly() {
-        for count in 0...6 {
+        for count in 0...ProviderInfo.all.count {
             let ids = Array(ProviderInfo.defaultOrder.prefix(count))
             let result = slots(ids.map { provider($0) })
             checkEqual(result.count, count); checkEqual(result.compactMap(\.providerID), ids)
         }
     }
     func testSixthPlanAlsoHasRealQuota() {
-        let result = slots(ProviderInfo.defaultOrder.map { provider($0, percent: 37) })
+        let result = slots(ProviderInfo.defaultOrder.prefix(6).map { provider($0, percent: 37) })
         checkEqual(result.count, 6); checkEqual(result.last?.providerID, "antigravity"); checkEqual(result.last?.percent, 37)
     }
     func testUnknownAndDuplicateIDsNeverCreateExtraBars() {

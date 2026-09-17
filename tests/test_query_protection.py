@@ -64,7 +64,7 @@ class GateTests(unittest.TestCase):
         self.book=GateBook(self.path,clock=lambda:self.now,jitter=lambda delay:0)
     def tearDown(self):self.tmp.cleanup()
     def test_all_provider_floors(self):
-        self.assertEqual(MIN_INTERVAL,{'claude':600,'kimi':300,'codex':300,'glm':300,'copilot':600,'antigravity':300})
+        self.assertEqual(MIN_INTERVAL,{'claude':600,'kimi':300,'codex':300,'glm':300,'copilot':600,'antigravity':300,'cursor':600,'minimax':600,'windsurf':300,'kiro':900})
     def test_slow_preference_respected(self):self.assertEqual(interval_for('kimi',1800),1800)
     def test_fast_preference_cannot_lower_floor(self):self.assertEqual(interval_for('claude',1),600)
     def test_recovery_ramp_converges_to_provider_interval(self):

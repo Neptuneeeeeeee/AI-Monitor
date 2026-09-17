@@ -117,13 +117,19 @@ import CoreGraphics
             try record("status icon always uses monochrome template: " + style, image.isTemplate)
         }
         try record("panel brand colors remain enabled", store.preferences.useBrandColors)
-        for count in 0...6 {
+        for count in 0...ProviderInfo.all.count {
             store.enabled = Set(ProviderInfo.defaultOrder.prefix(count))
             try record("live selection maps to exactly \(count) bars", store.iconSlots.count == count)
         }
         store.enabled = Set(ProviderInfo.defaultOrder)
         settle()
         try record("hosting view accepts first mouse", host.acceptsFirstMouse(for: nil))
+        try record("ten plan providers are registered", ProviderInfo.all.count == 10)
+        try record("new provider connection hints are present", ProviderInfo.all.filter { ["cursor", "minimax", "windsurf", "kiro"].contains($0.id) }.allSatisfy { !$0.connectionHint.isEmpty })
+        store.setMiniMaxRegion("global")
+        try record("MiniMax region changes in an isolated model", store.minimaxRegion == "global")
+        store.setMiniMaxRegion("cn")
+        try record("MiniMax fixture does not start collection", !store.refreshing && !store.savingPlanCredential)
         let initialSlots = store.iconSlots
         let apiToggle = try target("toolbar.api")
         let refreshButton = try target("toolbar.refresh")

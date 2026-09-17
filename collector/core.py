@@ -105,7 +105,7 @@ def run(args, timeout=10, input_data=None):
 
 def executable(name):
     import shutil
-    paths = {'kimi': [HOME / '.kimi-code/bin/kimi'], 'codex': [Path('/opt/homebrew/bin/codex')], 'claude': [HOME / '.local/bin/claude']}
+    paths = {'kimi': [HOME / '.kimi-code/bin/kimi'], 'codex': [Path('/opt/homebrew/bin/codex')], 'claude': [HOME / '.local/bin/claude'], 'kiro-cli': [HOME / '.local/bin/kiro-cli']}
     for p in paths.get(name, []) + [Path('/opt/homebrew/bin') / name, Path('/usr/local/bin') / name]:
         if p.is_file() and os.access(p, os.X_OK): return str(p)
     return shutil.which(name)

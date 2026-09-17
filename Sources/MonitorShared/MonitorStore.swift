@@ -10,6 +10,8 @@ import MonitorCore
     @Published var snapshot: Snapshot?
     @Published var refreshing = false
     @Published var authorizingClaude = false
+    @Published var minimaxRegion = "cn"
+    @Published var savingPlanCredential = false
     @Published var banner = ""
     @Published var showSettings = false { didSet { onChange?() } }
     @Published var settingsTab = "order"
@@ -58,10 +60,15 @@ import MonitorCore
             preferences.save(to: defaults)
         }
         guard servicesEnabled else { return }
+        if let bytes = try? Data(contentsOf: support.appendingPathComponent("plan-connections.json")),
+           bytes.count < 16384, let settings = try? JSONSerialization.jsonObject(with: bytes) as? [String: String],
+           let region = settings["minimaxRegion"], ["cn", "global"].contains(region) { minimaxRegion = region }
         availablePanelHeight = max(360, (NSScreen.main?.visibleFrame.height ?? 982) - 64)
         if !KeychainBridge.ensureInstalled() { banner = "固定钥匙串组件未安装，请重新安装 Monitor。" }
         try? FileManager.default.createDirectory(at: support, withIntermediateDirectories: true, attributes: [.posixPermissions: 0o700])
         if let data = try? Data(contentsOf: support.appendingPathComponent("snapshot.json")), let old = try? JSONDecoder().decode(Snapshot.self, from: data) { snapshot = old }
+        // Revalidate new-account context before reusing a disk snapshot at launch.
+        snapshot?.providers.removeAll { ["cursor", "minimax", "windsurf", "kiro"].contains($0.id) }
         reschedule()
         clock = Timer.scheduledTimer(withTimeInterval: 30, repeats: true) { [weak self] _ in
             Task { @MainActor in self?.objectWillChange.send(); self?.onChange?() }
@@ -91,7 +98,7 @@ import MonitorCore
         timer?.tolerance = 5
     }
     func refresh(force: Bool = false) {
-        guard servicesEnabled && !refreshing else { return }
+        guard servicesEnabled && !refreshing && !savingPlanCredential else { return }
         let uptime = ProcessInfo.processInfo.systemUptime
         guard uptime - lastDispatch >= 3 else { return }
         lastDispatch = uptime
@@ -128,7 +135,7 @@ import MonitorCore
         }
         do {
             try p.run(); capture.start(out.fileHandleForReading)
-            DispatchQueue.main.asyncAfter(deadline: .now() + 85) { [weak p] in
+            DispatchQueue.main.asyncAfter(deadline: .now() + 160) { [weak p] in
                 guard let p, p.isRunning else { return }; p.terminate()
                 DispatchQueue.main.asyncAfter(deadline: .now() + 3) { if p.isRunning { Darwin.kill(p.processIdentifier, SIGKILL) } }
             }
@@ -160,10 +167,24 @@ import MonitorCore
         }
     }
     func openWebsite(_ id: String) {
+        if id == "minimax" && minimaxRegion == "global" {
+            NSWorkspace.shared.open(URL(string: "https://platform.minimax.io/subscribe/token-plan")!); return
+        }
         let text = id == "glm" && glmRegion == "global" ? "https://z.ai/manage-apikey/coding-plan/personal/my-plan" : ProviderInfo.all.first { $0.id == id }?.website
         if let text, let url = URL(string: text) { NSWorkspace.shared.open(url) }
     }
     func reconnect(_ id: String) {
+        if ["cursor", "windsurf"].contains(id) {
+            let name = id == "cursor" ? "Cursor.app" : "Windsurf.app"
+            let roots = [URL(fileURLWithPath: "/Applications"), FileManager.default.homeDirectoryForCurrentUser.appendingPathComponent("Applications")]
+            if let app = roots.map({ $0.appendingPathComponent(name) }).first(where: { FileManager.default.fileExists(atPath: $0.path) }) {
+                NSWorkspace.shared.openApplication(at: app, configuration: NSWorkspace.OpenConfiguration()) { _, _ in }
+                banner = "在官方应用登录后刷新。"
+            } else { banner = "请先安装对应官方应用，再启用套餐。" }
+            return
+        }
+        if id == "kiro" { banner = "请在终端运行 kiro-cli login；登录完成后返回刷新。"; return }
+
         if id == "claude" { grantClaude(); return }
         if id == "antigravity" {
             NSWorkspace.shared.openApplication(at: URL(fileURLWithPath: "/Applications/Antigravity.app"), configuration: NSWorkspace.OpenConfiguration()) { _, _ in }

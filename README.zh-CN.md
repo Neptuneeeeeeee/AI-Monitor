@@ -4,7 +4,7 @@
 
 ## 当前状态
 
-本目录是公开工程边界，可单独复制、构建，不依赖私人实验目录。1.8.0 是开发候选版本：未内置 Python、未做 Developer ID 签名/公证，尚未选定开源许可证。不能把现有候选ZIP宣传为所有用户都能直接使用的正式发行版。
+本目录是公开工程边界，可单独复制、构建，不依赖私人实验目录。1.9.0 是开发候选版本：未内置 Python、未做 Developer ID 签名/公证，尚未选定开源许可证。不能把现有候选ZIP宣传为所有用户都能直接使用的正式发行版。
 
 界面主要保留中文，文档提供中英文；完整界面多语言尚未实现。
 
@@ -40,3 +40,9 @@ bash scripts/build.sh
 ## 仓库与构建版本
 
 应用名为 **AI Monitor**，计划公开仓库名为 `AI-Monitor`；双版本工作区中只有 `public/` 对应公开仓库。构建不会推送GitHub。BUILD.json记录实际公共提交、Local提交和是否存在未提交修改，并保留源码哈希。详见[Git对应关系](docs/GIT_WORKFLOW.md)。
+
+## 新增套餐（1.9.0）
+
+套餐列表扩展到十项：Kimi、Codex、Claude、GLM、Copilot、Antigravity、Cursor、MiniMax、Windsurf、Kiro。新增项默认关闭，先在套餐排序中启用。Windsurf 明确为本地缓存，MiniMax 的中国/国际订阅 Key 在其登录状态折叠项中分别配置。
+
+账号连接页已删除独立的 Kimi Code、GLM Coding Plan 密钥配置块；对应套餐和已有凭据保留，API 余额页不变。新适配通过合成响应与隔离测试，不等同于用户真实账号已经连接。调研及接口说明见 `docs/PLAN_RESEARCH_2026_09.md`。

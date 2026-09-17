@@ -93,7 +93,7 @@ def collect_glm(region):
     if not key:
         names = ('BIGMODEL_API_KEY', 'ZHIPU_API_KEY', 'ZHIPUAI_API_KEY', 'GLM_API_KEY') if region == 'cn' else ('Z_AI_API_KEY', 'ZAI_API_KEY')
         key = next((os.environ[n] for n in names if os.environ.get(n)), None)
-    if not key: raise MonitorError('auth_required', '请在设置中选择中国/国际区域，并保存对应的 GLM Coding Plan API Key。密钥存放于本机钥匙串。')
+    if not key: raise MonitorError('auth_required', '未找到对应区域的 GLM 套餐凭据。可使用已保存的凭据，或按文档配置该区域的环境变量；独立 Key 配置卡已移除。')
     host = 'open.bigmodel.cn' if region == 'cn' else 'api.z.ai'
     payload = request_json('https://' + host + '/api/monitor/usage/quota/limit', headers={'Authorization': 'Bearer ' + key})
     if payload.get('success') is False:

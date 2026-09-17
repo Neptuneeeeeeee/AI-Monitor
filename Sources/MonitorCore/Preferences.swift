@@ -122,9 +122,26 @@ public enum MenuBarMapping {
                 candidates = provider.windows.filter { $0.id == "premium_interactions" && $0.safePercent != nil }
                 period = "month"; label = "每月 Premium"
             }
+            if candidates.isEmpty && id == "cursor" {
+                let total = provider.windows.filter { $0.id == "cursor-monthly" && $0.safePercent != nil }
+                candidates = total.isEmpty ? provider.windows.filter { ["cursor-auto", "cursor-api"].contains($0.id) && $0.safePercent != nil } : total
+                period = "month"; label = total.isEmpty ? "月度额度池" : "月度套餐"
+            }
+            if candidates.isEmpty && id == "kiro" {
+                candidates = provider.windows.filter { $0.id == "kiro-monthly" && $0.safePercent != nil }
+                period = "month"; label = "每月 Credits"
+            }
+            if candidates.isEmpty && id == "windsurf" {
+                candidates = provider.windows.filter { $0.id == "windsurf-daily" && $0.safePercent != nil }
+                period = "day"; label = "每日额度缓存"
+                if candidates.isEmpty {
+                    candidates = provider.windows.filter { ["windsurf-messages", "windsurf-actions"].contains($0.id) && $0.safePercent != nil }
+                    period = "provider"; label = "服务商窗口缓存"
+                }
+            }
             let percentages = candidates.compactMap(\.safePercent)
             guard let percent = percentages.min() else {
-                return MenuBarSlot(providerID:id, name:name, state:"unknown", reason:id == "copilot" ? "没有可量化的月额度" : "未提供 5 小时额度")
+                return MenuBarSlot(providerID:id, name:name, state:"unknown", reason:["cursor", "kiro", "copilot"].contains(id) ? "没有可量化的月额度" : id == "windsurf" ? "没有可量化的主窗口缓存" : "未提供 5 小时额度")
             }
             let resetPassed = candidates.contains { ($0.resetAt ?? Double.infinity) <= now && measuredAt < ($0.resetAt ?? 0) }
             let cached = provider.isStale(now:now,maxAge:maxAge) || resetPassed || provider.queryStatus == "cooldown"

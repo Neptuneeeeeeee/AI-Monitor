@@ -4,7 +4,7 @@ import os
 from core import MonitorError, run
 from runtime_config import KEYCHAIN_PREFIX
 
-ALLOWED_SERVICES = {'kimi', 'glm-cn', 'glm-global', 'copilot'}
+ALLOWED_SERVICES = {'kimi', 'glm-cn', 'glm-global', 'copilot', 'minimax-cn', 'minimax-global'}
 
 def fingerprint(value, account=None):
     return hashlib.sha256(str(account or value or '').encode()).hexdigest()[:24]

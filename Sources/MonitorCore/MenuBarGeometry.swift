@@ -10,7 +10,7 @@ public enum MenuBarGeometry {
     public static func rows(count: Int) -> [MenuBarRow] {
         guard count > 0 else { return [] }
         let count = min(count, ProviderInfo.all.count)
-        let gap = count <= 4 ? 1.6 : 1.1
+        let gap = count <= 4 ? 1.6 : count <= 6 ? 1.1 : 0.6
         let height = min(3.2, (18.0 - Double(count - 1) * gap) / Double(count))
         let total = Double(count) * height + Double(count - 1) * gap
         let top = (20.0 + total) / 2

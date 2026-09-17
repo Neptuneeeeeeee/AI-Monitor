@@ -9,6 +9,9 @@ from core import MonitorError
 from rate_limits import http_error, has_rate_signal
 
 ALLOWED_REMOTE = {
+    ('cursor.com', '/api/usage-summary'),
+    ('www.minimaxi.com', '/v1/token_plan/remains'),
+    ('www.minimax.io', '/v1/token_plan/remains'),
     ('api.kimi.com', '/coding/v1/usages'), ('auth.kimi.com', '/api/oauth/token'),
     ('api.anthropic.com', '/api/oauth/usage'), ('api.github.com', '/copilot_internal/user'),
     ('open.bigmodel.cn', '/api/monitor/usage/quota/limit'), ('api.z.ai', '/api/monitor/usage/quota/limit'),

@@ -6,9 +6,6 @@ import MonitorCore
 
 struct SettingsPanel: View {
     @ObservedObject var store: MonitorStore
-    @State private var kimiKey = ""
-    @State private var glmKey = ""
-    @State private var saveMessage = ""
     @State private var clearConfirmation = false
     @State private var resetConfirmation = false
     var body: some View {
@@ -74,7 +71,7 @@ struct SettingsPanel: View {
                         }
                     }.font(.system(size: 10)).foregroundStyle(MonitorPalette.secondary)
                 }
-                Text("Copilot 无 Session 时显示月度 Premium；浅色实线为上次读数，虚线仅表示从未读到可用数值。").font(.system(size: 10)).foregroundStyle(MonitorPalette.secondary)
+                Text("菜单栏按各平台的真实窗口显示：5 小时、月度或每日缓存，不将月额度假装成 Session。浅色实线表示缓存。").font(.system(size: 10)).foregroundStyle(MonitorPalette.secondary)
             }
         }
     }
@@ -110,7 +107,7 @@ struct SettingsPanel: View {
             SettingsGroup("刷新与启动") {
                 SettingsToggle("自动刷新", isOn: $store.preferences.autoRefresh)
                 Picker("查询最小间隔", selection: $store.refreshSeconds) { Text("5 分钟").tag(300); Text("10 分钟").tag(600); Text("15 分钟").tag(900); Text("30 分钟").tag(1800) }
-                Text("Claude 与 Copilot 至少 10 分钟，其余至少 5 分钟。限流后会延长等待，手动刷新也不绕过。更长的所选间隔同样生效。")
+                Text("Claude、Copilot、Cursor、MiniMax 至少 10 分钟，Kiro 至少 15 分钟，其余至少 5 分钟。手动刷新不绕过限流等待。")
                     .font(.system(size: 10)).foregroundStyle(MonitorPalette.secondary).fixedSize(horizontal: false, vertical: true)
                 SettingsToggle("打开面板时更新过期数据", isOn: $store.preferences.refreshOnOpen)
                 SettingsToggle("Mac 唤醒后刷新", isOn: $store.preferences.refreshOnWake)
@@ -128,6 +125,9 @@ struct SettingsPanel: View {
                 ForEach(store.orderedProviders) { info in
                     DisclosureGroup {
                         VStack(alignment: .leading, spacing: 7) {
+                            Text(info.connectionHint).fixedSize(horizontal: false, vertical: true)
+                            if info.id == "minimax" { MiniMaxConnectionEditor(store: store) }
+                            if info.id == "glm" { Picker("账号区域", selection: $store.glmRegion) { Text("中国 BigModel").tag("cn"); Text("国际 Z.ai").tag("global") } }
                             if let result = store.provider(info.id) {
                                 Text(result.queryScheduleText(now: store.now))
                                 if let fetched = result.fetchedAt { Text("上次成功：" + Date(timeIntervalSince1970: fetched).formatted(date: .omitted, time: .standard)) }
@@ -146,47 +146,20 @@ struct SettingsPanel: View {
                 }
                 Button("重新检查连接") { store.refresh(force: true) }.disabled(store.refreshing)
             }
-            SettingsGroup("Kimi Code") {
-                SecureField("可选：Kimi Code API Key", text: $kimiKey).textFieldStyle(.roundedBorder)
-                HStack {
-                    Button("保存到钥匙串") { save(kimiKey, service: "kimi"); kimiKey = "" }.disabled(kimiKey.trimmingCharacters(in: .whitespaces).isEmpty)
-                    Spacer(); Button("移除") { remove("kimi") }
-                }
-                Text("留空则使用官方 CLI 登录和自动续期。").font(.system(size: 10)).foregroundStyle(MonitorPalette.secondary)
-            }
-            SettingsGroup("GLM Coding Plan") {
-                Picker("账号区域", selection: $store.glmRegion) { Text("中国 BigModel").tag("cn"); Text("国际 Z.ai").tag("global") }
-                SecureField("所选区域的 Coding Plan Key", text: $glmKey).textFieldStyle(.roundedBorder)
-                HStack {
-                    Button("保存到钥匙串") { save(glmKey, service: "glm-" + store.glmRegion); glmKey = "" }.disabled(glmKey.trimmingCharacters(in: .whitespaces).isEmpty)
-                    Spacer(); Button("移除") { remove("glm-" + store.glmRegion) }
-                }
-            }
-            if !saveMessage.isEmpty { Text(saveMessage).font(.system(size: 11)).foregroundStyle(MonitorPalette.secondary) }
             SettingsGroup("本机数据") {
                 Button("导出脱敏诊断…") { store.diagnostic() }
                 Button("打开数据目录") { NSWorkspace.shared.open(store.support) }
                 Button("清除额度缓存…") { clearConfirmation = true }.disabled(store.refreshing)
-                Text("没有遥测，不读取聊天记录。Key 只保存到本机钥匙串；查询凭证只发送给所属服务商。").font(.system(size: 10)).foregroundStyle(MonitorPalette.secondary)
+                Text("没有遥测，不解析或上传聊天内容。仅在启用后读取对应应用的指定状态；Key 保存在本机钥匙串，凭证只发给所属服务商。").font(.system(size: 10)).foregroundStyle(MonitorPalette.secondary)
             }
             HStack {
-                Text("Monitor 1.7 · 本地构建").font(.system(size: 10)).foregroundStyle(MonitorPalette.secondary)
+                Text("AI Monitor \(AppRuntime.profile.version) · \(AppRuntime.profile.channel == "local" ? "Local" : "公开版候选")").font(.system(size: 10)).foregroundStyle(MonitorPalette.secondary)
                 Spacer()
-                Button("退出 Monitor") { NSApp.terminate(nil) }
+                Button("退出 AI Monitor") { NSApp.terminate(nil) }
             }
         }.controlSize(.regular).buttonStyle(ResponsiveButtonStyle())
     }
-    private func save(_ value: String, service: String) {
-        let clean = value.trimmingCharacters(in: .whitespacesAndNewlines)
-        guard !clean.isEmpty else { return }
-        finish(Vault.save(clean, service: service))
-    }
-    private func remove(_ service: String) { finish(Vault.save("", service: service)) }
-    private func finish(_ status: OSStatus) {
-        let success = status == errSecSuccess || status == errSecItemNotFound
-        saveMessage = success ? "钥匙串已更新。" : "未成功（系统状态 \(status)）。"
-        if success { store.refresh(force: true) }
-    }
+
 }
 
 struct SettingsGroup<Content: View>: View {
