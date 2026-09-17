@@ -60,4 +60,9 @@ extension MonitorCoreTests {
     func testEmptyExpandedProviderNotFullAllowance() {
         for id in ["cursor", "minimax", "windsurf", "kiro"] { checkNil(slots([expanded(id,[])])[0].percent) }
     }
+    func testOfficialEstimateVisibleInMenuHint() {
+        let p = expanded("kiro", [QuotaWindow(id:"kiro-monthly",label:"套餐 Credits · 本月（官方估计）",remainingPercent:75,kind:"monthly")], status:"partial")
+        checkTrue(slots([p])[0].reason.contains("官方估计"))
+    }
+
 }

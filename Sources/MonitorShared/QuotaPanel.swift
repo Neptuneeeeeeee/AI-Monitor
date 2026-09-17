@@ -96,7 +96,7 @@ struct ProviderSection: View {
                 Spacer(minLength: 0)
                 if stale {
                     Label(result?.lastValueLabel ?? "上次读数", systemImage: "clock").font(.system(size: 9)).foregroundStyle(MonitorPalette.secondary)
-                        .help(result?.fetchedAt.map { "最后成功：" + Date(timeIntervalSince1970: $0).formatted() + "；非实时，等待重新查询。" } ?? "尚未重新验证")
+                        .help(result?.fetchedAt.map { (info.id == "windsurf" ? "缓存文件修改时间（不是额度实测时间）：" : "最后成功：") + Date(timeIntervalSince1970: $0).formatted() + "；非实时。" } ?? "尚未重新验证")
                 }
             }.padding(.horizontal, 3)
             if !rows.isEmpty {

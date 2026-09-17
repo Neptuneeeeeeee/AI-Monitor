@@ -29,6 +29,7 @@ struct MiniMaxConnectionEditor: View {
                 .font(.system(size: 10)).foregroundStyle(MonitorPalette.secondary)
                 .fixedSize(horizontal: false, vertical: true)
         }.disabled(store.refreshing || store.savingPlanCredential)
+        .onChange(of: store.minimaxRegion) { _, _ in key = "" }
         .confirmationDialog("仅移除当前区域的 MiniMax 订阅 Key？", isPresented: $removeConfirmation) {
             Button("移除 Key", role: .destructive) { Task { _ = await store.saveMiniMaxCredential("") } }
         }

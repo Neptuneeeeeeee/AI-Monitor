@@ -47,7 +47,7 @@ import MonitorCore
         button.title = ""; button.imagePosition = .imageOnly
         button.image = MenuBarIcon.make(slots: store.iconSlots, style: store.preferences.iconStyle, threshold: store.preferences.lowThreshold)
         button.toolTip = store.iconHelp
-        button.setAccessibilityLabel("\(AppRuntime.profile.displayName)，\(store.iconSlots.count) 个套餐的剩余额度（Copilot 为每月）")
+        button.setAccessibilityLabel("\(AppRuntime.profile.displayName)，\(store.iconSlots.count) 个套餐的剩余额度，按各平台实际窗口显示")
         button.setAccessibilityValue(store.iconHelp)
         popover.behavior = store.preferences.keepPopoverOpen || store.showSettings ? .applicationDefined : .transient
         DispatchQueue.main.async { [weak self] in self?.resizePanels() }

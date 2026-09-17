@@ -16,6 +16,7 @@ func checkNil<T>(_ value: T?, file: String = #filePath, line: UInt = #line) {
     static func main() {
         let suite = MonitorCoreTests()
         let cases: [(String, () throws -> Void)] = [
+            ("testOfficialEstimateVisibleInMenuHint", suite.testOfficialEstimateVisibleInMenuHint),
             ("testExpandedRegistryKeepsOriginalOrder", suite.testExpandedRegistryKeepsOriginalOrder),
             ("testExpandedGeometryIsReadable", suite.testExpandedGeometryIsReadable),
             ("testCursorMonthlyIsNotFiveHours", suite.testCursorMonthlyIsNotFiveHours),

@@ -120,7 +120,7 @@ struct SettingsPanel: View {
     private var connections: some View {
         VStack(spacing: 13) {
             SettingsGroup("登录状态") {
-                Text("仅在你启用后，通过本版本的固定组件读取 Claude Code 登录凭证。系统可能要求授权；锁定或超时时保留上次读数。不更改系统权限。")
+                Text("仅在你启用后读取对应官方客户端或已保存的订阅凭据，不自动改变系统权限。缓存、估计与服务商实际窗口会分别标明。")
                     .font(.system(size:10)).foregroundStyle(MonitorPalette.secondary).fixedSize(horizontal:false, vertical:true)
                 ForEach(store.orderedProviders) { info in
                     DisclosureGroup {

@@ -193,6 +193,7 @@ class KiroContractTests(unittest.TestCase):
         v = E.parse_kiro('Estimated Usage\n(25 of 100 covered in plan)')
         self.assertEqual(v['status'], 'partial')
         self.assertIn('估计', v['message'])
+        self.assertIn('官方估计', v['windows'][0]['label'])
     def test_ansi_and_decimal_counts(self):
         v = E.parse_kiro('\x1b[32m(1,250.50 of 5,000 covered in plan)\x1b[0m')
         self.assertAlmostEqual(v['windows'][0]['remainingPercent'], 74.99)

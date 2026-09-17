@@ -130,6 +130,7 @@ public enum MenuBarMapping {
             if candidates.isEmpty && id == "kiro" {
                 candidates = provider.windows.filter { $0.id == "kiro-monthly" && $0.safePercent != nil }
                 period = "month"; label = "每月 Credits"
+                if candidates.contains(where: { $0.label.contains("官方估计") }) { label += "（官方估计）" }
             }
             if candidates.isEmpty && id == "windsurf" {
                 candidates = provider.windows.filter { $0.id == "windsurf-daily" && $0.safePercent != nil }

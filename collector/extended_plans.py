@@ -268,6 +268,8 @@ def parse_kiro(raw):
     value = checked_result('kiro', 'Kiro', '官方 kiro-cli /usage', windows, plan,
                            '只显示 CLI 明确报告的本月套餐 Credits；不合并赠额、超额预算或上下文占用。不推测重置时区。')
     if 'estimated usage' in lower and windows:
+        for quota in windows:
+            quota['label'] += '（官方估计）'
         value.update(status='partial', message='官方 CLI 报告的估计用量，非最终账单。')
         value['note'] = '官方 CLI 将此数据标为 Estimated Usage；仅显示其套餐计数，不将其视为最终账单。'
     return value
