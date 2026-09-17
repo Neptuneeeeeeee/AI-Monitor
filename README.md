@@ -50,3 +50,7 @@ See `PRIVACY.md`, `SECURITY.md`, and `docs/ARCHITECTURE.md`. No new macOS system
 ## Distribution checklist
 
 Choose an appropriate source license and review third-party code/assets; embed or otherwise explicitly support the Python runtime; test a clean Mac; implement Developer ID signing and notarization; and release only a reviewed version/tag. `scripts/release_preflight.py` reports these blockers rather than claiming a candidate is release-ready. Do not publish private state, signing material, local experiments, or build logs.
+
+### Candidate app storage
+
+The output `.app` is a local shortcut to an immutable signed bundle under this edition’s `~/Library/Caches/ThalnovaAIMonitor/.../Candidates/` directory. This avoids desktop sync software attaching metadata that breaks code-signature verification. The ZIP in the output directory is a real file, not a shortcut. Share the ZIP only; clearing build caches can invalidate the local shortcut until you rebuild. Installation resolves the shortcut and copies the actual bundle.

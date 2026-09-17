@@ -32,3 +32,7 @@ bash scripts/build.sh
 共享模型与界面在 `Sources/MonitorCore`、`Sources/MonitorShared`；本目录只有公开入口 `Sources/Monitor/Main.swift`。私人实验模块不参与公开构建。公开版自己的设置、数据和钥匙串组件与Local和旧版分开，但同一个服务商账号、官方CLI登录和上游限流额度仍可能共享。
 
 源码归属、隐私、安全和发行前检查分别见 `LICENSE_PENDING.md`、`PRIVACY.md`、`SECURITY.md`、`docs/RELEASE_CHECKLIST.md`。
+
+## 候选应用存放说明
+
+输出目录中的 `.app` 是指向本版本独立缓存中签名应用的本机快捷入口；真正的应用保存在 `~/Library/Caches/ThalnovaAIMonitor/<Public或Local>/Candidates/`。这样可以避免桌面同步软件为应用目录添加导致签名校验失败的元数据。输出目录的ZIP是真实文件，不是快捷入口；对外只选择ZIP，不能分享本机快捷入口。清理构建缓存后快捷入口可能失效，重新构建即可恢复；安装脚本会解析快捷入口并复制实际应用。

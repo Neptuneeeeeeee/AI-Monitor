@@ -20,7 +20,7 @@ def main() -> int:
     p.add_argument('--replace',action='store_true',help='Allow replacement of the SAME edition, retaining a rollback copy')
     p.add_argument('--launch',action='store_true',help='Launch only after a successful explicit install')
     a=p.parse_args();project=a.project.resolve();profile=profile_for(project,a.channel)
-    source=output_for(project,a.channel)/(profile['displayName']+'.app')
+    source=(output_for(project,a.channel)/(profile['displayName']+'.app')).resolve()
     target=Path.home()/'Applications'/(profile['displayName']+'.app')
     if target.name=='Monitor.app' or profile['bundleID']=='local.thalnova.Monitor':raise ValueError('Legacy installation is protected')
     if a.launch and not a.install:raise ValueError('--launch requires --install')

@@ -183,27 +183,38 @@ def main() -> int:
         run([sys.executable,str(PUBLIC/'scripts/verify_bundle.py'),str(app),'--channel',channel],PUBLIC,env,180)
         if source_hashes(PUBLIC) != public_before or (channel == 'local' and source_hashes(project) != local_before):
             raise RuntimeError('Sources changed while building; rebuild before using this candidate')
-        final=output/app.name
-        if final.exists():
-            previous=plistlib.loads((final/'Contents/Info.plist').read_bytes())
-            if previous.get('CFBundleIdentifier') != profile['bundleID']:raise ValueError('Refusing to replace an unrelated candidate')
-            archive=output/'previous'/stamp;archive.mkdir(parents=True,exist_ok=False)
-            shutil.move(str(final),str(archive/final.name))
+        # Desktop/file-provider folders can reattach Finder metadata to .app
+        # directories. Keep each signed candidate immutable in an edition cache;
+        # output contains only a local shortcut plus the real portable ZIP.
+        candidate_root=cache/'Candidates'/(stamp+'-'+uuid.uuid4().hex[:10])
+        candidate_root.mkdir(parents=True,mode=0o700)
+        final=candidate_root/app.name
         shutil.move(str(app),str(final))
         run(['/usr/bin/codesign','--verify','--deep','--strict',str(final)],project,env)
+        visible=output/final.name
+        if visible.exists() or visible.is_symlink():
+            previous=plistlib.loads((visible/'Contents/Info.plist').read_bytes()) if visible.exists() else {}
+            if visible.exists() and previous.get('CFBundleIdentifier') != profile['bundleID']:
+                raise ValueError('Refusing to replace an unrelated candidate shortcut')
+            archive=output/'previous'/(stamp+'-'+uuid.uuid4().hex[:8]);archive.mkdir(parents=True)
+            shutil.move(str(visible),str(archive/visible.name))
+        shortcut=output/('.shortcut-'+uuid.uuid4().hex)
+        shortcut.symlink_to(final,target_is_directory=True)
+        os.replace(shortcut,visible)
         package=output/(profile['executableName']+'-'+profile['version']+'-'+arch+'-candidate.zip')
         temporary_zip=output/('.zip-'+uuid.uuid4().hex+'.zip')
         run(['/usr/bin/ditto','-c','-k','--norsrc','--noextattr','--keepParent',str(final),str(temporary_zip)],project,env)
         os.replace(temporary_zip,package)
         hashes=source_hashes(PUBLIC)
         report={'schema':1,'channel':channel,'bundleID':profile['bundleID'],'version':profile['version'],'builtAtUTC':stamp,
-                'architecture':arch,'app':final.name,'archive':package.name,'archiveSHA256':digest(package),
+                'architecture':arch,'app':visible.name,'appLocation':str(final),'appIsLocalShortcut':True,'archive':package.name,'archiveSHA256':digest(package),
                 'testsRun':not args.skip_tests,'signed':'ad-hoc','distributionReady':False,
                 'limitations':['Python runtime is not bundled','Developer ID signing and notarization not performed','Open-source license and third-party redistribution review pending'],
                 'publicSourceHashes':hashes,'localSourceHashes':local_before,
                 'appFileHashes':{str(f.relative_to(final)):digest(f) for f in sorted(final.rglob('*')) if f.is_file()}}
         (output/'BUILD.json').write_text(json.dumps(report,indent=2)+'\n')
         (output/'SHA256SUMS').write_text(report['archiveSHA256']+'  '+package.name+'\n')
+        (output/'CANDIDATE_README.txt').write_text('The .app entry is a local shortcut to a signed candidate in this edition\'s cache.\nShare the actual ZIP, never the shortcut. Cache cleanup can invalidate the shortcut; rebuilding recreates it.\nDeveloper candidate only: see BUILD.json for distribution limitations.\n')
         print('BUILD_COMPLETE',final,flush=True);print('CANDIDATE_ONLY_NOT_INSTALLED',package,flush=True)
         return 0
     finally:

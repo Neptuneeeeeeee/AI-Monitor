@@ -8,7 +8,9 @@ enum AppRuntime {
     static var testHome: URL?
     static var home: URL { testHome ?? FileManager.default.homeDirectoryForCurrentUser }
     static var support: URL { profile.supportURL(home: home) }
-    static var defaults: UserDefaults { UserDefaults(suiteName: profile.bundleID)! }
+    // The main bundle already has the validated edition ID. Its application
+    // domain is .standard; creating a suite named after that same ID is invalid.
+    static var defaults: UserDefaults { .standard }
     static func configure(expectedChannel: String) throws {
         guard let resource = Bundle.main.resourceURL else { throw failure("Application resources are missing.") }
         let data = try Data(contentsOf: resource.appendingPathComponent("RuntimeProfile.json"))

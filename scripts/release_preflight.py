@@ -21,7 +21,7 @@ def inspect() -> dict:
     if approval.get('cleanMacTested') is not True:blockers.append('Clean-Mac installation test pending')
     out=output_for(PUBLIC,'public');receipt=out/'BUILD.json'
     if not receipt.exists():blockers.append('No completed public build receipt');return {'ready':False,'blockers':blockers}
-    report=json.loads(receipt.read_text());app=out/report['app']
+    report=json.loads(receipt.read_text());app=(out/report['app']).resolve()
     if report.get('channel')!='public':blockers.append('Wrong candidate channel')
     if report.get('testsRun') is not True:blockers.append('Candidate did not run the required tests')
     if report.get('publicSourceHashes')!=source_hashes(PUBLIC):blockers.append('Sources changed after this candidate was built')
