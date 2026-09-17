@@ -143,6 +143,7 @@ public enum MonitorApplication {
             if args.contains("--experimental-status") { throw AppRuntime.failure("This executable has no private experiment entry point.") }
             let app = NSApplication.shared; app.setActivationPolicy(.accessory)
             if args.contains("--render-preview") { try PreviewSupport.render(args:args); return }
+            if args.contains("--demo") { DemoSupport.run(args: args); return }
             startupExtension?()
             let delegate = AppDelegate(); app.delegate = delegate
             withExtendedLifetime(delegate) { app.run() }

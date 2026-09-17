@@ -1,3 +1,7 @@
+# 1.9.1 — Official-source icons and disconnected interactive preview
+
+Four new plan logos are bundled from vendor sources. A labelled --demo window uses production views with isolated preferences and denies real account/keychain/system actions.
+
 # Changelog
 
 ## 1.9.0 — Expanded plan adapters (development candidate)

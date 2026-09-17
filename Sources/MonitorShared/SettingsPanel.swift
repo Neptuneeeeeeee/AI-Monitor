@@ -148,7 +148,7 @@ struct SettingsPanel: View {
             }
             SettingsGroup("本机数据") {
                 Button("导出脱敏诊断…") { store.diagnostic() }
-                Button("打开数据目录") { NSWorkspace.shared.open(store.support) }
+                Button("打开数据目录") { store.openDataDirectory() }
                 Button("清除额度缓存…") { clearConfirmation = true }.disabled(store.refreshing)
                 Text("没有遥测，不解析或上传聊天内容。仅在启用后读取对应应用的指定状态；Key 保存在本机钥匙串，凭证只发给所属服务商。").font(.system(size: 10)).foregroundStyle(MonitorPalette.secondary)
             }

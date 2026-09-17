@@ -14,16 +14,16 @@ struct MiniMaxConnectionEditor: View {
                 Text("国际").tag("global")
             }.accessibilityIdentifier("minimax.region")
             SecureField("Token Plan 订阅 Key", text: $key)
-                .textFieldStyle(.roundedBorder).accessibilityIdentifier("minimax.key")
+                .textFieldStyle(.roundedBorder).accessibilityIdentifier("minimax.key").disabled(!store.servicesEnabled)
             HStack {
                 Button("保存到钥匙串") {
                     let candidate = key
                     Task { if await store.saveMiniMaxCredential(candidate) { key = "" } }
-                }.disabled(key.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty)
+                }.disabled(!store.servicesEnabled || key.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty)
                     .accessibilityIdentifier("minimax.save")
                 Spacer()
                 Button("移除本区域 Key") { removeConfirmation = true }
-                    .accessibilityIdentifier("minimax.remove")
+                    .accessibilityIdentifier("minimax.remove").disabled(!store.servicesEnabled)
             }
             Text("只用于查询订阅用量，不调用模型；不会把 Key 尝试发送到另一个区域。保存后仍需在套餐排序中启用 MiniMax。")
                 .font(.system(size: 10)).foregroundStyle(MonitorPalette.secondary)

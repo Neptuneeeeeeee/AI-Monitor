@@ -46,3 +46,7 @@ bash scripts/build.sh
 套餐列表扩展到十项：Kimi、Codex、Claude、GLM、Copilot、Antigravity、Cursor、MiniMax、Windsurf、Kiro。新增项默认关闭，先在套餐排序中启用。Windsurf 明确为本地缓存，MiniMax 的中国/国际订阅 Key 在其登录状态折叠项中分别配置。
 
 账号连接页已删除独立的 Kimi Code、GLM Coding Plan 密钥配置块；对应套餐和已有凭据保留，API 余额页不变。新适配通过合成响应与隔离测试，不等同于用户真实账号已经连接。调研及接口说明见 `docs/PLAN_RESEARCH_2026_09.md`。
+
+## 交互预览 / Interactive preview
+
+`bash scripts/preview.sh` 打开使用模拟数据的可操作窗口，不连接真实账号。关闭窗口或按 ⌘Q 退出。说明见 `docs/INTERACTIVE_PREVIEW.md`。

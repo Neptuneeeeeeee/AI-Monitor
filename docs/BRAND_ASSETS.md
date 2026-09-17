@@ -19,3 +19,9 @@ GitHub 的 Copilot 小图形来自 Primer Octicons，用作产品导航图标。
 ## Monitor 应用图标
 
 `Resources/AppIcon.icns` 是 Monitor 自己的图标（访达、启动台）：白色圆角方块上的四条额度横杠，呼应菜单栏图标，颜色取自 `BrandStyle` 的区分色，不含任何服务商标志。由 `swift scripts/make_app_icon.swift Resources/AppIcon.icns` 生成，`build.sh` 打包时复制进应用并写入 `CFBundleIconFile`。
+
+## 2026-09-17：新增四个平台
+
+Cursor 使用官方 brand 页面提供的品牌包中的 `General Logos/Cube/PNG/CUBE_2D_LIGHT.png`，按原比例缩至256px。Windsurf 使用官方 brand 页面链接的黑色 symbol SVG，由macOS sips转换PNG并保留原始画布和黑色；不着色、不旋转。MiniMax 使用官网链接的 favicon.ico，原始尺寸32px；不将放大称为高分辨率原图。Kiro 使用官网声明的192px apple-touch-icon。四个来源URL、来源页面与输出SHA256均记录在 `Resources/BrandAssets/sources.json`。
+
+页面：Cursor https://cursor.com/brand ；Windsurf https://windsurf.com/brand ；MiniMax https://www.minimax.io/ ；Kiro https://kiro.dev/ 。图标离线打包，UI不请求第三方图标服务。品牌资源不等于本项目拥有商标许可；正式发行时仍需按各品牌要求完成审查。

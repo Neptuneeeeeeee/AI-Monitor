@@ -62,3 +62,7 @@ The product is **AI Monitor**; the suggested repository name is `AI-Monitor`. In
 ## Expanded plans (1.9.0)
 
 The standalone Kimi Code and GLM Coding Plan credential cards were removed from connection settings; their provider rows and saved credentials remain available. MiniMax has an inline, region-specific subscription-key editor. All added providers remain disabled until selected. See [research and adapter contracts](docs/PLAN_RESEARCH_2026_09.md) for dated popularity evidence, query sources, limitations and the difference between developer tool adoption and paid-plan subscribers. Public/Local continue to share the reviewed library; no private experiment module enters the public app.
+
+## 交互预览 / Interactive preview
+
+`bash scripts/preview.sh` 打开使用模拟数据的可操作窗口，不连接真实账号。关闭窗口或按 ⌘Q 退出。说明见 `docs/INTERACTIVE_PREVIEW.md`。

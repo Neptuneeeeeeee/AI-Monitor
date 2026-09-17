@@ -31,7 +31,7 @@ import MonitorCore
         }
     }
     @Published var glmRegion: String { didSet { defaults.set(glmRegion, forKey: "glmRegion") } }
-    @Published var launchAtLogin = SMAppService.mainApp.status == .enabled
+    @Published var launchAtLogin = false
     var onChange: (() -> Void)?
     var dismissPanel: (() -> Void)?
     let defaults: UserDefaults
@@ -60,6 +60,7 @@ import MonitorCore
             preferences.save(to: defaults)
         }
         guard servicesEnabled else { return }
+        launchAtLogin = SMAppService.mainApp.status == .enabled
         if let bytes = try? Data(contentsOf: support.appendingPathComponent("plan-connections.json")),
            bytes.count < 16384, let settings = try? JSONSerialization.jsonObject(with: bytes) as? [String: String],
            let region = settings["minimaxRegion"], ["cn", "global"].contains(region) { minimaxRegion = region }
@@ -142,6 +143,7 @@ import MonitorCore
         } catch { refreshing = false; process = nil; banner = "无法启动本地采集程序。"; reschedule(); onChange?() }
     }
     func toggleLogin(_ value: Bool) {
+        guard servicesEnabled else { banner = "交互预览不执行账号连接、系统设置或真实数据操作。"; return }
         do {
             if value { try SMAppService.mainApp.register() } else { try SMAppService.mainApp.unregister() }
             launchAtLogin = SMAppService.mainApp.status == .enabled
@@ -149,6 +151,7 @@ import MonitorCore
         } catch { banner = "登录项设置未成功，请在系统设置中检查。" }
     }
     func grantClaude() {
+        guard servicesEnabled else { banner = "交互预览不执行账号连接、系统设置或真实数据操作。"; return }
         guard !authorizingClaude else { return }; authorizingClaude = true
         banner = "正在检查 Claude 登录凭证读取…"
         Task {
@@ -167,6 +170,7 @@ import MonitorCore
         }
     }
     func openWebsite(_ id: String) {
+        guard servicesEnabled else { banner = "交互预览不执行账号连接、系统设置或真实数据操作。"; return }
         if id == "minimax" && minimaxRegion == "global" {
             NSWorkspace.shared.open(URL(string: "https://platform.minimax.io/subscribe/token-plan")!); return
         }
@@ -174,6 +178,7 @@ import MonitorCore
         if let text, let url = URL(string: text) { NSWorkspace.shared.open(url) }
     }
     func reconnect(_ id: String) {
+        guard servicesEnabled else { banner = "交互预览不执行账号连接、系统设置或真实数据操作。"; return }
         if ["cursor", "windsurf"].contains(id) {
             let name = id == "cursor" ? "Cursor.app" : "Windsurf.app"
             let roots = [URL(fileURLWithPath: "/Applications"), FileManager.default.homeDirectoryForCurrentUser.appendingPathComponent("Applications")]
@@ -199,7 +204,12 @@ import MonitorCore
             try FileManager.default.setAttributes([.posixPermissions: 0o700], ofItemAtPath: file.path); NSWorkspace.shared.open(file)
         } catch { banner = "无法打开登录入口，请在官方终端登录。" }
     }
+    func openDataDirectory() {
+        guard servicesEnabled else { banner = "交互预览不访问正式数据目录。"; return }
+        NSWorkspace.shared.open(support)
+    }
     func diagnostic() {
+        guard servicesEnabled else { banner = "交互预览不执行账号连接、系统设置或真实数据操作。"; return }
         let panel = NSSavePanel(); panel.nameFieldStringValue = "Monitor-diagnostics.json"; panel.title = "导出脱敏诊断"
         if panel.runModal() == .OK, let url = panel.url, let snapshot {
             let encoder = JSONEncoder(); encoder.outputFormatting = [.prettyPrinted, .sortedKeys]
@@ -237,8 +247,12 @@ import MonitorCore
     func openAPISettings(_ id: String?) { apiMode = true; api.editingID = id; showSettings = true }
     func toggleAPI() { showSettings = false; api.editingID = nil; apiMode.toggle(); if apiMode { api.refresh() } }
     func backFromSettings() { if apiMode && api.editingID != nil { api.editingID=nil } else { showSettings=false } }
-    func refreshCurrent() { if apiMode { api.refresh() } else { refresh(force:true) } }
+    func refreshCurrent() {
+        guard servicesEnabled else { banner = "这里只展示模拟数据，未发起真实查询。"; return }
+        if apiMode { api.refresh() } else { refresh(force:true) }
+    }
     func clearQuotaCache() {
+        guard servicesEnabled else { banner = "交互预览不执行账号连接、系统设置或真实数据操作。"; return }
         guard !refreshing else { banner = "请等待本轮刷新结束。"; return }
         for name in ["snapshot.json", "provider-state.json"] { try? FileManager.default.removeItem(at: support.appendingPathComponent(name)) }
         snapshot = nil; banner = "额度缓存已清除；账号、钥匙串与防限流等待时间保持不变。"; onChange?(); refresh(force: true)

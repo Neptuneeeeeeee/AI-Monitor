@@ -61,6 +61,7 @@ import MonitorCore
         let a=APIAccount(provider:provider);accounts.append(a);_=persist();editingID=a.id;onChange?()
     }
     func save(_ draft: APIAccount, key: String) async -> Bool {
+        guard servicesEnabled else { message="交互预览不保存密钥或账号配置。";return false }
         guard !saving, accounts.contains(where:{$0.id==draft.id}) else { return false }
         saving=true;defer { saving=false }
         var account=draft
@@ -82,6 +83,7 @@ import MonitorCore
         onChange?();refresh();return true
     }
     func removeKey(_ id: String) async {
+        guard servicesEnabled else { message="交互预览不会访问钥匙串或真实账单。";return }
         guard !saving else { return };saving=true;defer { saving=false }
         let ok=await Task.detached { APIVault.remove(id) }.value
         guard ok,let i=accounts.firstIndex(where:{$0.id==id}) else { message="密钥移除未完成。";return }
@@ -89,12 +91,14 @@ import MonitorCore
         message="已移除该 API Key；查询冷却记录保留。";onChange?()
     }
     func grant(_ id: String) async {
+        guard servicesEnabled else { message="交互预览不会访问钥匙串或真实账单。";return }
         guard !saving else { return };saving=true;defer { saving=false }
         let ok=await Task.detached { APIVault.grant(id) }.value
         message=ok ? "API 钥匙串授权已验证。" : "API 钥匙串未完成授权。"
         if ok { refresh() }
     }
     func openBilling(_ account: APIAccount) {
+        guard servicesEnabled else { message="交互预览不会访问钥匙串或真实账单。";return }
         var value=account.provider.billingURL
         if account.region=="global" && account.provider == .kimi { value="https://platform.moonshot.ai/console/account" }
         if account.region=="global" && account.provider == .siliconflow { value="https://cloud.siliconflow.com/account/balance" }

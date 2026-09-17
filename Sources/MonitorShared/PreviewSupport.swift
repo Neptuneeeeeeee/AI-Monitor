@@ -15,13 +15,14 @@ import MonitorCore
         let suiteName = AppRuntime.profile.bundleID + ".preview." + UUID().uuidString
         let isolated = UserDefaults(suiteName: suiteName)!
         defer { isolated.removePersistentDomain(forName: suiteName) }
-        var preferences = DisplayPreferences.load(from: AppRuntime.defaults)
+        var preferences = DisplayPreferences()
         let fixture = !args.contains("--snapshot")
         if fixture {
             preferences = DisplayPreferences()
             preferences.providerOrder = ["claude", "kimi", "codex", "glm", "copilot", "antigravity"]
             isolated.set(["claude", "kimi", "codex", "glm"], forKey: "enabled")
         } else {
+            preferences = DisplayPreferences.load(from: AppRuntime.defaults)
             isolated.set(AppRuntime.defaults.stringArray(forKey: "enabled") ?? ProviderInfo.defaultOrder, forKey: "enabled")
         }
         preferences.save(to: isolated)
@@ -89,20 +90,20 @@ import MonitorCore
             store.api.editingID = nil; store.showSettings = false; store.apiMode = false
             let savedSnapshot = store.snapshot; let savedEnabled = store.enabled
             store.enabled = ["cursor", "minimax", "windsurf", "kiro"]
-            store.snapshot = Snapshot(generatedAt: stamp, providers: [
-                ProviderResult(id:"cursor",name:"Cursor",plan:"pro",fetchedAt:stamp,windows:[
-                    QuotaWindow(id:"cursor-monthly",label:"套餐 · 本月",remainingPercent:68,resetAt:stamp+12*86400,kind:"monthly")]),
-                ProviderResult(id:"minimax",name:"MiniMax",plan:"Max",fetchedAt:stamp,windows:[
-                    QuotaWindow(id:"minimax-0-5h",label:"general · 当前窗口",remainingPercent:42,resetAt:stamp+7200,durationMinutes:300),
-                    QuotaWindow(id:"minimax-0-weekly",label:"general · 每周",remainingPercent:73,resetAt:stamp+4*86400,durationMinutes:10080)]),
-                ProviderResult(id:"windsurf",name:"Windsurf",status:"stale",plan:"pro",fetchedAt:stamp-1800,windows:[
-                    QuotaWindow(id:"windsurf-daily",label:"每日额度 · 缓存",remainingPercent:80,resetAt:stamp+8*3600,durationMinutes:1440),
-                    QuotaWindow(id:"windsurf-weekly",label:"每周额度 · 缓存",remainingPercent:60,resetAt:stamp+3*86400,durationMinutes:10080)],note:"仅为模拟缓存，非实时读数。"),
-                ProviderResult(id:"kiro",name:"Kiro",status:"partial",plan:"KIRO PRO",fetchedAt:stamp,windows:[
-                    QuotaWindow(id:"kiro-monthly",label:"套餐 Credits · 本月（官方估计）",remainingPercent:37.5,unit:"credits",remaining:375,limit:1000,kind:"monthly")])])
+            store.snapshot = expandedFixtures(now: stamp)
             try png(MonitorPanel(store:store), output.appendingPathComponent("expanded-plans-fixture.png"))
             try png(MiniMaxConnectionEditor(store:store).padding(16).frame(width:340).background(Color.white), output.appendingPathComponent("minimax-editor-fixture.png"))
             store.snapshot=savedSnapshot; store.enabled=savedEnabled
+            let demoSuite = AppRuntime.profile.bundleID + ".demo-render." + UUID().uuidString
+            let demoDefaults = UserDefaults(suiteName: demoSuite)!
+            defer { demoDefaults.removePersistentDomain(forName: demoSuite) }
+            let demo = DemoSupport.makeStore(defaults: demoDefaults)
+            try png(DemoRoot(store: demo), output.appendingPathComponent("interactive-demo-fixture.png"))
+            demo.openSettings("connections")
+            try png(DemoRoot(store: demo), output.appendingPathComponent("demo-connections-fixture.png"))
+            demo.apiMode = true; demo.showSettings = false
+            try png(DemoRoot(store: demo), output.appendingPathComponent("demo-api-fixture.png"))
+            demo.shutdown()
             try UIInteractionChecks.run(output: output)
         } else {
             store.apiMode = true; store.showSettings = false
@@ -110,6 +111,19 @@ import MonitorCore
             store.apiMode = false
         }
         print("Rendered \(source) native quota panel, dark-system panel, three settings tabs and dynamic-bar icon. No network requests.")
+    }
+    static func expandedFixtures(now: Double) -> Snapshot {
+        Snapshot(generatedAt: now, providers: [
+                ProviderResult(id:"cursor",name:"Cursor",plan:"pro",fetchedAt:now,windows:[
+                    QuotaWindow(id:"cursor-monthly",label:"套餐 · 本月",remainingPercent:68,resetAt:now+12*86400,kind:"monthly")]),
+                ProviderResult(id:"minimax",name:"MiniMax",plan:"Max",fetchedAt:now,windows:[
+                    QuotaWindow(id:"minimax-0-5h",label:"general · 当前窗口",remainingPercent:42,resetAt:now+7200,durationMinutes:300),
+                    QuotaWindow(id:"minimax-0-weekly",label:"general · 每周",remainingPercent:73,resetAt:now+4*86400,durationMinutes:10080)]),
+                ProviderResult(id:"windsurf",name:"Windsurf",status:"stale",plan:"pro",fetchedAt:now-1800,windows:[
+                    QuotaWindow(id:"windsurf-daily",label:"每日额度 · 缓存",remainingPercent:80,resetAt:now+8*3600,durationMinutes:1440),
+                    QuotaWindow(id:"windsurf-weekly",label:"每周额度 · 缓存",remainingPercent:60,resetAt:now+3*86400,durationMinutes:10080)],note:"仅为模拟缓存，非实时读数。"),
+                ProviderResult(id:"kiro",name:"Kiro",status:"partial",plan:"KIRO PRO",fetchedAt:now,windows:[
+                    QuotaWindow(id:"kiro-monthly",label:"套餐 Credits · 本月（官方估计）",remainingPercent:37.5,unit:"credits",remaining:375,limit:1000,kind:"monthly")])])
     }
     private static func png<V: View>(_ view: V, _ url: URL) throws {
         // ImageRenderer omits AppKit-backed ScrollView/Picker content. Render the
@@ -133,7 +147,7 @@ import MonitorCore
         try data.write(to: url, options: .atomic)
         try FileManager.default.setAttributes([.posixPermissions:0o600], ofItemAtPath: url.path)
     }
-    private static func fixtures(now: Double) -> Snapshot {
+    static func fixtures(now: Double) -> Snapshot {
         // Deliberately synthetic. Only files named '*fixture*' use these numbers.
         Snapshot(generatedAt: now, providers: [
             ProviderResult(id:"claude", name:"Claude", plan:"pro", fetchedAt:now, windows:[

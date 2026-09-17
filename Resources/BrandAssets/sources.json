@@ -40,5 +40,41 @@
     "source": "https://www.gstatic.com/lamda/images/gemini_sparkle_4g_512_lt_f94943af3be039176192d.png (linked by https://gemini.google.com/)",
     "file": "gemini.png",
     "sha256": "5e7cfecaa53f4f65a313fe89b0f389548126544a78fad8489510c70ae641a4a1"
+  },
+  {
+    "id": "cursor",
+    "source": "https://ptht05hbb1ssoooe.public.blob.vercel-storage.com/assets/brand/cursor-brand-assets.zip",
+    "sourcePage": "https://cursor.com/brand",
+    "file": "cursor.png",
+    "sha256": "08cfa39cdc966e8bf38586751bbce515c1196db0317039d13a6ca7469f3536fa",
+    "retrievedAt": "2026-09-17",
+    "note": "General Logos/Cube/PNG/CUBE_2D_LIGHT.png"
+  },
+  {
+    "id": "minimax",
+    "source": "https://www.minimax.io/favicon.ico",
+    "sourcePage": "https://www.minimax.io/",
+    "file": "minimax.png",
+    "sha256": "176310bfce0bc071b0c6b2903eb2e352ef1e4b10deecc84fb7da5635a7783fcc",
+    "retrievedAt": "2026-09-17",
+    "note": "Official website favicon; original ICO is 32px"
+  },
+  {
+    "id": "windsurf",
+    "source": "https://exafunction.github.io/public/brand/windsurf-black-symbol.svg",
+    "sourcePage": "https://windsurf.com/brand",
+    "file": "windsurf.png",
+    "sha256": "9476aaf7731ce0b8a7ff741ef6bf1972ec310bbdb1f99689a99e36f01f6cc312",
+    "retrievedAt": "2026-09-17",
+    "note": "Official black symbol; native SVG rasterization"
+  },
+  {
+    "id": "kiro",
+    "source": "https://kiro.dev/apple-icon.png?4cefa8c54a20b098",
+    "sourcePage": "https://kiro.dev/",
+    "file": "kiro.png",
+    "sha256": "eaf4e3a56ad089982e2b06d1d7bcbded64b24b7df946a3991ad8fcc778ee46c6",
+    "retrievedAt": "2026-09-17",
+    "note": "Official 192px touch icon"
   }
 ]
