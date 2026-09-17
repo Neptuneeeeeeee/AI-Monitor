@@ -4,15 +4,19 @@ AI subscription quotas, API balances, and costs in your macOS menu bar.
 
 [中文说明](README.zh-CN.md)
 
-## Status
+## Download and install
 
-This checkout is the public-source boundary of a two-edition workspace. Version 1.9.3 is a **development candidate**. This repository is a **source preview**, not a notarized, end-user-ready release. No open-source license has been selected; see `LICENSE_PENDING.md`. Publishing this source does not grant an MIT, Apache, or other general redistribution license. No binary release is published by this upload.
+Download the **DMG** or application **ZIP** from [GitHub Releases](https://github.com/Neptuneeeeeeee/AI-Monitor/releases/tag/v1.9.4), then drag **AI Monitor.app** into Applications. See [installation instructions](docs/INSTALL.md).
 
-The app retains a native SwiftUI/AppKit interface and Python standard-library collectors. It displays plan quotas separately from API balances/costs. Missing provider data is not presented as zero, unlimited usage, or a full balance. UI text is currently primarily Chinese; the README is bilingual, but full UI localization is not implemented.
+**Apple Silicon, macOS 14 or later.** Release downloads include Python 3.13 and public TLS root certificates; end users do not need Python, Xcode, Homebrew or a compiler. Official provider clients and account login may still be required to read subscriptions. UI text is primarily Chinese.
+
+**Preview / not notarized:** v1.9.4 has an ad-hoc integrity signature, not Developer ID signing or Apple notarization. A first-launch Gatekeeper confirmation can be required. Read the security notice in the release and follow Apple's per-app guidance only after verifying the source and checksum. Never disable system-wide protections.
+
+The owner has requested a downloadable preview, not a new MIT/Apache source license. The general source-license decision and complete third-party review remain pending. Runtime dependency notices are included in the app. This preview is not a stable, universally verified release.
 
 ## Requirements and build
 
-Build on macOS 14 or later with Apple Command Line Tools, Swift 5.9 or later, and a working `/usr/bin/python3`. The candidate package does not yet embed Python. Build outputs use the host architecture; only architectures actually tested are supported for a given release.
+Build on macOS 14 or later with Apple Command Line Tools, Swift 5.9 or later, and a working `/usr/bin/python3`. A normal developer build may use system Python. For a self-contained downloadable build, use `bash scripts/build.sh --bundle-python`, then `python3 scripts/package_release.py --preview`. The runtime inputs are SHA-256 pinned in `Config/runtime-lock.json`. Build outputs use the host architecture; only architectures actually tested are supported for a given release.
 
 ```bash
 bash scripts/test.sh
@@ -49,7 +53,7 @@ See `PRIVACY.md`, `SECURITY.md`, and `docs/ARCHITECTURE.md`. No new macOS system
 
 ## Distribution checklist
 
-Choose an appropriate source license and review third-party code/assets; embed or otherwise explicitly support the Python runtime; test a clean Mac; implement Developer ID signing and notarization; and release only a reviewed version/tag. `scripts/release_preflight.py` reports these blockers rather than claiming a candidate is release-ready. Do not publish private state, signing material, local experiments, or build logs.
+Before a stable release: choose an appropriate source license and complete the third-party review; test a second clean Mac; implement Developer ID signing and notarization; and release only a reviewed version/tag. The explicit preview packager separately requires an embedded runtime, passing tests, relocation/TLS/UI checks and truthful unsigned-preview notes. `scripts/release_preflight.py` reports these blockers rather than claiming a candidate is release-ready. Do not publish private state, signing material, local experiments, or build logs.
 
 ### Candidate app storage
 

@@ -27,11 +27,18 @@ enum AppRuntime {
         // A parent shell must not redirect a production collector into another edition.
         for key in ["MONITOR_DATA_DIR", "MONITOR_TEST_MODE", "MONITOR_TEST_HOME", "MONITOR_KEYCHAIN_HELPER", "MONITOR_API_VAULT", "PYTHONPATH", "PYTHONHOME"] { env.removeValue(forKey: key) }
         env["PYTHONDONTWRITEBYTECODE"] = "1"
+        env["PYTHONNOUSERSITE"] = "1"
+        if env["SSL_CERT_FILE"] == nil,
+           let ca = Bundle.main.resourceURL?.appendingPathComponent("Python/certificates/cacert.pem"),
+           FileManager.default.fileExists(atPath: ca.path) { env["SSL_CERT_FILE"] = ca.path }
         return env
     }
     static var pythonExecutable: URL? {
         if let bundled = Bundle.main.resourceURL?.appendingPathComponent("Python/bin/python3"),
            FileManager.default.isExecutableFile(atPath: bundled.path) { return bundled }
+        // A downloadable package must never silently fall back to developer tools.
+        if let metadata = Bundle.main.resourceURL?.appendingPathComponent("Distribution.json"),
+           FileManager.default.fileExists(atPath: metadata.path) { return nil }
         let system = URL(fileURLWithPath: "/usr/bin/python3")
         return FileManager.default.isExecutableFile(atPath: system.path) ? system : nil
     }
@@ -42,7 +49,7 @@ enum AppRuntime {
             "keychainHelperID":profile.keychainHelperID, "apiHelperID":profile.apiHelperID,
             "keychainHelperPath":KeychainBridge.appURL.path, "apiHelperPath":APIVault.appURL.path,
             "defaultEnabledProviders":profile.defaultEnabledProviders,
-            "experimentalModules":profile.experimentalModules, "pythonBundled":Bundle.main.resourceURL.map { FileManager.default.isExecutableFile(atPath:$0.appendingPathComponent("Python/bin/python3").path) } ?? false]
+            "experimentalModules":profile.experimentalModules, "pythonExecutable":pythonExecutable?.path ?? "", "pythonBundled":Bundle.main.resourceURL.map { FileManager.default.isExecutableFile(atPath:$0.appendingPathComponent("Python/bin/python3").path) } ?? false]
         return try JSONSerialization.data(withJSONObject: info, options: [.prettyPrinted, .sortedKeys])
     }
 }

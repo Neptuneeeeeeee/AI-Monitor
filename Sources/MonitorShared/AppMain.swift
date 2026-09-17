@@ -140,6 +140,7 @@ public enum MonitorApplication {
                 FileHandle.standardOutput.write(try AppRuntime.runtimeInfo()); return
             }
             if args.contains("--self-test-isolation") { try IsolationSelfCheck.run(); return }
+            if args.contains("--self-test-runtime") { try RuntimeSelfCheck.run(); return }
             if args.contains("--experimental-status") { throw AppRuntime.failure("This executable has no private experiment entry point.") }
             let app = NSApplication.shared; app.setActivationPolicy(.accessory)
             if args.contains("--render-preview") { try PreviewSupport.render(args:args); return }

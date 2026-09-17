@@ -20,15 +20,20 @@ def verify(app:Path,channel:str)->dict:
     if info['CFBundleIdentifier']!=expected or profile['bundleID']!=expected or profile['channel']!=channel:raise ValueError('Cross-edition app/profile')
     if profile!=json.loads((r/'collector/runtime.json').read_text()):raise ValueError('Swift/Python profile drift')
     if channel=='public' and profile['experimentalModules']:raise ValueError('Private experiments in public bundle')
-    permitted={'RuntimeProfile.json','collector','BrandAssets','AppIcon.icns','AuthBridge','APIVault','Python'}
+    permitted={'RuntimeProfile.json','collector','BrandAssets','AppIcon.icns','AuthBridge','APIVault','Python','Distribution.json','Notices'}
     if {f.name for f in r.iterdir()}-permitted:raise ValueError('Unexpected top-level resource')
     for f in app.rglob('*'):
         if f.is_symlink():raise ValueError('Unexpected symlink in candidate')
-        if f.name in {'.env','.git','accounts.json','snapshot.json','backups','logs','Experimental'} or f.suffix in {'.key','.pem','.pyc'}:raise ValueError('Private/runtime artifact in app: '+f.name)
+        public_ca = f == r/'Python/certificates/cacert.pem'
+        if f.name in {'.env','.git','accounts.json','snapshot.json','backups','logs','Experimental'} or f.suffix in {'.key','.pyc'} or (f.suffix=='.pem' and not public_ca):raise ValueError('Private/runtime artifact in app: '+f.name)
+        if public_ca and (b'PRIVATE KEY' in f.read_bytes() or b'BEGIN CERTIFICATE' not in f.read_bytes()):raise ValueError('Invalid public certificate bundle')
     call(['/usr/bin/codesign','--verify','--deep','--strict',app])
     executable=app/'Contents/MacOS'/info['CFBundleExecutable']
     runtime=json.loads(call([executable,'--runtime-info']))
     if runtime['bundleID']!=expected or runtime['keychainPrefix']!=expected+'.' or runtime['defaultEnabledProviders']!=[]:raise ValueError('Wrong runtime/defaults')
+    if runtime['pythonBundled']:
+        smoke=json.loads(call([executable,'--self-test-runtime']))
+        if not smoke.get('passed') or smoke.get('systemPythonUsed') is not False:raise ValueError('Bundled runtime failed its native launch test')
     helpers=[]
     for sub,label,exe,suffix in [('AuthBridge','Keychain','MonitorKeychain','.Keychain.v1'),('APIVault','API Vault','MonitorAPIVault','.APIVault.v1')]:
         folder=r/sub;bundle=folder/(profile['displayName']+' '+label+'.app');binary=bundle/'Contents/MacOS'/exe

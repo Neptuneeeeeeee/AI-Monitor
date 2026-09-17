@@ -1,5 +1,12 @@
 # 1.9.1 — Official-source icons and disconnected interactive preview
 
+## 1.9.4 — Downloadable Apple Silicon preview
+
+- Add pinned standalone CPython 3.13 and Mozilla public CA roots to the DMG/ZIP build; no separate Python or developer tools are required at runtime.
+- Add a native bundled-interpreter self-check, relocated-app/TLS tests and a drag-to-Applications disk image.
+- Preserve third-party runtime notices, include bilingual installation instructions and keep missing/zero allowance semantics unchanged.
+- Package as an explicitly unnotarized preview. Current local installation is not automatically upgraded by release creation.
+
 ## 1.9.3 — Correct zero-capacity Cursor accounts
 
 - A Cursor response with an explicit zero, negative or invalid plan limit no longer becomes 100% remaining from placeholder percentage fields.

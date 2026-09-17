@@ -1,6 +1,15 @@
 # AI Monitor
 
-> **源码预览，尚非正式开源发行。** 当前候选版本为 1.9.3；许可证尚未选择，不擅自授予 MIT、Apache 等使用或再分发许可。本次仅公开工程源码，不发布已公证安装包。Python 运行时打包、正式签名/公证及第三方资源审查仍待完成。
+## 直接下载安装
+
+前往 [GitHub Releases](https://github.com/Neptuneeeeeeee/AI-Monitor/releases/tag/v1.9.4) 下载 **DMG**（推荐）或应用 ZIP，把 **AI Monitor.app** 拖入“应用程序”后打开。不要把自动生成的 Source code ZIP 当作应用。详见 [安装说明](docs/INSTALL.md)。
+
+**Apple Silicon、macOS 14 及以上；安装包已经内置 Python，无需 Xcode、Python 或 Homebrew。** 对应套餐仍需你自己的官方客户端及有效登录。
+
+**当前为 1.9.4 未公证预发布版**：没有 Developer ID 分发签名，首次打开可能被系统拦截。核实来源和校验值并决定信任后，可按 Apple 指引对这个应用单独“仍要打开”，不要关闭 Gatekeeper。正式源码许可证和完整第三方审查仍待完成，不宣称已授予 MIT/Apache 许可。
+
+---
+
 
 在 macOS 菜单栏查看 AI 套餐额度、API 余额与费用。
 

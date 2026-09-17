@@ -120,6 +120,7 @@ def main() -> int:
     parser.add_argument('--expected-channel',choices=['public','local'],default='public')
     parser.add_argument('--jobs',type=int,default=2)
     parser.add_argument('--skip-tests',action='store_true',help='Developer candidate only; recorded in build receipt')
+    parser.add_argument('--bundle-python',action='store_true',help='Include pinned standalone Python for the downloadable preview')
     args = parser.parse_args()
     project = args.project.resolve(); channel = args.expected_channel
     if channel == 'public' and project != PUBLIC: raise ValueError('Public entry must build its own checkout')
@@ -144,6 +145,7 @@ def main() -> int:
     arch = platform.machine()
     if arch not in ('arm64','x86_64'): raise RuntimeError('Build on a supported Mac')
     jobs = str(args.jobs)
+    if args.bundle_python and (channel != 'public' or args.skip_tests):raise ValueError('Runtime distribution requires tested public build')
     if not args.skip_tests:
         run([sys.executable,str(PUBLIC/'scripts/test_python.py')],PUBLIC,env,180)
         if channel == 'local' and (project/'tests').is_dir():
@@ -175,7 +177,18 @@ def main() -> int:
             target=resources/destination;target.mkdir()
             shutil.copytree(bundle,target/bundle.name,copy_function=clean_copy)
             (target/'identity.json').write_text(json.dumps(metadata,indent=2)+'\n')
-        info={'CFBundleDevelopmentRegion':'en','CFBundleExecutable':profile['executableName'],
+        runtime_report=None
+        if args.bundle_python:
+            from bundle_runtime import prepare
+            runtime_report=prepare(resources/'Python',env)
+            (resources/'Distribution.json').write_text(json.dumps({'schema':1,'kind':'public-preview','pythonRequired':True,'notarized':False,'architecture':arch},indent=2)+'\n')
+            notices=resources/'Notices';notices.mkdir()
+            for filename in ['THIRD_PARTY_NOTICES.md','LICENSE_PENDING.md','PRIVACY.md']:
+                clean_copy(PUBLIC/filename,notices/filename)
+            clean_copy(PUBLIC/'Resources/BrandAssets/sources.json',notices/'brand-sources.json')
+            runtime_env={**env,'PYTHONNOUSERSITE':'1','SSL_CERT_FILE':str(resources/'Python/certificates/cacert.pem')}
+            run([str(resources/'Python/bin/python3'),'-B',str(PUBLIC/'scripts/test_python.py')],PUBLIC,runtime_env,240)
+        info={'CFBundleDevelopmentRegion' :'en','CFBundleExecutable':profile['executableName'],
               'CFBundleIconFile':'AppIcon','CFBundleIdentifier':profile['bundleID'],
               'CFBundleInfoDictionaryVersion':'6.0','CFBundleName':profile['displayName'],
               'CFBundleDisplayName':profile['displayName'],'CFBundlePackageType':'APPL',
@@ -214,7 +227,8 @@ def main() -> int:
         report={'schema':1,'channel':channel,'bundleID':profile['bundleID'],'version':profile['version'],'buildNumber':profile['buildNumber'],'builtAtUTC':stamp,
                 'architecture':arch,'app':visible.name,'appLocation':str(final),'appIsLocalShortcut':True,'archive':package.name,'archiveSHA256':digest(package),
                 'testsRun':not args.skip_tests,'signed':'ad-hoc','distributionReady':False,
-                'limitations':['Python runtime is not bundled','Developer ID signing and notarization not performed','Open-source license and third-party redistribution review pending'],
+                'pythonBundled':bool(runtime_report),'runtime':runtime_report,
+                'limitations':([] if runtime_report else ['Python runtime is not bundled'])+['Developer ID signing and notarization not performed','Source license selection and complete third-party review remain pending'],
                 'publicSourceHashes':hashes,'localSourceHashes':local_before,
                 'publicGit':public_git_before,'localGit':local_git_before,
                 'appFileHashes':{str(f.relative_to(final)):digest(f) for f in sorted(final.rglob('*')) if f.is_file()}}
