@@ -1,0 +1,13 @@
+{
+  "schema": 1,
+  "channel": "public",
+  "bundleID": "com.thalnova.aimonitor",
+  "displayName": "Thalnova AI Monitor",
+  "dataDirectoryName": "Thalnova AI Monitor",
+  "executableName": "ThalnovaAIMonitor",
+  "version": "1.8.0",
+  "buildNumber": "10",
+  "defaultEnabledProviders": [],
+  "badge": "",
+  "experimentalModules": []
+}

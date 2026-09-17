@@ -1,0 +1,44 @@
+[
+  {
+    "id": "claude",
+    "source": "https://cdn.sanity.io/images/4zrzovbb/claude-com/369b14e80ac643cc09dccd581ccb91f82b559190-32x32.png (linked by https://claude.com/)",
+    "file": "claude.png",
+    "sha256": "4004381309500f25e49a1ae639912ce307ea81da74cc383954a1ac8b9d343fe6"
+  },
+  {
+    "id": "kimi",
+    "source": "https://www.kimi.com/pwa-192.png",
+    "file": "kimi.png",
+    "sha256": "6c14f9c3062e953b3ed57ae3e19db931c1c1bba38d4d8d55550544f31d55e469"
+  },
+  {
+    "id": "codex",
+    "source": "https://developers.openai.com/favicon.png",
+    "file": "codex.png",
+    "sha256": "8d5575ee667ff715cd3e3074d5296edc68d5aadd89720d203e13131b68b22a04"
+  },
+  {
+    "id": "glm",
+    "source": "https://z-cdn.chatglm.cn/z-ai/static/logo.svg (linked by https://chat.z.ai/)",
+    "file": "glm.png",
+    "sha256": "f877ae2d5782707284f4ebf84678bdc79fd230dff90080c84451fd4d59b36f4c"
+  },
+  {
+    "id": "copilot",
+    "source": "https://raw.githubusercontent.com/primer/octicons/main/icons/copilot-24.svg",
+    "file": "copilot.png",
+    "sha256": "0fcfc3890c52f5b9fb716e39e43019a54dbf8aa93756d37eb1c4c62ecdb26958"
+  },
+  {
+    "id": "antigravity",
+    "source": "/Applications/Antigravity.app/Contents/Resources/icon.icns (installed official app)",
+    "file": "antigravity.png",
+    "sha256": "6e5f67c0fdf00c7e6bde1fcfac1f36dc12130e2e9c6f1201ff8fc3ed940d3dfa"
+  },
+  {
+    "id": "gemini",
+    "source": "https://www.gstatic.com/lamda/images/gemini_sparkle_4g_512_lt_f94943af3be039176192d.png (linked by https://gemini.google.com/)",
+    "file": "gemini.png",
+    "sha256": "5e7cfecaa53f4f65a313fe89b0f389548126544a78fad8489510c70ae641a4a1"
+  }
+]
