@@ -10,7 +10,7 @@ def load_profile():
     doc = json.loads(path.read_text())
     channel = doc.get('channel')
     suffix = '' if channel == 'public' else '.local'
-    name = 'Thalnova AI Monitor' + ('' if channel == 'public' else ' Local')
+    name = 'AI Monitor' + ('' if channel == 'public' else ' Local')
     if (channel not in ('public', 'local') or doc.get('schema') != 1
             or doc.get('bundleID') != 'com.thalnova.aimonitor' + suffix
             or doc.get('dataDirectoryName') != name
@@ -28,7 +28,7 @@ if os.environ.get('MONITOR_TEST_MODE') == '1':
     if override:
         candidate = Path(override).expanduser().resolve()
         production = [HOME/'Library/Application Support'/n for n in
-                      ('Monitor','Thalnova AI Monitor','Thalnova AI Monitor Local')]
+                      ('Monitor','AI Monitor','AI Monitor Local','Thalnova AI Monitor','Thalnova AI Monitor Local')]
         if not candidate.is_absolute() or any(candidate == p or p in candidate.parents for p in production):
             raise RuntimeError('Tests cannot target production storage')
         SUPPORT = candidate

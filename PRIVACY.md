@@ -6,7 +6,7 @@ No plan is enabled by default. Selecting a provider permits its existing adapter
 
 Keys entered for this app use its own per-edition Keychain/API Vault helper and service namespace. Secret values pass through private process pipes, not command-line arguments or source files. API account metadata does not contain the key, but quota/balance data and account aliases can still be private.
 
-Public user data: `~/Library/Application Support/Thalnova AI Monitor/`. Preferences domain: `com.thalnova.aimonitor`. Helper roots: `Auth/` and `APIAuth/` under that data directory. Other editions use different namespaces. Existing legacy credentials/settings are not automatically imported.
+Public user data: `~/Library/Application Support/AI Monitor/`. Preferences domain: `com.thalnova.aimonitor`. Helper roots: `Auth/` and `APIAuth/` under that data directory. Other editions use different namespaces. Existing legacy credentials/settings are not automatically imported.
 
 The app does not grant itself Accessibility, Full Disk Access, automation consent, or other system privileges. Current candidates are not App Sandbox confined. A separate folder is an accidental-overwrite boundary, not a security boundary against other processes running as the same user.
 

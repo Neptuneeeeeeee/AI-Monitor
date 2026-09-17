@@ -1,4 +1,4 @@
-# Thalnova AI Monitor
+# AI Monitor
 
 在 macOS 菜单栏查看 AI 套餐额度、API 余额与费用。
 
@@ -35,4 +35,8 @@ bash scripts/build.sh
 
 ## 候选应用存放说明
 
-输出目录中的 `.app` 是指向本版本独立缓存中签名应用的本机快捷入口；真正的应用保存在 `~/Library/Caches/ThalnovaAIMonitor/<Public或Local>/Candidates/`。这样可以避免桌面同步软件为应用目录添加导致签名校验失败的元数据。输出目录的ZIP是真实文件，不是快捷入口；对外只选择ZIP，不能分享本机快捷入口。清理构建缓存后快捷入口可能失效，重新构建即可恢复；安装脚本会解析快捷入口并复制实际应用。
+输出目录中的 `.app` 是指向本版本独立缓存中签名应用的本机快捷入口；真正的应用保存在 `~/Library/Caches/AIMonitor/<Public或Local>/Candidates/`。这样可以避免桌面同步软件为应用目录添加导致签名校验失败的元数据。输出目录的ZIP是真实文件，不是快捷入口；对外只选择ZIP，不能分享本机快捷入口。清理构建缓存后快捷入口可能失效，重新构建即可恢复；安装脚本会解析快捷入口并复制实际应用。
+
+## 仓库与构建版本
+
+应用名为 **AI Monitor**，计划公开仓库名为 `AI-Monitor`；双版本工作区中只有 `public/` 对应公开仓库。构建不会推送GitHub。BUILD.json记录实际公共提交、Local提交和是否存在未提交修改，并保留源码哈希。详见[Git对应关系](docs/GIT_WORKFLOW.md)。

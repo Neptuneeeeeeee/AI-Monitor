@@ -4,8 +4,8 @@ extension MonitorCoreTests {
     func runtimeFixture(channel: String = "public", overrides: [String:Any] = [:]) throws -> RuntimeProfile {
         let local = channel == "local"
         var doc: [String:Any] = ["schema":1,"channel":channel,"bundleID":"com.thalnova.aimonitor" + (local ? ".local" : ""),
-            "displayName":"Thalnova AI Monitor" + (local ? " Local" : ""),"dataDirectoryName":"Thalnova AI Monitor" + (local ? " Local" : ""),
-            "executableName":"ThalnovaAIMonitor" + (local ? "Local" : ""),"version":"1.8.0","buildNumber":"10",
+            "displayName":"AI Monitor" + (local ? " Local" : ""),"dataDirectoryName":"AI Monitor" + (local ? " Local" : ""),
+            "executableName":"AIMonitor" + (local ? "Local" : ""),"version":"1.8.0","buildNumber":"11",
             "defaultEnabledProviders":[String](),"badge":local ? "LOCAL" : "","experimentalModules":local ? ["LocalExperiments"] : [String]()]
         doc.merge(overrides) { _, new in new }
         return try JSONDecoder().decode(RuntimeProfile.self,from:JSONSerialization.data(withJSONObject:doc))

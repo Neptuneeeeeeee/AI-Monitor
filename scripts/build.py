@@ -15,6 +15,7 @@ import subprocess
 import sys
 import tempfile
 import uuid
+from git_provenance import repository_state
 
 PUBLIC = Path(__file__).resolve().parents[1]
 PROVIDERS = {'claude','kimi','codex','glm','copilot','antigravity'}
@@ -24,9 +25,9 @@ def digest(path: Path) -> str:
 
 def profile_for(project: Path, expected: str) -> dict:
     doc = json.loads((project/'Config/profile.json').read_text())
-    name = 'Thalnova AI Monitor' + (' Local' if expected == 'local' else '')
+    name = 'AI Monitor' + (' Local' if expected == 'local' else '')
     identifier = 'com.thalnova.aimonitor' + ('.local' if expected == 'local' else '')
-    executable = 'ThalnovaAIMonitor' + ('Local' if expected == 'local' else '')
+    executable = 'AIMonitor' + ('Local' if expected == 'local' else '')
     if (expected not in ('public','local') or doc.get('schema') != 1
             or doc.get('channel') != expected or doc.get('bundleID') != identifier
             or doc.get('displayName') != name or doc.get('dataDirectoryName') != name
@@ -129,9 +130,11 @@ def main() -> int:
     from audit_public import audit_source
     audit_source(PUBLIC)
     public_before = source_hashes(PUBLIC)
+    public_git_before = repository_state(PUBLIC)
+    local_git_before = repository_state(project) if channel == "local" else None
     local_before = source_hashes(project) if channel == 'local' else {}
     output = output_for(project,channel);output.mkdir(parents=True,exist_ok=True)
-    cache = Path.home()/'Library/Caches/ThalnovaAIMonitor'/channel.capitalize()
+    cache = Path.home()/'Library/Caches/AIMonitor'/channel.capitalize()
     cache.mkdir(parents=True,exist_ok=True)
     lock = (cache/'build.lock').open('a')
     try: fcntl.flock(lock,fcntl.LOCK_EX|fcntl.LOCK_NB)
@@ -183,6 +186,8 @@ def main() -> int:
         run([sys.executable,str(PUBLIC/'scripts/verify_bundle.py'),str(app),'--channel',channel],PUBLIC,env,180)
         if source_hashes(PUBLIC) != public_before or (channel == 'local' and source_hashes(project) != local_before):
             raise RuntimeError('Sources changed while building; rebuild before using this candidate')
+        if repository_state(PUBLIC) != public_git_before or (channel == 'local' and repository_state(project) != local_git_before):
+            raise RuntimeError('Git revision/worktree changed while building; rebuild this candidate')
         # Desktop/file-provider folders can reattach Finder metadata to .app
         # directories. Keep each signed candidate immutable in an edition cache;
         # output contains only a local shortcut plus the real portable ZIP.
@@ -206,11 +211,12 @@ def main() -> int:
         run(['/usr/bin/ditto','-c','-k','--norsrc','--noextattr','--keepParent',str(final),str(temporary_zip)],project,env)
         os.replace(temporary_zip,package)
         hashes=source_hashes(PUBLIC)
-        report={'schema':1,'channel':channel,'bundleID':profile['bundleID'],'version':profile['version'],'builtAtUTC':stamp,
+        report={'schema':1,'channel':channel,'bundleID':profile['bundleID'],'version':profile['version'],'buildNumber':profile['buildNumber'],'builtAtUTC':stamp,
                 'architecture':arch,'app':visible.name,'appLocation':str(final),'appIsLocalShortcut':True,'archive':package.name,'archiveSHA256':digest(package),
                 'testsRun':not args.skip_tests,'signed':'ad-hoc','distributionReady':False,
                 'limitations':['Python runtime is not bundled','Developer ID signing and notarization not performed','Open-source license and third-party redistribution review pending'],
                 'publicSourceHashes':hashes,'localSourceHashes':local_before,
+                'publicGit':public_git_before,'localGit':local_git_before,
                 'appFileHashes':{str(f.relative_to(final)):digest(f) for f in sorted(final.rglob('*')) if f.is_file()}}
         (output/'BUILD.json').write_text(json.dumps(report,indent=2)+'\n')
         (output/'SHA256SUMS').write_text(report['archiveSHA256']+'  '+package.name+'\n')

@@ -25,7 +25,7 @@ public struct RuntimeProfile: Codable, Equatable {
     public func validate(expectedChannel: String) throws {
         let validID = bundleID.range(of: "^[A-Za-z0-9]+(?:[.-][A-Za-z0-9]+)+$", options: .regularExpression) != nil
         let expectedID = expectedChannel == "public" ? "com.thalnova.aimonitor" : "com.thalnova.aimonitor.local"
-        let expectedName = expectedChannel == "public" ? "Thalnova AI Monitor" : "Thalnova AI Monitor Local"
+        let expectedName = expectedChannel == "public" ? "AI Monitor" : "AI Monitor Local"
         guard schema == 1, ["public", "local"].contains(channel), channel == expectedChannel,
               validID, bundleID == expectedID, displayName == expectedName, dataDirectoryName == expectedName,
               !executableName.isEmpty, !executableName.contains("/"),

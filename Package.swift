@@ -1,11 +1,11 @@
 // swift-tools-version: 5.9
 import PackageDescription
 let package = Package(
-    name: "ThalnovaAIMonitor", platforms: [.macOS(.v14)],
+    name: "AIMonitor", platforms: [.macOS(.v14)],
     products: [
         .library(name: "MonitorCore", targets: ["MonitorCore"]),
         .library(name: "MonitorShared", targets: ["MonitorShared"]),
-        .executable(name: "ThalnovaAIMonitor", targets: ["Monitor"]),
+        .executable(name: "AIMonitor", targets: ["Monitor"]),
         .executable(name: "MonitorCoreChecks", targets: ["MonitorCoreChecks"])
     ],
     targets: [

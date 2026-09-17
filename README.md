@@ -1,4 +1,4 @@
-# Thalnova AI Monitor
+# AI Monitor
 
 AI subscription quotas, API balances, and costs in your macOS menu bar.
 
@@ -53,4 +53,8 @@ Choose an appropriate source license and review third-party code/assets; embed o
 
 ### Candidate app storage
 
-The output `.app` is a local shortcut to an immutable signed bundle under this edition’s `~/Library/Caches/ThalnovaAIMonitor/.../Candidates/` directory. This avoids desktop sync software attaching metadata that breaks code-signature verification. The ZIP in the output directory is a real file, not a shortcut. Share the ZIP only; clearing build caches can invalidate the local shortcut until you rebuild. Installation resolves the shortcut and copies the actual bundle.
+The output `.app` is a local shortcut to an immutable signed bundle under this edition’s `~/Library/Caches/AIMonitor/.../Candidates/` directory. This avoids desktop sync software attaching metadata that breaks code-signature verification. The ZIP in the output directory is a real file, not a shortcut. Share the ZIP only; clearing build caches can invalidate the local shortcut until you rebuild. Installation resolves the shortcut and copies the actual bundle.
+
+## Git and build provenance
+
+The product is **AI Monitor**; the suggested repository name is `AI-Monitor`. In the dual workspace only `public/` is this repository. GitHub remote configuration is explicit; builds never push. BUILD.json records `publicGit` (commit/branch/dirty state), and Local builds additionally record `localGit`, alongside source hashes. See [Git workflow](docs/GIT_WORKFLOW.md).

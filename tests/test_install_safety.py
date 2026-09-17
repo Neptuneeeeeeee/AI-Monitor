@@ -15,7 +15,7 @@ class InstallSafetyTests(unittest.TestCase):
             doc=json.loads(result.stdout);self.assertFalse(doc['willInstall']);self.assertFalse(doc['willLaunch']);self.assertFalse((Path(home)/'Applications').exists())
     def test_target_never_legacy(self):
         with tempfile.TemporaryDirectory() as home:
-            doc=json.loads(self.invoke(home).stdout);self.assertEqual(Path(doc['target']).name,'Thalnova AI Monitor.app');self.assertEqual(doc['bundleID'],'com.thalnova.aimonitor')
+            doc=json.loads(self.invoke(home).stdout);self.assertEqual(Path(doc['target']).name,'AI Monitor.app');self.assertEqual(doc['bundleID'],'com.thalnova.aimonitor')
     def test_launch_requires_explicit_install(self):
         with tempfile.TemporaryDirectory() as home:
             r=self.invoke(home,'--launch');self.assertNotEqual(r.returncode,0);self.assertFalse((Path(home)/'Applications').exists())
