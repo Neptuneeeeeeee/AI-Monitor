@@ -6,7 +6,7 @@ AI subscription quotas, API balances, and costs in your macOS menu bar.
 
 ## Status
 
-This checkout is the public-source boundary of a two-edition workspace. Version 1.9.2 is a **development candidate**. This repository is a **source preview**, not a notarized, end-user-ready release. No open-source license has been selected; see `LICENSE_PENDING.md`. Publishing this source does not grant an MIT, Apache, or other general redistribution license. No binary release is published by this upload.
+This checkout is the public-source boundary of a two-edition workspace. Version 1.9.3 is a **development candidate**. This repository is a **source preview**, not a notarized, end-user-ready release. No open-source license has been selected; see `LICENSE_PENDING.md`. Publishing this source does not grant an MIT, Apache, or other general redistribution license. No binary release is published by this upload.
 
 The app retains a native SwiftUI/AppKit interface and Python standard-library collectors. It displays plan quotas separately from API balances/costs. Missing provider data is not presented as zero, unlimited usage, or a full balance. UI text is currently primarily Chinese; the README is bilingual, but full UI localization is not implemented.
 
@@ -37,7 +37,7 @@ Replacement requires `--replace` and the same edition must already be quit. `--l
 
 ## Connections and feature limits
 
-No plan provider is enabled on first launch. Select the providers to connect in Settings; unsupported or unconfigured accounts remain unavailable. Plan collectors now register ten providers: Kimi, Codex, Claude, GLM, Copilot, Antigravity, Cursor, MiniMax, Windsurf and Kiro. Cursor uses actual monthly dashboard data; MiniMax reads Token Plan windows; Kiro uses the official `/usage` output. Windsurf is explicitly a **local cached reading, not live server usage**. The automated suite uses fixtures. Separately, real-account checks on one Mac succeeded for Claude, Kimi, Codex, Copilot, Antigravity, and Cursor. This does not guarantee every account or client version works. MiniMax, Windsurf, and Kiro have not yet been verified with live accounts in this release.
+No plan provider is enabled on first launch. Select the providers to connect in Settings; unsupported or unconfigured accounts remain unavailable. Plan collectors now register ten providers: Kimi, Codex, Claude, GLM, Copilot, Antigravity, Cursor, MiniMax, Windsurf and Kiro. Cursor uses actual monthly dashboard data; MiniMax reads Token Plan windows; Kiro uses the official `/usage` output. Windsurf is explicitly a **local cached reading, not live server usage**. The automated suite uses fixtures. Separately, real-account numeric readings on one Mac were verified for Claude, Kimi, Codex, Copilot, and Antigravity. Cursor authentication was also verified, but the tested account reported a zero-capacity plan; it is shown as having no quantifiable allowance, not 100% remaining. This does not guarantee every account or client version works. MiniMax, Windsurf, and Kiro have not yet been verified with live accounts in this release.
 
 API adapters expose different capabilities; they are not equivalent wallets. Some report balances, some require organization billing credentials for costs, and some only validate access. The Google AI Studio adapter currently does **not** display a numeric balance or cost report. See `docs/PROVIDER_CAPABILITIES.md` for implementation limits.
 

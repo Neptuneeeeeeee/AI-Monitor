@@ -1,5 +1,12 @@
 # 1.9.1 — Official-source icons and disconnected interactive preview
 
+## 1.9.3 — Correct zero-capacity Cursor accounts
+
+- A Cursor response with an explicit zero, negative or invalid plan limit no longer becomes 100% remaining from placeholder percentage fields.
+- Zero-capacity accounts display a successful-connection/no-allowance explanation, without a fabricated progress bar. Existing valid 100%-used positive-capacity accounts still display a real 0%.
+- Retained old full-quota observations cannot reappear during the query cooldown after the account reports no allowance.
+- Real-account verification distinguishes five measured providers from a connected Cursor account without a positive subscription pool.
+
 ## 1.9.2 — Real-client compatibility fixes
 
 - Allow bounded APFS copy-on-write snapshots for larger Cursor state databases; only the selected login row is queried, never chat rows. Large byte-copy fallbacks remain disallowed.

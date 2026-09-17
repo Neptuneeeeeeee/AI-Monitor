@@ -82,6 +82,14 @@ def parse_cursor(payload):
     plan = individual.get('plan') if isinstance(individual, dict) else None
     if not isinstance(plan, dict) or plan.get('enabled') is not True:
         return []
+    # A zero-capacity account may still report 0 percent used for every pool.
+    # That describes no positive allowance, not 100 percent remaining. An
+    # explicit invalid/nonpositive limit overrides percentage placeholders;
+    # absent limits are allowed for genuine percentage-only responses.
+    if 'limit' in plan:
+        cap = number(plan['limit'])
+        if cap is None or cap <= 0:
+            return []
     reset = payload.get('billingCycleEnd')
     windows = []
     total = percent(plan.get('totalPercentUsed'))
@@ -107,9 +115,15 @@ def collect_cursor():
         raise MonitorError('auth_required', '请先在 Cursor 官方应用登录，再启用此套餐。')
     payload = request_json('https://cursor.com/api/usage-summary', headers={
         'Cookie': cursor_cookie(token), 'Accept': 'application/json'})
-    return checked_result('cursor', 'Cursor', 'Cursor 应用登录 · 官方 usage-summary', parse_cursor(payload),
-                          safe_text(payload.get('membershipType')),
-                          '显示官方本月包含额度；不把团队余额或按量付费上限并入个人套餐。不续期凭据、不扫描浏览器。')
+    value = checked_result('cursor', 'Cursor', 'Cursor 应用登录 · 官方 usage-summary', parse_cursor(payload),
+                           safe_text(payload.get('membershipType')),
+                           '显示官方本月包含额度；不把团队余额或按量付费上限并入个人套餐。不续期凭据、不扫描浏览器。')
+    usage = payload.get('individualUsage')
+    plan = usage.get('plan') if isinstance(usage, dict) else None
+    if not value['windows'] and isinstance(plan, dict) and number(plan.get('limit')) == 0:
+        value['message'] = '已连接 Cursor；官方套餐上限为 0，没有可计算的套餐剩余百分比。'
+        value['note'] = '接口的 0% 已使用不是 100% 可用；不将零额度池、免费账号或按量消费预算当成有剩余的订阅套餐。'
+    return value
 
 
 # MiniMax -------------------------------------------------------------------

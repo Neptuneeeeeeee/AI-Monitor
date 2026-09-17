@@ -1,6 +1,6 @@
 # AI Monitor
 
-> **源码预览，尚非正式开源发行。** 当前候选版本为 1.9.2；许可证尚未选择，不擅自授予 MIT、Apache 等使用或再分发许可。本次仅公开工程源码，不发布已公证安装包。Python 运行时打包、正式签名/公证及第三方资源审查仍待完成。
+> **源码预览，尚非正式开源发行。** 当前候选版本为 1.9.3；许可证尚未选择，不擅自授予 MIT、Apache 等使用或再分发许可。本次仅公开工程源码，不发布已公证安装包。Python 运行时打包、正式签名/公证及第三方资源审查仍待完成。
 
 在 macOS 菜单栏查看 AI 套餐额度、API 余额与费用。
 
@@ -53,6 +53,6 @@ bash scripts/build.sh
 
 `bash scripts/preview.sh` 打开使用模拟数据的可操作窗口，不连接真实账号。关闭窗口或按 ⌘Q 退出。说明见 `docs/INTERACTIVE_PREVIEW.md`。
 
-## 1.9.2 实际客户端验证
+## 1.9.3 实际客户端验证
 
-在一台 Mac 上，Claude、Kimi、Codex、Copilot、Antigravity 与 Cursor 的真实用量查询已通过；测试记录和用户数据不在此仓库。Codex 可能返回非五小时的官方主窗口，按实际窗口显示；真实零额度不等于查询失败。MiniMax、Windsurf、Kiro 仍需要更多真实账号验证。
+在一台 Mac 上，Claude、Kimi、Codex、Copilot、Antigravity 的真实数值额度已验证。Cursor 的连接成功，但该账号返回套餐上限为 0；界面明确显示无可量化额度，不把零上限下的“已使用0%”显示成“剩余100%”。测试记录和用户数据不在此仓库。Codex 可能返回非五小时的官方主窗口，按实际窗口显示；真实零额度不等于查询失败。MiniMax、Windsurf、Kiro 仍需要更多真实账号验证。

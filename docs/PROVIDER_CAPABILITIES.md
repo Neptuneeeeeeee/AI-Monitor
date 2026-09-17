@@ -19,3 +19,7 @@ Daily-cost presentation follows the adapters' UTC-day convention. Missing, stale
 Original providers retain their existing quota semantics. New 1.9.0 adapters use mocked fixtures and temporary official-state-shaped databases rather than live account validation. Revalidate provider endpoints and permissions against official documentation before each public release.
 
 Kimi/GLM standalone credential cards have been removed without deleting their adapters or saved keys. See `PLAN_RESEARCH_2026_09.md` for the dated source and compatibility matrix.
+
+### Cursor zero-capacity responses (1.9.3)
+
+An explicit nonpositive or invalid plan limit takes precedence over placeholder percentages. Such accounts return no quota windows. A zero upper bound is not a full unused plan, nor evidence of unlimited access. Percentage-only contracts without an explicit limit remain supported.
