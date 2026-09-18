@@ -1,0 +1,71 @@
+{
+  "schema": 1,
+  "sourceCommit": "b2b3485edf5710e1ed1a3445275f3810f4d6abc4",
+  "releaseRepresented": "v1.9.4",
+  "actualReleasedUILanguage": "mainly Chinese",
+  "syntheticData": true,
+  "credentialReads": false,
+  "accountNetworkRequests": false,
+  "rendering": "Real SwiftUI/AppKit production views rendered in a disposable source checkout. AppKit adds only framing, headings and captions.",
+  "englishImages": "Documentation-only English translation of visible labels in the temporary checkout; not evidence of released English UI support.",
+  "chineseImages": "Original Chinese visible labels. The public app, binary release and user preferences were not modified.",
+  "createdAt": "2026-09-18T05:07:28.894342+00:00",
+  "images": [
+    {
+      "file": "en/hero.png",
+      "width": 1500,
+      "height": 1240,
+      "bytes": 379230,
+      "sha256": "0f3deb3c03bbae3a6d2c648f2722399e519a60fc57aeacfde98ac9ad07d298c7"
+    },
+    {
+      "file": "en/plans.png",
+      "width": 748,
+      "height": 1620,
+      "bytes": 189161,
+      "sha256": "bcc5086e2703e9166a1327f1a3b2e655b786d9139e219061c13da1bbb23deabf"
+    },
+    {
+      "file": "en/settings.png",
+      "width": 748,
+      "height": 1700,
+      "bytes": 166045,
+      "sha256": "c9917aff1c08341e06237bdd971188eee04110fbfcdabf7924de242ec7cd1c93"
+    },
+    {
+      "file": "en/api-balance.png",
+      "width": 748,
+      "height": 1500,
+      "bytes": 164671,
+      "sha256": "2f8ad740af2e6863fbbd7311ebda2e93b97bfe24457e29ee9cce7e9a925cef4d"
+    },
+    {
+      "file": "zh-CN/hero.png",
+      "width": 1500,
+      "height": 1240,
+      "bytes": 382141,
+      "sha256": "4ce63072371c6ca215c3f3f01e770a7c038eae9bab6eef04d74fec2453e5a8c9"
+    },
+    {
+      "file": "zh-CN/plans.png",
+      "width": 748,
+      "height": 1620,
+      "bytes": 185835,
+      "sha256": "79b76b692bdca30669ed11c41f21ef5a8d0a08c0cd060a9c78d3a0870248bf0c"
+    },
+    {
+      "file": "zh-CN/settings.png",
+      "width": 748,
+      "height": 1700,
+      "bytes": 183468,
+      "sha256": "4ff23675812a311fa27f8f8175d9672deccdf4664f5465dd6b95ffefd9bb3eaa"
+    },
+    {
+      "file": "zh-CN/api-balance.png",
+      "width": 748,
+      "height": 1500,
+      "bytes": 160213,
+      "sha256": "f25b152310d7c406e8a90124e07612360932ea220b415afa1c61b0ebca3285ff"
+    }
+  ]
+}

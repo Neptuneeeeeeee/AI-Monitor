@@ -1,67 +1,46 @@
 # AI Monitor
 
-## 直接下载安装
+在 macOS 菜单栏，一眼查看 AI 套餐额度与 API 余额。
 
-前往 [GitHub Releases](https://github.com/Neptuneeeeeeee/AI-Monitor/releases/tag/v1.9.4) 下载 **DMG**（推荐）或应用 ZIP，把 **AI Monitor.app** 拖入“应用程序”后打开。不要把自动生成的 Source code ZIP 当作应用。详见 [安装说明](docs/INSTALL.md)。
+[English](README.md) · **简体中文** · [繁體中文](docs/i18n/README.zh-TW.md) · [日本語](docs/i18n/README.ja.md) · [한국어](docs/i18n/README.ko.md) · [Español](docs/i18n/README.es.md) · [Français](docs/i18n/README.fr.md) · [Deutsch](docs/i18n/README.de.md) · [Português](docs/i18n/README.pt-BR.md)
 
-**Apple Silicon、macOS 14 及以上；安装包已经内置 Python，无需 Xcode、Python 或 Homebrew。** 对应套餐仍需你自己的官方客户端及有效登录。
+**[下载 Mac 版](https://github.com/Neptuneeeeeeee/AI-Monitor/releases/download/v1.9.4/AI-Monitor-v1.9.4-macos-arm64.dmg)** · [ZIP 压缩包](https://github.com/Neptuneeeeeeee/AI-Monitor/releases/download/v1.9.4/AI-Monitor-v1.9.4-macos-arm64.zip) · [版本说明](https://github.com/Neptuneeeeeeee/AI-Monitor/releases/tag/v1.9.4)
 
-**当前为 1.9.4 未公证预发布版**：没有 Developer ID 分发签名，首次打开可能被系统拦截。核实来源和校验值并决定信任后，可按 Apple 指引对这个应用单独“仍要打开”，不要关闭 Gatekeeper。正式源码许可证和完整第三方审查仍待完成，不宣称已授予 MIT/Apache 许可。
+**Apple Silicon（M 系列）· macOS 14 及以上 · 已内置 Python**
 
----
+打开 DMG，将 **AI Monitor.app** 拖入 **应用程序**，再到设置中选择需要显示的套餐。无需另装 Python、Xcode 或 Homebrew；部分平台仍需官方客户端及有效登录。
 
+> **预发布版：** 尚无 Developer ID 分发签名，也未经过 Apple 公证。首次打开可能被 macOS 拦截，请先阅读[安装说明](docs/INSTALL.md)，核实来源后再决定是否打开，不要关闭系统安全保护。
 
-在 macOS 菜单栏查看 AI 套餐额度、API 余额与费用。
+![AI Monitor 套餐、设置与 API 余额界面](docs/images/zh-CN/hero.png)
 
-## 当前状态
+*图片中的数值均为示例。当前 v1.9.4 应用界面以中文为主；英文图片是用于文档展示的翻译预览。上方语言入口只切换 README，不改变应用语言。*
 
-本目录是公开工程边界，可单独复制、构建，不依赖私人实验目录。1.9.0 是开发候选版本：未内置 Python、未做 Developer ID 签名/公证，尚未选定开源许可证。不能把现有候选ZIP宣传为所有用户都能直接使用的正式发行版。
+## 能做什么
 
-界面主要保留中文，文档提供中英文；完整界面多语言尚未实现。
+- 查看剩余额度与重置时间，菜单栏保持简洁黑白横杠。
+- 自由选择显示的套餐，并调整顺序。
+- 切换查看 API 余额或当日费用，具体取决于平台支持。
 
-## 构建与安装
+## 支持的平台
 
-需要 macOS 14+、Apple Command Line Tools、Swift 5.9+ 和可用的 `/usr/bin/python3`。使用本机架构构建。
+**订阅套餐:** Claude · Codex · Kimi · GitHub Copilot · Antigravity · Cursor · GLM · MiniMax · Windsurf · Kiro
 
-```bash
-bash scripts/test.sh
-bash scripts/build.sh
-```
+**API 连接:** DeepSeek · Kimi · OpenAI · Claude · SiliconFlow · OpenRouter. Google AI Studio 仅检查访问权限，不显示数字账单.
 
-构建、测试、打包不会安装或启动菜单栏应用，不读取真实账号进行测试，也不复用已安装的旧helper。独立检出时产物在 `dist/`，工作区内在 `../output/public/`。
+各平台及账号可提供的数据不同。Windsurf 显示本地缓存，并非实时查询；具体限制和连接要求见[支持详情](docs/PROVIDER_CAPABILITIES.md)。
 
-`bash scripts/install.sh` 只显示计划。增加 `--install` 才安装；增加 `--launch` 才请求启动；替换同版要先退出它并加 `--replace`。不会触及旧 `Monitor.app`。
+<details>
+<summary>更多界面图片</summary>
 
-## 首次使用与限制
+<p>
+<img src="docs/images/zh-CN/plans.png" alt="套餐额度示例" width="31%">
+<img src="docs/images/zh-CN/settings.png" alt="套餐选择与排序" width="31%">
+<img src="docs/images/zh-CN/api-balance.png" alt="API 余额与费用示例" width="31%">
+</p>
 
-首次打开默认未启用任何套餐，请在设置中选择需要连接的服务。API账户未填凭据时不查询。不将未返回的余额、费用或额度伪造为0、100%或无限。
+</details>
 
-各服务能力不一样：订阅额度不等于API钱包；部分API需组织账单权限；Google AI Studio数字账单仍未接通。详见 `docs/PROVIDER_CAPABILITIES.md`。
+[安装说明](docs/INSTALL.md) · [支持详情](docs/PROVIDER_CAPABILITIES.md) · [隐私说明](PRIVACY.md) · [更新记录](CHANGELOG.md) · [从源码构建](docs/DEVELOPMENT.md)
 
-## 本地版与公开版
-
-共享模型与界面在 `Sources/MonitorCore`、`Sources/MonitorShared`；本目录只有公开入口 `Sources/Monitor/Main.swift`。私人实验模块不参与公开构建。公开版自己的设置、数据和钥匙串组件与Local和旧版分开，但同一个服务商账号、官方CLI登录和上游限流额度仍可能共享。
-
-源码归属、隐私、安全和发行前检查分别见 `LICENSE_PENDING.md`、`PRIVACY.md`、`SECURITY.md`、`docs/RELEASE_CHECKLIST.md`。
-
-## 候选应用存放说明
-
-输出目录中的 `.app` 是指向本版本独立缓存中签名应用的本机快捷入口；真正的应用保存在 `~/Library/Caches/AIMonitor/<Public或Local>/Candidates/`。这样可以避免桌面同步软件为应用目录添加导致签名校验失败的元数据。输出目录的ZIP是真实文件，不是快捷入口；对外只选择ZIP，不能分享本机快捷入口。清理构建缓存后快捷入口可能失效，重新构建即可恢复；安装脚本会解析快捷入口并复制实际应用。
-
-## 仓库与构建版本
-
-应用名为 **AI Monitor**，计划公开仓库名为 `AI-Monitor`；双版本工作区中只有 `public/` 对应公开仓库。构建不会推送GitHub。BUILD.json记录实际公共提交、Local提交和是否存在未提交修改，并保留源码哈希。详见[Git对应关系](docs/GIT_WORKFLOW.md)。
-
-## 新增套餐（1.9.0）
-
-套餐列表扩展到十项：Kimi、Codex、Claude、GLM、Copilot、Antigravity、Cursor、MiniMax、Windsurf、Kiro。新增项默认关闭，先在套餐排序中启用。Windsurf 明确为本地缓存，MiniMax 的中国/国际订阅 Key 在其登录状态折叠项中分别配置。
-
-账号连接页已删除独立的 Kimi Code、GLM Coding Plan 密钥配置块；对应套餐和已有凭据保留，API 余额页不变。新适配通过合成响应与隔离测试，不等同于用户真实账号已经连接。调研及接口说明见 `docs/PLAN_RESEARCH_2026_09.md`。
-
-## 交互预览 / Interactive preview
-
-`bash scripts/preview.sh` 打开使用模拟数据的可操作窗口，不连接真实账号。关闭窗口或按 ⌘Q 退出。说明见 `docs/INTERACTIVE_PREVIEW.md`。
-
-## 1.9.3 实际客户端验证
-
-在一台 Mac 上，Claude、Kimi、Codex、Copilot、Antigravity 的真实数值额度已验证。Cursor 的连接成功，但该账号返回套餐上限为 0；界面明确显示无可量化额度，不把零上限下的“已使用0%”显示成“剩余100%”。测试记录和用户数据不在此仓库。Codex 可能返回非五小时的官方主窗口，按实际窗口显示；真实零额度不等于查询失败。MiniMax、Windsurf、Kiro 仍需要更多真实账号验证。
+源码许可证尚未选定，详见[许可说明](LICENSE_PENDING.md)与[第三方声明](THIRD_PARTY_NOTICES.md)。
