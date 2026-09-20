@@ -27,7 +27,9 @@ if os.environ.get('MONITOR_TEST_MODE') == '1':
     override = os.environ.get('MONITOR_DATA_DIR')
     if override:
         candidate = Path(override).expanduser().resolve()
-        production = [HOME/'Library/Application Support'/n for n in
+        # Both sides must be resolved, or a symlinked route to a production
+        # directory (/var -> /private/var, a symlinked home) slips past the check.
+        production = [(HOME/'Library/Application Support'/n).resolve() for n in
                       ('Monitor','AI Monitor','AI Monitor Local','Thalnova AI Monitor','Thalnova AI Monitor Local')]
         if not candidate.is_absolute() or any(candidate == p or p in candidate.parents for p in production):
             raise RuntimeError('Tests cannot target production storage')
