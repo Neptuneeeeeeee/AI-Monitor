@@ -15,9 +15,10 @@ final class MonitorCoreTests {
         let items=slots([provider("kimi"),provider("claude"),provider("glm")], order:["claude","codex","kimi","glm"], enabled:["kimi","claude","glm"])
         checkEqual(items.map(\.providerID),["claude","kimi","glm"])
     }
-    func testDisconnectedPlanKeepsItsRowAndFifthIsIncluded() {
+    func testDisconnectedPlanKeepsItsRowAndFifthIsDropped() {
         let items=slots([provider("kimi"),provider("codex",status:"unavailable"),provider("claude"),provider("glm"),provider("copilot")])
-        checkEqual(items[1].providerID,"codex"); checkNil(items[1].percent); checkEqual(items[3].providerID,"glm"); checkEqual(items.count,5); checkEqual(items[4].providerID,"copilot")
+        checkEqual(items[1].providerID,"codex"); checkNil(items[1].percent); checkEqual(items[3].providerID,"glm"); checkEqual(items.count,4)
+        checkTrue(!items.contains { $0.providerID == "copilot" })
     }
     func testWeeklyNeverSubstitutesForFiveHours() { checkNil(slots([provider("codex",minutes:10080,percent:95)])[0].percent) }
     func testMonthlyNeverSubstitutesForFiveHours() { checkNil(slots([provider("codex",minutes:43200,percent:90)])[0].percent) }
@@ -100,16 +101,22 @@ final class MonitorCoreTests {
     }
     func testUnknownMembershipCodeIsNotShownAsPlanName() { var p=provider("kimi");p.plan="LEVEL_INTERMEDIATE";checkNil(p.friendlyPlan);p.plan="pro";checkEqual(p.friendlyPlan,"Pro") }
 
-    func testAllSelectionCountsFollowExactly() {
+    func testAllSelectionCountsFollowExactlyUpToTheCap() {
         for count in 0...ProviderInfo.all.count {
             let ids = Array(ProviderInfo.defaultOrder.prefix(count))
             let result = slots(ids.map { provider($0) })
-            checkEqual(result.count, count); checkEqual(result.compactMap(\.providerID), ids)
+            checkEqual(result.count, min(count, MenuBarGeometry.maxRows))
+            checkEqual(result.compactMap(\.providerID), Array(ids.prefix(MenuBarGeometry.maxRows)))
         }
     }
-    func testSixthPlanAlsoHasRealQuota() {
+    func testOverflowingSelectionKeepsTheFirstFourPlansWithRealQuota() {
         let result = slots(ProviderInfo.defaultOrder.prefix(6).map { provider($0, percent: 37) })
-        checkEqual(result.count, 6); checkEqual(result.last?.providerID, "antigravity"); checkEqual(result.last?.percent, 37)
+        checkEqual(result.count, 4); checkEqual(result.last?.providerID, "glm"); checkEqual(result.last?.percent, 37)
+    }
+    func testReorderingChoosesWhichFourPlansReachTheMenuBar() {
+        var preferences = DisplayPreferences(); preferences.move("kiro", to: "kimi")
+        let result = slots(ProviderInfo.defaultOrder.map { provider($0) }, order: preferences.providerOrder, enabled: Set(ProviderInfo.defaultOrder))
+        checkEqual(result.compactMap(\.providerID), ["kiro", "kimi", "codex", "claude"])
     }
     func testUnknownAndDuplicateIDsNeverCreateExtraBars() {
         let result = slots([provider("kimi")], order:["kimi","kimi","unknown"], enabled:["kimi","unknown"])
@@ -118,7 +125,7 @@ final class MonitorCoreTests {
     func testAdaptiveBarGeometryFitsAndDoesNotOverlap() {
         for count in 0...6 {
             let rows = MenuBarGeometry.rows(count: count)
-            checkEqual(rows.count,count)
+            checkEqual(rows.count,min(count, MenuBarGeometry.maxRows))
             for row in rows { checkTrue(row.y >= 0); checkTrue(row.y + row.height <= 20); checkTrue(row.height >= 2) }
             for index in 1..<max(1,rows.count) { checkTrue(rows[index].y + rows[index].height < rows[index-1].y) }
         }

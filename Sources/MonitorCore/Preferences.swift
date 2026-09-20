@@ -107,7 +107,10 @@ public struct MenuBarSlot: Codable, Equatable {
 
 public enum MenuBarMapping {
     public static func slots(order: [String], enabled: Set<String>, snapshot: Snapshot?, now: Double, maxAge: Double) -> [MenuBarSlot] {
-        let selected = DisplayPreferences.normalizedOrder(order).filter { enabled.contains($0) }
+        // The status item only fits MenuBarGeometry.maxRows bars, so a longer selection
+        // keeps the first plans in the user's own order. Everything enabled still shows
+        // in the panel; only the menu bar is truncated.
+        let selected = DisplayPreferences.normalizedOrder(order).filter { enabled.contains($0) }.prefix(MenuBarGeometry.maxRows)
         let slots = selected.map { id -> MenuBarSlot in
             let name = ProviderInfo.all.first { $0.id == id }?.name ?? id
             guard let provider = snapshot?.providers.first(where: { $0.id == id }) else {

@@ -119,7 +119,7 @@ import CoreGraphics
         try record("panel brand colors remain enabled", store.preferences.useBrandColors)
         for count in 0...ProviderInfo.all.count {
             store.enabled = Set(ProviderInfo.defaultOrder.prefix(count))
-            try record("live selection maps to exactly \(count) bars", store.iconSlots.count == count)
+            try record("live selection maps to exactly \(min(count, MenuBarGeometry.maxRows)) bars", store.iconSlots.count == min(count, MenuBarGeometry.maxRows))
         }
         store.enabled = Set(ProviderInfo.defaultOrder)
         settle()

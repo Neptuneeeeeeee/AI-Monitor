@@ -54,7 +54,7 @@ import MonitorCore
         let icon = MenuBarIcon.make(slots: store.iconSlots, style: store.preferences.iconStyle, threshold: store.preferences.lowThreshold)
         try png(Image(nsImage: icon).padding(6).background(Color.white).environment(\.colorScheme, .light), output.appendingPathComponent("menu-icon-\(source).png"))
         if fixture {
-            for count in 0...ProviderInfo.all.count {
+            for count in 0...MenuBarGeometry.maxRows {
                 let testSlots = ProviderInfo.defaultOrder.prefix(count).map { MenuBarSlot(providerID: $0, name: $0, percent: 100, state: "known", reason: "synthetic count test") }
                 let testIcon = MenuBarIcon.make(slots: testSlots, style: "mono", threshold: 25)
                 try png(Image(nsImage: testIcon).padding(6).background(Color.white).environment(\.colorScheme, .light), output.appendingPathComponent("menu-count-\(count).png"))

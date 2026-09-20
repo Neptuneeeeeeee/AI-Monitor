@@ -172,7 +172,7 @@ import MonitorCore
         store.toggleAPI(); check(store.apiMode, "API navigation works")
         store.openAPISettings(account.id); check(store.showSettings && store.api.editingID == account.id, "API editor navigation works")
         store.backFromSettings(); store.backFromSettings(); store.toggleAPI(); check(!store.apiMode, "return to plans")
-        store.enabled = Set(ProviderInfo.defaultOrder); check(store.iconSlots.count == 10, "ten menu bars")
+        store.enabled = Set(ProviderInfo.defaultOrder); check(store.iconSlots.count == MenuBarGeometry.maxRows, "menu bars capped at four")
         store.move("kiro", by: -1); check(store.preferences.providerOrder.contains("kiro"), "ordering works")
         store.preferences.compact.toggle(); check(!store.preferences.compact, "display setting works")
         check(MenuBarIcon.make(slots: store.iconSlots, style: "mono", threshold: 25).isTemplate, "monochrome menu icon")

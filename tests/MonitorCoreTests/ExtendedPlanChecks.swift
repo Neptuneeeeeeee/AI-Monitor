@@ -12,9 +12,9 @@ extension MonitorCoreTests {
     func testExpandedGeometryIsReadable() {
         for count in 7...10 {
             let rows = MenuBarGeometry.rows(count: count)
-            checkEqual(rows.count, count)
+            checkEqual(rows.count, MenuBarGeometry.maxRows)
             for row in rows { checkTrue(row.height >= 1.2); checkTrue(row.y >= 0); checkTrue(row.y + row.height <= 20) }
-            for index in 1..<count { checkTrue(rows[index].y + rows[index].height < rows[index-1].y) }
+            for index in 1..<rows.count { checkTrue(rows[index].y + rows[index].height < rows[index-1].y) }
         }
     }
     func testCursorMonthlyIsNotFiveHours() {

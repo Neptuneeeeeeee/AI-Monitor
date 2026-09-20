@@ -1,5 +1,12 @@
 # 1.9.1 — Official-source icons and disconnected interactive preview
 
+## 1.9.5 — Menu bar limited to four quota bars
+
+- Draw at most four bars in the status item. A selection of four or fewer is unchanged; a longer one keeps the first plans in the user's own order, so reordering in Settings decides which plans reach the menu bar.
+- Apply the limit when the slots are mapped, so the icon, its tooltip, the accessibility label and the Settings preview all describe the same bars. Every enabled plan still appears in the panel.
+- Keep row thickness constant at four bars or fewer instead of thinning rows as more plans are selected.
+- Fix a test-mode storage guard that compared a resolved candidate path against unresolved production paths, so a symlinked route to a production directory was not rejected. Both sides are now resolved before comparison.
+
 ## 1.9.4 — Downloadable Apple Silicon preview
 
 - Add pinned standalone CPython 3.13 and Mozilla public CA roots to the DMG/ZIP build; no separate Python or developer tools are required at runtime.
