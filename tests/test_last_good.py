@@ -61,6 +61,86 @@ class LastValueTests(unittest.TestCase):
                 value,_=collect_one('glm','global',None,state,gates=gates)
             self.assertEqual(value['windows'],[])
 
+class ClaudeCooldownTests(unittest.TestCase):
+    def setUp(self):
+        self.tmp = tempfile.TemporaryDirectory()
+        self.path = Path(self.tmp.name)
+        self.now = 2000
+        self.good = {**good(), 'id': 'claude', 'name': 'Claude'}
+        self.record = {'generation': 'same', 'region': 'cn', 'authBlocked': True,
+                       'status': 'auth_required', 'lastGood': self.good}
+
+    def tearDown(self):
+        self.tmp.cleanup()
+
+    def book(self, name='gates'):
+        return GateBook(self.path / (name + '.json'), clock=lambda: self.now, jitter=lambda _: 0)
+
+    def test_transient_failure_after_login_error_keeps_history_through_restart(self):
+        for status in ['rate_limited', 'network_error', 'unavailable', 'permission_required', 'error']:
+            with self.subTest(status=status):
+                gates = self.book(status)
+                state = {'claude': dict(self.record)}
+                with patch('monitor.generation', return_value='same'), \
+                     patch('monitor.collect_claude', side_effect=MonitorError(status, 'fixture')) as fetch:
+                    value, state['claude'] = collect_one('claude', 'cn', None, state, gates=gates)
+                    deadline = value['nextQueryAt']
+                    # A restart, lost UI snapshot and repeated refreshes must keep
+                    # the same reading without contacting Claude or extending time.
+                    gates = self.book(status)
+                    for _ in range(5):
+                        value, state['claude'] = collect_one('claude', 'cn', None, state, True, gates=gates)
+                        self.assertEqual(value['windows'], self.good['windows'])
+                        self.assertEqual(value['fetchedAt'], 1000)
+                        self.assertEqual(value['status'], 'stale')
+                        self.assertEqual(value['liveStatus'], status)
+                        self.assertEqual(value['queryStatus'], 'cooldown')
+                        self.assertEqual(value['nextQueryAt'], deadline)
+                        self.assertTrue(value['historical'])
+                    fetch.assert_called_once()
+                self.assertTrue(state['claude']['authBlocked'])
+                self.assertEqual(state['claude']['lastGood'], self.good)
+                self.assertEqual(gates.get('claude')['requestCount'], 1)
+
+    def test_existing_cooldown_recovers_zero_without_a_local_credential_file(self):
+        self.good['windows'][0]['remainingPercent'] = 0
+        gates = self.book()
+        gates.reserve('claude'); gates.failure('claude', MonitorError('rate_limited', 'fixture'))
+        with patch('monitor.generation', return_value=None), patch('monitor.collect_claude') as fetch:
+            value, _ = collect_one('claude', 'cn', None, {'claude': self.record}, gates=gates)
+        fetch.assert_not_called()
+        self.assertEqual(value['windows'][0]['remainingPercent'], 0)
+        self.assertEqual(value['fetchedAt'], 1000)
+        self.assertEqual(value['status'], 'stale')
+        self.assertTrue(value['historical'])
+
+    def test_cooldown_without_any_success_does_not_invent_quota(self):
+        gates = self.book()
+        gates.reserve('claude'); gates.failure('claude', MonitorError('rate_limited', 'fixture'))
+        with patch('monitor.generation', return_value=None), patch('monitor.collect_claude') as fetch:
+            value, _ = collect_one('claude', 'cn', None, {}, gates=gates)
+        fetch.assert_not_called()
+        self.assertEqual(value['windows'], [])
+        self.assertIsNone(value['fetchedAt'])
+
+    def test_current_login_rejection_does_not_claim_a_usable_account(self):
+        gates = self.book()
+        with patch('monitor.generation', return_value='same'), \
+             patch('monitor.collect_claude', side_effect=MonitorError('auth_required', 'fixture')):
+            value, record = collect_one('claude', 'cn', None, {'claude': self.record}, gates=gates)
+            cached, _ = collect_one('claude', 'cn', value, {'claude': record}, gates=gates)
+        self.assertEqual(value['windows'], [])
+        self.assertEqual(cached['windows'], [])
+        self.assertEqual(record['lastGood'], self.good)
+
+    def test_next_success_replaces_history_and_clears_login_block(self):
+        latest = {**self.good, 'fetchedAt': self.now, 'windows': [window('short', 'Session', remaining_percent=31, minutes=300)]}
+        with patch('monitor.generation', return_value='same'), patch('monitor.collect_claude', return_value=latest):
+            value, record = collect_one('claude', 'cn', None, {'claude': self.record}, gates=self.book())
+        self.assertEqual(value['windows'][0]['remainingPercent'], 31)
+        self.assertEqual(record['lastGood']['fetchedAt'], self.now)
+        self.assertFalse(record['authBlocked'])
+
 class AuthorizationStatusTests(unittest.TestCase):
     def test_timeout_is_not_permission_required(self):
         with patch.dict('os.environ',{'MONITOR_KEYCHAIN_HELPER':'/synthetic/helper'}),patch('credentials.run',side_effect=MonitorError('network_error','timeout')):

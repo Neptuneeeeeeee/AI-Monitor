@@ -84,13 +84,19 @@ def collect_one(pid, region, previous, state, force=False, *, gates, requested=3
     try: before = generation(pid, region)
     except MonitorError: before = None
     record = state.get(pid) or {}
-    saved = choose(record, previous) if record.get('region', region) == region and not record.get('authBlocked') else None
+    history = choose(record, previous) if record.get('region', region) == region else None
+    saved = history if not record.get('authBlocked') else None
     same = before is not None and record.get('generation') == before and record.get('region', region) == region
     # Do not carry new-provider results across an unknown/changed account context.
     # Kiro has no local identity proof, so transient failures omit its cached balance.
     if pid in NEW_IDS and not same:
         saved = None
         record = {}
+    # Claude may recover from an expired login into a rate-limit cooldown before
+    # its next successful reading. Keep the last measurement available as history;
+    # error_result still rejects it for current login/unsupported errors.
+    fallback = history if pid == 'claude' else saved
+    verified_cache = same and not record.get('authBlocked')
     # Reserve/persist the gate BEFORE touching credentials or spawning an adapter.
     # --force means check which sources are due, not bypass their protection.
     allowed, gate = gates.reserve(pid, requested)
@@ -103,7 +109,7 @@ def collect_one(pid, region, previous, state, force=False, *, gates, requested=3
                 if confirmation.get('authorizedAt', 0) > gate.get('lastFinished', gate.get('lastAttempt', 0)):
                     status = 'unavailable'
                     message = '固定组件授权已验证；等待现有查询保护窗口结束。'
-            value = error_result(pid, MonitorError(status, message), saved, same)
+            value = error_result(pid, MonitorError(status, message), fallback, verified_cache)
             query_status = 'cooldown'
         elif saved:
             value = dict(saved) if same and gate.get('status') in ('ok', 'partial') else historical(saved, gate.get('status', 'unavailable'), '使用上次成功读数，等待计划中的刷新。', same)
@@ -135,11 +141,11 @@ def collect_one(pid, region, previous, state, force=False, *, gates, requested=3
     updated = gates.failure(pid, pass_error, requested)
     try: after = generation(pid, region)
     except MonitorError: after = None
-    value = error_result(pid, pass_error, saved, same and after == before)
+    value = error_result(pid, pass_error, fallback, verified_cache and after == before)
     value['attemptedAt'] = gate['lastAttempt']
     value = with_schedule(value, updated, pid, requested, 'cooldown')
     base = dict(record)
-    if saved and not base.get('lastGood'): base['lastGood'] = saved
+    if fallback and not base.get('lastGood'): base['lastGood'] = fallback
     return value, update_record(base, value, generation=after, region=region, error_status=pass_error.status)
 
 
