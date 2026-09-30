@@ -22,7 +22,9 @@ enum MenuBarIcon {
                     fill.withAlphaComponent(0.22).setFill()
                     NSBezierPath(roundedRect: rect, xRadius: 1, yRadius: 1).fill()
                     if percent > 0 {
-                        fill.withAlphaComponent(slot.state == "cached" ? 0.62 : 1).setFill()
+                        // Keep measured quotas legible between refreshes. Cache age
+                        // remains in the tooltip and panel instead of dimming the bar.
+                        fill.setFill()
                         let width = max(0.4, 18 * CGFloat(min(100, percent) / 100))
                         NSBezierPath(roundedRect: NSRect(x: 1, y: y, width: width, height: height), xRadius: min(1, width / 2), yRadius: 1).fill()
                     }

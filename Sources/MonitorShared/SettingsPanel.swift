@@ -72,7 +72,7 @@ struct SettingsPanel: View {
                     }.font(.system(size: 10)).foregroundStyle(MonitorPalette.secondary)
                 }
                 Text("菜单栏最多 \(MenuBarGeometry.maxRows) 条横杠，取排序在前的已启用套餐；其余套餐仍在面板中显示。").font(.system(size: 10)).foregroundStyle(MonitorPalette.secondary)
-                Text("菜单栏按各平台的真实窗口显示：5 小时、月度或每日缓存，不将月额度假装成 Session。浅色实线表示缓存。").font(.system(size: 10)).foregroundStyle(MonitorPalette.secondary)
+                Text("菜单栏按各平台的真实窗口显示：5 小时、月度或每日缓存。已有额度保持清晰实线，缓存时间见悬停提示和面板；虚线表示暂无额度读数。").font(.system(size: 10)).foregroundStyle(MonitorPalette.secondary)
             }
         }
     }
