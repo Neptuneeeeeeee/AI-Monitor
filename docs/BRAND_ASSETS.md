@@ -6,13 +6,13 @@
 
 - **claude**：`https://cdn.sanity.io/images/4zrzovbb/claude-com/369b14e80ac643cc09dccd581ccb91f82b559190-32x32.png (linked by https://claude.com/)`
 - **kimi**：`https://www.kimi.com/pwa-192.png`
-- **codex**：`https://developers.openai.com/favicon.png`
+- **codex**：`https://cdn.openai.com/brand/openai-logos.zip`（OpenAI 官方 logo 包，见下文 2026-09-30）
 - **glm**：`https://z-cdn.chatglm.cn/z-ai/static/logo.svg (linked by https://chat.z.ai/)`
 - **copilot**：`https://raw.githubusercontent.com/primer/octicons/main/icons/copilot-24.svg`
 - **antigravity**：`/Applications/Antigravity.app/Contents/Resources/icon.icns (installed official app)`
 - **gemini**：`https://www.gstatic.com/lamda/images/gemini_sparkle_4g_512_lt_f94943af3be039176192d.png (linked by https://gemini.google.com/)`
 
-GitHub 的 Copilot 小图形来自 Primer Octicons，用作产品导航图标。OpenAI 标志保持其开发者官网提供的原始图形，绿色只用于外侧卡片和额度条。
+GitHub 的 Copilot 小图形来自 Primer Octicons，用作产品导航图标。OpenAI 标志使用官方 logo 包中的黑色 Blossom 原始图形，绿色只用于外侧卡片和额度条。
 
 资源文件摘要见 `Resources/BrandAssets/sources.json`。
 
@@ -25,3 +25,7 @@ GitHub 的 Copilot 小图形来自 Primer Octicons，用作产品导航图标。
 Cursor 使用官方 brand 页面提供的品牌包中的 `General Logos/Cube/PNG/CUBE_2D_LIGHT.png`，按原比例缩至256px。Windsurf 使用官方 brand 页面链接的黑色 symbol SVG，由macOS sips转换PNG并保留原始画布和黑色；不着色、不旋转。MiniMax 使用官网链接的 favicon.ico，原始尺寸32px；不将放大称为高分辨率原图。Kiro 使用官网声明的192px apple-touch-icon。四个来源URL、来源页面与输出SHA256均记录在 `Resources/BrandAssets/sources.json`。
 
 页面：Cursor https://cursor.com/brand ；Windsurf https://windsurf.com/brand ；MiniMax https://www.minimax.io/ ；Kiro https://kiro.dev/ 。图标离线打包，UI不请求第三方图标服务。品牌资源不等于本项目拥有商标许可；正式发行时仍需按各品牌要求完成审查。
+
+## 2026-09-30：Codex 改用 OpenAI 官方 Blossom
+
+Codex（以及 API 余额里的 OpenAI）原先使用开发者官网的48px蓝底 favicon，现改为 OpenAI 官方 logo 包（`https://cdn.openai.com/brand/openai-logos.zip`，品牌页 https://openai.com/brand/ ）中的 `OpenAI-logos/SVGs/OAI_OpenAI-Blossom_Black.svg`。由macOS sips从SVG直接转成512px PNG，黑色、透明背景、形状不变；原文件四周约四分之一画布宽的透明留白被裁去（viewBox `168 168 380 380`），否则24pt下图形只有其他标志的一半大。来源URL与输出SHA256记录在 `Resources/BrandAssets/sources.json`。

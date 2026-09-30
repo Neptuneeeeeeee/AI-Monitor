@@ -13,9 +13,12 @@
   },
   {
     "id": "codex",
-    "source": "https://developers.openai.com/favicon.png",
+    "source": "https://cdn.openai.com/brand/openai-logos.zip",
+    "sourcePage": "https://openai.com/brand/",
     "file": "codex.png",
-    "sha256": "8d5575ee667ff715cd3e3074d5296edc68d5aadd89720d203e13131b68b22a04"
+    "sha256": "c3cc4b3386ec3ecc1e571cc96c4419d4f95b4c118544671698d0b83448c873c0",
+    "retrievedAt": "2026-09-30",
+    "note": "OpenAI-logos/SVGs/OAI_OpenAI-Blossom_Black.svg; native SVG rasterization at 512px, transparent clear space trimmed (viewBox 168 168 380 380), shape and black colour unchanged"
   },
   {
     "id": "glm",
