@@ -23,6 +23,14 @@ def keychain(service):
     if rc not in (0, 2): raise MonitorError('unavailable', '钥匙串辅助组件暂不可用，不等同于缺少授权。')
     return out.decode('utf-8') if rc == 0 else None
 
+def claude_desktop_token():
+    """Claude desktop's least-privileged usage token, decrypted only inside the helper; else None."""
+    helper = os.environ.get('MONITOR_KEYCHAIN_HELPER')
+    if not helper: return None
+    try: rc, out = run([helper, '--claude-desktop-token'], timeout=25)
+    except MonitorError: return None
+    return out.decode('utf-8') if rc == 0 else None
+
 def own_key(service):
     if service not in ALLOWED_SERVICES: return None
     return keychain(KEYCHAIN_PREFIX + service)

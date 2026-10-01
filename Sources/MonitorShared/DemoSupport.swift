@@ -136,6 +136,7 @@ import MonitorCore
         store.toggleLogin(true); check(!store.launchAtLogin, "login item mutation blocked")
         store.grantClaude(); check(!store.authorizingClaude, "keychain grant blocked")
         for id in ProviderInfo.defaultOrder { store.reconnect(id); store.openWebsite(id) }
+        store.banner = ""; store.renewClaudeLogin(); check(!store.banner.isEmpty, "CLI sign-in blocked")
         store.refresh(force: true); check(!store.refreshing, "no plan collector")
         let planSaved = await store.saveMiniMaxCredential("synthetic-demo-only")
         check(!planSaved, "plan secret save rejected")

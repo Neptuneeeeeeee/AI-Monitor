@@ -40,9 +40,14 @@ class BrandDemoTests(unittest.TestCase):
         self.assertIn('DemoSupport.run(args: args); return',facade)
     def test_disconnected_plan_actions_fail_closed(self):
         text=(ROOT/'Sources/MonitorShared/MonitorStore.swift').read_text()
-        for name in ('toggleLogin','grantClaude','openWebsite','reconnect','diagnostic','clearQuotaCache','openDataDirectory','refreshCurrent'):
+        for name in ('toggleLogin','grantClaude','renewClaudeLogin','openWebsite','reconnect','diagnostic','clearQuotaCache','openDataDirectory','refreshCurrent'):
             header=re.search(r'func '+name+r'\([^\n]*\{\n\s*([^\n]+)',text)
             self.assertIsNotNone(header,name);self.assertIn('guard servicesEnabled',header.group(1))
+    def test_login_scripts_use_the_system_proxy(self):
+        # Terminal CLIs ignore the macOS proxy; a direct sign-in from a blocked region fails.
+        text=(ROOT/'Sources/MonitorShared/MonitorStore.swift').read_text()
+        self.assertIn('/usr/sbin/scutil --proxy',text)
+        self.assertIn('\\(proxy)cd \\"$HOME\\"',text)
     def test_icons_do_not_recolour_menu_bar(self):
         text=(ROOT/'Sources/MonitorShared/BrandStyle.swift').read_text()
         self.assertIn('image.isTemplate = false',text)

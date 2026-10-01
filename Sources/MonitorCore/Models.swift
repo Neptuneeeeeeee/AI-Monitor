@@ -176,6 +176,7 @@ public struct ProviderInfo: Identifiable, Equatable {
         case "minimax": return "展开后选择中国/国际区域并保存 Token Plan 订阅 Key；不是普通按量计费 API Key。"
         case "windsurf": return "只读取 Windsurf 应用的套餐缓存，始终标为非实时；请先打开官方应用更新。"
         case "kiro": return "先运行 kiro-cli login；查询仅使用官方 /usage 命令。官方 CLI 可能自行续期登录。"
+        case "claude": return "优先读取桌面版 Claude 的登录（点“检查 Claude 读取”授权一次），否则使用终端 claude CLI 的登录；只查询额度，不代为续期。"
         case "kimi": return "使用官方 Kimi CLI 登录；已有本机订阅 Key 保持可用。"
         case "glm": return "使用本机已有套餐凭据或对应区域的环境变量；原独立 Key 配置块已移除。"
         case "opencode": return "先在 OpenCode 运行 /connect 选择 OpenCode Go 并粘贴订阅 Key；只读取 OpenCode 保存的这把 Key 查询官方 Go 用量。"

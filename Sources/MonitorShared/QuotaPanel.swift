@@ -108,12 +108,22 @@ struct ProviderSection: View {
                 HStack {
                     VStack(alignment: .leading, spacing: 4) {
                         Text(emptyText).font(.system(size: 11)).foregroundStyle(MonitorPalette.secondary)
+                        if needsClaudeLogin, let message = result?.message, !message.isEmpty {
+                            Text(L10n.tr(message)).font(.system(size: 10)).foregroundStyle(MonitorPalette.secondary).fixedSize(horizontal: false, vertical: true)
+                        }
                         if let result, result.nextQueryAt != nil {
                             Text(result.queryScheduleText(now: store.now)).font(.system(size: 10)).foregroundStyle(MonitorPalette.secondary)
                         }
                     }
                     Spacer()
-                    Button(L10n.tr("设置")) { store.openSettings("connections") }.buttonStyle(ResponsiveButtonStyle()).font(.system(size: 11)).foregroundStyle(MonitorPalette.blue)
+                    if needsClaudeLogin && store.claudeDesktopInstalled {
+                        // Opens Settings so the grant result banner is visible next to the system dialog.
+                        Button(L10n.tr("读取桌面版登录")) { store.openSettings("connections"); store.grantClaude() }.buttonStyle(ResponsiveButtonStyle()).font(.system(size: 11)).foregroundStyle(MonitorPalette.blue)
+                    } else if needsClaudeLogin {
+                        Button(L10n.tr("重新登录")) { store.renewClaudeLogin() }.buttonStyle(ResponsiveButtonStyle()).font(.system(size: 11)).foregroundStyle(MonitorPalette.blue)
+                    } else {
+                        Button(L10n.tr("设置")) { store.openSettings("connections") }.buttonStyle(ResponsiveButtonStyle()).font(.system(size: 11)).foregroundStyle(MonitorPalette.blue)
+                    }
                 }.padding(.horizontal, 11).padding(.vertical, 12)
                     .background(store.preferences.useBrandColors ? brand.wash : MonitorPalette.card).clipShape(RoundedRectangle(cornerRadius: 10))
             }
@@ -127,6 +137,7 @@ struct ProviderSection: View {
             Button(L10n.tr("隐藏此套餐")) { store.enabled.remove(info.id) }
         }
     }
+    private var needsClaudeLogin: Bool { info.id == "claude" && result?.status == "auth_required" }
     private var emptyText: String {
         guard let result else { return store.refreshing ? L10n.tr("正在读取…") : L10n.tr("等待读取") }
         if ["ok", "partial"].contains(result.status), !result.windows.isEmpty { return L10n.tr("额度项目已隐藏") }

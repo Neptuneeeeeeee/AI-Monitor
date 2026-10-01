@@ -1,6 +1,7 @@
 import Foundation
 import Security
 import LocalAuthentication
+import CommonCrypto
 
 // Edition-specific helper. The build pins its namespace and signs this component.
 // Own entries are separate; official Claude Code credentials remain upstream-owned.
@@ -9,6 +10,9 @@ let prefix = "__KEYCHAIN_PREFIX__"
 let own = Set(["kimi", "glm-cn", "glm-global", "copilot", "minimax-cn", "minimax-global"])
 let claudeService = "Claude Code-credentials"
 let allowed = Set(own.map { prefix + $0 }).union([claudeService])
+// Claude desktop encrypts its OAuth token cache with Electron safeStorage. Only this helper
+// ever holds that storage key; it returns one usage-capable token and nothing else.
+let desktopService = "Claude Safe Storage", desktopAccount = "Claude Key"
 
 enum Outcome {
     case ok(Data), missing, locked, denied(OSStatus), failed(OSStatus)
@@ -95,10 +99,11 @@ func readClaude(interactive: Bool) -> Outcome {
     }
 }
 
-func readOwn(_ service: String, interactive: Bool) -> Outcome {
+func readOwn(_ service: String, account: String? = nil, interactive: Bool) -> Outcome {
     var query: [String: Any] = [kSecClass as String:kSecClassGenericPassword,
         kSecAttrService as String:service, kSecReturnData as String:true,
         kSecMatchLimit as String:kSecMatchLimitOne]
+    if let account { query[kSecAttrAccount as String] = account }
     if !interactive {
         let context = LAContext(); context.interactionNotAllowed = true
         query[kSecUseAuthenticationContext as String] = context
@@ -118,6 +123,63 @@ func readOwn(_ service: String, interactive: Bool) -> Outcome {
 func readItem(_ service: String, interactive: Bool) -> Outcome {
     guard allowed.contains(service) else { return .failed(errSecParam) }
     return service == claudeService ? readClaude(interactive:interactive) : readOwn(service, interactive:interactive)
+}
+
+// Electron safeStorage on macOS: "v10" + AES-128-CBC, key = PBKDF2-SHA1(password, "saltysalt", 1003), IV of spaces.
+func safeStorageOpen(_ blob: Data, password: Data) -> Data? {
+    let body = blob.dropFirst(3)
+    guard blob.prefix(3) == Data("v10".utf8), !body.isEmpty, body.count % kCCBlockSizeAES128 == 0 else { return nil }
+    var key = [UInt8](repeating: 0, count: kCCKeySizeAES128)
+    defer { key.withUnsafeMutableBytes { _ = memset_s($0.baseAddress, $0.count, 0, $0.count) } }
+    let salt = Array("saltysalt".utf8)
+    let derived = password.withUnsafeBytes { raw in
+        CCKeyDerivationPBKDF(CCPBKDFAlgorithm(kCCPBKDF2), raw.bindMemory(to: Int8.self).baseAddress, password.count,
+                             salt, salt.count, CCPseudoRandomAlgorithm(kCCPRFHmacAlgSHA1), 1003, &key, key.count)
+    }
+    guard derived == kCCSuccess else { return nil }
+    let iv = [UInt8](repeating: 0x20, count: kCCBlockSizeAES128)
+    var plain = [UInt8](repeating: 0, count: body.count + kCCBlockSizeAES128), moved = 0
+    let status = body.withUnsafeBytes { raw in
+        CCCrypt(CCOperation(kCCDecrypt), CCAlgorithm(kCCAlgorithmAES), CCOptions(kCCOptionPKCS7Padding),
+                key, key.count, iv, raw.baseAddress, body.count, &plain, plain.count, &moved)
+    }
+    return status == kCCSuccess ? Data(plain.prefix(moved)) : nil
+}
+
+// Picks the signed-in account's unexpired token that can read usage (user:profile) with the
+// fewest other scopes. Missing app, cache or such a token: .missing, so the CLI login is used.
+func desktopToken(interactive: Bool) -> Outcome {
+    let config = FileManager.default.homeDirectoryForCurrentUser.appendingPathComponent("Library/Application Support/Claude/config.json")
+    guard let text = try? Data(contentsOf: config), text.count <= 4 << 20,
+          let doc = try? JSONSerialization.jsonObject(with: text) as? [String: Any] else { return .missing }
+    if !interactive && !loginKeychainUnlocked() { return .locked }
+    // The storage key belongs to another app, so its ACL would otherwise ask the user even
+    // with the no-UI query flags. Background reads must fail instead of raising that dialog.
+    if !interactive { SecKeychainSetUserInteractionAllowed(false) }
+    let secret = readOwn(desktopService, account: desktopAccount, interactive: interactive)
+    guard case .ok(let password) = secret else { return secret }
+    let account = (doc["lastKnownAccountUuid"] as? String).map { "acct:" + $0 + "|" }
+    let now = Date().timeIntervalSince1970 * 1000
+    var best: (scopes: Int, expires: Double, token: String, plan: Any)?
+    for name in ["oauth:tokenCacheV2", "oauth:tokenCache"] where best == nil {
+        guard let encoded = doc[name] as? String, let blob = Data(base64Encoded: encoded),
+              let plain = safeStorageOpen(blob, password: password),
+              let cache = try? JSONSerialization.jsonObject(with: plain) as? [String: Any] else { continue }
+        for (entry, value) in cache {
+            // Entry key: acct:<account>|<client>:<org>:https://api.anthropic.com:<space-separated scopes>
+            guard account.map({ entry.hasPrefix($0) }) ?? true, let base = entry.range(of: "https://api.anthropic.com:"),
+                  let row = value as? [String: Any], let token = row["token"] as? String, !token.isEmpty,
+                  let expires = (row["expiresAt"] as? NSNumber)?.doubleValue, expires > now else { continue }
+            let scopes = entry[base.upperBound...].split(separator: " ")
+            guard scopes.contains("user:profile") else { continue }
+            if best == nil || scopes.count < best!.scopes || (scopes.count == best!.scopes && expires > best!.expires) {
+                best = (scopes.count, expires, token, row["subscriptionType"] ?? NSNull())
+            }
+        }
+    }
+    guard let best, let data = try? JSONSerialization.data(withJSONObject: [
+        "accessToken": best.token, "expiresAt": best.expires, "subscriptionType": best.plan]) else { return .missing }
+    return .ok(data)
 }
 
 func saveItem(_ service: String, data: Data) -> OSStatus {
@@ -150,6 +212,19 @@ if args.count == 2 && args[1] == "--identity" { print("__HELPER_ID__|__KEYCHAIN_
 if args.count == 2 && args[1] == "--version" { print("MonitorKeychainBridge/2"); exit(0) }
 if args.count == 2 && args[1] == "--grant-claude" {
     finish(readItem(claudeService, interactive:true), report:true)
+}
+// Raises the system keychain dialog once; reports only whether a usable token was found.
+if args.count == 2 && args[1] == "--grant-claude-desktop" {
+    finish(desktopToken(interactive:true), report:true)
+}
+if args.count == 2 && args[1] == "--status-claude-desktop" {
+    finish(desktopToken(interactive:false), report:true)
+}
+if args.count == 2 && args[1] == "--claude-desktop-token" {
+    let outcome = desktopToken(interactive:false)
+    if case .ok(let data) = outcome { FileHandle.standardOutput.write(data) }
+    // Only the parent reads this private pipe. Never echo it in diagnostics.
+    finish(outcome, report:false)
 }
 if args.count == 3 && args[1] == "--status" {
     finish(readItem(args[2], interactive:false), report:true)

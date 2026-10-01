@@ -14,7 +14,7 @@ import time
 from core import HOME, SUPPORT, MonitorError, read_json, atomic_json, CHILDREN, CHILDREN_LOCK, stop_child, run
 from kimi_provider import collect_kimi, kimi_home
 from codex_provider import collect_codex
-from other_providers import collect_claude, collect_glm, collect_copilot
+from other_providers import collect_claude, collect_glm, collect_copilot, claude_login_expired, claude_expired_message
 from antigravity_provider import collect_antigravity, official_processes
 from extended_plans import (collect_cursor, collect_minimax, collect_windsurf, collect_kiro, collect_opencode, collect_cline,
                             opencode_identity, cline_identity, DB_PATHS, NEW_IDS)
@@ -101,6 +101,16 @@ def collect_one(pid, region, previous, state, force=False, *, gates, requested=3
     # error_result still rejects it for current login/unsupported errors.
     fallback = history if pid == 'claude' else saved
     verified_cache = same and not record.get('authBlocked')
+    # An expired Claude CLI login is known from the local credential alone. Report it
+    # before the gate, so a cooldown cannot disguise it as rate limiting, and spend no
+    # request or gate slot on a token the service would reject.
+    if pid == 'claude' and claude_login_expired():
+        value = error_result(pid, MonitorError('auth_required', claude_expired_message()))
+        value['attemptedAt'] = gates.get(pid).get('lastAttempt')
+        value = with_schedule(value, {}, pid, requested, 'login_required')
+        base = dict(record)
+        if fallback and not base.get('lastGood'): base['lastGood'] = fallback
+        return value, update_record(base, value, generation=before, region=region, error_status='auth_required')
     # Reserve/persist the gate BEFORE touching credentials or spawning an adapter.
     # --force means check which sources are due, not bypass their protection.
     allowed, gate = gates.reserve(pid, requested)

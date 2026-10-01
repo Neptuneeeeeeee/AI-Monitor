@@ -114,6 +114,7 @@ import MonitorCore
         var env = AppRuntime.collectorEnvironment()
         env["MONITOR_KEYCHAIN_HELPER"] = KeychainBridge.executable.path
         env["MONITOR_CLAUDE_KEYCHAIN_ALLOWED"] = defaults.bool(forKey: "claudeKeychainAllowed") ? "1" : "0"
+        env["MONITOR_CLAUDE_DESKTOP_ALLOWED"] = defaults.bool(forKey: "claudeDesktopAllowed") ? "1" : "0"
         env["PYTHONDONTWRITEBYTECODE"] = "1"
         env["PATH"] = NSHomeDirectory() + "/.kimi-code/bin:" + NSHomeDirectory() + "/.local/bin:/opt/homebrew/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin"
         p.environment = env; p.currentDirectoryURL = support
@@ -155,12 +156,18 @@ import MonitorCore
         guard servicesEnabled else { banner = "交互预览不执行账号连接、系统设置或真实数据操作。"; return }
         guard !authorizingClaude else { return }; authorizingClaude = true
         banner = "正在检查 Claude 登录凭证读取…"
+        let desktopInstalled = claudeDesktopInstalled
         Task {
+            // Claude desktop first: its login stays current while the app runs. The CLI item stays the fallback.
+            let desktop = desktopInstalled ? await Task.detached { KeychainBridge.grantClaudeDesktop() }.value : errSecItemNotFound
             let status = await Task.detached { KeychainBridge.grantClaude() }.value
             authorizingClaude = false
-            banner = status == errSecSuccess ? "Claude 登录凭证可以无弹窗读取。额度查询仍遵守现有冷却时间。" : status == errSecNotAvailable ? "钥匙串组件忙或超时，未判定为拒绝。稍后再试。" : status == errSecInteractionNotAllowed ? "登录钥匙串已锁定，解锁后再试；后台不会弹窗。" : status == errSecItemNotFound ? "本机没有 Claude Code 的登录条目。请在官方 CLI 运行 claude auth login。" : "未能读取 Claude 登录凭证（系统状态 \(status)）。"
-            if status == errSecSuccess {
-                defaults.set(true, forKey: "claudeKeychainAllowed")
+            defaults.set(desktop == errSecSuccess, forKey: "claudeDesktopAllowed")
+            banner = desktop == errSecSuccess ? "已可无弹窗读取桌面版 Claude 的登录，查询额度时优先使用。额度查询仍遵守现有冷却时间。"
+                : desktopInstalled ? (desktop == errSecItemNotFound ? "桌面版 Claude 没有可用于查询额度的登录。请先在桌面版登录，或在终端运行 claude auth login。" : desktop == errSecInteractionNotAllowed ? "登录钥匙串已锁定，解锁后再试；后台不会弹窗。" : desktop == errSecNotAvailable ? "钥匙串组件忙或超时，未判定为拒绝。稍后再试。" : "未获授权读取桌面版 Claude 的登录。再次点击并在系统窗口中选择“始终允许”，或在终端运行 claude auth login。")
+                : status == errSecSuccess ? "Claude 登录凭证可以无弹窗读取。额度查询仍遵守现有冷却时间。" : status == errSecNotAvailable ? "钥匙串组件忙或超时，未判定为拒绝。稍后再试。" : status == errSecInteractionNotAllowed ? "登录钥匙串已锁定，解锁后再试；后台不会弹窗。" : status == errSecItemNotFound ? "本机没有 Claude Code 的登录条目。请在官方 CLI 运行 claude auth login。" : "未能读取 Claude 登录凭证（系统状态 \(status)）。"
+            if status == errSecSuccess { defaults.set(true, forKey: "claudeKeychainAllowed") }
+            if desktop == errSecSuccess || status == errSecSuccess {
                 if let data = try? JSONSerialization.data(withJSONObject:["authorizedAt": Date().timeIntervalSince1970, "component":"MonitorKeychainBridge/2"]) {
                     let target = support.appendingPathComponent("claude-authorization.json")
                     try? data.write(to:target,options:.atomic)
@@ -169,6 +176,9 @@ import MonitorCore
                 refresh(force:true)
             }
         }
+    }
+    var claudeDesktopInstalled: Bool {
+        FileManager.default.fileExists(atPath: FileManager.default.homeDirectoryForCurrentUser.appendingPathComponent("Library/Application Support/Claude/config.json").path)
     }
     func openWebsite(_ id: String) {
         guard servicesEnabled else { banner = "交互预览不执行账号连接、系统设置或真实数据操作。"; return }
@@ -196,15 +206,26 @@ import MonitorCore
             NSWorkspace.shared.openApplication(at: URL(fileURLWithPath: "/Applications/Antigravity.app"), configuration: NSWorkspace.OpenConfiguration()) { _, _ in }
             banner = "在 Antigravity 登录后点击刷新。"; return
         }
-        // Translated text is shell-quoted and printed with %s, never used as a format.
-        func say(_ key: String) -> String { "printf '%s\\n' '" + L10n.tr(key).replacingOccurrences(of: "'", with: "'\\''") + "'" }
         let commands = ["kimi": "if command -v kimi >/dev/null 2>&1; then kimi login; else \(say("未找到 Kimi CLI，请先安装官方客户端。")); fi",
                         "codex": "if command -v codex >/dev/null 2>&1; then codex login; else \(say("未找到 Codex CLI，请先安装官方客户端。")); fi",
                         "opencode": "if command -v opencode >/dev/null 2>&1; then \(say("在列表中选择 OpenCode Go，并粘贴订阅 Key。")); opencode auth login; else \(say("未找到 OpenCode CLI，请先安装官方客户端，或在 OpenCode 中运行 /connect。")); fi",
                         "cline": "if command -v cline >/dev/null 2>&1; then \(say("选择 Cline 账号登录（ClinePass 使用 Cline 账号）。")); cline auth; else \(say("未找到 Cline CLI；也可以在 VS Code 的 Cline 扩展中登录 Cline 账号。")); fi"]
         guard let command = commands[id] else { openSettings("connections"); return }
+        openLoginScript(id, command)
+    }
+    // The official CLI performs the sign-in and owns the new tokens; Monitor only reads them afterwards.
+    func renewClaudeLogin() {
+        guard servicesEnabled else { banner = "交互预览不执行账号连接、系统设置或真实数据操作。"; return }
+        openLoginScript("claude", "if command -v claude >/dev/null 2>&1; then claude auth login; else \(say("未找到 Claude CLI，请先安装官方客户端。")); fi")
+    }
+    // Translated text is shell-quoted and printed with %s, never used as a format.
+    private func say(_ key: String) -> String { "printf '%s\\n' '" + L10n.tr(key).replacingOccurrences(of: "'", with: "'\\''") + "'" }
+    private func openLoginScript(_ id: String, _ command: String) {
         let file = support.appendingPathComponent("login-\(id).command")
-        let body = "#!/bin/zsh\nexport PATH=\"$HOME/.kimi-code/bin:$HOME/.opencode/bin:$HOME/.local/bin:/opt/homebrew/bin:/usr/local/bin:$PATH\"\ncd \"$HOME\"\n\(command)\nprintf '\\n'; \(say("登录完成后回到 Monitor 点击刷新。"))\n"
+        // Terminal CLIs ignore the macOS system proxy. Without it (and without a TUN), a
+        // sign-in or token renewal can leave from a blocked region and fail with 403.
+        let proxy = "if [ -z \"$HTTPS_PROXY\" ]; then p=$(/usr/sbin/scutil --proxy | /usr/bin/awk '/HTTPSEnable : 1/{e=1} /HTTPSProxy :/{h=$3} /HTTPSPort :/{t=$3} END{if(e&&h&&t)print \"http://\"h\":\"t}'); [ -n \"$p\" ] && export HTTPS_PROXY=\"$p\" HTTP_PROXY=\"$p\"; fi\n"
+        let body = "#!/bin/zsh\nexport PATH=\"$HOME/.kimi-code/bin:$HOME/.opencode/bin:$HOME/.local/bin:/opt/homebrew/bin:/usr/local/bin:$PATH\"\n\(proxy)cd \"$HOME\"\n\(command)\nprintf '\\n'; \(say("登录完成后回到 Monitor 点击刷新。"))\n"
         do {
             try body.write(to: file, atomically: true, encoding: .utf8)
             try FileManager.default.setAttributes([.posixPermissions: 0o700], ofItemAtPath: file.path); NSWorkspace.shared.open(file)

@@ -77,6 +77,22 @@ enum KeychainBridge {
         default: return errSecNotAvailable
         }
     }
+    // Claude desktop's storage key belongs to Claude.app; the system asks once, then the
+    // fixed helper reads it in the background. Never returns the token to the app process.
+    static func grantClaudeDesktop() -> OSStatus {
+        let (code,data)=call(["--grant-claude-desktop"],timeout:180)
+        guard code != 124 else { return errSecNotAvailable }
+        guard let doc=try? JSONSerialization.jsonObject(with:data) as? [String:Any], let status=doc["status"] as? Int else { return errSecNotAvailable }
+        if status != 0 { return OSStatus(status) }
+        let (verified,_) = call(["--status-claude-desktop"])
+        switch verified {
+        case 0: return errSecSuccess
+        case 2: return errSecItemNotFound
+        case 3: return errSecAuthFailed
+        case 5: return errSecInteractionNotAllowed
+        default: return errSecNotAvailable
+        }
+    }
     static func read(_ service:String) -> (OSStatus,String?) {
         let (code,data)=call(["--keychain-read",service])
         switch code {

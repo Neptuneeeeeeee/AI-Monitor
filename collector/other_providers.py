@@ -4,7 +4,7 @@ import os
 import re
 import time
 from core import HOME, MonitorError, read_json, result, number, timestamp, window, duration_label, executable, run
-from credentials import own_key, keychain, fingerprint
+from credentials import own_key, keychain, fingerprint, claude_desktop_token
 from network import request_json
 from rate_limits import http_error, parse_cli_http, has_rate_signal
 
@@ -32,7 +32,22 @@ def parse_claude(payload):
                                  unit=currency, currency=currency, kind='extra'))
     return output
 
+DESKTOP_CONFIG = HOME / 'Library/Application Support/Claude/config.json'
+CLI_SOURCE = '官方 OAuth usage · 本机钥匙串/CLI'
+DESKTOP_SOURCE = '官方 OAuth usage · 桌面版 Claude 登录'
+
+def desktop_credentials():
+    # Opt-in from Settings; the running desktop app keeps this login current itself.
+    if os.environ.get('MONITOR_CLAUDE_DESKTOP_ALLOWED') != '1': return None
+    text = claude_desktop_token()
+    try: auth = json.loads(text) if text else None
+    except ValueError: return None
+    return {**auth, 'origin': 'desktop'} if isinstance(auth, dict) and auth.get('accessToken') else None
+
 def claude_credentials():
+    return desktop_credentials() or cli_credentials()
+
+def cli_credentials():
     data = read_json(HOME / '.claude/.credentials.json', {})
     if not isinstance(data, dict) or not data.get('claudeAiOauth'):
         if os.environ.get('MONITOR_CLAUDE_KEYCHAIN_ALLOWED') != '1':
@@ -44,7 +59,24 @@ def claude_credentials():
     auth = data.get('claudeAiOauth') if isinstance(data, dict) else None
     if not isinstance(auth, dict) or not auth.get('accessToken'):
         raise MonitorError('auth_required', '未读到 Claude 订阅登录。先授权钥匙串；仍不可用时请在官方 CLI 运行 claude auth login。')
-    return auth
+    return {**auth, 'origin': 'cli'}
+
+CLAUDE_LOGIN_EXPIRED = 'Claude CLI 的登录已过期，不是查询限流。点“重新登录”在终端运行官方 claude auth login，完成后刷新。'
+CLAUDE_LOGIN_EXPIRED_DESKTOP = 'Claude CLI 的登录已过期，不是查询限流。点“读取桌面版登录”改用桌面版 Claude 的登录，或在终端运行 claude auth login。'
+CLAUDE_DESKTOP_UNREADABLE = '桌面版 Claude 的登录暂时读不到，CLI 登录也已过期。点“读取桌面版登录”重新授权，或在终端运行 claude auth login。'
+
+def claude_expired_message():
+    # Only reached when the credential in use is expired, so an enabled desktop login was not usable.
+    if os.environ.get('MONITOR_CLAUDE_DESKTOP_ALLOWED') == '1': return CLAUDE_DESKTOP_UNREADABLE
+    return CLAUDE_LOGIN_EXPIRED_DESKTOP if DESKTOP_CONFIG.is_file() else CLAUDE_LOGIN_EXPIRED
+
+def claude_login_expired(now=None):
+    """True only when the CLI's own stored expiry has passed. Local read; sends nothing."""
+    try: auth = claude_credentials()
+    except MonitorError: return False
+    # Claude Code stores milliseconds since the epoch. No expiry recorded: no claim.
+    expires = number(auth.get('expiresAt'))
+    return expires is not None and expires / 1000 <= (time.time() if now is None else now)
 
 def collect_claude():
     state = claude_credentials()
@@ -53,13 +85,15 @@ def collect_claude():
     try: payload = fetch(state)
     except MonitorError as error:
         if error.http_status != 401: raise
-        # Reread the owning CLI's latest state; never rotate a second refresh chain.
+        # Reread the owning client's latest state; never rotate a second refresh chain.
         latest = claude_credentials()
+        if latest.get('accessToken') == state.get('accessToken') and state.get('origin') == 'desktop':
+            latest = cli_credentials()
         if latest.get('accessToken') == state.get('accessToken'):
             raise MonitorError('auth_required', 'Claude 的登录凭证需要官方客户端续期。请运行 claude auth login 后刷新；不会反复弹出钥匙串请求。')
         state = latest; payload = fetch(state)
     windows = parse_claude(payload)
-    return result('claude', 'Claude Code', '官方 OAuth usage · 本机钥匙串/CLI', windows,
+    return result('claude', 'Claude Code', DESKTOP_SOURCE if state.get('origin') == 'desktop' else CLI_SOURCE, windows,
                   plan=state.get('subscriptionType'), status='ok' if windows else 'unsupported',
                   message='' if windows else '账号接口未提供可量化的额度。',
                   identity=fingerprint(state['accessToken']), note='只查询 usage；不发送提示词，不运行模型来触发续期。')

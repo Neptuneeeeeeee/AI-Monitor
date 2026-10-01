@@ -163,6 +163,26 @@
    "de": "BigModel China",
    "pt-BR": "BigModel China"
   },
+  "Claude CLI 的登录已过期，不是查询限流。点“读取桌面版登录”改用桌面版 Claude 的登录，或在终端运行 claude auth login。": {
+   "zh-Hant": "Claude CLI 的登入已過期，不是查詢限流。點「讀取桌面版登入」改用桌面版 Claude 的登入，或在終端機執行 claude auth login。",
+   "en": "The Claude CLI sign-in has expired; this is not query rate limiting. Click “Use desktop sign-in” to use the Claude desktop app’s sign-in instead, or run claude auth login in Terminal.",
+   "ja": "Claude CLI のログインの有効期限が切れています。照会の制限ではありません。「デスクトップ版のログインを使う」でデスクトップ版 Claude のログインに切り替えるか、ターミナルで claude auth login を実行してください。",
+   "ko": "Claude CLI 로그인이 만료되었습니다. 조회 제한이 아닙니다. “데스크톱 로그인 사용”을 눌러 데스크톱 Claude 로그인으로 바꾸거나 터미널에서 claude auth login을 실행하세요.",
+   "es": "El inicio de sesión de Claude CLI ha caducado; no es un límite de consultas. Pulsa «Usar sesión de escritorio» para usar la sesión de la app de escritorio de Claude o ejecuta claude auth login en Terminal.",
+   "fr": "La connexion de Claude CLI a expiré ; ce n’est pas une limite de requêtes. Cliquez sur « Utiliser la connexion de bureau » pour passer à celle de l’app Claude pour ordinateur, ou lancez claude auth login dans le Terminal.",
+   "de": "Die Anmeldung der Claude-CLI ist abgelaufen; das ist keine Abfragebegrenzung. „Desktop-Anmeldung verwenden“ nutzt stattdessen die Anmeldung der Claude-Desktop-App, oder claude auth login im Terminal ausführen.",
+   "pt-BR": "O login do Claude CLI expirou; não é limite de consultas. Clique em “Usar login do app” para usar o login do app Claude para desktop ou execute claude auth login no Terminal."
+  },
+  "Claude CLI 的登录已过期，不是查询限流。点“重新登录”在终端运行官方 claude auth login，完成后刷新。": {
+   "zh-Hant": "Claude CLI 的登入已過期，不是查詢限流。點「重新登入」在終端機執行官方 claude auth login，完成後重新整理。",
+   "en": "The Claude CLI sign-in has expired; this is not query rate limiting. Click “Sign in again” to run the official claude auth login in Terminal, then refresh.",
+   "ja": "Claude CLI のログインの有効期限が切れています。照会の制限ではありません。「再ログイン」を押すとターミナルで公式の claude auth login を実行します。完了したら更新してください。",
+   "ko": "Claude CLI 로그인이 만료되었습니다. 조회 제한이 아닙니다. “다시 로그인”을 눌러 터미널에서 공식 claude auth login을 실행한 뒤 새로 고치세요.",
+   "es": "El inicio de sesión de Claude CLI ha caducado; no es un límite de consultas. Pulsa «Volver a iniciar sesión» para ejecutar el claude auth login oficial en Terminal y luego actualiza.",
+   "fr": "La connexion de Claude CLI a expiré ; ce n’est pas une limite de requêtes. Cliquez sur « Se reconnecter » pour lancer le claude auth login officiel dans le Terminal, puis actualisez.",
+   "de": "Die Anmeldung der Claude-CLI ist abgelaufen; das ist keine Abfragebegrenzung. „Erneut anmelden“ startet das offizielle claude auth login im Terminal, danach aktualisieren.",
+   "pt-BR": "O login do Claude CLI expirou; não é limite de consultas. Clique em “Entrar novamente” para executar o claude auth login oficial no Terminal e depois atualize."
+  },
   "Claude 登录凭证可以无弹窗读取。额度查询仍遵守现有冷却时间。": {
    "zh-Hant": "Claude 登入憑證可以無彈窗讀取。額度查詢仍遵守現有冷卻時間。",
    "en": "The Claude sign-in can be read without prompts. Quota queries still respect the current cooldown.",
@@ -1073,6 +1093,16 @@
    "de": "Nur den MiniMax-Abo-Schlüssel dieser Region entfernen?",
    "pt-BR": "Remover só a chave de assinatura do MiniMax desta região?"
   },
+  "优先读取桌面版 Claude 的登录（点“检查 Claude 读取”授权一次），否则使用终端 claude CLI 的登录；只查询额度，不代为续期。": {
+   "zh-Hant": "優先讀取桌面版 Claude 的登入（點「檢查 Claude 讀取」授權一次），否則使用終端機 claude CLI 的登入；只查詢額度，不代為續期。",
+   "en": "Uses the Claude desktop app’s sign-in first (authorize once with “Check Claude access”), otherwise the terminal claude CLI sign-in; it only reads usage and never renews a sign-in.",
+   "ja": "デスクトップ版 Claude のログインを優先して読み取ります（「Claude の読み取りを確認」で一度許可）。使えない場合はターミナルの claude CLI のログインを使います。使用量を照会するだけで、ログインの更新は行いません。",
+   "ko": "데스크톱 Claude 로그인을 먼저 사용하고(“Claude 읽기 확인”으로 한 번 허용), 없으면 터미널 claude CLI 로그인을 사용합니다. 사용량만 조회하며 로그인을 대신 갱신하지 않습니다.",
+   "es": "Usa primero la sesión de la app de escritorio de Claude (autoriza una vez con «Comprobar acceso a Claude») y, si no, la sesión de claude CLI del terminal; solo consulta el uso y nunca renueva la sesión.",
+   "fr": "Utilise d’abord la connexion de l’app Claude pour ordinateur (autorisez une fois avec « Vérifier l’accès à Claude »), sinon celle de claude CLI dans le Terminal ; lit seulement l’usage et ne renouvelle jamais la connexion.",
+   "de": "Nutzt zuerst die Anmeldung der Claude-Desktop-App (einmal mit „Claude-Zugriff prüfen“ erlauben), sonst die der claude-CLI im Terminal; liest nur die Nutzung und erneuert keine Anmeldung.",
+   "pt-BR": "Usa primeiro o login do app Claude para desktop (autorize uma vez em “Verificar acesso ao Claude”); senão, o login do claude CLI no Terminal. Só consulta o uso e nunca renova o login."
+  },
   "低余量与参考线": {
    "zh-Hant": "低餘量與參考線",
    "en": "Low quota & pace marker",
@@ -1843,6 +1873,16 @@
    "de": "Lokaler Antigravity-Dienst gefunden, aber ohne nutzbares Kontingent. Kontingentseite in der offiziellen App öffnen und erneut versuchen.",
    "pt-BR": "O serviço local do Antigravity foi encontrado, mas não retornou cota utilizável. Abra a página de cotas no app oficial e tente de novo."
   },
+  "已可无弹窗读取桌面版 Claude 的登录，查询额度时优先使用。额度查询仍遵守现有冷却时间。": {
+   "zh-Hant": "已可無彈窗讀取桌面版 Claude 的登入，查詢額度時優先使用。額度查詢仍遵守現有冷卻時間。",
+   "en": "The Claude desktop sign-in can now be read without prompts and is used first. Quota queries still respect the current cooldown.",
+   "ja": "デスクトップ版 Claude のログインをダイアログなしで読み取れるようになり、照会で優先して使います。利用枠の照会は現在のクールダウンに従います。",
+   "ko": "이제 데스크톱 Claude 로그인을 팝업 없이 읽을 수 있으며 우선 사용합니다. 한도 조회는 여전히 현재 대기 시간을 따릅니다.",
+   "es": "La sesión de Claude de escritorio ya se puede leer sin avisos y se usa primero. Las consultas de cuota siguen respetando la pausa actual.",
+   "fr": "La connexion de Claude pour ordinateur peut désormais être lue sans invite et sert en priorité. Les requêtes de quota respectent toujours la pause en cours.",
+   "de": "Die Claude-Desktop-Anmeldung ist jetzt ohne Rückfrage lesbar und wird zuerst verwendet. Kontingentabfragen halten weiterhin die aktuelle Pause ein.",
+   "pt-BR": "O login do Claude para desktop já pode ser lido sem avisos e é usado primeiro. As consultas de cota ainda respeitam a pausa atual."
+  },
   "已安排下次查询；当前没有已验证的可用缓存。": {
    "zh-Hant": "已排定下次查詢；目前沒有已驗證的可用快取。",
    "en": "The next query is scheduled; there is no verified cache to show yet.",
@@ -2603,6 +2643,16 @@
    "de": "Nicht bereit",
    "pt-BR": "Indisponível"
   },
+  "未找到 Claude CLI，请先安装官方客户端。": {
+   "zh-Hant": "找不到 Claude CLI，請先安裝官方用戶端。",
+   "en": "Claude CLI not found. Install the official client first.",
+   "ja": "Claude CLI が見つかりません。先に公式クライアントをインストールしてください。",
+   "ko": "Claude CLI를 찾을 수 없습니다. 먼저 공식 클라이언트를 설치하세요.",
+   "es": "No se encontró Claude CLI. Instala primero el cliente oficial.",
+   "fr": "Claude CLI introuvable. Installez d’abord le client officiel.",
+   "de": "Claude-CLI nicht gefunden. Zuerst den offiziellen Client installieren.",
+   "pt-BR": "Claude CLI não encontrada. Instale antes o cliente oficial."
+  },
   "未找到 Cline CLI；也可以在 VS Code 的 Cline 扩展中登录 Cline 账号。": {
    "zh-Hant": "找不到 Cline CLI；也可以在 VS Code 的 Cline 擴充功能中登入 Cline 帳號。",
    "en": "Cline CLI not found. You can also sign in to your Cline account in the Cline extension for VS Code.",
@@ -2753,6 +2803,16 @@
    "de": "Claude-Anmeldung konnte nicht gelesen werden (Systemstatus {0}).",
    "pt-BR": "Não foi possível ler o login do Claude (status do sistema {0})."
   },
+  "未获授权读取桌面版 Claude 的登录。再次点击并在系统窗口中选择“始终允许”，或在终端运行 claude auth login。": {
+   "zh-Hant": "未獲授權讀取桌面版 Claude 的登入。再次點擊並在系統視窗中選擇「永遠允許」，或在終端機執行 claude auth login。",
+   "en": "Not authorized to read the Claude desktop sign-in. Click again and choose “Always Allow” in the system dialog, or run claude auth login in Terminal.",
+   "ja": "デスクトップ版 Claude のログインを読み取る許可がありません。もう一度押してシステムのダイアログで「常に許可」を選ぶか、ターミナルで claude auth login を実行してください。",
+   "ko": "데스크톱 Claude 로그인을 읽을 권한이 없습니다. 다시 눌러 시스템 창에서 “항상 허용”을 선택하거나 터미널에서 claude auth login을 실행하세요.",
+   "es": "No hay autorización para leer la sesión de Claude de escritorio. Vuelve a pulsar y elige «Permitir siempre» en el cuadro del sistema, o ejecuta claude auth login en Terminal.",
+   "fr": "Lecture de la connexion de Claude pour ordinateur non autorisée. Cliquez de nouveau et choisissez « Toujours autoriser » dans la fenêtre du système, ou lancez claude auth login dans le Terminal.",
+   "de": "Kein Zugriff auf die Claude-Desktop-Anmeldung erlaubt. Erneut klicken und im Systemdialog „Immer erlauben“ wählen oder claude auth login im Terminal ausführen.",
+   "pt-BR": "Sem autorização para ler o login do Claude para desktop. Clique de novo e escolha “Sempre Permitir” na janela do sistema, ou execute claude auth login no Terminal."
+  },
   "未读到 Claude 订阅登录。先授权钥匙串；仍不可用时请在官方 CLI 运行 claude auth login。": {
    "zh-Hant": "未讀到 Claude 訂閱登入。請先授權鑰匙圈；仍無法使用時請在官方 CLI 執行 claude auth login。",
    "en": "No Claude subscription sign-in was read. Authorize Keychain access first; if it still fails, run claude auth login in the official CLI.",
@@ -2882,6 +2942,36 @@
    "fr": "Le compte a changé pendant la requête ; un quota pouvant appartenir à l’ancien compte n’a pas été enregistré.",
    "de": "Das Konto hat sich während der Abfrage geändert; ein möglicherweise fremdes Kontingent wurde nicht gespeichert.",
    "pt-BR": "A conta mudou durante a consulta; uma cota que pode ser da conta anterior não foi salva."
+  },
+  "桌面版 Claude 没有可用于查询额度的登录。请先在桌面版登录，或在终端运行 claude auth login。": {
+   "zh-Hant": "桌面版 Claude 沒有可用於查詢額度的登入。請先在桌面版登入，或在終端機執行 claude auth login。",
+   "en": "The Claude desktop app has no sign-in that can read usage. Sign in to the desktop app first, or run claude auth login in Terminal.",
+   "ja": "デスクトップ版 Claude に使用量を照会できるログインがありません。先にデスクトップ版でログインするか、ターミナルで claude auth login を実行してください。",
+   "ko": "데스크톱 Claude에 사용량을 조회할 수 있는 로그인이 없습니다. 먼저 데스크톱 앱에 로그인하거나 터미널에서 claude auth login을 실행하세요.",
+   "es": "La app de escritorio de Claude no tiene una sesión que pueda consultar el uso. Inicia sesión primero en la app o ejecuta claude auth login en Terminal.",
+   "fr": "L’app Claude pour ordinateur n’a aucune connexion capable de lire l’usage. Connectez-vous d’abord dans l’app, ou lancez claude auth login dans le Terminal.",
+   "de": "Die Claude-Desktop-App hat keine Anmeldung, die die Nutzung lesen kann. Zuerst in der Desktop-App anmelden oder claude auth login im Terminal ausführen.",
+   "pt-BR": "O app Claude para desktop não tem um login que consulte o uso. Entre primeiro no app ou execute claude auth login no Terminal."
+  },
+  "桌面版 Claude 登录": {
+   "zh-Hant": "桌面版 Claude 登入",
+   "en": "Claude desktop sign-in",
+   "ja": "デスクトップ版 Claude のログイン",
+   "ko": "Claude 데스크톱 로그인",
+   "es": "sesión de Claude de escritorio",
+   "fr": "connexion de Claude pour ordinateur",
+   "de": "Claude-Desktop-Anmeldung",
+   "pt-BR": "login do Claude para desktop"
+  },
+  "桌面版 Claude 的登录暂时读不到，CLI 登录也已过期。点“读取桌面版登录”重新授权，或在终端运行 claude auth login。": {
+   "zh-Hant": "桌面版 Claude 的登入暫時讀不到，CLI 登入也已過期。點「讀取桌面版登入」重新授權，或在終端機執行 claude auth login。",
+   "en": "The Claude desktop sign-in can’t be read right now and the CLI sign-in has also expired. Click “Use desktop sign-in” to authorize again, or run claude auth login in Terminal.",
+   "ja": "デスクトップ版 Claude のログインを読み取れず、CLI のログインも期限切れです。「デスクトップ版のログインを使う」で再度許可するか、ターミナルで claude auth login を実行してください。",
+   "ko": "데스크톱 Claude 로그인을 지금 읽을 수 없고 CLI 로그인도 만료되었습니다. “데스크톱 로그인 사용”으로 다시 허용하거나 터미널에서 claude auth login을 실행하세요.",
+   "es": "Ahora no se puede leer la sesión de Claude de escritorio y la de CLI también ha caducado. Pulsa «Usar sesión de escritorio» para autorizar de nuevo o ejecuta claude auth login en Terminal.",
+   "fr": "La connexion de Claude pour ordinateur est illisible pour l’instant et celle de la CLI a aussi expiré. Cliquez sur « Utiliser la connexion de bureau » pour autoriser à nouveau, ou lancez claude auth login dans le Terminal.",
+   "de": "Die Claude-Desktop-Anmeldung ist gerade nicht lesbar und die CLI-Anmeldung ist ebenfalls abgelaufen. Mit „Desktop-Anmeldung verwenden“ erneut erlauben oder claude auth login im Terminal ausführen.",
+   "pt-BR": "Não foi possível ler o login do Claude para desktop e o login da CLI também expirou. Clique em “Usar login do app” para autorizar de novo ou execute claude auth login no Terminal."
   },
   "检查 Claude 读取": {
    "zh-Hant": "檢查 Claude 讀取",
@@ -3593,6 +3683,16 @@
    "de": "Liest die von Cline gespeicherte Anmeldung, ohne sie zu erneuern oder in die Einstellungen zu schreiben; das Token kann ablaufen, wenn Cline nicht läuft.",
    "pt-BR": "Lê o login que o próprio Cline salvou, sem renová-lo nem gravar nas configurações; o token pode expirar com o Cline fechado."
   },
+  "读取桌面版登录": {
+   "zh-Hant": "讀取桌面版登入",
+   "en": "Use desktop sign-in",
+   "ja": "デスクトップ版のログインを使う",
+   "ko": "데스크톱 로그인 사용",
+   "es": "Usar sesión de escritorio",
+   "fr": "Utiliser la connexion de bureau",
+   "de": "Desktop-Anmeldung verwenden",
+   "pt-BR": "Usar login do app"
+  },
   "账号区域": {
    "zh-Hant": "帳號區域",
    "en": "Account region",
@@ -3732,6 +3832,16 @@
    "fr": "Revérifier les connexions",
    "de": "Verbindungen erneut prüfen",
    "pt-BR": "Verificar conexões novamente"
+  },
+  "重新登录": {
+   "zh-Hant": "重新登入",
+   "en": "Sign in again",
+   "ja": "再ログイン",
+   "ko": "다시 로그인",
+   "es": "Volver a iniciar sesión",
+   "fr": "Se reconnecter",
+   "de": "Erneut anmelden",
+   "pt-BR": "Entrar novamente"
   },
   "重置于 {0}": {
    "zh-Hant": "重設於 {0}",

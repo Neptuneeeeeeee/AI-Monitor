@@ -141,6 +141,9 @@ struct SettingsPanel: View {
                             } else { Text(L10n.tr("尚未查询，启用套餐后刷新。")) }
                             HStack {
                                 Button(info.id == "claude" ? L10n.tr("检查 Claude 读取") : info.id == "antigravity" ? L10n.tr("打开应用") : L10n.tr("连接")) { store.reconnect(info.id) }
+                                if info.id == "claude" && store.provider("claude")?.status == "auth_required" {
+                                    Button(L10n.tr("重新登录")) { store.renewClaudeLogin() }
+                                }
                                 Spacer(); Button(L10n.tr("官方用量 ↗")) { store.openWebsite(info.id) }
                             }
                         }.font(.system(size: 10)).foregroundStyle(MonitorPalette.secondary).padding(.top, 5)
