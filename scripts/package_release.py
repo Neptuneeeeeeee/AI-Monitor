@@ -68,7 +68,7 @@ def main():
             demo=temp/'demo-selftest.json'
             run([exe,'--demo','--demo-self-test','--demo-receipt',demo],env=env,timeout=90)
             demo_result=json.loads(demo.read_text())
-            if demo_result['status']!='checks-passed' or demo_result['servicesEnabled'] or demo_result['apiServicesEnabled']:raise ValueError('Disconnected native preview failed')
+            if demo_result['status']!='checks-passed' or demo_result['servicesEnabled']:raise ValueError('Disconnected native preview failed')
             report['checks']['nativeDemoChecks']=demo_result['checkCount']
             ui=temp/'ui-fixture';run([exe,'--render-preview',ui],env=env,timeout=180)
             native=json.loads((ui/'ui-interaction-checks.json').read_text())

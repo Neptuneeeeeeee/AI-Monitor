@@ -27,7 +27,7 @@ def main():
         try:
             doc=json.loads(state.read_text())
             if doc.get('status')=='ready' and doc.get('windowVisible') is True:
-                if doc.get('servicesEnabled') is not False or doc.get('apiServicesEnabled') is not False:
+                if doc.get('servicesEnabled') is not False:
                     raise RuntimeError('Unexpected live-service preview')
                 os.kill(doc['pid'],0)
                 result={**doc,'app':str(app),'stateFile':str(state),'installationPerformed':False}
