@@ -1,6 +1,6 @@
 # AI Monitor
 
-KI-Kontingente und API-Guthaben direkt in der macOS-Menüleiste.
+KI-Abo-Kontingente direkt in der macOS-Menüleiste.
 
 [English](../../README.md) · [简体中文](../../README.zh-CN.md) · [繁體中文](README.zh-TW.md) · [日本語](README.ja.md) · [한국어](README.ko.md) · [Español](README.es.md) · [Français](README.fr.md) · **Deutsch** · [Português](README.pt-BR.md)
 
@@ -12,7 +12,10 @@ KI-Kontingente und API-Guthaben direkt in der macOS-Menüleiste.
 
 > **Vorabversion:** ohne Developer-ID-Signatur und Apple-Notarisierung. macOS kann den ersten Start blockieren. Lies die [Installationsanleitung](../INSTALL.md) und prüfe die Quelle, bevor du die App öffnest. Deaktiviere keine systemweiten Sicherheitsfunktionen.
 
-![AI Monitor: Kontingente, Einstellungen und API-Guthaben](../images/en/hero.png)
+<p>
+<img src="../images/en/plans.png" alt="Beispiel für Abo-Kontingente" width="48%">
+<img src="../images/en/settings.png" alt="Auswahl und Reihenfolge der Abos" width="48%">
+</p>
 
 *Alle Werte sind Beispieldaten. Die englischen Bilder sind übersetzte Ansichten für die Dokumentation; die Oberfläche von v1.9.4 ist überwiegend chinesisch. Die Sprachlinks wechseln nur die README-Sprache.*
 
@@ -20,26 +23,12 @@ KI-Kontingente und API-Guthaben direkt in der macOS-Menüleiste.
 
 - Verbleibende Kontingente und Rücksetzzeiten mit einfarbigen Anzeigen in der Menüleiste verfolgen.
 - Angezeigte Abos auswählen und nach Wunsch sortieren.
-- API-Guthaben und Tageskosten ansehen, soweit der Anbieter sie bereitstellt.
 
 ## Unterstützte Dienste
 
-**Abos:** Claude · Codex · Kimi · GitHub Copilot · Antigravity · Cursor · GLM · MiniMax · Windsurf · Kiro
-
-**API-Verbindungen:** DeepSeek · Kimi · OpenAI · Claude · SiliconFlow · OpenRouter. Google AI Studio: nur Zugriffsprüfung, keine Abrechnungsbeträge.
+**Abos:** Claude · Codex · Kimi · GitHub Copilot · Antigravity · Cursor · GLM · MiniMax · Windsurf · Kiro · OpenCode Go · ClinePass
 
 Die verfügbaren Daten hängen vom Anbieter und Konto ab. Windsurf zeigt lokal gespeicherte Werte, keine Echtzeitdaten. Grenzen und Voraussetzungen stehen in der [Funktionsübersicht](../PROVIDER_CAPABILITIES.md).
-
-<details>
-<summary>Weitere Bildschirmansichten</summary>
-
-<p>
-<img src="../images/en/plans.png" alt="Beispiel für Abo-Kontingente" width="31%">
-<img src="../images/en/settings.png" alt="Auswahl und Reihenfolge der Abos" width="31%">
-<img src="../images/en/api-balance.png" alt="Beispiel für API-Guthaben und Kosten" width="31%">
-</p>
-
-</details>
 
 [Installation](../INSTALL.md) · [Funktionsumfang](../PROVIDER_CAPABILITIES.md) · [Datenschutz](../../PRIVACY.md) · [Änderungen](../../CHANGELOG.md) · [Aus Quellcode bauen](../DEVELOPMENT.md)
 

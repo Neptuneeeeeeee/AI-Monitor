@@ -38,7 +38,7 @@ class RuntimeIsolationTests(unittest.TestCase):
                 if f.suffix in ('.swift','.py'):
                     self.assertNotIn('local.thalnova.Monitor',f.read_text(),str(f))
     def test_helper_templates_have_placeholders(self):
-        for name in ['APIVault.swift','KeychainBridge.swift']:
+        for name in ['KeychainBridge.swift']:
             text=(ROOT/'Support'/name).read_text();self.assertIn('__KEYCHAIN_PREFIX__',text);self.assertNotIn('local.thalnova.Monitor',text)
     def test_invalid_entitlements_rejected(self):
         import plistlib

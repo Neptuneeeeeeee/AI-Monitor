@@ -20,9 +20,8 @@ struct BrandStyle {
         case "copilot": rgb = (0.50, 0.28, 0.77)
         case "antigravity": rgb = (0.15, 0.48, 0.79)
         case "gemini": rgb = (0.22, 0.47, 0.90)
-        case "deepseek": rgb = (0.19, 0.35, 0.89)
-        case "siliconflow": rgb = (0.48, 0.31, 0.84)
-        case "openrouter": rgb = (0.34, 0.39, 0.60)
+        case "opencode": rgb = (0.30, 0.30, 0.32)
+        case "cline": rgb = (0.20, 0.24, 0.30)
         default: rgb = (0.28, 0.39, 0.58)
         }
         return BrandStyle(id: id, color: NSColor(srgbRed: rgb.0, green: rgb.1, blue: rgb.2, alpha: 1))
@@ -36,7 +35,7 @@ struct BrandStyle {
 }
 
 enum BrandAssets {
-    static let ids = ["kimi", "codex", "claude", "glm", "copilot", "antigravity", "gemini", "cursor", "minimax", "windsurf", "kiro"]
+    static let ids = ["kimi", "codex", "claude", "glm", "copilot", "antigravity", "gemini", "cursor", "minimax", "windsurf", "kiro", "opencode", "cline"]
     private static let images: [String: NSImage] = {
         var output: [String: NSImage] = [:]
         for id in ids {
@@ -58,13 +57,6 @@ struct ProviderLogo: View {
         Group {
             if enabled, let image = BrandAssets.image(id) {
                 Image(nsImage: image).resizable().renderingMode(.original).interpolation(.high).scaledToFit()
-            } else if ["deepseek", "siliconflow", "openrouter"].contains(id) {
-                // Local monograms distinguish providers without imitating official logos.
-                Text(["deepseek":"D", "siliconflow":"Si", "openrouter":"OR"][id] ?? "API")
-                    .font(.system(size:size * (id == "deepseek" ? 0.68 : 0.44),weight:.bold,design:.rounded))
-                    .frame(width:size,height:size)
-                    .foregroundStyle(BrandStyle.forID(id).accent)
-                    .background(RoundedRectangle(cornerRadius:size * 0.25).fill(BrandStyle.forID(id).accent.opacity(0.11)))
             } else {
                 Image(systemName: ProviderInfo.all.first { $0.id == id }?.symbol ?? "sparkles")
                     .resizable().scaledToFit().padding(size * 0.10).foregroundStyle(BrandStyle.forID(id).accent)

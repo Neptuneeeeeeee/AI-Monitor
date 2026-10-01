@@ -25,6 +25,8 @@ import MonitorCore
             preferences = DisplayPreferences.load(from: AppRuntime.defaults)
             isolated.set(AppRuntime.defaults.stringArray(forKey: "enabled") ?? ProviderInfo.defaultOrder, forKey: "enabled")
         }
+        if let pos = args.firstIndex(of: "--language"), args.indices.contains(pos + 1),
+           AppLanguage(rawValue: args[pos + 1]) != nil { preferences.language = args[pos + 1] }
         preferences.save(to: isolated)
         let store = MonitorStore(defaults: isolated, servicesEnabled: false)
         if let pos = args.firstIndex(of: "--snapshot"), args.indices.contains(pos+1) {
@@ -63,36 +65,16 @@ import MonitorCore
         let slots = try JSONEncoder().encode(store.iconSlots)
         try slots.write(to: output.appendingPathComponent("icon-mapping-\(source).json"), options: .atomic)
         if fixture {
-            store.apiMode = true; store.showSettings = false
-            try png(MonitorPanel(store: store), output.appendingPathComponent("api-unconfigured-fixture.png"))
+            store.showSettings = false
             let stamp = store.now
-            var observations: [APIObservation] = []
-            for i in store.api.accounts.indices {
-                var a = store.api.accounts[i]
-                a.credentialRevision = "synthetic-ui-fixture"
-                if a.provider.supportsDailyCost { a.dailyBudget = 10 }
-                if [.deepseek, .kimi, .siliconflow].contains(a.provider) { a.balanceReference = 200 }
-                store.api.accounts[i] = a
-                let balances: [APIProvider:Double] = [.deepseek:82.40,.kimi:120,.siliconflow:88.88,.openrouter:18.50]
-                let spent: [APIProvider:Double] = [.openai:4.20,.claude:1.35,.openrouter:3.20]
-                observations.append(APIObservation(id:a.id,context:a.context,status:a.provider == .google ? "unsupported" : "ok",currency:a.selectedCurrency,
-                    balance:balances[a.provider],balanceLabel:a.provider == .openrouter ? "Key 剩余额度" : "账户余额",dailySpent:spent[a.provider],
-                    dayUTC:APIObservation.day(Date(timeIntervalSince1970:stamp)),keyLimit:a.provider == .openrouter ? 20 : nil,
-                    limitPeriod:a.provider == .openrouter ? "每月" : nil,fetchedAt:stamp,source:"synthetic UI fixture — not a connected account",
-                    message:a.provider == .google ? "Key 校验仅为示例；账单接口未接通" : a.provider.capabilities))
-            }
-            store.api.snapshot = APIBalanceSnapshot(generatedAt:stamp,accounts:observations)
-            try png(MonitorPanel(store: store), output.appendingPathComponent("api-balance-fixture.png"))
-            store.showSettings = true
-            try png(MonitorPanel(store: store), output.appendingPathComponent("api-settings-fixture.png"))
-            store.api.editingID = store.api.accounts.first(where:{$0.provider == .openai})?.id
-            try png(MonitorPanel(store: store), output.appendingPathComponent("api-editor-fixture.png"))
-            store.api.editingID = nil; store.showSettings = false; store.apiMode = false
             let savedSnapshot = store.snapshot; let savedEnabled = store.enabled
             store.enabled = ["cursor", "minimax", "windsurf", "kiro"]
             store.snapshot = expandedFixtures(now: stamp)
             try png(MonitorPanel(store:store), output.appendingPathComponent("expanded-plans-fixture.png"))
             try png(MiniMaxConnectionEditor(store:store).padding(16).frame(width:340).background(Color.white), output.appendingPathComponent("minimax-editor-fixture.png"))
+            store.enabled = ["opencode", "cline"]
+            store.snapshot = agentPlanFixtures(now: stamp)
+            try png(MonitorPanel(store:store), output.appendingPathComponent("agent-plans-fixture.png"))
             store.snapshot=savedSnapshot; store.enabled=savedEnabled
             let demoSuite = AppRuntime.profile.bundleID + ".demo-render." + UUID().uuidString
             let demoDefaults = UserDefaults(suiteName: demoSuite)!
@@ -101,14 +83,8 @@ import MonitorCore
             try png(DemoRoot(store: demo), output.appendingPathComponent("interactive-demo-fixture.png"))
             demo.openSettings("connections")
             try png(DemoRoot(store: demo), output.appendingPathComponent("demo-connections-fixture.png"))
-            demo.apiMode = true; demo.showSettings = false
-            try png(DemoRoot(store: demo), output.appendingPathComponent("demo-api-fixture.png"))
             demo.shutdown()
             try UIInteractionChecks.run(output: output)
-        } else {
-            store.apiMode = true; store.showSettings = false
-            try png(MonitorPanel(store:store),output.appendingPathComponent("api-unconfigured-live.png"))
-            store.apiMode = false
         }
         print("Rendered \(source) native quota panel, dark-system panel, three settings tabs and dynamic-bar icon. No network requests.")
     }
@@ -124,6 +100,17 @@ import MonitorCore
                     QuotaWindow(id:"windsurf-weekly",label:"每周额度 · 缓存",remainingPercent:60,resetAt:now+3*86400,durationMinutes:10080)],note:"仅为模拟缓存，非实时读数。"),
                 ProviderResult(id:"kiro",name:"Kiro",status:"partial",plan:"KIRO PRO",fetchedAt:now,windows:[
                     QuotaWindow(id:"kiro-monthly",label:"套餐 Credits · 本月（官方估计）",remainingPercent:37.5,unit:"credits",remaining:375,limit:1000,kind:"monthly")])])
+    }
+    static func agentPlanFixtures(now: Double) -> Snapshot {
+        Snapshot(generatedAt: now, providers: [
+            ProviderResult(id:"opencode",name:"OpenCode Go",fetchedAt:now,windows:[
+                QuotaWindow(id:"opencode-5h",label:"当前 5 小时",remainingPercent:63,resetAt:now+3*3600,durationMinutes:300),
+                QuotaWindow(id:"opencode-weekly",label:"每周",remainingPercent:71,resetAt:now+3*86400,durationMinutes:10080),
+                QuotaWindow(id:"opencode-monthly",label:"每月 · 订阅周期",remainingPercent:84,resetAt:now+19*86400,kind:"monthly")]),
+            ProviderResult(id:"cline",name:"ClinePass",fetchedAt:now,windows:[
+                QuotaWindow(id:"cline-5h",label:"当前 5 小时",remainingPercent:88,resetAt:now+4*3600,durationMinutes:300),
+                QuotaWindow(id:"cline-weekly",label:"每周",remainingPercent:56,resetAt:now+5*86400,durationMinutes:10080),
+                QuotaWindow(id:"cline-monthly",label:"每月",remainingPercent:47,resetAt:now+12*86400,kind:"monthly")])])
     }
     private static func png<V: View>(_ view: V, _ url: URL) throws {
         // ImageRenderer omits AppKit-backed ScrollView/Picker content. Render the

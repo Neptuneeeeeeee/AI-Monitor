@@ -18,6 +18,8 @@ enum AppRuntime {
         try value.validate(expectedChannel: expectedChannel)
         guard Bundle.main.bundleIdentifier == value.bundleID else { throw failure("Bundle and profile identifiers differ.") }
         profile = value
+        // Without the catalog the interface stays in its Simplified Chinese source text.
+        try? L10n.load(from: resource.appendingPathComponent("Localization/Localizable.json"))
     }
     static func failure(_ message: String) -> NSError {
         NSError(domain: "AppRuntime", code: 1, userInfo: [NSLocalizedDescriptionKey: message])
@@ -25,7 +27,7 @@ enum AppRuntime {
     static func collectorEnvironment() -> [String:String] {
         var env = ProcessInfo.processInfo.environment
         // A parent shell must not redirect a production collector into another edition.
-        for key in ["MONITOR_DATA_DIR", "MONITOR_TEST_MODE", "MONITOR_TEST_HOME", "MONITOR_KEYCHAIN_HELPER", "MONITOR_API_VAULT", "PYTHONPATH", "PYTHONHOME"] { env.removeValue(forKey: key) }
+        for key in ["MONITOR_DATA_DIR", "MONITOR_TEST_MODE", "MONITOR_TEST_HOME", "MONITOR_KEYCHAIN_HELPER", "PYTHONPATH", "PYTHONHOME"] { env.removeValue(forKey: key) }
         env["PYTHONDONTWRITEBYTECODE"] = "1"
         env["PYTHONNOUSERSITE"] = "1"
         if env["SSL_CERT_FILE"] == nil,
@@ -46,8 +48,8 @@ enum AppRuntime {
         let info: [String:Any] = ["channel":profile.channel, "bundleID":profile.bundleID,
             "displayName":profile.displayName, "dataDirectory":support.path,
             "preferencesDomain":profile.bundleID, "keychainPrefix":profile.keychainPrefix,
-            "keychainHelperID":profile.keychainHelperID, "apiHelperID":profile.apiHelperID,
-            "keychainHelperPath":KeychainBridge.appURL.path, "apiHelperPath":APIVault.appURL.path,
+            "keychainHelperID":profile.keychainHelperID,
+            "keychainHelperPath":KeychainBridge.appURL.path,
             "defaultEnabledProviders":profile.defaultEnabledProviders,
             "experimentalModules":profile.experimentalModules, "pythonExecutable":pythonExecutable?.path ?? "", "pythonBundled":Bundle.main.resourceURL.map { FileManager.default.isExecutableFile(atPath:$0.appendingPathComponent("Python/bin/python3").path) } ?? false]
         return try JSONSerialization.data(withJSONObject: info, options: [.prettyPrinted, .sortedKeys])
@@ -71,14 +73,10 @@ enum AppRuntime {
         // not URL values whose trailing slash depends on filesystem existence.
         let checks: [String:Bool] = [
             "storePath":store.support.standardizedFileURL.path == AppRuntime.support.standardizedFileURL.path,
-            "apiPath":store.api.root.standardizedFileURL.path == AppRuntime.support.appendingPathComponent("API").standardizedFileURL.path,
             "noEnabledPlans":store.enabled.isEmpty,
-            "noConfiguredAPIKeys":store.api.accounts.allSatisfy({ !$0.configured }),
             "keychainHelper":KeychainBridge.ensureInstalled(),
-            "apiHelper":APIVault.ensureInstalled(),
             "keychainUnderTemporaryHome":KeychainBridge.root.path.hasPrefix(home.path+"/"),
-            "apiUnderTemporaryHome":APIVault.root.path.hasPrefix(home.path+"/"),
-            "temporaryAccountsPersisted":fm.fileExists(atPath:store.api.root.appendingPathComponent("accounts.json").path)]
+            "dataDirectoryUnderTemporaryHome":store.support.path.hasPrefix(home.path+"/") && fm.fileExists(atPath:store.support.path)]
         let failed = checks.filter { !$0.value }.keys.sorted()
         guard failed.isEmpty else {
             throw AppRuntime.failure("Isolation check failed: " + failed.joined(separator:", "))

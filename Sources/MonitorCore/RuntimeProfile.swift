@@ -15,9 +15,7 @@ public struct RuntimeProfile: Codable, Equatable {
     public let experimentalModules: [String]
     public var keychainPrefix: String { bundleID + "." }
     public var keychainHelperID: String { bundleID + ".Keychain.v1" }
-    public var apiHelperID: String { bundleID + ".APIVault.v1" }
     public var keychainAppName: String { displayName + " Keychain.app" }
-    public var apiAppName: String { displayName + " API Vault.app" }
     public func supportURL(home: URL) -> URL {
         home.appendingPathComponent("Library/Application Support", isDirectory: true)
             .appendingPathComponent(dataDirectoryName, isDirectory: true)

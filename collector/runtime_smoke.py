@@ -16,8 +16,8 @@ def main():
     with sqlite3.connect(':memory:') as db:
         db.execute('CREATE TABLE probe(v INTEGER)');db.execute('INSERT INTO probe VALUES (17)')
         assert db.execute('SELECT v FROM probe').fetchone()[0]==17
-    import monitor,api_monitor,extended_plans,codex_provider
-    assert len(monitor.NAMES)==10
+    import monitor,extended_plans,codex_provider
+    assert len(monitor.NAMES)==12
     assert extended_plans.parse_cursor({'individualUsage':{'plan':{'enabled':True,'limit':0,'totalPercentUsed':0}}})==[]
     value=codex_provider.parse_codex({'rateLimits':{'primary':{'usedPercent':100,'windowDurationMins':43200}}})
     assert value and value[0]['remainingPercent']==0

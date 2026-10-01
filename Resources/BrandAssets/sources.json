@@ -79,5 +79,23 @@
     "sha256": "eaf4e3a56ad089982e2b06d1d7bcbded64b24b7df946a3991ad8fcc778ee46c6",
     "retrievedAt": "2026-09-17",
     "note": "Official 192px touch icon"
+  },
+  {
+    "id": "opencode",
+    "source": "https://opencode.ai/web-app-manifest-512x512.png",
+    "sourcePage": "https://opencode.ai/site.webmanifest (same bytes as packages/ui/src/assets/favicon/web-app-manifest-512x512.png in https://github.com/anomalyco/opencode)",
+    "file": "opencode.png",
+    "sha256": "63495f813cb7ea507cb6eb2cd1ee9d673e456a6af3eeb4138bc920d24ec9f15f",
+    "retrievedAt": "2026-10-01",
+    "note": "Official 512px web app manifest icon, unmodified"
+  },
+  {
+    "id": "cline",
+    "source": "~/.vscode/extensions/saoudrizwan.claude-dev-4.1.17/assets/icons/icon.png (installed official Cline extension)",
+    "sourcePage": "https://marketplace.visualstudio.com/items?itemName=saoudrizwan.claude-dev",
+    "file": "cline.png",
+    "sha256": "3375f1e5f8a68330c85733c820450072d382600003fdaa2e81ade486dae49688",
+    "retrievedAt": "2026-10-01",
+    "note": "Official 128px extension icon, unmodified"
   }
 ]

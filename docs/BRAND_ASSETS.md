@@ -28,4 +28,8 @@ Cursor 使用官方 brand 页面提供的品牌包中的 `General Logos/Cube/PNG
 
 ## 2026-09-30：Codex 改用 OpenAI 官方 Blossom
 
-Codex（以及 API 余额里的 OpenAI）原先使用开发者官网的48px蓝底 favicon，现改为 OpenAI 官方 logo 包（`https://cdn.openai.com/brand/openai-logos.zip`，品牌页 https://openai.com/brand/ ）中的 `OpenAI-logos/SVGs/OAI_OpenAI-Blossom_Black.svg`。由macOS sips从SVG直接转成512px PNG，黑色、透明背景、形状不变；原文件四周约四分之一画布宽的透明留白被裁去（viewBox `168 168 380 380`），否则24pt下图形只有其他标志的一半大。来源URL与输出SHA256记录在 `Resources/BrandAssets/sources.json`。
+Codex 原先使用开发者官网的48px蓝底 favicon，现改为 OpenAI 官方 logo 包（`https://cdn.openai.com/brand/openai-logos.zip`，品牌页 https://openai.com/brand/ ）中的 `OpenAI-logos/SVGs/OAI_OpenAI-Blossom_Black.svg`。由macOS sips从SVG直接转成512px PNG，黑色、透明背景、形状不变；原文件四周约四分之一画布宽的透明留白被裁去（viewBox `168 168 380 380`），否则24pt下图形只有其他标志的一半大。来源URL与输出SHA256记录在 `Resources/BrandAssets/sources.json`。
+
+## 2026-10-01：新增 OpenCode Go 与 ClinePass
+
+OpenCode 使用官网 Web App 清单（`https://opencode.ai/site.webmanifest`）声明的 `https://opencode.ai/web-app-manifest-512x512.png`，与官方仓库 `anomalyco/opencode` 中 `packages/ui/src/assets/favicon/web-app-manifest-512x512.png` 字节一致，512px 原图未改动。Cline 使用本机已安装官方 VS Code 扩展（`saoudrizwan.claude-dev` 4.1.17）内的 `assets/icons/icon.png`，128px 原图未改动。来源与输出SHA256记录在 `Resources/BrandAssets/sources.json`。API 余额页移除后，DeepSeek、SiliconFlow、OpenRouter 的本地字母标识与区分色一并删除。

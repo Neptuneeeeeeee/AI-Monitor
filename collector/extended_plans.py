@@ -4,7 +4,9 @@ Field contracts/research sources: docs/PLAN_RESEARCH_2026_09.md.
 Unknown or contradictory data produces no invented zero/100 percent allowance.
 """
 import base64
+import hashlib
 import json
+import os
 import re
 import time
 from pathlib import Path
@@ -13,7 +15,7 @@ from credentials import own_key
 from network import request_json
 from local_plan_store import read_app_value
 
-NEW_IDS = {'cursor', 'minimax', 'windsurf', 'kiro'}
+NEW_IDS = {'cursor', 'minimax', 'windsurf', 'kiro', 'opencode', 'cline'}
 DB_PATHS = {
     'cursor': 'Library/Application Support/Cursor/User/globalStorage/state.vscdb',
     'windsurf': 'Library/Application Support/Windsurf/User/globalStorage/state.vscdb',
@@ -22,6 +24,8 @@ MINIMAX_ENDPOINTS = {
     'cn': 'https://www.minimaxi.com/v1/token_plan/remains',
     'global': 'https://www.minimax.io/v1/token_plan/remains',
 }
+OPENCODE_USAGE = 'https://opencode.ai/zen/go/v1/usage'
+CLINE_USAGE = 'https://api.cline.bot/api/v1/users/me/plan/usage-limits'
 
 
 def safe_text(value, limit=60):
@@ -299,4 +303,157 @@ def collect_kiro():
     value = parse_kiro(text)
     if rc:
         raise MonitorError('unavailable', 'Kiro CLI 查询未正常退出；未将不完整输出当作成功结果。')
+    return value
+
+
+# OpenCode Go: the subscription key OpenCode saved with /connect -------------
+OPENCODE_WINDOWS = [('rolling', 'opencode-5h', '当前 5 小时', 300, None),
+                    ('weekly', 'opencode-weekly', '每周', 10080, None),
+                    ('monthly', 'opencode-monthly', '每月 · 订阅周期', None, 'monthly')]
+
+
+def opencode_auth_path():
+    # OpenCode keeps provider keys under the XDG data directory (xdg-basedir).
+    base = os.environ.get('XDG_DATA_HOME', '')
+    root = Path(base) if base.startswith('/') else HOME / '.local/share'
+    return root / 'opencode/auth.json'
+
+
+def opencode_key():
+    doc = read_json(opencode_auth_path(), {})
+    # The Go entry first; a Zen console key of the same workspace also reads Go usage.
+    for name in ('opencode-go', 'opencode'):
+        entry = doc.get(name) if isinstance(doc, dict) else None
+        key = entry.get('key') if isinstance(entry, dict) and entry.get('type') == 'api' else None
+        if isinstance(key, str) and key.strip():
+            key = key.strip()
+            if len(key) > 8192 or not re.fullmatch(r'[!-~]+', key):
+                raise MonitorError('auth_required', 'OpenCode 保存的 Key 格式无效，请在 OpenCode 中重新运行 /connect。')
+            return key
+    raise MonitorError('auth_required', '未找到 OpenCode Go 登录。请在 OpenCode 中运行 /connect（或 opencode auth login），选择 OpenCode Go 并粘贴订阅 Key。')
+
+
+def opencode_identity():
+    try:
+        return hashlib.sha256(('opencode:' + opencode_key()).encode()).hexdigest()
+    except MonitorError:
+        return None
+
+
+def parse_opencode(payload):
+    usage = payload.get('usage')
+    if not isinstance(usage, dict):
+        raise MonitorError('error', 'OpenCode Go 返回结构变化，未推算额度。')
+    windows = []
+    for key, wid, label, minutes, kind in OPENCODE_WINDOWS:
+        item = usage.get(key)
+        if not isinstance(item, dict):
+            continue
+        # The server reports a USED percentage, floored to an integer.
+        used = percent(item.get('percent'))
+        if used is None:
+            continue
+        windows.append(window(wid, label, used_percent=used, reset=item.get('resetsAt'),
+                              minutes=minutes, kind=kind, unit='plan quota'))
+    return windows
+
+
+def collect_opencode():
+    key = opencode_key()
+    try:
+        payload = request_json(OPENCODE_USAGE, headers={'Authorization': 'Bearer ' + key})
+    except MonitorError as error:
+        if error.http_status == 403:
+            raise MonitorError('unsupported', '此 OpenCode Key 所在工作区没有 OpenCode Go 订阅；Zen 余额不是 Go 套餐额度。', http_status=403)
+        raise
+    return checked_result('opencode', 'OpenCode Go', 'OpenCode 保存的 Key · 官方 Go 用量接口', parse_opencode(payload), None,
+                          '5 小时、每周与每月窗口均为服务端按金额计算的已用比例；不读取会话记录，不调用模型。')
+
+
+# ClinePass: the account sign-in Cline keeps in providers.json ----------------
+CLINE_WINDOWS = {'five_hour': ('cline-5h', '当前 5 小时', 300, None),
+                 'weekly': ('cline-weekly', '每周', 10080, None),
+                 'monthly': ('cline-monthly', '每月', None, 'monthly')}
+
+
+def cline_settings_path():
+    return HOME / '.cline/data/settings/providers.json'
+
+
+def cline_session():
+    doc = read_json(cline_settings_path(), {})
+    providers = doc.get('providers') if isinstance(doc, dict) else None
+    # Cline writes the ClinePass sign-in under "cline"; older files may use "cline-pass".
+    for name in ('cline', 'cline-pass'):
+        entry = providers.get(name) if isinstance(providers, dict) else None
+        settings = entry.get('settings') if isinstance(entry, dict) else None
+        auth = settings.get('auth') if isinstance(settings, dict) else None
+        token = auth.get('accessToken') if isinstance(auth, dict) else None
+        if isinstance(token, str) and token.strip():
+            account = auth.get('accountId')
+            return token.strip(), account if isinstance(account, str) and account.strip() else None
+    raise MonitorError('auth_required', '未找到 Cline 账号登录。请先在 Cline（VS Code 扩展或 CLI）登录 Cline 账号，再启用 ClinePass。')
+
+
+def cline_bearer(token, now=None):
+    now = time.time() if now is None else now
+    raw = token[len('workos:'):] if token.lower().startswith('workos:') else token
+    if len(raw) > 16384 or not re.fullmatch(r'[!-~]+', raw):
+        raise MonitorError('auth_required', 'Cline 登录凭证格式无效，请在 Cline 中重新登录。')
+    parts = raw.split('.')
+    if len(parts) == 3:
+        try:
+            claims = json.loads(base64.urlsafe_b64decode(parts[1] + '=' * (-len(parts[1]) % 4)))
+            expiry = number(claims.get('exp')) if isinstance(claims, dict) else None
+        except (ValueError, TypeError):
+            expiry = None
+        if expiry is not None and expiry <= now + 60:
+            # Refreshing here would rotate Cline's refresh token behind its back.
+            raise MonitorError('unavailable', 'Cline 登录令牌已过期；打开 Cline 让官方客户端自行续期后再刷新。本应用不代为续期。')
+    # The account API accepts the stored WorkOS token only with its prefix.
+    return 'workos:' + raw
+
+
+def cline_identity():
+    try:
+        _, account = cline_session()
+    except MonitorError:
+        return None
+    # Cline rotates the access token hourly; the server-issued account id is stable.
+    return hashlib.sha256(('cline:' + account).encode()).hexdigest() if account else None
+
+
+def parse_cline(payload):
+    data = payload.get('data')
+    limits = data.get('limits') if isinstance(data, dict) else None
+    if payload.get('success') is not True or not isinstance(limits, list):
+        raise MonitorError('error', 'ClinePass 返回结构变化，未推算额度。')
+    found = {}
+    for item in limits[:12]:
+        if not isinstance(item, dict):
+            continue
+        kind = str(item.get('type') or '').strip().lower()
+        if kind not in CLINE_WINDOWS:
+            continue
+        used = percent(item.get('percentUsed', item.get('percent_used')))
+        if used is None:
+            continue
+        wid, label, minutes, period = CLINE_WINDOWS[kind]
+        found[kind] = window(wid, label, used_percent=used, reset=item.get('resetsAt', item.get('resets_at')),
+                             minutes=minutes, kind=period, unit='plan quota')
+    return [found[kind] for kind in CLINE_WINDOWS if kind in found]
+
+
+def collect_cline():
+    token, _ = cline_session()
+    try:
+        payload = request_json(CLINE_USAGE, headers={'Authorization': 'Bearer ' + cline_bearer(token)})
+    except MonitorError as error:
+        if error.http_status == 404:
+            raise MonitorError('unsupported', '已连接 Cline 账号，但没有 ClinePass 订阅记录；按量 Credits 不是套餐额度。', http_status=404)
+        raise
+    value = checked_result('cline', 'ClinePass', 'Cline 账号登录 · 官方用量接口', parse_cline(payload), None,
+                           '读取 Cline 自己保存的登录，不续期、不写入其配置；Cline 未运行时令牌可能过期。')
+    if not value['windows']:
+        value['message'] = '已连接 Cline 账号，但响应中没有 ClinePass 套餐窗口。'
     return value

@@ -39,7 +39,7 @@ enum MenuBarIcon {
             return true
         }
         image.isTemplate = true
-        image.accessibilityDescription = slots.isEmpty ? "未启用套餐，点击打开设置" : "\(slots.count) 个套餐的剩余额度（Copilot 为每月）"
+        image.accessibilityDescription = slots.isEmpty ? L10n.tr("未启用套餐，点击打开设置") : L10n.tr("{0} 个套餐的剩余额度（Copilot 为每月）", slots.count)
         return image
     }
 }

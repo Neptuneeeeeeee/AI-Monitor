@@ -1,0 +1,3937 @@
+{
+ "schema": 1,
+ "source": "zh-Hans",
+ "languages": [
+  "zh-Hans",
+  "zh-Hant",
+  "en",
+  "ja",
+  "ko",
+  "es",
+  "fr",
+  "de",
+  "pt-BR"
+ ],
+ "strings": {
+  "1 位小数": {
+   "zh-Hant": "1 位小數",
+   "en": "1 decimal",
+   "ja": "小数1桁",
+   "ko": "소수점 1자리",
+   "es": "1 decimal",
+   "fr": "1 décimale",
+   "de": "1 Dezimalstelle",
+   "pt-BR": "1 casa decimal"
+  },
+  "10 分钟": {
+   "zh-Hant": "10 分鐘",
+   "en": "10 minutes",
+   "ja": "10分",
+   "ko": "10분",
+   "es": "10 minutos",
+   "fr": "10 minutes",
+   "de": "10 Minuten",
+   "pt-BR": "10 minutos"
+  },
+  "15 分钟": {
+   "zh-Hant": "15 分鐘",
+   "en": "15 minutes",
+   "ja": "15分",
+   "ko": "15분",
+   "es": "15 minutos",
+   "fr": "15 minutes",
+   "de": "15 Minuten",
+   "pt-BR": "15 minutos"
+  },
+  "30 分钟": {
+   "zh-Hant": "30 分鐘",
+   "en": "30 minutes",
+   "ja": "30分",
+   "ko": "30분",
+   "es": "30 minutos",
+   "fr": "30 minutes",
+   "de": "30 Minuten",
+   "pt-BR": "30 minutos"
+  },
+  "5 分钟": {
+   "zh-Hant": "5 分鐘",
+   "en": "5 minutes",
+   "ja": "5分",
+   "ko": "5분",
+   "es": "5 minutos",
+   "fr": "5 minutes",
+   "de": "5 Minuten",
+   "pt-BR": "5 minutos"
+  },
+  "5 小时": {
+   "zh-Hant": "5 小時",
+   "en": "5-hour window",
+   "ja": "5時間枠",
+   "ko": "5시간 창",
+   "es": "ventana de 5 horas",
+   "fr": "fenêtre de 5 heures",
+   "de": "5-Stunden-Fenster",
+   "pt-BR": "janela de 5 horas"
+  },
+  "5 小时、每周与每月窗口均为服务端按金额计算的已用比例；不读取会话记录，不调用模型。": {
+   "zh-Hant": "5 小時、每週與每月視窗皆為伺服器依金額計算的已用比例；不讀取工作階段記錄，不呼叫模型。",
+   "en": "The 5-hour, weekly and monthly windows are used shares the server computes from spend; session history is not read and no model is called.",
+   "ja": "5時間・週・月のウィンドウは、サーバーが金額から計算した使用率です。セッション履歴は読み取らず、モデルも呼び出しません。",
+   "ko": "5시간, 주간, 월간 창은 서버가 금액 기준으로 계산한 사용 비율입니다. 세션 기록을 읽지 않고 모델도 호출하지 않습니다.",
+   "es": "Las ventanas de 5 horas, semanal y mensual son el porcentaje usado que calcula el servidor según el gasto; no se lee el historial de sesiones ni se llama a ningún modelo.",
+   "fr": "Les fenêtres de 5 heures, hebdomadaire et mensuelle sont la part utilisée calculée par le serveur selon la dépense ; l’historique n’est pas lu et aucun modèle n’est appelé.",
+   "de": "5-Stunden-, Wochen- und Monatsfenster sind vom Server aus den Ausgaben berechnete Nutzungsanteile; kein Sitzungsverlauf gelesen, kein Modell aufgerufen.",
+   "pt-BR": "As janelas de 5 horas, semanal e mensal são a fração usada que o servidor calcula pelo gasto; o histórico de sessões não é lido e nenhum modelo é chamado."
+  },
+  "5 小时与周窗口按响应显示；积分和并发限制不冒充套餐余量。不跨区域尝试 Key。": {
+   "zh-Hant": "5 小時與週視窗依回應顯示；點數和並行限制不冒充方案餘量。不跨區域嘗試 Key。",
+   "en": "5-hour and weekly windows are shown as reported; credits and concurrency limits never stand in for plan quota. The key is never tried in another region.",
+   "ja": "5時間と週のウィンドウは応答どおりに表示します。クレジットや同時実行の上限をプランの残量として扱いません。他の地域でキーを試すこともありません。",
+   "ko": "5시간 및 주간 창은 응답대로 표시합니다. 크레딧과 동시 실행 한도를 플랜 잔량으로 취급하지 않으며 다른 지역에서 키를 시도하지 않습니다.",
+   "es": "Las ventanas de 5 horas y semanales se muestran tal como llegan; los créditos y límites de concurrencia nunca sustituyen la cuota del plan. La clave nunca se prueba en otra región.",
+   "fr": "Les fenêtres de 5 heures et hebdomadaires sont affichées telles quelles ; crédits et limites de simultanéité ne remplacent jamais le quota. La clé n’est jamais essayée dans une autre région.",
+   "de": "5-Stunden- und Wochenfenster wie gemeldet; Credits und Parallelitätslimits ersetzen nie das Plankontingent. Der Schlüssel wird nie in einer anderen Region versucht.",
+   "pt-BR": "As janelas de 5 horas e semanais aparecem como informadas; créditos e limites de concorrência nunca substituem a cota do plano. A chave nunca é testada em outra região."
+  },
+  "AI Monitor · 交互预览（模拟数据）": {
+   "zh-Hant": "AI Monitor · 互動預覽（模擬資料）",
+   "en": "AI Monitor · Interactive preview (sample data)",
+   "ja": "AI Monitor · インタラクティブプレビュー（サンプルデータ）",
+   "ko": "AI Monitor · 대화형 미리 보기(샘플 데이터)",
+   "es": "AI Monitor · Vista previa interactiva (datos de ejemplo)",
+   "fr": "AI Monitor · Aperçu interactif (données d’exemple)",
+   "de": "AI Monitor · Interaktive Vorschau (Beispieldaten)",
+   "pt-BR": "AI Monitor · Prévia interativa (dados de exemplo)"
+  },
+  "API 额度池": {
+   "zh-Hant": "API 額度池",
+   "en": "API pool",
+   "ja": "API プール",
+   "ko": "API 풀",
+   "es": "Bolsa API",
+   "fr": "Réserve API",
+   "de": "API-Pool",
+   "pt-BR": "Reserva API"
+  },
+  "Antigravity 已运行，但尚未找到它的本机监听端口；请等待启动完成后刷新。": {
+   "zh-Hant": "Antigravity 已執行，但尚未找到它的本機監聽連接埠；請等待啟動完成後重新整理。",
+   "en": "Antigravity is running, but its local listening port was not found yet. Wait for startup to finish, then refresh.",
+   "ja": "Antigravity は起動していますが、ローカルの待ち受けポートがまだ見つかりません。起動完了後に更新してください。",
+   "ko": "Antigravity가 실행 중이지만 로컬 수신 포트를 아직 찾지 못했습니다. 시작이 끝난 뒤 새로 고치세요.",
+   "es": "Antigravity está en ejecución, pero aún no se encuentra su puerto local. Espera a que termine de iniciarse y actualiza.",
+   "fr": "Antigravity est lancé, mais son port local est introuvable pour l’instant. Attendez la fin du démarrage puis actualisez.",
+   "de": "Antigravity läuft, aber der lokale Port wurde noch nicht gefunden. Start abwarten, dann aktualisieren.",
+   "pt-BR": "O Antigravity está rodando, mas a porta local ainda não foi encontrada. Aguarde a inicialização e atualize."
+  },
+  "Antigravity 已运行，但本地服务的认证信息尚未就绪；请等待启动完成后刷新。": {
+   "zh-Hant": "Antigravity 已執行，但本機服務的認證資訊尚未就緒；請等待啟動完成後重新整理。",
+   "en": "Antigravity is running, but its local service credentials are not ready yet. Wait for startup to finish, then refresh.",
+   "ja": "Antigravity は起動していますが、ローカルサービスの認証情報がまだ準備できていません。起動完了後に更新してください。",
+   "ko": "Antigravity가 실행 중이지만 로컬 서비스 인증 정보가 아직 준비되지 않았습니다. 시작이 끝난 뒤 새로 고치세요.",
+   "es": "Antigravity está en ejecución, pero las credenciales de su servicio local aún no están listas. Espera a que termine de iniciarse y actualiza.",
+   "fr": "Antigravity est lancé, mais les identifiants de son service local ne sont pas encore prêts. Attendez la fin du démarrage puis actualisez.",
+   "de": "Antigravity läuft, aber die Zugangsdaten des lokalen Dienstes sind noch nicht bereit. Start abwarten, dann aktualisieren.",
+   "pt-BR": "O Antigravity está rodando, mas as credenciais do serviço local ainda não estão prontas. Aguarde a inicialização e atualize."
+  },
+  "Antigravity 本地额度接口暂时拒绝查询，请检查官方应用。": {
+   "zh-Hant": "Antigravity 本機額度介面暫時拒絕查詢，請檢查官方 App。",
+   "en": "Antigravity's local quota endpoint is refusing queries for now. Check the official app.",
+   "ja": "Antigravity のローカル利用枠エンドポイントが照会を一時的に拒否しています。公式アプリを確認してください。",
+   "ko": "Antigravity 로컬 한도 엔드포인트가 일시적으로 조회를 거부합니다. 공식 앱을 확인하세요.",
+   "es": "El endpoint local de cuotas de Antigravity rechaza consultas por ahora. Revisa la app oficial.",
+   "fr": "Le point d’accès local des quotas d’Antigravity refuse les requêtes pour l’instant. Vérifiez l’app officielle.",
+   "de": "Der lokale Kontingent-Endpunkt von Antigravity lehnt Abfragen derzeit ab. Offizielle App prüfen.",
+   "pt-BR": "O endpoint local de cotas do Antigravity está recusando consultas por ora. Verifique o app oficial."
+  },
+  "Auto 额度池": {
+   "zh-Hant": "Auto 額度池",
+   "en": "Auto pool",
+   "ja": "Auto プール",
+   "ko": "Auto 풀",
+   "es": "Bolsa Auto",
+   "fr": "Réserve Auto",
+   "de": "Auto-Pool",
+   "pt-BR": "Reserva Auto"
+  },
+  "BigModel 中国": {
+   "zh-Hant": "BigModel 中國",
+   "en": "BigModel China",
+   "ja": "BigModel 中国",
+   "ko": "BigModel 중국",
+   "es": "BigModel China",
+   "fr": "BigModel Chine",
+   "de": "BigModel China",
+   "pt-BR": "BigModel China"
+  },
+  "Claude 登录凭证可以无弹窗读取。额度查询仍遵守现有冷却时间。": {
+   "zh-Hant": "Claude 登入憑證可以無彈窗讀取。額度查詢仍遵守現有冷卻時間。",
+   "en": "The Claude sign-in can be read without prompts. Quota queries still respect the current cooldown.",
+   "ja": "Claude のログイン情報はダイアログなしで読み取れます。利用枠の照会は現在のクールダウンに従います。",
+   "ko": "Claude 로그인 자격 증명을 팝업 없이 읽을 수 있습니다. 한도 조회는 여전히 현재 대기 시간을 따릅니다.",
+   "es": "La sesión de Claude se puede leer sin avisos. Las consultas de cuota siguen respetando la pausa actual.",
+   "fr": "La connexion Claude peut être lue sans invite. Les requêtes de quota respectent toujours la pause en cours.",
+   "de": "Die Claude-Anmeldung ist ohne Rückfrage lesbar. Kontingentabfragen halten weiterhin die aktuelle Pause ein.",
+   "pt-BR": "O login do Claude pode ser lido sem avisos. As consultas de cota ainda respeitam a pausa atual."
+  },
+  "Claude 的登录凭证需要官方客户端续期。请运行 claude auth login 后刷新；不会反复弹出钥匙串请求。": {
+   "zh-Hant": "Claude 的登入憑證需要官方用戶端續期。請執行 claude auth login 後重新整理；不會反覆彈出鑰匙圈請求。",
+   "en": "The Claude sign-in needs renewal by the official client. Run claude auth login, then refresh; Keychain prompts are not repeated.",
+   "ja": "Claude のログイン情報は公式クライアントでの更新が必要です。claude auth login を実行してから更新してください。キーチェーンの確認を繰り返し表示することはありません。",
+   "ko": "Claude 로그인 자격 증명은 공식 클라이언트에서 갱신해야 합니다. claude auth login을 실행한 뒤 새로 고치세요. 키체인 요청을 반복해서 띄우지 않습니다.",
+   "es": "La sesión de Claude necesita que el cliente oficial la renueve. Ejecuta claude auth login y luego actualiza; no se repiten los avisos del Llavero.",
+   "fr": "La connexion Claude doit être renouvelée par le client officiel. Exécutez claude auth login puis actualisez ; les invites de trousseau ne se répètent pas.",
+   "de": "Die Claude-Anmeldung muss vom offiziellen Client erneuert werden. claude auth login ausführen, dann aktualisieren; Schlüsselbund-Rückfragen werden nicht wiederholt.",
+   "pt-BR": "O login do Claude precisa ser renovado pelo cliente oficial. Execute claude auth login e depois atualize; os avisos das Chaves não se repetem."
+  },
+  "Claude、Copilot、Cursor、MiniMax、ClinePass 至少 10 分钟，Kiro 至少 15 分钟，其余至少 5 分钟。手动刷新不绕过限流等待。": {
+   "zh-Hant": "Claude、Copilot、Cursor、MiniMax、ClinePass 至少 10 分鐘，Kiro 至少 15 分鐘，其餘至少 5 分鐘。手動重新整理不會略過限流等待。",
+   "en": "Claude, Copilot, Cursor, MiniMax and ClinePass wait at least 10 minutes, Kiro 15, all others 5. A manual refresh never skips a rate-limit wait.",
+   "ja": "Claude、Copilot、Cursor、MiniMax、ClinePass は最低10分、Kiro は15分、その他は5分です。手動更新でもレート制限の待ち時間は省略しません。",
+   "ko": "Claude, Copilot, Cursor, MiniMax, ClinePass는 최소 10분, Kiro는 15분, 나머지는 5분입니다. 수동 새로 고침도 속도 제한 대기를 건너뛰지 않습니다.",
+   "es": "Claude, Copilot, Cursor, MiniMax y ClinePass esperan al menos 10 minutos, Kiro 15 y los demás 5. Actualizar a mano nunca omite una espera por límite.",
+   "fr": "Claude, Copilot, Cursor, MiniMax et ClinePass attendent au moins 10 minutes, Kiro 15, les autres 5. Une actualisation manuelle ne contourne jamais une attente de limitation.",
+   "de": "Claude, Copilot, Cursor, MiniMax und ClinePass warten mindestens 10 Minuten, Kiro 15, alle anderen 5. Manuelles Aktualisieren umgeht keine Wartezeit.",
+   "pt-BR": "Claude, Copilot, Cursor, MiniMax e ClinePass esperam pelo menos 10 minutos, Kiro 15 e os demais 5. A atualização manual nunca ignora uma espera de limite."
+  },
+  "Cline 登录令牌已过期；打开 Cline 让官方客户端自行续期后再刷新。本应用不代为续期。": {
+   "zh-Hant": "Cline 登入權杖已過期；開啟 Cline 讓官方用戶端自行續期後再重新整理。本 App 不代為續期。",
+   "en": "The Cline sign-in token has expired. Open Cline so the official client renews it, then refresh. This app never renews it for you.",
+   "ja": "Cline のログイントークンの有効期限が切れました。Cline を開いて公式クライアントに更新させてから、更新してください。このアプリは代わりに更新しません。",
+   "ko": "Cline 로그인 토큰이 만료되었습니다. Cline을 열어 공식 클라이언트가 갱신하게 한 뒤 새로 고치세요. 이 앱은 대신 갱신하지 않습니다.",
+   "es": "El token de sesión de Cline caducó. Abre Cline para que el cliente oficial lo renueve y luego actualiza. Esta app nunca lo renueva por ti.",
+   "fr": "Le jeton de connexion Cline a expiré. Ouvrez Cline pour que le client officiel le renouvelle, puis actualisez. Cette app ne le renouvelle jamais à votre place.",
+   "de": "Das Cline-Anmeldetoken ist abgelaufen. Cline öffnen, damit der offizielle Client es erneuert, dann aktualisieren. Diese App erneuert es nie selbst.",
+   "pt-BR": "O token de login do Cline expirou. Abra o Cline para o cliente oficial renová-lo e depois atualize. Este app nunca o renova por você."
+  },
+  "Cline 登录凭证格式无效，请在 Cline 中重新登录。": {
+   "zh-Hant": "Cline 登入憑證格式無效，請在 Cline 中重新登入。",
+   "en": "The Cline sign-in credential is invalid. Sign in again in Cline.",
+   "ja": "Cline のログイン情報の形式が無効です。Cline で再度ログインしてください。",
+   "ko": "Cline 로그인 자격 증명 형식이 올바르지 않습니다. Cline에서 다시 로그인하세요.",
+   "es": "La credencial de sesión de Cline no es válida. Vuelve a iniciar sesión en Cline.",
+   "fr": "L’identifiant de connexion Cline n’est pas valide. Reconnectez-vous dans Cline.",
+   "de": "Die Cline-Anmeldedaten sind ungültig. In Cline erneut anmelden.",
+   "pt-BR": "A credencial de login do Cline é inválida. Entre de novo no Cline."
+  },
+  "Cline 账号登录": {
+   "zh-Hant": "Cline 帳號登入",
+   "en": "Cline account sign-in",
+   "ja": "Cline アカウントのログイン",
+   "ko": "Cline 계정 로그인",
+   "es": "Sesión de la cuenta de Cline",
+   "fr": "Connexion au compte Cline",
+   "de": "Cline-Kontoanmeldung",
+   "pt-BR": "Login da conta Cline"
+  },
+  "ClinePass 返回结构变化，未推算额度。": {
+   "zh-Hant": "ClinePass 回傳結構變更，未推算額度。",
+   "en": "ClinePass changed its response format; no quota was inferred.",
+   "ja": "ClinePass の応答形式が変わったため、利用枠は推定していません。",
+   "ko": "ClinePass 응답 구조가 바뀌어 한도를 추정하지 않았습니다.",
+   "es": "ClinePass cambió el formato de la respuesta; no se infirió ninguna cuota.",
+   "fr": "ClinePass a changé le format de réponse ; aucun quota déduit.",
+   "de": "ClinePass hat das Antwortformat geändert; kein Kontingent abgeleitet.",
+   "pt-BR": "O ClinePass mudou o formato da resposta; nenhuma cota foi inferida."
+  },
+  "Codex CLI 尚未登录，请运行 codex login。": {
+   "zh-Hant": "Codex CLI 尚未登入，請執行 codex login。",
+   "en": "Codex CLI is not signed in. Run codex login.",
+   "ja": "Codex CLI にログインしていません。codex login を実行してください。",
+   "ko": "Codex CLI에 로그인하지 않았습니다. codex login을 실행하세요.",
+   "es": "Codex CLI no tiene sesión iniciada. Ejecuta codex login.",
+   "fr": "Codex CLI n’est pas connectée. Exécutez codex login.",
+   "de": "Codex-CLI ist nicht angemeldet. codex login ausführen.",
+   "pt-BR": "A Codex CLI não está conectada. Execute codex login."
+  },
+  "Codex 初始化查询超时；未创建模型会话。": {
+   "zh-Hant": "Codex 初始化查詢逾時；未建立模型工作階段。",
+   "en": "Codex initialization timed out; no model session was created.",
+   "ja": "Codex の初期化がタイムアウトしました。モデルセッションは作成していません。",
+   "ko": "Codex 초기화 조회가 시간 초과되었습니다. 모델 세션은 만들지 않았습니다.",
+   "es": "Se agotó el tiempo al iniciar Codex; no se creó ninguna sesión de modelo.",
+   "fr": "Délai dépassé à l’initialisation de Codex ; aucune session de modèle créée.",
+   "de": "Zeitüberschreitung bei der Codex-Initialisierung; keine Modellsitzung erstellt.",
+   "pt-BR": "A inicialização do Codex expirou; nenhuma sessão de modelo foi criada."
+  },
+  "Codex 响应超出解析范围。": {
+   "zh-Hant": "Codex 回應超出解析範圍。",
+   "en": "The Codex response was too large to parse.",
+   "ja": "Codex の応答が解析できる範囲を超えています。",
+   "ko": "Codex 응답이 분석 가능한 범위를 넘었습니다.",
+   "es": "La respuesta de Codex es demasiado grande para analizarla.",
+   "fr": "La réponse de Codex est trop volumineuse pour être analysée.",
+   "de": "Die Codex-Antwort ist zu groß zum Auswerten.",
+   "pt-BR": "A resposta do Codex é grande demais para ser analisada."
+  },
+  "Codex 官方服务没有返回完整额度响应。": {
+   "zh-Hant": "Codex 官方服務沒有回傳完整額度回應。",
+   "en": "Codex's official service did not return a complete quota response.",
+   "ja": "Codex の公式サービスから完全な利用枠の応答がありませんでした。",
+   "ko": "Codex 공식 서비스가 완전한 한도 응답을 반환하지 않았습니다.",
+   "es": "El servicio oficial de Codex no devolvió una respuesta de cuota completa.",
+   "fr": "Le service officiel de Codex n’a pas renvoyé de réponse de quota complète.",
+   "de": "Der offizielle Codex-Dienst lieferte keine vollständige Kontingentantwort.",
+   "pt-BR": "O serviço oficial do Codex não retornou uma resposta de cota completa."
+  },
+  "Codex 官方额度服务提前退出，请检查 codex login 状态。": {
+   "zh-Hant": "Codex 官方額度服務提前結束，請檢查 codex login 狀態。",
+   "en": "Codex's official quota service exited early. Check your codex login status.",
+   "ja": "Codex の公式利用枠サービスが途中で終了しました。codex login の状態を確認してください。",
+   "ko": "Codex 공식 한도 서비스가 일찍 종료되었습니다. codex login 상태를 확인하세요.",
+   "es": "El servicio oficial de cuotas de Codex terminó antes de tiempo. Revisa el estado de codex login.",
+   "fr": "Le service officiel de quotas de Codex s’est arrêté trop tôt. Vérifiez l’état de codex login.",
+   "de": "Der offizielle Codex-Kontingentdienst wurde vorzeitig beendet. codex login prüfen.",
+   "pt-BR": "O serviço oficial de cotas do Codex encerrou cedo. Verifique o status do codex login."
+  },
+  "Codex 账号状态查询超时；未创建模型会话。": {
+   "zh-Hant": "Codex 帳號狀態查詢逾時；未建立模型工作階段。",
+   "en": "Codex account status query timed out; no model session was created.",
+   "ja": "Codex のアカウント状態の照会がタイムアウトしました。モデルセッションは作成していません。",
+   "ko": "Codex 계정 상태 조회가 시간 초과되었습니다. 모델 세션은 만들지 않았습니다.",
+   "es": "Se agotó el tiempo al consultar la cuenta de Codex; no se creó ninguna sesión de modelo.",
+   "fr": "Délai dépassé pour l’état du compte Codex ; aucune session de modèle créée.",
+   "de": "Zeitüberschreitung bei der Codex-Kontoabfrage; keine Modellsitzung erstellt.",
+   "pt-BR": "A consulta do status da conta do Codex expirou; nenhuma sessão de modelo foi criada."
+  },
+  "Codex 额度接口查询超时；未创建模型会话。": {
+   "zh-Hant": "Codex 額度介面查詢逾時；未建立模型工作階段。",
+   "en": "Codex quota query timed out; no model session was created.",
+   "ja": "Codex の利用枠の照会がタイムアウトしました。モデルセッションは作成していません。",
+   "ko": "Codex 한도 조회가 시간 초과되었습니다. 모델 세션은 만들지 않았습니다.",
+   "es": "Se agotó el tiempo al consultar la cuota de Codex; no se creó ninguna sesión de modelo.",
+   "fr": "Délai dépassé pour le quota Codex ; aucune session de modèle créée.",
+   "de": "Zeitüberschreitung bei der Codex-Kontingentabfrage; keine Modellsitzung erstellt.",
+   "pt-BR": "A consulta de cota do Codex expirou; nenhuma sessão de modelo foi criada."
+  },
+  "Copilot 返回无法识别的响应。": {
+   "zh-Hant": "Copilot 回傳無法辨識的回應。",
+   "en": "Copilot returned an unrecognized response.",
+   "ja": "Copilot から認識できない応答が返されました。",
+   "ko": "Copilot이 인식할 수 없는 응답을 반환했습니다.",
+   "es": "Copilot devolvió una respuesta no reconocida.",
+   "fr": "Copilot a renvoyé une réponse non reconnue.",
+   "de": "Copilot lieferte eine unbekannte Antwort.",
+   "pt-BR": "O Copilot retornou uma resposta não reconhecida."
+  },
+  "Copilot 额度接口": {
+   "zh-Hant": "Copilot 額度介面",
+   "en": "Copilot quota endpoint",
+   "ja": "Copilot の利用枠エンドポイント",
+   "ko": "Copilot 한도 엔드포인트",
+   "es": "endpoint de cuotas de Copilot",
+   "fr": "point d’accès des quotas Copilot",
+   "de": "Copilot-Kontingent-Endpunkt",
+   "pt-BR": "endpoint de cotas do Copilot"
+  },
+  "Cursor 应用登录": {
+   "zh-Hant": "Cursor App 登入",
+   "en": "Cursor app sign-in",
+   "ja": "Cursor アプリのログイン",
+   "ko": "Cursor 앱 로그인",
+   "es": "Sesión de la app Cursor",
+   "fr": "Connexion de l’app Cursor",
+   "de": "Cursor-App-Anmeldung",
+   "pt-BR": "Login do app Cursor"
+  },
+  "Cursor 登录凭证已过期或格式变化；请由官方应用完成续期。": {
+   "zh-Hant": "Cursor 登入憑證已過期或格式變更；請由官方 App 完成續期。",
+   "en": "The Cursor credential expired or changed format; let the official app renew it.",
+   "ja": "Cursor のログイン情報が期限切れか形式が変わりました。公式アプリで更新してください。",
+   "ko": "Cursor 로그인 자격 증명이 만료되었거나 형식이 바뀌었습니다. 공식 앱에서 갱신하세요.",
+   "es": "La credencial de Cursor caducó o cambió de formato; deja que la app oficial la renueve.",
+   "fr": "L’identifiant Cursor a expiré ou changé de format ; laissez l’app officielle le renouveler.",
+   "de": "Die Cursor-Zugangsdaten sind abgelaufen oder haben ein neues Format; die offizielle App soll sie erneuern.",
+   "pt-BR": "A credencial do Cursor expirou ou mudou de formato; deixe o app oficial renová-la."
+  },
+  "Cursor 登录状态不可用，请在 Cursor 应用重新登录。": {
+   "zh-Hant": "Cursor 登入狀態無法使用，請在 Cursor App 重新登入。",
+   "en": "The Cursor sign-in is not usable. Sign in again in the Cursor app.",
+   "ja": "Cursor のログイン状態を使用できません。Cursor アプリで再度ログインしてください。",
+   "ko": "Cursor 로그인 상태를 사용할 수 없습니다. Cursor 앱에서 다시 로그인하세요.",
+   "es": "La sesión de Cursor no es utilizable. Vuelve a iniciar sesión en la app Cursor.",
+   "fr": "La connexion Cursor est inutilisable. Reconnectez-vous dans l’app Cursor.",
+   "de": "Die Cursor-Anmeldung ist nicht nutzbar. In der Cursor-App erneut anmelden.",
+   "pt-BR": "O login do Cursor não está utilizável. Entre de novo no app Cursor."
+  },
+  "Extra Usage · 额外预算": {
+   "zh-Hant": "Extra Usage · 額外預算",
+   "en": "Extra Usage · extra budget",
+   "ja": "Extra Usage · 追加予算",
+   "ko": "Extra Usage · 추가 예산",
+   "es": "Extra Usage · presupuesto adicional",
+   "fr": "Extra Usage · budget supplémentaire",
+   "de": "Extra Usage · Zusatzbudget",
+   "pt-BR": "Extra Usage · orçamento extra"
+  },
+  "GLM 未授权套餐额度查询，请检查所选区域、API Key 与 Coding Plan 资格。": {
+   "zh-Hant": "GLM 未授權方案額度查詢，請檢查所選區域、API Key 與 Coding Plan 資格。",
+   "en": "GLM did not authorize the plan quota query. Check the selected region, API key and Coding Plan eligibility.",
+   "ja": "GLM がプランの利用枠の照会を許可しませんでした。選択した地域、API キー、Coding Plan の資格を確認してください。",
+   "ko": "GLM이 플랜 한도 조회를 허용하지 않았습니다. 선택한 지역, API 키, Coding Plan 자격을 확인하세요.",
+   "es": "GLM no autorizó la consulta de la cuota del plan. Revisa la región, la clave de API y la elegibilidad del Coding Plan.",
+   "fr": "GLM n’a pas autorisé la requête de quota. Vérifiez la région choisie, la clé API et l’éligibilité au Coding Plan.",
+   "de": "GLM hat die Kontingentabfrage nicht erlaubt. Region, API-Schlüssel und Berechtigung für den Coding Plan prüfen.",
+   "pt-BR": "O GLM não autorizou a consulta de cota do plano. Verifique a região, a chave de API e a elegibilidade ao Coding Plan."
+  },
+  "GLM 额度响应结构变化，未推算剩余百分比。": {
+   "zh-Hant": "GLM 額度回應結構變更，未推算剩餘百分比。",
+   "en": "The GLM quota response changed format; no remaining percentage was inferred.",
+   "ja": "GLM の利用枠の応答形式が変わったため、残りのパーセントは推定していません。",
+   "ko": "GLM 한도 응답 구조가 바뀌어 남은 비율을 추정하지 않았습니다.",
+   "es": "La respuesta de cuotas de GLM cambió de formato; no se infirió el porcentaje restante.",
+   "fr": "La réponse de quota GLM a changé de format ; aucun pourcentage restant déduit.",
+   "de": "Die GLM-Kontingentantwort hat ein neues Format; kein Restprozentsatz abgeleitet.",
+   "pt-BR": "A resposta de cotas do GLM mudou de formato; nenhuma porcentagem restante foi inferida."
+  },
+  "Gemini 与 Claude 分别显示（Claude 为本地显示别名）。菜单栏取实际五小时池的最低余量，不用月/周额度代替。": {
+   "zh-Hant": "Gemini 與 Claude 分別顯示（Claude 為本機顯示別名）。選單列取實際五小時池的最低餘量，不以月／週額度代替。",
+   "en": "Gemini and Claude are shown separately (Claude is a local display alias). The menu bar uses the lowest real five-hour pool, never a monthly or weekly quota instead.",
+   "ja": "Gemini と Claude は別々に表示します（Claude はローカルでの表示名）。メニューバーには実際の5時間プールの最小残量を使い、月間・週間の枠で代用しません。",
+   "ko": "Gemini와 Claude는 따로 표시됩니다(Claude는 로컬 표시 별칭). 메뉴 막대는 실제 5시간 풀의 최저 잔량을 사용하며 월간/주간 한도로 대체하지 않습니다.",
+   "es": "Gemini y Claude se muestran por separado (Claude es un alias local). La barra de menús usa la bolsa real de cinco horas más baja, nunca una cuota mensual o semanal.",
+   "fr": "Gemini et Claude sont affichés séparément (Claude est un alias local). La barre des menus utilise la plus basse réserve réelle de cinq heures, jamais un quota mensuel ou hebdomadaire.",
+   "de": "Gemini und Claude werden getrennt gezeigt (Claude ist ein lokaler Anzeigename). Die Menüleiste nutzt den niedrigsten echten Fünf-Stunden-Pool, nie ein Monats- oder Wochenkontingent.",
+   "pt-BR": "Gemini e Claude aparecem separados (Claude é um apelido local). A barra de menus usa a menor reserva real de cinco horas, nunca uma cota mensal ou semanal."
+  },
+  "GitHub 官方额度查询未完成，已安排稍后重试。": {
+   "zh-Hant": "GitHub 官方額度查詢未完成，已排定稍後重試。",
+   "en": "The official GitHub quota query did not finish; a retry is scheduled.",
+   "ja": "GitHub の公式利用枠の照会が完了しませんでした。後で再試行します。",
+   "ko": "GitHub 공식 한도 조회를 완료하지 못했습니다. 나중에 다시 시도하도록 예약했습니다.",
+   "es": "La consulta oficial de cuotas de GitHub no terminó; se programó un reintento.",
+   "fr": "La requête officielle de quota GitHub n’a pas abouti ; une nouvelle tentative est prévue.",
+   "de": "Die offizielle GitHub-Kontingentabfrage wurde nicht abgeschlossen; ein neuer Versuch ist geplant.",
+   "pt-BR": "A consulta oficial de cota do GitHub não terminou; uma nova tentativa foi agendada."
+  },
+  "Key 格式无效，不能包含空白或控制字符。": {
+   "zh-Hant": "Key 格式無效，不能包含空白或控制字元。",
+   "en": "Invalid key: it cannot contain spaces or control characters.",
+   "ja": "キーの形式が無効です。空白や制御文字は使えません。",
+   "ko": "키 형식이 올바르지 않습니다. 공백이나 제어 문자를 포함할 수 없습니다.",
+   "es": "Clave no válida: no puede contener espacios ni caracteres de control.",
+   "fr": "Clé non valide : elle ne peut contenir ni espaces ni caractères de contrôle.",
+   "de": "Ungültiger Schlüssel: keine Leer- oder Steuerzeichen erlaubt.",
+   "pt-BR": "Chave inválida: não pode conter espaços nem caracteres de controle."
+  },
+  "Kimi managed provider 使用替代地址；已阻止官方凭证转发。": {
+   "zh-Hant": "Kimi managed provider 使用替代位址；已阻止官方憑證轉送。",
+   "en": "The Kimi managed provider uses an alternate address; forwarding the official credential was blocked.",
+   "ja": "Kimi managed provider が代替アドレスを使っているため、公式の認証情報の転送をブロックしました。",
+   "ko": "Kimi managed provider가 대체 주소를 사용해 공식 자격 증명 전달을 차단했습니다.",
+   "es": "El managed provider de Kimi usa una dirección alternativa; se bloqueó el reenvío de la credencial oficial.",
+   "fr": "Le managed provider Kimi utilise une adresse alternative ; le transfert de l’identifiant officiel a été bloqué.",
+   "de": "Der Kimi managed provider nutzt eine Ersatzadresse; die Weitergabe der offiziellen Zugangsdaten wurde blockiert.",
+   "pt-BR": "O managed provider do Kimi usa um endereço alternativo; o encaminhamento da credencial oficial foi bloqueado."
+  },
+  "Kimi 官方客户端正在更新登录状态，本轮跳过刷新以避免冲突。": {
+   "zh-Hant": "Kimi 官方用戶端正在更新登入狀態，本輪略過重新整理以避免衝突。",
+   "en": "The official Kimi client is updating its sign-in; this round is skipped to avoid a conflict.",
+   "ja": "Kimi の公式クライアントがログイン状態を更新中のため、競合を避けて今回の更新をスキップしました。",
+   "ko": "Kimi 공식 클라이언트가 로그인 상태를 업데이트하는 중이라 충돌을 피하려고 이번 새로 고침을 건너뜁니다.",
+   "es": "El cliente oficial de Kimi está actualizando su sesión; se omite esta ronda para evitar conflictos.",
+   "fr": "Le client officiel Kimi met à jour sa connexion ; ce cycle est ignoré pour éviter un conflit.",
+   "de": "Der offizielle Kimi-Client aktualisiert gerade die Anmeldung; diese Runde wird übersprungen.",
+   "pt-BR": "O cliente oficial do Kimi está atualizando o login; esta rodada foi pulada para evitar conflito."
+  },
+  "Kimi 更新登录后仍被服务商拒绝；本轮不重复续期，请重新登录。": {
+   "zh-Hant": "Kimi 更新登入後仍被服務商拒絕；本輪不重複續期，請重新登入。",
+   "en": "Kimi still refused after the sign-in was renewed; no further renewal this round. Sign in again.",
+   "ja": "ログイン更新後も Kimi に拒否されました。今回はこれ以上更新しません。再度ログインしてください。",
+   "ko": "로그인을 갱신한 뒤에도 Kimi가 거부했습니다. 이번에는 다시 갱신하지 않으니 다시 로그인하세요.",
+   "es": "Kimi siguió rechazando tras renovar la sesión; no se vuelve a renovar en esta ronda. Inicia sesión de nuevo.",
+   "fr": "Kimi refuse toujours après le renouvellement ; pas de nouvel essai ce cycle. Reconnectez-vous.",
+   "de": "Kimi lehnt auch nach der Erneuerung ab; in dieser Runde keine weitere Erneuerung. Erneut anmelden.",
+   "pt-BR": "O Kimi continuou recusando após renovar o login; sem nova renovação nesta rodada. Entre de novo."
+  },
+  "Kimi 未返回可识别的套餐额度；没有以 100% 代替。": {
+   "zh-Hant": "Kimi 未回傳可辨識的方案額度；沒有以 100% 代替。",
+   "en": "Kimi returned no recognizable plan quota; 100% is not substituted.",
+   "ja": "Kimi から認識できるプランの枠が返されませんでした。100% で代用しません。",
+   "ko": "Kimi가 인식 가능한 플랜 한도를 반환하지 않았습니다. 100%로 대체하지 않습니다.",
+   "es": "Kimi no devolvió una cuota de plan reconocible; no se sustituye por 100 %.",
+   "fr": "Kimi n’a renvoyé aucun quota reconnaissable ; 100 % n’est pas utilisé à la place.",
+   "de": "Kimi lieferte kein erkennbares Plankontingent; es wird nicht durch 100 % ersetzt.",
+   "pt-BR": "O Kimi não retornou cota de plano reconhecível; 100% não é usado no lugar."
+  },
+  "Kimi 登录已过期且没有续期凭证，请重新登录。": {
+   "zh-Hant": "Kimi 登入已過期且沒有續期憑證，請重新登入。",
+   "en": "The Kimi sign-in expired and has no renewal credential. Sign in again.",
+   "ja": "Kimi のログインが期限切れで、更新用の認証情報がありません。再度ログインしてください。",
+   "ko": "Kimi 로그인이 만료되었고 갱신 자격 증명이 없습니다. 다시 로그인하세요.",
+   "es": "La sesión de Kimi caducó y no tiene credencial de renovación. Vuelve a iniciar sesión.",
+   "fr": "La connexion Kimi a expiré sans identifiant de renouvellement. Reconnectez-vous.",
+   "de": "Die Kimi-Anmeldung ist abgelaufen und hat keine Erneuerungsdaten. Erneut anmelden.",
+   "pt-BR": "O login do Kimi expirou e não tem credencial de renovação. Entre de novo."
+  },
+  "Kimi 登录锁已变化；未覆盖官方客户端的新凭证。": {
+   "zh-Hant": "Kimi 登入鎖已變更；未覆寫官方用戶端的新憑證。",
+   "en": "The Kimi sign-in lock changed; the official client's new credential was not overwritten.",
+   "ja": "Kimi のログインロックが変わりました。公式クライアントの新しい認証情報は上書きしていません。",
+   "ko": "Kimi 로그인 잠금이 바뀌었습니다. 공식 클라이언트의 새 자격 증명을 덮어쓰지 않았습니다.",
+   "es": "El bloqueo de sesión de Kimi cambió; no se sobrescribió la nueva credencial del cliente oficial.",
+   "fr": "Le verrou de connexion Kimi a changé ; le nouvel identifiant du client officiel n’a pas été écrasé.",
+   "de": "Die Kimi-Anmeldesperre hat sich geändert; die neuen Zugangsdaten des offiziellen Clients wurden nicht überschrieben.",
+   "pt-BR": "O bloqueio de login do Kimi mudou; a nova credencial do cliente oficial não foi sobrescrita."
+  },
+  "Kimi 的续期凭证已被服务商拒绝。已停止重复重试，请重新 kimi login。": {
+   "zh-Hant": "Kimi 的續期憑證已被服務商拒絕。已停止重複重試，請重新 kimi login。",
+   "en": "Kimi rejected the renewal credential. Retries have stopped; run kimi login again.",
+   "ja": "Kimi が更新用の認証情報を拒否しました。再試行を停止したので、kimi login をやり直してください。",
+   "ko": "Kimi가 갱신 자격 증명을 거부했습니다. 재시도를 중단했으니 kimi login을 다시 실행하세요.",
+   "es": "Kimi rechazó la credencial de renovación. Se detuvieron los reintentos; vuelve a ejecutar kimi login.",
+   "fr": "Kimi a refusé l’identifiant de renouvellement. Les tentatives sont arrêtées ; relancez kimi login.",
+   "de": "Kimi hat die Erneuerungsdaten abgelehnt. Wiederholungen gestoppt; kimi login erneut ausführen.",
+   "pt-BR": "O Kimi recusou a credencial de renovação. As tentativas pararam; execute kimi login de novo."
+  },
+  "Kimi 续期凭证已失效；已停止重复重试，需在官方 CLI 重新登录。": {
+   "zh-Hant": "Kimi 續期憑證已失效；已停止重複重試，需在官方 CLI 重新登入。",
+   "en": "The Kimi renewal credential is no longer valid. Retries have stopped; sign in again in the official CLI.",
+   "ja": "Kimi の更新用の認証情報が無効になりました。再試行を停止したので、公式 CLI で再度ログインしてください。",
+   "ko": "Kimi 갱신 자격 증명이 더 이상 유효하지 않습니다. 재시도를 중단했으니 공식 CLI에서 다시 로그인하세요.",
+   "es": "La credencial de renovación de Kimi ya no es válida. Se detuvieron los reintentos; vuelve a iniciar sesión en la CLI oficial.",
+   "fr": "L’identifiant de renouvellement Kimi n’est plus valide. Les tentatives sont arrêtées ; reconnectez-vous dans la CLI officielle.",
+   "de": "Die Kimi-Erneuerungsdaten sind ungültig. Wiederholungen gestoppt; in der offiziellen CLI erneut anmelden.",
+   "pt-BR": "A credencial de renovação do Kimi não é mais válida. As tentativas pararam; entre de novo na CLI oficial."
+  },
+  "Kimi 续期响应缺少必要字段，未改写原登录文件。": {
+   "zh-Hant": "Kimi 續期回應缺少必要欄位，未改寫原登入檔案。",
+   "en": "The Kimi renewal response lacked required fields; the original sign-in file was not rewritten.",
+   "ja": "Kimi の更新応答に必要な項目がなかったため、元のログインファイルは書き換えていません。",
+   "ko": "Kimi 갱신 응답에 필수 필드가 없어 원래 로그인 파일을 다시 쓰지 않았습니다.",
+   "es": "A la respuesta de renovación de Kimi le faltan campos; no se reescribió el archivo de sesión original.",
+   "fr": "La réponse de renouvellement Kimi manque de champs requis ; le fichier de connexion d’origine n’a pas été réécrit.",
+   "de": "Der Kimi-Erneuerungsantwort fehlen Pflichtfelder; die ursprüngliche Anmeldedatei wurde nicht überschrieben.",
+   "pt-BR": "Faltam campos na resposta de renovação do Kimi; o arquivo de login original não foi reescrito."
+  },
+  "Kiro CLI 查询未正常退出；未将不完整输出当作成功结果。": {
+   "zh-Hant": "Kiro CLI 查詢未正常結束；未將不完整輸出當作成功結果。",
+   "en": "The Kiro CLI query did not exit normally; incomplete output was not treated as success.",
+   "ja": "Kiro CLI の照会が正常に終了しませんでした。不完全な出力を成功として扱っていません。",
+   "ko": "Kiro CLI 조회가 정상적으로 끝나지 않았습니다. 불완전한 출력을 성공으로 처리하지 않았습니다.",
+   "es": "La consulta de Kiro CLI no terminó con normalidad; la salida incompleta no se tomó como éxito.",
+   "fr": "La requête Kiro CLI ne s’est pas terminée normalement ; la sortie incomplète n’est pas considérée comme un succès.",
+   "de": "Die Kiro-CLI-Abfrage endete nicht normal; unvollständige Ausgabe gilt nicht als Erfolg.",
+   "pt-BR": "A consulta da Kiro CLI não terminou normalmente; a saída incompleta não foi tratada como sucesso."
+  },
+  "Kiro 官方 CLI 本次未取得用量，请稍后重试。": {
+   "zh-Hant": "Kiro 官方 CLI 本次未取得用量，請稍後重試。",
+   "en": "The official Kiro CLI returned no usage this time. Try again later.",
+   "ja": "Kiro の公式 CLI から今回は使用量を取得できませんでした。後でもう一度お試しください。",
+   "ko": "Kiro 공식 CLI가 이번에는 사용량을 가져오지 못했습니다. 나중에 다시 시도하세요.",
+   "es": "La CLI oficial de Kiro no devolvió el uso esta vez. Inténtalo más tarde.",
+   "fr": "La CLI officielle Kiro n’a pas renvoyé l’utilisation cette fois. Réessayez plus tard.",
+   "de": "Die offizielle Kiro-CLI lieferte diesmal keine Nutzung. Später erneut versuchen.",
+   "pt-BR": "A CLI oficial do Kiro não retornou o uso desta vez. Tente mais tarde."
+  },
+  "Mac 唤醒后刷新": {
+   "zh-Hant": "Mac 喚醒後重新整理",
+   "en": "Refresh when the Mac wakes",
+   "ja": "Mac のスリープ解除後に更新",
+   "ko": "Mac이 깨어나면 새로 고침",
+   "es": "Actualizar al reactivar el Mac",
+   "fr": "Actualiser au réveil du Mac",
+   "de": "Nach dem Aufwachen des Mac aktualisieren",
+   "pt-BR": "Atualizar quando o Mac despertar"
+  },
+  "MiniMax Key 已保存；下次刷新仍遵守原有查询间隔。": {
+   "zh-Hant": "MiniMax Key 已儲存；下次重新整理仍遵守原有查詢間隔。",
+   "en": "MiniMax key saved; the next refresh still follows the usual query interval.",
+   "ja": "MiniMax のキーを保存しました。次回の更新も通常の照会間隔に従います。",
+   "ko": "MiniMax 키를 저장했습니다. 다음 새로 고침도 기존 조회 간격을 따릅니다.",
+   "es": "Clave de MiniMax guardada; la próxima actualización sigue respetando el intervalo habitual.",
+   "fr": "Clé MiniMax enregistrée ; la prochaine actualisation respecte toujours l’intervalle habituel.",
+   "de": "MiniMax-Schlüssel gesichert; die nächste Aktualisierung hält das übliche Intervall ein.",
+   "pt-BR": "Chave do MiniMax salva; a próxima atualização ainda segue o intervalo habitual."
+  },
+  "MiniMax Key 更新未完成（系统状态 {0}），请重试。": {
+   "zh-Hant": "MiniMax Key 更新未完成（系統狀態 {0}），請重試。",
+   "en": "The MiniMax key update did not finish (system status {0}). Please try again.",
+   "ja": "MiniMax のキーを更新できませんでした（システム状態 {0}）。もう一度お試しください。",
+   "ko": "MiniMax 키 업데이트를 완료하지 못했습니다(시스템 상태 {0}). 다시 시도하세요.",
+   "es": "No se completó la actualización de la clave de MiniMax (estado del sistema {0}). Inténtalo de nuevo.",
+   "fr": "La mise à jour de la clé MiniMax n’a pas abouti (état système {0}). Réessayez.",
+   "de": "Die Aktualisierung des MiniMax-Schlüssels wurde nicht abgeschlossen (Systemstatus {0}). Bitte erneut versuchen.",
+   "pt-BR": "A atualização da chave do MiniMax não terminou (status do sistema {0}). Tente novamente."
+  },
+  "MiniMax Key 格式无效，请重新保存。": {
+   "zh-Hant": "MiniMax Key 格式無效，請重新儲存。",
+   "en": "The MiniMax key format is invalid. Save it again.",
+   "ja": "MiniMax のキーの形式が無効です。もう一度保存してください。",
+   "ko": "MiniMax 키 형식이 올바르지 않습니다. 다시 저장하세요.",
+   "es": "El formato de la clave de MiniMax no es válido. Vuelve a guardarla.",
+   "fr": "Le format de la clé MiniMax n’est pas valide. Enregistrez-la à nouveau.",
+   "de": "Das Format des MiniMax-Schlüssels ist ungültig. Erneut sichern.",
+   "pt-BR": "O formato da chave do MiniMax é inválido. Salve de novo."
+  },
+  "MiniMax 中国": {
+   "zh-Hant": "MiniMax 中國",
+   "en": "MiniMax China",
+   "ja": "MiniMax 中国",
+   "ko": "MiniMax 중국",
+   "es": "MiniMax China",
+   "fr": "MiniMax Chine",
+   "de": "MiniMax China",
+   "pt-BR": "MiniMax China"
+  },
+  "MiniMax 区域保存失败，未更改当前连接。": {
+   "zh-Hant": "MiniMax 區域儲存失敗，未變更目前連線。",
+   "en": "Could not save the MiniMax region; the current connection is unchanged.",
+   "ja": "MiniMax の地域を保存できませんでした。現在の接続は変更されていません。",
+   "ko": "MiniMax 지역을 저장하지 못했습니다. 현재 연결은 바뀌지 않았습니다.",
+   "es": "No se pudo guardar la región de MiniMax; la conexión actual no cambia.",
+   "fr": "Impossible d’enregistrer la région MiniMax ; la connexion actuelle est inchangée.",
+   "de": "MiniMax-Region konnte nicht gesichert werden; die aktuelle Verbindung bleibt unverändert.",
+   "pt-BR": "Não foi possível salvar a região do MiniMax; a conexão atual não mudou."
+  },
+  "MiniMax 区域配置无效，请在账号连接中重新选择。": {
+   "zh-Hant": "MiniMax 區域設定無效，請在帳號連線中重新選擇。",
+   "en": "The MiniMax region setting is invalid. Choose it again under Accounts.",
+   "ja": "MiniMax の地域設定が無効です。アカウント設定で選び直してください。",
+   "ko": "MiniMax 지역 설정이 올바르지 않습니다. 계정에서 다시 선택하세요.",
+   "es": "La región de MiniMax no es válida. Vuelve a elegirla en Cuentas.",
+   "fr": "La région MiniMax n’est pas valide. Choisissez-la à nouveau dans Comptes.",
+   "de": "Die MiniMax-Region ist ungültig. Unter Konten erneut wählen.",
+   "pt-BR": "A região do MiniMax é inválida. Escolha de novo em Contas."
+  },
+  "MiniMax 国际": {
+   "zh-Hant": "MiniMax 國際",
+   "en": "MiniMax International",
+   "ja": "MiniMax 国際",
+   "ko": "MiniMax 국제",
+   "es": "MiniMax Internacional",
+   "fr": "MiniMax International",
+   "de": "MiniMax International",
+   "pt-BR": "MiniMax Internacional"
+  },
+  "MiniMax 套餐查询暂不可用，请在官方平台检查。": {
+   "zh-Hant": "MiniMax 方案查詢暫時無法使用，請在官方平台檢查。",
+   "en": "MiniMax plan lookup is unavailable for now. Check the official platform.",
+   "ja": "MiniMax のプラン照会は現在利用できません。公式プラットフォームで確認してください。",
+   "ko": "MiniMax 플랜 조회를 일시적으로 사용할 수 없습니다. 공식 플랫폼에서 확인하세요.",
+   "es": "La consulta del plan de MiniMax no está disponible por ahora. Revisa la plataforma oficial.",
+   "fr": "La consultation du forfait MiniMax est indisponible pour l’instant. Vérifiez la plateforme officielle.",
+   "de": "Die MiniMax-Planabfrage ist derzeit nicht verfügbar. Offizielle Plattform prüfen.",
+   "pt-BR": "A consulta do plano MiniMax está indisponível por ora. Verifique a plataforma oficial."
+  },
+  "MiniMax 拒绝此订阅 Key；请核对区域与 Key 类型。": {
+   "zh-Hant": "MiniMax 拒絕此訂閱 Key；請核對區域與 Key 類型。",
+   "en": "MiniMax rejected this subscription key. Check the region and key type.",
+   "ja": "MiniMax がこのサブスクリプションキーを拒否しました。地域とキーの種類を確認してください。",
+   "ko": "MiniMax가 이 구독 키를 거부했습니다. 지역과 키 종류를 확인하세요.",
+   "es": "MiniMax rechazó esta clave de suscripción. Comprueba la región y el tipo de clave.",
+   "fr": "MiniMax a refusé cette clé d’abonnement. Vérifiez la région et le type de clé.",
+   "de": "MiniMax hat diesen Abo-Schlüssel abgelehnt. Region und Schlüsseltyp prüfen.",
+   "pt-BR": "O MiniMax recusou esta chave de assinatura. Verifique a região e o tipo de chave."
+  },
+  "MiniMax 返回结构变化，未推算额度。": {
+   "zh-Hant": "MiniMax 回傳結構變更，未推算額度。",
+   "en": "MiniMax changed its response format; no quota was inferred.",
+   "ja": "MiniMax の応答形式が変わったため、利用枠は推定していません。",
+   "ko": "MiniMax 응답 구조가 바뀌어 한도를 추정하지 않았습니다.",
+   "es": "MiniMax cambió el formato de la respuesta; no se infirió ninguna cuota.",
+   "fr": "MiniMax a changé le format de réponse ; aucun quota déduit.",
+   "de": "MiniMax hat das Antwortformat geändert; kein Kontingent abgeleitet.",
+   "pt-BR": "O MiniMax mudou o formato da resposta; nenhuma cota foi inferida."
+  },
+  "OpenCode Go 返回结构变化，未推算额度。": {
+   "zh-Hant": "OpenCode Go 回傳結構變更，未推算額度。",
+   "en": "OpenCode Go changed its response format; no quota was inferred.",
+   "ja": "OpenCode Go の応答形式が変わったため、利用枠は推定していません。",
+   "ko": "OpenCode Go 응답 구조가 바뀌어 한도를 추정하지 않았습니다.",
+   "es": "OpenCode Go cambió el formato de la respuesta; no se infirió ninguna cuota.",
+   "fr": "OpenCode Go a changé le format de réponse ; aucun quota déduit.",
+   "de": "OpenCode Go hat das Antwortformat geändert; kein Kontingent abgeleitet.",
+   "pt-BR": "O OpenCode Go mudou o formato da resposta; nenhuma cota foi inferida."
+  },
+  "OpenCode 保存的 Key": {
+   "zh-Hant": "OpenCode 儲存的 Key",
+   "en": "Key saved by OpenCode",
+   "ja": "OpenCode が保存したキー",
+   "ko": "OpenCode가 저장한 키",
+   "es": "Clave guardada por OpenCode",
+   "fr": "Clé enregistrée par OpenCode",
+   "de": "Von OpenCode gespeicherter Schlüssel",
+   "pt-BR": "Chave salva pelo OpenCode"
+  },
+  "OpenCode 保存的 Key 格式无效，请在 OpenCode 中重新运行 /connect。": {
+   "zh-Hant": "OpenCode 儲存的 Key 格式無效，請在 OpenCode 中重新執行 /connect。",
+   "en": "The key saved by OpenCode is invalid. Run /connect again in OpenCode.",
+   "ja": "OpenCode が保存したキーの形式が無効です。OpenCode で /connect を再実行してください。",
+   "ko": "OpenCode가 저장한 키 형식이 올바르지 않습니다. OpenCode에서 /connect를 다시 실행하세요.",
+   "es": "La clave guardada por OpenCode no es válida. Vuelve a ejecutar /connect en OpenCode.",
+   "fr": "La clé enregistrée par OpenCode n’est pas valide. Relancez /connect dans OpenCode.",
+   "de": "Der von OpenCode gespeicherte Schlüssel ist ungültig. /connect in OpenCode erneut ausführen.",
+   "pt-BR": "A chave salva pelo OpenCode é inválida. Execute /connect de novo no OpenCode."
+  },
+  "Session · 5 小时": {
+   "zh-Hant": "Session · 5 小時",
+   "en": "Session · 5 hours",
+   "ja": "Session · 5時間",
+   "ko": "Session · 5시간",
+   "es": "Session · 5 horas",
+   "fr": "Session · 5 heures",
+   "de": "Session · 5 Stunden",
+   "pt-BR": "Session · 5 horas"
+  },
+  "Token Plan 订阅 Key": {
+   "zh-Hant": "Token Plan 訂閱 Key",
+   "en": "Token Plan subscription key",
+   "ja": "Token Plan サブスクリプションキー",
+   "ko": "Token Plan 구독 키",
+   "es": "Clave de suscripción de Token Plan",
+   "fr": "Clé d’abonnement Token Plan",
+   "de": "Abo-Schlüssel für den Token Plan",
+   "pt-BR": "Chave de assinatura do Token Plan"
+  },
+  "Weekly · 每周": {
+   "zh-Hant": "Weekly · 每週",
+   "en": "Weekly · 7 days",
+   "ja": "Weekly · 毎週",
+   "ko": "Weekly · 매주",
+   "es": "Weekly · semanal",
+   "fr": "Weekly · hebdomadaire",
+   "de": "Weekly · wöchentlich",
+   "pt-BR": "Weekly · semanal"
+  },
+  "Windsurf 官方应用": {
+   "zh-Hant": "Windsurf 官方 App",
+   "en": "Official Windsurf app",
+   "ja": "Windsurf 公式アプリ",
+   "ko": "Windsurf 공식 앱",
+   "es": "App oficial de Windsurf",
+   "fr": "App officielle Windsurf",
+   "de": "Offizielle Windsurf-App",
+   "pt-BR": "App oficial do Windsurf"
+  },
+  "Windsurf 本地套餐缓存格式变化，未推算额度。": {
+   "zh-Hant": "Windsurf 本機方案快取格式變更，未推算額度。",
+   "en": "Windsurf's local plan cache changed format; no quota was inferred.",
+   "ja": "Windsurf のローカルのプランキャッシュの形式が変わったため、利用枠は推定していません。",
+   "ko": "Windsurf 로컬 플랜 캐시 형식이 바뀌어 한도를 추정하지 않았습니다.",
+   "es": "La caché local del plan de Windsurf cambió de formato; no se infirió ninguna cuota.",
+   "fr": "Le cache local du forfait Windsurf a changé de format ; aucun quota déduit.",
+   "de": "Der lokale Plan-Cache von Windsurf hat ein neues Format; kein Kontingent abgeleitet.",
+   "pt-BR": "O cache local do plano do Windsurf mudou de formato; nenhuma cota foi inferida."
+  },
+  "Z.ai 国际": {
+   "zh-Hant": "Z.ai 國際",
+   "en": "Z.ai International",
+   "ja": "Z.ai 国際",
+   "ko": "Z.ai 국제",
+   "es": "Z.ai Internacional",
+   "fr": "Z.ai International",
+   "de": "Z.ai International",
+   "pt-BR": "Z.ai Internacional"
+  },
+  "{0} 上限": {
+   "zh-Hant": "上限 {0}",
+   "en": "{0} cap",
+   "ja": "上限 {0}",
+   "ko": "한도 {0}",
+   "es": "Límite {0}",
+   "fr": "Plafond {0}",
+   "de": "Limit {0}",
+   "pt-BR": "Limite {0}"
+  },
+  "{0} 个套餐的剩余额度（Copilot 为每月）": {
+   "zh-Hant": "{0} 個方案的剩餘額度（Copilot 為每月）",
+   "en": "Remaining quota of {0} plans (Copilot is monthly)",
+   "ja": "{0} 件のプランの残り枠（Copilot は月間）",
+   "ko": "플랜 {0}개의 남은 한도(Copilot은 월간)",
+   "es": "Cuota restante de {0} planes (Copilot es mensual)",
+   "fr": "Quota restant de {0} forfaits (Copilot est mensuel)",
+   "de": "Restkontingent von {0} Plänen (Copilot monatlich)",
+   "pt-BR": "Cota restante de {0} planos (Copilot é mensal)"
+  },
+  "{0} 分钟窗口": {
+   "zh-Hant": "{0} 分鐘視窗",
+   "en": "{0}-minute window",
+   "ja": "{0}分間のウィンドウ",
+   "ko": "{0}분 창",
+   "es": "Ventana de {0} minutos",
+   "fr": "Fenêtre de {0} minutes",
+   "de": "{0}-Minuten-Fenster",
+   "pt-BR": "Janela de {0} minutos"
+  },
+  "{0} 剩余": {
+   "zh-Hant": "剩餘 {0}",
+   "en": "{0} left",
+   "ja": "残り {0}",
+   "ko": "{0} 남음",
+   "es": "Quedan {0}",
+   "fr": "{0} restant",
+   "de": "{0} übrig",
+   "pt-BR": "{0} restante"
+  },
+  "{0} 后重置": {
+   "zh-Hant": "{0} 後重設",
+   "en": "Resets in {0}",
+   "ja": "{0}後にリセット",
+   "ko": "{0} 후 초기화",
+   "es": "Se reinicia en {0}",
+   "fr": "Réinit. dans {0}",
+   "de": "Reset in {0}",
+   "pt-BR": "Renova em {0}"
+  },
+  "{0} 天窗口": {
+   "zh-Hant": "{0} 天視窗",
+   "en": "{0}-day window",
+   "ja": "{0}日間のウィンドウ",
+   "ko": "{0}일 창",
+   "es": "Ventana de {0} días",
+   "fr": "Fenêtre de {0} jours",
+   "de": "{0}-Tage-Fenster",
+   "pt-BR": "Janela de {0} dias"
+  },
+  "{0} 小时窗口": {
+   "zh-Hant": "{0} 小時視窗",
+   "en": "{0}-hour window",
+   "ja": "{0}時間のウィンドウ",
+   "ko": "{0}시간 창",
+   "es": "Ventana de {0} horas",
+   "fr": "Fenêtre de {0} heures",
+   "de": "{0}-Stunden-Fenster",
+   "pt-BR": "Janela de {0} horas"
+  },
+  "{0} 重置": {
+   "zh-Hant": "{0} 重設",
+   "en": "Resets {0}",
+   "ja": "{0} にリセット",
+   "ko": "{0} 초기화",
+   "es": "Se reinicia {0}",
+   "fr": "Réinit. {0}",
+   "de": "Reset {0}",
+   "pt-BR": "Renova {0}"
+  },
+  "{0}剩余": {
+   "zh-Hant": "{0}剩餘",
+   "en": "{0} left",
+   "ja": "{0}の残り",
+   "ko": "{0} 남음",
+   "es": "{0}: restante",
+   "fr": "{0} : restant",
+   "de": "{0} übrig",
+   "pt-BR": "{0}: restante"
+  },
+  "{0}多个池最低余量": {
+   "zh-Hant": "{0}多個池的最低餘量",
+   "en": "{0}: lowest of several pools",
+   "ja": "{0}：複数プールの最小残量",
+   "ko": "{0}: 여러 풀 중 최저 잔량",
+   "es": "{0}: la más baja de varias bolsas",
+   "fr": "{0} : plus bas de plusieurs réserves",
+   "de": "{0}: niedrigster mehrerer Pools",
+   "pt-BR": "{0}: menor de várias reservas"
+  },
+  "{0}（非实时）": {
+   "zh-Hant": "{0}（非即時）",
+   "en": "{0} (not live)",
+   "ja": "{0}（リアルタイムではありません）",
+   "ko": "{0} (실시간 아님)",
+   "es": "{0} (no en vivo)",
+   "fr": "{0} (pas en direct)",
+   "de": "{0} (nicht live)",
+   "pt-BR": "{0} (não em tempo real)"
+  },
+  "{0}，{1} 个套餐的剩余额度，按各平台实际窗口显示": {
+   "zh-Hant": "{0}，{1} 個方案的剩餘額度，依各平台實際視窗顯示",
+   "en": "{0}, remaining quota of {1} plans, shown in each provider's real windows",
+   "ja": "{0}、{1} 件のプランの残り枠（各サービスの実際のウィンドウで表示）",
+   "ko": "{0}, 플랜 {1}개의 남은 한도(각 서비스의 실제 창 기준)",
+   "es": "{0}, cuota restante de {1} planes según la ventana real de cada proveedor",
+   "fr": "{0}, quota restant de {1} forfaits selon la fenêtre réelle de chaque fournisseur",
+   "de": "{0}, Restkontingent von {1} Plänen im jeweiligen Anbieterfenster",
+   "pt-BR": "{0}, cota restante de {1} planos conforme a janela real de cada provedor"
+  },
+  "上次 {0}": {
+   "zh-Hant": "上次 {0}",
+   "en": "Last {0}",
+   "ja": "前回 {0}",
+   "ko": "마지막 {0}",
+   "es": "Último {0}",
+   "fr": "Dernier {0}",
+   "de": "Zuletzt {0}",
+   "pt-BR": "Último {0}"
+  },
+  "上次成功读数，非实时。": {
+   "zh-Hant": "上次成功讀數，非即時。",
+   "en": "Last successful reading, not live.",
+   "ja": "前回成功した値で、リアルタイムではありません。",
+   "ko": "마지막 성공 측정값이며 실시간이 아닙니다.",
+   "es": "Última lectura correcta, no en vivo.",
+   "fr": "Dernière valeur réussie, pas en direct.",
+   "de": "Letzter erfolgreicher Wert, nicht live.",
+   "pt-BR": "Última leitura bem-sucedida, não em tempo real."
+  },
+  "上次成功：{0}": {
+   "zh-Hant": "上次成功：{0}",
+   "en": "Last success: {0}",
+   "ja": "前回の成功：{0}",
+   "ko": "마지막 성공: {0}",
+   "es": "Último éxito: {0}",
+   "fr": "Dernier succès : {0}",
+   "de": "Zuletzt erfolgreich: {0}",
+   "pt-BR": "Último sucesso: {0}"
+  },
+  "上次读数": {
+   "zh-Hant": "上次讀數",
+   "en": "Last reading",
+   "ja": "前回の値",
+   "ko": "마지막 측정값",
+   "es": "Última lectura",
+   "fr": "Dernière valeur",
+   "de": "Letzter Wert",
+   "pt-BR": "Última leitura"
+  },
+  "上移": {
+   "zh-Hant": "上移",
+   "en": "Move up",
+   "ja": "上へ移動",
+   "ko": "위로 이동",
+   "es": "Subir",
+   "fr": "Monter",
+   "de": "Nach oben",
+   "pt-BR": "Mover para cima"
+  },
+  "上移 {0}": {
+   "zh-Hant": "上移 {0}",
+   "en": "Move {0} up",
+   "ja": "{0} を上へ",
+   "ko": "{0} 위로 이동",
+   "es": "Subir {0}",
+   "fr": "Monter {0}",
+   "de": "{0} nach oben",
+   "pt-BR": "Mover {0} para cima"
+  },
+  "下次可查询 {0}": {
+   "zh-Hant": "下次可查詢 {0}",
+   "en": "Next check {0}",
+   "ja": "次回の確認 {0}",
+   "ko": "다음 조회 {0}",
+   "es": "Próxima consulta {0}",
+   "fr": "Prochaine vérification {0}",
+   "de": "Nächste Prüfung {0}",
+   "pt-BR": "Próxima consulta {0}"
+  },
+  "下移": {
+   "zh-Hant": "下移",
+   "en": "Move down",
+   "ja": "下へ移動",
+   "ko": "아래로 이동",
+   "es": "Bajar",
+   "fr": "Descendre",
+   "de": "Nach unten",
+   "pt-BR": "Mover para baixo"
+  },
+  "下移 {0}": {
+   "zh-Hant": "下移 {0}",
+   "en": "Move {0} down",
+   "ja": "{0} を下へ",
+   "ko": "{0} 아래로 이동",
+   "es": "Bajar {0}",
+   "fr": "Descendre {0}",
+   "de": "{0} nach unten",
+   "pt-BR": "Mover {0} para baixo"
+  },
+  "不连接账号，不保存密钥，不改变正式设置。": {
+   "zh-Hant": "不連線帳號、不儲存金鑰，也不變更正式設定。",
+   "en": "No accounts are connected, no keys are saved and real settings are untouched.",
+   "ja": "アカウントに接続せず、キーを保存せず、実際の設定も変更しません。",
+   "ko": "계정을 연결하지 않고, 키를 저장하지 않으며, 실제 설정도 바꾸지 않습니다.",
+   "es": "No conecta cuentas, no guarda claves ni cambia los ajustes reales.",
+   "fr": "Aucun compte connecté, aucune clé enregistrée, aucun réglage réel modifié.",
+   "de": "Keine Konten verbunden, keine Schlüssel gespeichert, echte Einstellungen unverändert.",
+   "pt-BR": "Nenhuma conta conectada, nenhuma chave salva e nenhum ajuste real alterado."
+  },
+  "不限量": {
+   "zh-Hant": "不限量",
+   "en": "Unlimited",
+   "ja": "無制限",
+   "ko": "무제한",
+   "es": "Ilimitado",
+   "fr": "Illimité",
+   "de": "Unbegrenzt",
+   "pt-BR": "Ilimitado"
+  },
+  "不限量项目": {
+   "zh-Hant": "不限量項目",
+   "en": "Unlimited items",
+   "ja": "無制限の項目",
+   "ko": "무제한 항목",
+   "es": "Elementos ilimitados",
+   "fr": "Éléments illimités",
+   "de": "Unbegrenzte Einträge",
+   "pt-BR": "Itens ilimitados"
+  },
+  "个人": {
+   "zh-Hant": "個人",
+   "en": "Individual",
+   "ja": "個人",
+   "ko": "개인",
+   "es": "Individual",
+   "fr": "Individuel",
+   "de": "Einzelperson",
+   "pt-BR": "Individual"
+  },
+  "中国": {
+   "zh-Hant": "中國",
+   "en": "China",
+   "ja": "中国",
+   "ko": "중국",
+   "es": "China",
+   "fr": "Chine",
+   "de": "China",
+   "pt-BR": "China"
+  },
+  "中国 BigModel": {
+   "zh-Hant": "中國 BigModel",
+   "en": "China (BigModel)",
+   "ja": "中国 BigModel",
+   "ko": "중국 BigModel",
+   "es": "China (BigModel)",
+   "fr": "Chine (BigModel)",
+   "de": "China (BigModel)",
+   "pt-BR": "China (BigModel)"
+  },
+  "交互预览 · 合成数据，不是实际账号": {
+   "zh-Hant": "互動預覽 · 合成資料，不是實際帳號",
+   "en": "Interactive preview · synthetic data, not a real account",
+   "ja": "インタラクティブプレビュー · 合成データ（実際のアカウントではありません）",
+   "ko": "대화형 미리 보기 · 합성 데이터, 실제 계정 아님",
+   "es": "Vista previa interactiva · datos sintéticos, no una cuenta real",
+   "fr": "Aperçu interactif · données fictives, pas un vrai compte",
+   "de": "Interaktive Vorschau · synthetische Daten, kein echtes Konto",
+   "pt-BR": "Prévia interativa · dados sintéticos, não é uma conta real"
+  },
+  "交互预览 · 模拟数据": {
+   "zh-Hant": "互動預覽 · 模擬資料",
+   "en": "Interactive preview · sample data",
+   "ja": "インタラクティブプレビュー · サンプルデータ",
+   "ko": "대화형 미리 보기 · 샘플 데이터",
+   "es": "Vista previa interactiva · datos de ejemplo",
+   "fr": "Aperçu interactif · données d’exemple",
+   "de": "Interaktive Vorschau · Beispieldaten",
+   "pt-BR": "Prévia interativa · dados de exemplo"
+  },
+  "交互预览不执行账号连接、系统设置或真实数据操作。": {
+   "zh-Hant": "互動預覽不執行帳號連線、系統設定或真實資料操作。",
+   "en": "The interactive preview does not connect accounts, change system settings or touch real data.",
+   "ja": "インタラクティブプレビューでは、アカウント接続、システム設定、実データの操作は行いません。",
+   "ko": "대화형 미리 보기는 계정 연결, 시스템 설정, 실제 데이터 작업을 하지 않습니다.",
+   "es": "La vista previa interactiva no conecta cuentas, no cambia ajustes del sistema ni toca datos reales.",
+   "fr": "L’aperçu interactif ne connecte aucun compte, ne modifie pas le système et ne touche à aucune donnée réelle.",
+   "de": "Die interaktive Vorschau verbindet keine Konten, ändert keine Systemeinstellungen und keine echten Daten.",
+   "pt-BR": "A prévia interativa não conecta contas, não altera ajustes do sistema nem mexe em dados reais."
+  },
+  "交互预览不访问正式数据目录。": {
+   "zh-Hant": "互動預覽不存取正式資料目錄。",
+   "en": "The interactive preview does not access the real data folder.",
+   "ja": "インタラクティブプレビューでは実際のデータフォルダにアクセスしません。",
+   "ko": "대화형 미리 보기는 실제 데이터 폴더에 접근하지 않습니다.",
+   "es": "La vista previa interactiva no accede a la carpeta de datos real.",
+   "fr": "L’aperçu interactif n’accède pas au vrai dossier de données.",
+   "de": "Die interaktive Vorschau greift nicht auf den echten Datenordner zu.",
+   "pt-BR": "A prévia interativa não acessa a pasta de dados real."
+  },
+  "仅为官方应用缓存。时间是状态文件修改时间，不是额度实测时间；打开 Windsurf 后才可能更新。": {
+   "zh-Hant": "僅為官方 App 快取。時間是狀態檔修改時間，不是額度實測時間；開啟 Windsurf 後才可能更新。",
+   "en": "Official app cache only. The time is when the state file changed, not when quota was measured; it may update only after Windsurf is opened.",
+   "ja": "公式アプリのキャッシュのみです。時刻は状態ファイルの更新時刻で、利用枠の計測時刻ではありません。Windsurf を開くまで更新されない場合があります。",
+   "ko": "공식 앱 캐시일 뿐입니다. 시각은 상태 파일 수정 시각이며 한도 측정 시각이 아닙니다. Windsurf를 열어야 업데이트될 수 있습니다.",
+   "es": "Solo es la caché de la app oficial. La hora es la de modificación del archivo de estado, no la de medición; puede que solo se actualice al abrir Windsurf.",
+   "fr": "Cache de l’app officielle uniquement. L’heure est celle de modification du fichier d’état, pas de la mesure ; la mise à jour peut nécessiter d’ouvrir Windsurf.",
+   "de": "Nur Cache der offiziellen App. Die Zeit ist die Änderungszeit der Statusdatei, nicht der Messzeitpunkt; aktualisiert sich evtl. erst nach dem Öffnen von Windsurf.",
+   "pt-BR": "Apenas o cache do app oficial. O horário é o da alteração do arquivo de estado, não o da medição; pode só atualizar depois de abrir o Windsurf."
+  },
+  "仅为模拟缓存，非实时读数。": {
+   "zh-Hant": "僅為模擬快取，非即時讀數。",
+   "en": "Simulated cache only, not a live reading.",
+   "ja": "模擬キャッシュのみで、リアルタイムの値ではありません。",
+   "ko": "모의 캐시일 뿐이며 실시간 측정값이 아닙니다.",
+   "es": "Solo es una caché simulada, no una lectura en vivo.",
+   "fr": "Cache simulé uniquement, pas une valeur en direct.",
+   "de": "Nur simulierter Cache, kein Live-Wert.",
+   "pt-BR": "Apenas cache simulado, não é leitura em tempo real."
+  },
+  "仅在你启用后读取对应官方客户端或已保存的订阅凭据，不自动改变系统权限。缓存、估计与服务商实际窗口会分别标明。": {
+   "zh-Hant": "僅在你啟用後讀取對應官方用戶端或已儲存的訂閱憑證，不會自動變更系統權限。快取、估計與服務商實際視窗會分別標明。",
+   "en": "Only reads the official client or saved subscription credential of plans you enable, and never changes system permissions. Cached, estimated and live provider windows are labeled separately.",
+   "ja": "有効にしたプランについてのみ、公式クライアントまたは保存済みのサブスクリプション認証情報を読み取ります。システムの権限は変更しません。キャッシュ、推定、実際のウィンドウはそれぞれ明示します。",
+   "ko": "활성화한 플랜에 대해서만 공식 클라이언트 또는 저장된 구독 자격 증명을 읽으며 시스템 권한은 바꾸지 않습니다. 캐시, 추정값, 실제 창은 구분해 표시합니다.",
+   "es": "Solo lee el cliente oficial o la credencial guardada de los planes que actives y nunca cambia permisos del sistema. Las ventanas en caché, estimadas y reales se indican por separado.",
+   "fr": "Lit uniquement le client officiel ou l’identifiant enregistré des forfaits activés, sans modifier les autorisations système. Les fenêtres en cache, estimées et réelles sont signalées séparément.",
+   "de": "Liest nur den offiziellen Client oder gespeicherte Abo-Zugangsdaten aktivierter Pläne und ändert keine Systemberechtigungen. Zwischengespeicherte, geschätzte und echte Fenster werden getrennt gekennzeichnet.",
+   "pt-BR": "Lê apenas o cliente oficial ou a credencial salva dos planos ativados e nunca altera permissões do sistema. Janelas em cache, estimadas e reais são indicadas separadamente."
+  },
+  "仅移除当前区域的 MiniMax 订阅 Key？": {
+   "zh-Hant": "僅移除目前區域的 MiniMax 訂閱 Key？",
+   "en": "Remove only the MiniMax subscription key for this region?",
+   "ja": "現在の地域の MiniMax サブスクリプションキーのみ削除しますか？",
+   "ko": "현재 지역의 MiniMax 구독 키만 삭제할까요?",
+   "es": "¿Quitar solo la clave de suscripción de MiniMax de esta región?",
+   "fr": "Supprimer uniquement la clé d’abonnement MiniMax de cette région ?",
+   "de": "Nur den MiniMax-Abo-Schlüssel dieser Region entfernen?",
+   "pt-BR": "Remover só a chave de assinatura do MiniMax desta região?"
+  },
+  "低余量与参考线": {
+   "zh-Hant": "低餘量與參考線",
+   "en": "Low quota & pace marker",
+   "ja": "残量不足と目安線",
+   "ko": "부족 경고와 기준선",
+   "es": "Cuota baja y referencia",
+   "fr": "Quota faible et repère",
+   "de": "Niedriges Kontingent & Referenz",
+   "pt-BR": "Cota baixa e referência"
+  },
+  "使用上次成功读数，等待计划中的刷新。": {
+   "zh-Hant": "使用上次成功讀數，等待排定的重新整理。",
+   "en": "Showing the last successful reading until the scheduled refresh.",
+   "ja": "予定の更新まで前回成功した値を表示しています。",
+   "ko": "예약된 새로 고침까지 마지막 성공 측정값을 표시합니다.",
+   "es": "Se muestra la última lectura correcta hasta la actualización programada.",
+   "fr": "Dernière valeur réussie affichée jusqu’à l’actualisation prévue.",
+   "de": "Letzter erfolgreicher Wert bis zur geplanten Aktualisierung.",
+   "pt-BR": "Mostrando a última leitura bem-sucedida até a atualização agendada."
+  },
+  "使用官方 Kimi CLI 登录；已有本机订阅 Key 保持可用。": {
+   "zh-Hant": "使用官方 Kimi CLI 登入；本機既有的訂閱 Key 仍可使用。",
+   "en": "Uses the official Kimi CLI sign-in; an existing local subscription key keeps working.",
+   "ja": "公式の Kimi CLI のログインを使います。既存のサブスクリプションキーも引き続き使えます。",
+   "ko": "공식 Kimi CLI 로그인을 사용하며 기존 구독 키도 계속 사용할 수 있습니다.",
+   "es": "Usa el inicio de sesión de la CLI oficial de Kimi; una clave de suscripción local existente sigue funcionando.",
+   "fr": "Utilise la connexion de la CLI officielle Kimi ; une clé d’abonnement locale existante reste valable.",
+   "de": "Nutzt die Anmeldung der offiziellen Kimi-CLI; ein vorhandener lokaler Abo-Schlüssel funktioniert weiter.",
+   "pt-BR": "Usa o login da CLI oficial do Kimi; uma chave de assinatura local existente continua funcionando."
+  },
+  "使用本机已有套餐凭据或对应区域的环境变量；原独立 Key 配置块已移除。": {
+   "zh-Hant": "使用本機既有的方案憑證或對應區域的環境變數；原本獨立的 Key 設定區塊已移除。",
+   "en": "Uses an existing local plan credential or the environment variable for the region; the old separate key card has been removed.",
+   "ja": "このMacにある既存のプラン認証情報、または地域に対応する環境変数を使います。以前の個別キー設定欄は削除されました。",
+   "ko": "기존 로컬 플랜 자격 증명 또는 해당 지역의 환경 변수를 사용합니다. 예전의 별도 키 설정 카드는 제거되었습니다.",
+   "es": "Usa una credencial local existente del plan o la variable de entorno de la región; se quitó la antigua tarjeta de clave aparte.",
+   "fr": "Utilise un identifiant local existant ou la variable d’environnement de la région ; l’ancienne carte de clé séparée a été supprimée.",
+   "de": "Nutzt vorhandene lokale Plan-Zugangsdaten oder die Umgebungsvariable der Region; die frühere separate Schlüsselkarte wurde entfernt.",
+   "pt-BR": "Usa uma credencial local existente do plano ou a variável de ambiente da região; o antigo cartão de chave separado foi removido."
+  },
+  "保存到钥匙串": {
+   "zh-Hant": "儲存到鑰匙圈",
+   "en": "Save to Keychain",
+   "ja": "キーチェーンに保存",
+   "ko": "키체인에 저장",
+   "es": "Guardar en el Llavero",
+   "fr": "Enregistrer dans le trousseau",
+   "de": "Im Schlüsselbund sichern",
+   "pt-BR": "Salvar nas Chaves"
+  },
+  "倒计时": {
+   "zh-Hant": "倒數計時",
+   "en": "Countdown",
+   "ja": "カウントダウン",
+   "ko": "카운트다운",
+   "es": "Cuenta atrás",
+   "fr": "Compte à rebours",
+   "de": "Countdown",
+   "pt-BR": "Contagem regressiva"
+  },
+  "先在 Cline（VS Code 扩展或 CLI）登录 Cline 账号；只读取其登录状态，不代为续期。Cline 长时间未运行时令牌可能过期。": {
+   "zh-Hant": "先在 Cline（VS Code 擴充功能或 CLI）登入 Cline 帳號；只讀取其登入狀態，不代為續期。Cline 長時間未執行時權杖可能過期。",
+   "en": "Sign in to your Cline account in Cline (VS Code extension or CLI). Only its sign-in is read and never renewed here, so the token may expire if Cline has not run for a while.",
+   "ja": "Cline（VS Code 拡張機能または CLI）で Cline アカウントにログインしてください。ログイン状態を読み取るだけで、ここでは更新しません。Cline をしばらく起動していないとトークンが期限切れになることがあります。",
+   "ko": "Cline(VS Code 확장 또는 CLI)에서 Cline 계정에 로그인하세요. 로그인 상태만 읽고 여기서 갱신하지 않으므로 Cline을 한동안 실행하지 않으면 토큰이 만료될 수 있습니다.",
+   "es": "Inicia sesión con tu cuenta de Cline en Cline (extensión de VS Code o CLI). Solo se lee su sesión y nunca se renueva aquí, así que el token puede caducar si Cline lleva tiempo sin ejecutarse.",
+   "fr": "Connectez-vous à votre compte Cline dans Cline (extension VS Code ou CLI). Seule sa connexion est lue, jamais renouvelée ici : le jeton peut expirer si Cline n’a pas tourné depuis un moment.",
+   "de": "In Cline (VS-Code-Erweiterung oder CLI) beim Cline-Konto anmelden. Nur die Anmeldung wird gelesen und hier nie erneuert; das Token kann ablaufen, wenn Cline länger nicht lief.",
+   "pt-BR": "Entre na sua conta Cline no Cline (extensão do VS Code ou CLI). Só o login é lido e nunca renovado aqui, então o token pode expirar se o Cline ficar um tempo sem rodar."
+  },
+  "先在 Cursor 应用登录；仅提取其登录状态并查询官方月度额度，不读取浏览器 Cookie。": {
+   "zh-Hant": "先在 Cursor App 登入；僅擷取其登入狀態並查詢官方月度額度，不讀取瀏覽器 Cookie。",
+   "en": "Sign in to the Cursor app first. Only its sign-in state is used to read the official monthly quota; browser cookies are never read.",
+   "ja": "先に Cursor アプリでログインしてください。そのログイン状態のみを使って公式の月間枠を照会し、ブラウザの Cookie は読み取りません。",
+   "ko": "먼저 Cursor 앱에 로그인하세요. 그 로그인 상태만 사용해 공식 월간 한도를 조회하며 브라우저 쿠키는 읽지 않습니다.",
+   "es": "Inicia sesión primero en la app Cursor. Solo se usa su estado de sesión para leer la cuota mensual oficial; nunca se leen cookies del navegador.",
+   "fr": "Connectez-vous d’abord à l’app Cursor. Seul son état de connexion sert à lire le quota mensuel officiel ; les cookies du navigateur ne sont jamais lus.",
+   "de": "Zuerst in der Cursor-App anmelden. Nur deren Anmeldestatus wird für das offizielle Monatskontingent genutzt; Browser-Cookies werden nie gelesen.",
+   "pt-BR": "Entre primeiro no app Cursor. Só o estado de login dele é usado para ler a cota mensal oficial; cookies do navegador nunca são lidos."
+  },
+  "先在 OpenCode 运行 /connect 选择 OpenCode Go 并粘贴订阅 Key；只读取 OpenCode 保存的这把 Key 查询官方 Go 用量。": {
+   "zh-Hant": "先在 OpenCode 執行 /connect，選擇 OpenCode Go 並貼上訂閱 Key；只讀取 OpenCode 儲存的這把 Key 查詢官方 Go 用量。",
+   "en": "In OpenCode, run /connect, choose OpenCode Go and paste your subscription key. Only that key, as saved by OpenCode, is used to read official Go usage.",
+   "ja": "OpenCode で /connect を実行し、OpenCode Go を選んでサブスクリプションキーを貼り付けてください。OpenCode が保存したそのキーのみを使って公式の Go 使用量を照会します。",
+   "ko": "OpenCode에서 /connect를 실행해 OpenCode Go를 선택하고 구독 키를 붙여 넣으세요. OpenCode가 저장한 그 키만 사용해 공식 Go 사용량을 조회합니다.",
+   "es": "En OpenCode, ejecuta /connect, elige OpenCode Go y pega tu clave de suscripción. Solo se usa esa clave, guardada por OpenCode, para leer el uso oficial de Go.",
+   "fr": "Dans OpenCode, lancez /connect, choisissez OpenCode Go et collez votre clé d’abonnement. Seule cette clé, enregistrée par OpenCode, sert à lire l’utilisation officielle de Go.",
+   "de": "In OpenCode /connect ausführen, OpenCode Go wählen und den Abo-Schlüssel einfügen. Nur dieser von OpenCode gespeicherte Schlüssel wird für die offizielle Go-Nutzung verwendet.",
+   "pt-BR": "No OpenCode, execute /connect, escolha OpenCode Go e cole sua chave de assinatura. Só essa chave, salva pelo OpenCode, é usada para ler o uso oficial do Go."
+  },
+  "先运行 kiro-cli login；查询仅使用官方 /usage 命令。官方 CLI 可能自行续期登录。": {
+   "zh-Hant": "先執行 kiro-cli login；查詢僅使用官方 /usage 指令。官方 CLI 可能自行續期登入。",
+   "en": "Run kiro-cli login first. Queries use only the official /usage command; the official CLI may renew its own sign-in.",
+   "ja": "先に kiro-cli login を実行してください。照会には公式の /usage コマンドのみを使います。公式 CLI が自身のログインを更新する場合があります。",
+   "ko": "먼저 kiro-cli login을 실행하세요. 조회에는 공식 /usage 명령만 사용하며 공식 CLI가 자체적으로 로그인을 갱신할 수 있습니다.",
+   "es": "Ejecuta primero kiro-cli login. Las consultas solo usan el comando oficial /usage; la CLI oficial puede renovar su propia sesión.",
+   "fr": "Exécutez d’abord kiro-cli login. Les requêtes utilisent uniquement la commande officielle /usage ; la CLI officielle peut renouveler sa propre connexion.",
+   "de": "Zuerst kiro-cli login ausführen. Abfragen nutzen nur den offiziellen Befehl /usage; die offizielle CLI kann ihre Anmeldung selbst erneuern.",
+   "pt-BR": "Execute antes kiro-cli login. As consultas usam só o comando oficial /usage; a CLI oficial pode renovar o próprio login."
+  },
+  "全部套餐": {
+   "zh-Hant": "全部方案",
+   "en": "All plans",
+   "ja": "すべてのプラン",
+   "ko": "모든 플랜",
+   "es": "Todos los planes",
+   "fr": "Tous les forfaits",
+   "de": "Alle Pläne",
+   "pt-BR": "Todos os planos"
+  },
+  "全部模型": {
+   "zh-Hant": "全部模型",
+   "en": "all models",
+   "ja": "すべてのモデル",
+   "ko": "모든 모델",
+   "es": "todos los modelos",
+   "fr": "tous les modèles",
+   "de": "alle Modelle",
+   "pt-BR": "todos os modelos"
+  },
+  "公开版候选": {
+   "zh-Hant": "公開版候選",
+   "en": "public candidate",
+   "ja": "公開版候補",
+   "ko": "공개판 후보",
+   "es": "candidata pública",
+   "fr": "candidate publique",
+   "de": "öffentlicher Kandidat",
+   "pt-BR": "candidata pública"
+  },
+  "关闭面板": {
+   "zh-Hant": "關閉面板",
+   "en": "Close panel",
+   "ja": "パネルを閉じる",
+   "ko": "패널 닫기",
+   "es": "Cerrar panel",
+   "fr": "Fermer le panneau",
+   "de": "Bereich schließen",
+   "pt-BR": "Fechar painel"
+  },
+  "其他官方计费窗口": {
+   "zh-Hant": "其他官方計費視窗",
+   "en": "Other official billing windows",
+   "ja": "その他の公式課金ウィンドウ",
+   "ko": "기타 공식 과금 창",
+   "es": "Otras ventanas de facturación oficiales",
+   "fr": "Autres fenêtres de facturation officielles",
+   "de": "Weitere offizielle Abrechnungsfenster",
+   "pt-BR": "Outras janelas de cobrança oficiais"
+  },
+  "具体时间": {
+   "zh-Hant": "具體時間",
+   "en": "Exact time",
+   "ja": "日時",
+   "ko": "정확한 시각",
+   "es": "Hora exacta",
+   "fr": "Heure exacte",
+   "de": "Genaue Zeit",
+   "pt-BR": "Horário exato"
+  },
+  "刷新与启动": {
+   "zh-Hant": "重新整理與啟動",
+   "en": "Refresh & startup",
+   "ja": "更新と起動",
+   "ko": "새로 고침 및 시작",
+   "es": "Actualización e inicio",
+   "fr": "Actualisation et démarrage",
+   "de": "Aktualisierung & Start",
+   "pt-BR": "Atualização e inicialização"
+  },
+  "参考线不是耗尽预测。不会凭几个读数推算还可用多少 token。": {
+   "zh-Hant": "參考線不是耗盡預測。不會憑幾個讀數推算還可用多少 token。",
+   "en": "The marker is not a run-out forecast. Remaining tokens are never extrapolated from a few readings.",
+   "ja": "目安線は使い切りの予測ではありません。数回の値から残りのトークン数を推定することはありません。",
+   "ko": "기준선은 소진 예측이 아닙니다. 몇 번의 측정값으로 남은 token을 추정하지 않습니다.",
+   "es": "La referencia no es una previsión de agotamiento. No se estiman los tokens restantes a partir de unas pocas lecturas.",
+   "fr": "Le repère n’est pas une prévision d’épuisement. Les tokens restants ne sont jamais extrapolés à partir de quelques valeurs.",
+   "de": "Die Referenz ist keine Prognose. Verbleibende Tokens werden nie aus wenigen Werten hochgerechnet.",
+   "pt-BR": "A referência não é uma previsão de esgotamento. Tokens restantes nunca são estimados a partir de poucas leituras."
+  },
+  "变红阈值": {
+   "zh-Hant": "變紅門檻",
+   "en": "Turn red at",
+   "ja": "赤色にするしきい値",
+   "ko": "빨간색 표시 기준",
+   "es": "Rojo a partir de",
+   "fr": "Rouge à partir de",
+   "de": "Rot ab",
+   "pt-BR": "Vermelho a partir de"
+  },
+  "只显示 CLI 明确报告的本月套餐 Credits；不合并赠额、超额预算或上下文占用。不推测重置时区。": {
+   "zh-Hant": "只顯示 CLI 明確回報的本月方案 Credits；不合併贈額、超額預算或上下文佔用。不推測重設時區。",
+   "en": "Shows only the plan Credits the CLI explicitly reports for this month; bonus credits, overage budgets and context use are not merged. The reset time zone is not guessed.",
+   "ja": "CLI が明示した今月のプラン Credits のみを表示します。ボーナス、超過予算、コンテキスト使用量は合算しません。リセットのタイムゾーンも推測しません。",
+   "ko": "CLI가 명시적으로 보고한 이번 달 플랜 Credits만 표시합니다. 보너스, 초과 예산, 컨텍스트 사용량은 합치지 않으며 초기화 시간대도 추측하지 않습니다.",
+   "es": "Solo muestra los Credits del plan que la CLI informa para este mes; no suma bonificaciones, presupuestos de excedente ni uso de contexto. No se adivina la zona horaria del reinicio.",
+   "fr": "N’affiche que les Credits du forfait explicitement signalés par la CLI pour ce mois ; bonus, budgets de dépassement et contexte ne sont pas ajoutés. Le fuseau de réinitialisation n’est pas deviné.",
+   "de": "Zeigt nur die von der CLI ausdrücklich gemeldeten Plan-Credits dieses Monats; Bonus, Mehrverbrauchsbudget und Kontextnutzung werden nicht addiert. Die Zeitzone des Resets wird nicht geraten.",
+   "pt-BR": "Mostra só os Credits do plano que a CLI informa para este mês; bônus, orçamento excedente e uso de contexto não são somados. O fuso da renovação não é adivinhado."
+  },
+  "只查询 usage；不发送提示词，不运行模型来触发续期。": {
+   "zh-Hant": "只查詢 usage；不傳送提示詞，也不執行模型來觸發續期。",
+   "en": "Only usage is queried; no prompt is sent and no model is run to trigger renewal.",
+   "ja": "usage のみを照会します。プロンプトの送信や、更新のためのモデル実行は行いません。",
+   "ko": "usage만 조회합니다. 프롬프트를 보내거나 갱신을 위해 모델을 실행하지 않습니다.",
+   "es": "Solo se consulta usage; no se envía ningún prompt ni se ejecuta un modelo para forzar la renovación.",
+   "fr": "Seul usage est interrogé ; aucun prompt n’est envoyé ni aucun modèle lancé pour forcer le renouvellement.",
+   "de": "Nur usage wird abgefragt; kein Prompt, kein Modelllauf zur Erneuerung.",
+   "pt-BR": "Só usage é consultado; nenhum prompt é enviado nem modelo executado para forçar a renovação."
+  },
+  "只清除额度缓存？登录、Key 与限流等待时间保留。": {
+   "zh-Hant": "只清除額度快取？登入、Key 與限流等待時間保留。",
+   "en": "Clear only the quota cache? Sign-ins, keys and rate-limit waits are kept.",
+   "ja": "利用枠のキャッシュのみ消去しますか？ログイン、キー、レート制限の待ち時間は保持されます。",
+   "ko": "한도 캐시만 지울까요? 로그인, 키, 속도 제한 대기 시간은 유지됩니다.",
+   "es": "¿Borrar solo la caché de cuotas? Se conservan los inicios de sesión, las claves y las esperas por límite.",
+   "fr": "Effacer uniquement le cache des quotas ? Connexions, clés et délais de limitation sont conservés.",
+   "de": "Nur den Kontingent-Cache leeren? Anmeldungen, Schlüssel und Wartezeiten bleiben erhalten.",
+   "pt-BR": "Limpar só o cache de cotas? Logins, chaves e esperas de limite são mantidos."
+  },
+  "只用于查询订阅用量，不调用模型；不会把 Key 尝试发送到另一个区域。保存后仍需在套餐排序中启用 MiniMax。": {
+   "zh-Hant": "只用於查詢訂閱用量，不呼叫模型；不會把 Key 嘗試傳送到另一個區域。儲存後仍需在方案排序中啟用 MiniMax。",
+   "en": "Used only to read subscription usage, never to call a model, and never tried against the other region. After saving, still enable MiniMax under Plans.",
+   "ja": "サブスクリプションの使用量の照会のみに使い、モデルは呼び出しません。もう一方の地域にキーを送ることもありません。保存後、プラン画面で MiniMax を有効にしてください。",
+   "ko": "구독 사용량 조회에만 사용하며 모델을 호출하지 않고 다른 지역으로 키를 보내지 않습니다. 저장한 뒤 플랜 화면에서 MiniMax를 활성화하세요.",
+   "es": "Solo se usa para leer el uso de la suscripción, nunca para llamar a un modelo ni se prueba en la otra región. Tras guardarla, activa MiniMax en Planes.",
+   "fr": "Sert uniquement à lire l’utilisation de l’abonnement, jamais à appeler un modèle, et n’est jamais essayée sur l’autre région. Après l’enregistrement, activez MiniMax dans Forfaits.",
+   "de": "Nur zum Lesen der Abo-Nutzung, nie für Modellaufrufe und nie in der anderen Region versucht. Nach dem Sichern MiniMax unter Pläne aktivieren.",
+   "pt-BR": "Usada só para ler o uso da assinatura, nunca para chamar um modelo nem testada na outra região. Depois de salvar, ative o MiniMax em Planos."
+  },
+  "只读取 Windsurf 应用的套餐缓存，始终标为非实时；请先打开官方应用更新。": {
+   "zh-Hant": "只讀取 Windsurf App 的方案快取，一律標為非即時；請先開啟官方 App 更新。",
+   "en": "Reads only the Windsurf app's plan cache, always marked as not live. Open the official app first to update it.",
+   "ja": "Windsurf アプリのプランキャッシュのみを読み取り、常にリアルタイムではないと表示します。先に公式アプリを開いて更新してください。",
+   "ko": "Windsurf 앱의 플랜 캐시만 읽으며 항상 실시간 아님으로 표시합니다. 먼저 공식 앱을 열어 업데이트하세요.",
+   "es": "Solo lee la caché del plan de la app Windsurf, siempre marcada como no en vivo. Abre primero la app oficial para actualizarla.",
+   "fr": "Lit uniquement le cache du forfait de l’app Windsurf, toujours signalé comme différé. Ouvrez d’abord l’app officielle pour le mettre à jour.",
+   "de": "Liest nur den Plan-Cache der Windsurf-App, immer als nicht live markiert. Zuerst die offizielle App öffnen, um ihn zu aktualisieren.",
+   "pt-BR": "Lê só o cache do plano do app Windsurf, sempre marcado como não em tempo real. Abra antes o app oficial para atualizá-lo."
+  },
+  "只读取你已启用的套餐。没有可量化额度时不显示猜测值。": {
+   "zh-Hant": "只讀取你已啟用的方案。沒有可量化額度時不顯示猜測值。",
+   "en": "Only plans you enable are read. Without a measurable quota, no guess is shown.",
+   "ja": "有効にしたプランのみを読み取ります。数値化できる枠がない場合、推測値は表示しません。",
+   "ko": "활성화한 플랜만 읽습니다. 수치화할 수 있는 한도가 없으면 추정값을 표시하지 않습니다.",
+   "es": "Solo se leen los planes que actives. Sin una cuota medible no se muestra ninguna estimación.",
+   "fr": "Seuls les forfaits activés sont lus. Sans quota mesurable, aucune estimation n’est affichée.",
+   "de": "Nur aktivierte Pläne werden gelesen. Ohne messbares Kontingent wird nichts geschätzt.",
+   "pt-BR": "Só os planos ativados são lidos. Sem cota mensurável, nenhuma estimativa é exibida."
+  },
+  "各模型的独立额度": {
+   "zh-Hant": "各模型的獨立額度",
+   "en": "Per-model quotas",
+   "ja": "モデル別の利用枠",
+   "ko": "모델별 한도",
+   "es": "Cuotas por modelo",
+   "fr": "Quotas par modèle",
+   "de": "Kontingente pro Modell",
+   "pt-BR": "Cotas por modelo"
+  },
+  "启用 {0}": {
+   "zh-Hant": "啟用 {0}",
+   "en": "Enable {0}",
+   "ja": "{0} を有効化",
+   "ko": "{0} 사용",
+   "es": "Activar {0}",
+   "fr": "Activer {0}",
+   "de": "{0} aktivieren",
+   "pt-BR": "Ativar {0}"
+  },
+  "品牌、套餐名以及 Session、Weekly 等英文术语保持原样。": {
+   "zh-Hant": "品牌、方案名稱以及 Session、Weekly 等英文術語保持原樣。",
+   "en": "Brand and plan names and English terms such as Session and Weekly are kept as-is.",
+   "ja": "ブランド名、プラン名、Session や Weekly などの英語の用語はそのまま表示します。",
+   "ko": "브랜드, 플랜 이름과 Session, Weekly 같은 영어 용어는 그대로 표시합니다.",
+   "es": "Las marcas, los nombres de planes y términos en inglés como Session y Weekly se mantienen.",
+   "fr": "Les marques, noms de forfaits et termes anglais comme Session et Weekly restent inchangés.",
+   "de": "Marken- und Plannamen sowie englische Begriffe wie Session und Weekly bleiben unverändert.",
+   "pt-BR": "Marcas, nomes de planos e termos em inglês como Session e Weekly são mantidos."
+  },
+  "品牌色卡片与进度条": {
+   "zh-Hant": "品牌色卡片與進度條",
+   "en": "Brand-colored cards and bars",
+   "ja": "ブランドカラーのカードとバー",
+   "ko": "브랜드 색상 카드와 막대",
+   "es": "Tarjetas y barras con color de marca",
+   "fr": "Cartes et barres aux couleurs de la marque",
+   "de": "Karten und Balken in Markenfarben",
+   "pt-BR": "Cartões e barras com cor da marca"
+  },
+  "固定组件授权已验证；等待现有查询保护窗口结束。": {
+   "zh-Hant": "固定元件授權已驗證；等待現有查詢保護視窗結束。",
+   "en": "Access for the pinned helper is verified; waiting for the current query-protection window to end.",
+   "ja": "固定コンポーネントの許可を確認しました。現在の照会保護期間の終了を待っています。",
+   "ko": "고정 도우미의 권한을 확인했습니다. 현재 조회 보호 기간이 끝나기를 기다립니다.",
+   "es": "Acceso del asistente fijo verificado; esperando a que termine la ventana de protección actual.",
+   "fr": "Accès de l’assistant épinglé vérifié ; attente de la fin de la fenêtre de protection actuelle.",
+   "de": "Zugriff des fest eingebundenen Helfers geprüft; warte auf das Ende des aktuellen Schutzfensters.",
+   "pt-BR": "Acesso do auxiliar fixo verificado; aguardando o fim da janela de proteção atual."
+  },
+  "固定钥匙串组件未安装，请重新安装 Monitor。": {
+   "zh-Hant": "固定鑰匙圈元件未安裝，請重新安裝 Monitor。",
+   "en": "The pinned Keychain helper is not installed. Please reinstall Monitor.",
+   "ja": "固定のキーチェーン補助コンポーネントがインストールされていません。Monitor を再インストールしてください。",
+   "ko": "고정 키체인 도우미가 설치되지 않았습니다. Monitor를 다시 설치하세요.",
+   "es": "El asistente fijo del Llavero no está instalado. Reinstala Monitor.",
+   "fr": "L’assistant de trousseau épinglé n’est pas installé. Réinstallez Monitor.",
+   "de": "Der fest eingebundene Schlüsselbund-Helfer fehlt. Bitte Monitor neu installieren.",
+   "pt-BR": "O auxiliar fixo das Chaves não está instalado. Reinstale o Monitor."
+  },
+  "国际": {
+   "zh-Hant": "國際",
+   "en": "International",
+   "ja": "国際",
+   "ko": "국제",
+   "es": "Internacional",
+   "fr": "International",
+   "de": "International",
+   "pt-BR": "Internacional"
+  },
+  "国际 Z.ai": {
+   "zh-Hant": "國際 Z.ai",
+   "en": "International (Z.ai)",
+   "ja": "国際 Z.ai",
+   "ko": "국제 Z.ai",
+   "es": "Internacional (Z.ai)",
+   "fr": "International (Z.ai)",
+   "de": "International (Z.ai)",
+   "pt-BR": "Internacional (Z.ai)"
+  },
+  "在 Antigravity 登录后点击刷新。": {
+   "zh-Hant": "在 Antigravity 登入後按一下重新整理。",
+   "en": "Sign in to Antigravity, then click refresh.",
+   "ja": "Antigravity でログインしてから更新をクリックしてください。",
+   "ko": "Antigravity에 로그인한 뒤 새로 고침을 누르세요.",
+   "es": "Inicia sesión en Antigravity y luego pulsa actualizar.",
+   "fr": "Connectez-vous à Antigravity, puis cliquez sur actualiser.",
+   "de": "Bei Antigravity anmelden, dann auf Aktualisieren klicken.",
+   "pt-BR": "Entre no Antigravity e depois clique em atualizar."
+  },
+  "在列表中选择 OpenCode Go，并粘贴订阅 Key。": {
+   "zh-Hant": "在清單中選擇 OpenCode Go，並貼上訂閱 Key。",
+   "en": "Choose OpenCode Go in the list and paste your subscription key.",
+   "ja": "一覧から OpenCode Go を選び、サブスクリプションキーを貼り付けてください。",
+   "ko": "목록에서 OpenCode Go를 선택하고 구독 키를 붙여 넣으세요.",
+   "es": "Elige OpenCode Go en la lista y pega tu clave de suscripción.",
+   "fr": "Choisissez OpenCode Go dans la liste et collez votre clé d’abonnement.",
+   "de": "OpenCode Go in der Liste wählen und den Abo-Schlüssel einfügen.",
+   "pt-BR": "Escolha OpenCode Go na lista e cole sua chave de assinatura."
+  },
+  "在官方应用登录后刷新。": {
+   "zh-Hant": "在官方 App 登入後重新整理。",
+   "en": "Sign in to the official app, then refresh.",
+   "ja": "公式アプリでログインしてから更新してください。",
+   "ko": "공식 앱에 로그인한 뒤 새로 고치세요.",
+   "es": "Inicia sesión en la app oficial y luego actualiza.",
+   "fr": "Connectez-vous à l’app officielle, puis actualisez.",
+   "de": "In der offiziellen App anmelden, dann aktualisieren.",
+   "pt-BR": "Entre no app oficial e depois atualize."
+  },
+  "在账号连接中展开 MiniMax，选择区域并保存订阅 Key；不是普通按量计费 Key。": {
+   "zh-Hant": "在帳號連線中展開 MiniMax，選擇區域並儲存訂閱 Key；不是一般按量計費 Key。",
+   "en": "Expand MiniMax under Accounts, choose the region and save the subscription key. This is not a pay-as-you-go key.",
+   "ja": "アカウント設定で MiniMax を展開し、地域を選んでサブスクリプションキーを保存してください。従量課金のキーではありません。",
+   "ko": "계정에서 MiniMax를 펼쳐 지역을 선택하고 구독 키를 저장하세요. 종량제 키가 아닙니다.",
+   "es": "Despliega MiniMax en Cuentas, elige la región y guarda la clave de suscripción. No es una clave de pago por uso.",
+   "fr": "Développez MiniMax dans Comptes, choisissez la région et enregistrez la clé d’abonnement. Ce n’est pas une clé à l’usage.",
+   "de": "MiniMax unter Konten aufklappen, Region wählen und den Abo-Schlüssel sichern. Kein nutzungsbasierter Schlüssel.",
+   "pt-BR": "Expanda o MiniMax em Contas, escolha a região e salve a chave de assinatura. Não é uma chave por uso."
+  },
+  "外观": {
+   "zh-Hant": "外觀",
+   "en": "Appearance",
+   "ja": "外観",
+   "ko": "모양",
+   "es": "Apariencia",
+   "fr": "Apparence",
+   "de": "Darstellung",
+   "pt-BR": "Aparência"
+  },
+  "套餐": {
+   "zh-Hant": "方案",
+   "en": "Plan",
+   "ja": "プラン",
+   "ko": "플랜",
+   "es": "Plan",
+   "fr": "Forfait",
+   "de": "Plan",
+   "pt-BR": "Plano"
+  },
+  "套餐 Credits": {
+   "zh-Hant": "方案 Credits",
+   "en": "Plan Credits",
+   "ja": "プランの Credits",
+   "ko": "플랜 Credits",
+   "es": "Credits del plan",
+   "fr": "Credits du forfait",
+   "de": "Plan-Credits",
+   "pt-BR": "Credits do plano"
+  },
+  "套餐单位按服务商返回值计算；不是本地累计 token 的估算。": {
+   "zh-Hant": "方案單位依服務商回傳值計算；不是本機累計 token 的估算。",
+   "en": "Plan units come from the provider's response, not from a local token-count estimate.",
+   "ja": "プランの単位はサービス側の値で計算しており、ローカルで集計したトークン数の推定ではありません。",
+   "ko": "플랜 단위는 서비스가 반환한 값으로 계산하며 로컬 token 누적 추정이 아닙니다.",
+   "es": "Las unidades del plan vienen de la respuesta del proveedor, no de una estimación local de tokens.",
+   "fr": "Les unités du forfait proviennent de la réponse du fournisseur, pas d’une estimation locale des tokens.",
+   "de": "Planeinheiten stammen aus der Anbieterantwort, nicht aus einer lokalen Token-Schätzung.",
+   "pt-BR": "As unidades do plano vêm da resposta do provedor, não de uma estimativa local de tokens."
+  },
+  "套餐排序": {
+   "zh-Hant": "方案排序",
+   "en": "Plans",
+   "ja": "プラン",
+   "ko": "플랜",
+   "es": "Planes",
+   "fr": "Forfaits",
+   "de": "Pläne",
+   "pt-BR": "Planos"
+  },
+  "套餐窗口": {
+   "zh-Hant": "方案視窗",
+   "en": "Plan window",
+   "ja": "プランのウィンドウ",
+   "ko": "플랜 창",
+   "es": "Ventana del plan",
+   "fr": "Fenêtre du forfait",
+   "de": "Planfenster",
+   "pt-BR": "Janela do plano"
+  },
+  "安全刷新 · 冷却中的套餐不重复查询": {
+   "zh-Hant": "安全重新整理 · 冷卻中的方案不重複查詢",
+   "en": "Safe refresh · plans in cooldown are not queried again",
+   "ja": "安全な更新 · クールダウン中のプランは再照会しません",
+   "ko": "안전한 새로 고침 · 대기 중인 플랜은 다시 조회하지 않음",
+   "es": "Actualización segura · los planes en pausa no se consultan de nuevo",
+   "fr": "Actualisation sûre · les forfaits en pause ne sont pas réinterrogés",
+   "de": "Sichere Aktualisierung · pausierte Pläne werden nicht erneut abgefragt",
+   "pt-BR": "Atualização segura · planos em pausa não são consultados de novo"
+  },
+  "官方 CLI": {
+   "zh-Hant": "官方 CLI",
+   "en": "Official CLI",
+   "ja": "公式 CLI",
+   "ko": "공식 CLI",
+   "es": "CLI oficial",
+   "fr": "CLI officielle",
+   "de": "Offizielle CLI",
+   "pt-BR": "CLI oficial"
+  },
+  "官方 CLI 将此数据标为 Estimated Usage；仅显示其套餐计数，不将其视为最终账单。": {
+   "zh-Hant": "官方 CLI 將此資料標為 Estimated Usage；僅顯示其方案計數，不將其視為最終帳單。",
+   "en": "The official CLI labels this as Estimated Usage; only its plan counts are shown, and it is not treated as a final bill.",
+   "ja": "公式 CLI はこのデータを Estimated Usage としています。プランの数値のみを表示し、最終的な請求とは見なしません。",
+   "ko": "공식 CLI가 이 데이터를 Estimated Usage로 표시합니다. 플랜 수치만 표시하며 최종 청구로 보지 않습니다.",
+   "es": "La CLI oficial marca estos datos como Estimated Usage; solo se muestran sus recuentos del plan y no se tratan como factura final.",
+   "fr": "La CLI officielle les indique comme Estimated Usage ; seuls ses compteurs de forfait sont affichés, sans valeur de facture définitive.",
+   "de": "Die offizielle CLI kennzeichnet dies als Estimated Usage; nur die Planzähler werden gezeigt, keine Endabrechnung.",
+   "pt-BR": "A CLI oficial marca estes dados como Estimated Usage; só as contagens do plano são exibidas, sem valor de fatura final."
+  },
+  "官方 CLI 报告的估计用量，非最终账单。": {
+   "zh-Hant": "官方 CLI 回報的估計用量，非最終帳單。",
+   "en": "Estimated usage reported by the official CLI, not a final bill.",
+   "ja": "公式 CLI が報告した推定使用量で、最終的な請求ではありません。",
+   "ko": "공식 CLI가 보고한 추정 사용량이며 최종 청구가 아닙니다.",
+   "es": "Uso estimado informado por la CLI oficial, no una factura final.",
+   "fr": "Utilisation estimée signalée par la CLI officielle, pas une facture définitive.",
+   "de": "Von der offiziellen CLI geschätzte Nutzung, keine Endabrechnung.",
+   "pt-BR": "Uso estimado informado pela CLI oficial, não é a fatura final."
+  },
+  "官方 Go 用量接口": {
+   "zh-Hant": "官方 Go 用量介面",
+   "en": "official Go usage endpoint",
+   "ja": "公式の Go 使用量エンドポイント",
+   "ko": "공식 Go 사용량 엔드포인트",
+   "es": "endpoint oficial de uso de Go",
+   "fr": "point d’accès officiel d’utilisation Go",
+   "de": "offizieller Go-Nutzungsendpunkt",
+   "pt-BR": "endpoint oficial de uso do Go"
+  },
+  "官方 OAuth usage": {
+   "zh-Hant": "官方 OAuth usage",
+   "en": "Official OAuth usage",
+   "ja": "公式 OAuth usage",
+   "ko": "공식 OAuth usage",
+   "es": "OAuth usage oficial",
+   "fr": "OAuth usage officiel",
+   "de": "Offizielles OAuth usage",
+   "pt-BR": "OAuth usage oficial"
+  },
+  "官方 Token Plan 用量": {
+   "zh-Hant": "官方 Token Plan 用量",
+   "en": "official Token Plan usage",
+   "ja": "公式の Token Plan 使用量",
+   "ko": "공식 Token Plan 사용량",
+   "es": "uso oficial de Token Plan",
+   "fr": "utilisation officielle du Token Plan",
+   "de": "offizielle Nutzung des Token Plan",
+   "pt-BR": "uso oficial do Token Plan"
+  },
+  "官方 app-server": {
+   "zh-Hant": "官方 app-server",
+   "en": "Official app-server",
+   "ja": "公式 app-server",
+   "ko": "공식 app-server",
+   "es": "app-server oficial",
+   "fr": "app-server officiel",
+   "de": "Offizieller app-server",
+   "pt-BR": "app-server oficial"
+  },
+  "官方 kiro-cli /usage": {
+   "zh-Hant": "官方 kiro-cli /usage",
+   "en": "Official kiro-cli /usage",
+   "ja": "公式 kiro-cli /usage",
+   "ko": "공식 kiro-cli /usage",
+   "es": "kiro-cli /usage oficial",
+   "fr": "kiro-cli /usage officiel",
+   "de": "Offizielles kiro-cli /usage",
+   "pt-BR": "kiro-cli /usage oficial"
+  },
+  "官方 quota/limit": {
+   "zh-Hant": "官方 quota/limit",
+   "en": "official quota/limit",
+   "ja": "公式 quota/limit",
+   "ko": "공식 quota/limit",
+   "es": "quota/limit oficial",
+   "fr": "quota/limit officiel",
+   "de": "offizielles quota/limit",
+   "pt-BR": "quota/limit oficial"
+  },
+  "官方 usage-summary": {
+   "zh-Hant": "官方 usage-summary",
+   "en": "official usage-summary",
+   "ja": "公式 usage-summary",
+   "ko": "공식 usage-summary",
+   "es": "usage-summary oficial",
+   "fr": "usage-summary officiel",
+   "de": "offizielles usage-summary",
+   "pt-BR": "usage-summary oficial"
+  },
+  "官方 usages": {
+   "zh-Hant": "官方 usages",
+   "en": "official usages",
+   "ja": "公式 usages",
+   "ko": "공식 usages",
+   "es": "usages oficial",
+   "fr": "usages officiel",
+   "de": "offizielles usages",
+   "pt-BR": "usages oficial"
+  },
+  "官方估计": {
+   "zh-Hant": "官方估計",
+   "en": "official estimate",
+   "ja": "公式推定",
+   "ko": "공식 추정",
+   "es": "estimación oficial",
+   "fr": "estimation officielle",
+   "de": "offizielle Schätzung",
+   "pt-BR": "estimativa oficial"
+  },
+  "官方客户端尚未完成有效登录，请检查登录状态。": {
+   "zh-Hant": "官方用戶端尚未完成有效登入，請檢查登入狀態。",
+   "en": "The official client has not completed a valid sign-in. Check the sign-in status.",
+   "ja": "公式クライアントのログインが完了していません。ログイン状態を確認してください。",
+   "ko": "공식 클라이언트가 유효한 로그인을 완료하지 않았습니다. 로그인 상태를 확인하세요.",
+   "es": "El cliente oficial no ha completado un inicio de sesión válido. Revisa el estado de la sesión.",
+   "fr": "Le client officiel n’a pas terminé une connexion valide. Vérifiez l’état de connexion.",
+   "de": "Der offizielle Client hat keine gültige Anmeldung abgeschlossen. Anmeldestatus prüfen.",
+   "pt-BR": "O cliente oficial não concluiu um login válido. Verifique o status do login."
+  },
+  "官方客户端查询超时，已终止本次查询进程。": {
+   "zh-Hant": "官方用戶端查詢逾時，已終止本次查詢程序。",
+   "en": "The official client query timed out and was stopped.",
+   "ja": "公式クライアントの照会がタイムアウトしたため、照会プロセスを終了しました。",
+   "ko": "공식 클라이언트 조회가 시간 초과되어 이번 조회 프로세스를 종료했습니다.",
+   "es": "La consulta del cliente oficial agotó el tiempo y se detuvo.",
+   "fr": "La requête du client officiel a expiré et a été arrêtée.",
+   "de": "Die Abfrage des offiziellen Clients hat das Zeitlimit erreicht und wurde beendet.",
+   "pt-BR": "A consulta do cliente oficial expirou e foi interrompida."
+  },
+  "官方应用": {
+   "zh-Hant": "官方 App",
+   "en": "Official app",
+   "ja": "公式アプリ",
+   "ko": "공식 앱",
+   "es": "App oficial",
+   "fr": "App officielle",
+   "de": "Offizielle App",
+   "pt-BR": "App oficial"
+  },
+  "官方应用正在更新状态，请稍后重试。": {
+   "zh-Hant": "官方 App 正在更新狀態，請稍後重試。",
+   "en": "The official app is updating its state. Try again later.",
+   "ja": "公式アプリが状態を更新中です。後でもう一度お試しください。",
+   "ko": "공식 앱이 상태를 업데이트하는 중입니다. 나중에 다시 시도하세요.",
+   "es": "La app oficial está actualizando su estado. Inténtalo más tarde.",
+   "fr": "L’app officielle met à jour son état. Réessayez plus tard.",
+   "de": "Die offizielle App aktualisiert gerade ihren Status. Später erneut versuchen.",
+   "pt-BR": "O app oficial está atualizando o estado. Tente mais tarde."
+  },
+  "官方未提供可量化的套餐窗口；不以 100% 代替。": {
+   "zh-Hant": "官方未提供可量化的方案視窗；不以 100% 代替。",
+   "en": "No measurable plan window was reported; 100% is not substituted.",
+   "ja": "数値化できるプランのウィンドウが提供されていません。100% で代用しません。",
+   "ko": "수치화할 수 있는 플랜 창이 제공되지 않았습니다. 100%로 대체하지 않습니다.",
+   "es": "No se informó una ventana de plan medible; no se sustituye por 100 %.",
+   "fr": "Aucune fenêtre de forfait mesurable fournie ; 100 % n’est pas utilisé à la place.",
+   "de": "Kein messbares Planfenster gemeldet; es wird nicht durch 100 % ersetzt.",
+   "pt-BR": "Nenhuma janela de plano mensurável foi informada; 100% não é usado no lugar."
+  },
+  "官方用量": {
+   "zh-Hant": "官方用量",
+   "en": "Official usage",
+   "ja": "公式の使用量",
+   "ko": "공식 사용량",
+   "es": "Uso oficial",
+   "fr": "Utilisation officielle",
+   "de": "Offizielle Nutzung",
+   "pt-BR": "Uso oficial"
+  },
+  "官方用量 ↗": {
+   "zh-Hant": "官方用量 ↗",
+   "en": "Official usage ↗",
+   "ja": "公式の使用量 ↗",
+   "ko": "공식 사용량 ↗",
+   "es": "Uso oficial ↗",
+   "fr": "Utilisation officielle ↗",
+   "de": "Offizielle Nutzung ↗",
+   "pt-BR": "Uso oficial ↗"
+  },
+  "官方用量接口": {
+   "zh-Hant": "官方用量介面",
+   "en": "official usage endpoint",
+   "ja": "公式の使用量エンドポイント",
+   "ko": "공식 사용량 엔드포인트",
+   "es": "endpoint oficial de uso",
+   "fr": "point d’accès officiel d’utilisation",
+   "de": "offizieller Nutzungsendpunkt",
+   "pt-BR": "endpoint oficial de uso"
+  },
+  "官方额度查询暂时未完成，已安排稍后重试。": {
+   "zh-Hant": "官方額度查詢暫時未完成，已排定稍後重試。",
+   "en": "The official quota query has not finished yet; a retry is scheduled.",
+   "ja": "公式の利用枠の照会がまだ完了していません。後で再試行します。",
+   "ko": "공식 한도 조회가 아직 완료되지 않았습니다. 나중에 다시 시도하도록 예약했습니다.",
+   "es": "La consulta oficial de cuotas aún no ha terminado; se programó un reintento.",
+   "fr": "La requête officielle de quota n’a pas encore abouti ; une nouvelle tentative est prévue.",
+   "de": "Die offizielle Kontingentabfrage ist noch nicht abgeschlossen; ein neuer Versuch ist geplant.",
+   "pt-BR": "A consulta oficial de cota ainda não terminou; uma nova tentativa foi agendada."
+  },
+  "客户端输出超过安全解析范围。": {
+   "zh-Hant": "用戶端輸出超過安全解析範圍。",
+   "en": "The client output exceeded the safe parsing limit.",
+   "ja": "クライアントの出力が安全に解析できる範囲を超えています。",
+   "ko": "클라이언트 출력이 안전한 분석 범위를 넘었습니다.",
+   "es": "La salida del cliente superó el límite seguro de análisis.",
+   "fr": "La sortie du client dépasse la limite d’analyse sûre.",
+   "de": "Die Client-Ausgabe überschreitet die sichere Auswertungsgrenze.",
+   "pt-BR": "A saída do cliente excedeu o limite seguro de análise."
+  },
+  "导出失败。": {
+   "zh-Hant": "匯出失敗。",
+   "en": "Export failed.",
+   "ja": "書き出しに失敗しました。",
+   "ko": "내보내기에 실패했습니다.",
+   "es": "Error al exportar.",
+   "fr": "Échec de l’export.",
+   "de": "Export fehlgeschlagen.",
+   "pt-BR": "Falha ao exportar."
+  },
+  "导出脱敏诊断": {
+   "zh-Hant": "匯出去識別化診斷",
+   "en": "Export redacted diagnostics",
+   "ja": "匿名化した診断情報を書き出す",
+   "ko": "민감 정보를 제거한 진단 내보내기",
+   "es": "Exportar diagnóstico anonimizado",
+   "fr": "Exporter un diagnostic anonymisé",
+   "de": "Bereinigte Diagnose exportieren",
+   "pt-BR": "Exportar diagnóstico anonimizado"
+  },
+  "导出脱敏诊断…": {
+   "zh-Hant": "匯出去識別化診斷…",
+   "en": "Export redacted diagnostics…",
+   "ja": "匿名化した診断情報を書き出す…",
+   "ko": "민감 정보를 제거한 진단 내보내기…",
+   "es": "Exportar diagnóstico anonimizado…",
+   "fr": "Exporter un diagnostic anonymisé…",
+   "de": "Bereinigte Diagnose exportieren…",
+   "pt-BR": "Exportar diagnóstico anonimizado…"
+  },
+  "尚未启用套餐": {
+   "zh-Hant": "尚未啟用方案",
+   "en": "No plans enabled yet",
+   "ja": "有効なプランがまだありません",
+   "ko": "아직 활성화된 플랜 없음",
+   "es": "Aún no hay planes activados",
+   "fr": "Aucun forfait activé",
+   "de": "Noch keine Pläne aktiviert",
+   "pt-BR": "Nenhum plano ativado ainda"
+  },
+  "尚未启用套餐。": {
+   "zh-Hant": "尚未啟用方案。",
+   "en": "No plans enabled yet.",
+   "ja": "有効なプランがまだありません。",
+   "ko": "아직 활성화된 플랜이 없습니다.",
+   "es": "Aún no hay planes activados.",
+   "fr": "Aucun forfait activé.",
+   "de": "Noch keine Pläne aktiviert.",
+   "pt-BR": "Nenhum plano ativado ainda."
+  },
+  "尚未查询，启用套餐后刷新。": {
+   "zh-Hant": "尚未查詢，啟用方案後重新整理。",
+   "en": "Not queried yet. Enable the plan, then refresh.",
+   "ja": "まだ照会していません。プランを有効にしてから更新してください。",
+   "ko": "아직 조회하지 않았습니다. 플랜을 활성화한 뒤 새로 고치세요.",
+   "es": "Aún sin consultar. Activa el plan y actualiza.",
+   "fr": "Pas encore interrogé. Activez le forfait puis actualisez.",
+   "de": "Noch nicht abgefragt. Plan aktivieren und aktualisieren.",
+   "pt-BR": "Ainda não consultado. Ative o plano e atualize."
+  },
+  "尚未连接的套餐": {
+   "zh-Hant": "尚未連線的方案",
+   "en": "Plans not yet connected",
+   "ja": "未接続のプラン",
+   "ko": "아직 연결되지 않은 플랜",
+   "es": "Planes aún sin conectar",
+   "fr": "Forfaits pas encore connectés",
+   "de": "Noch nicht verbundene Pläne",
+   "pt-BR": "Planos ainda não conectados"
+  },
+  "尚未重新验证": {
+   "zh-Hant": "尚未重新驗證",
+   "en": "Not yet re-verified",
+   "ja": "まだ再確認されていません",
+   "ko": "아직 재확인되지 않음",
+   "es": "Aún sin volver a verificar",
+   "fr": "Pas encore revérifié",
+   "de": "Noch nicht erneut geprüft",
+   "pt-BR": "Ainda não reverificado"
+  },
+  "展开后选择中国/国际区域并保存 Token Plan 订阅 Key；不是普通按量计费 API Key。": {
+   "zh-Hant": "展開後選擇中國／國際區域並儲存 Token Plan 訂閱 Key；不是一般按量計費 API Key。",
+   "en": "Expand to choose the China or international region and save the Token Plan subscription key. This is not a pay-as-you-go API key.",
+   "ja": "展開して中国または国際の地域を選び、Token Plan のサブスクリプションキーを保存します。従量課金の API キーではありません。",
+   "ko": "펼쳐서 중국 또는 국제 지역을 선택하고 Token Plan 구독 키를 저장하세요. 종량제 API 키가 아닙니다.",
+   "es": "Despliega para elegir la región de China o internacional y guarda la clave de suscripción de Token Plan. No es una clave de API de pago por uso.",
+   "fr": "Développez pour choisir la région Chine ou internationale et enregistrez la clé d’abonnement Token Plan. Ce n’est pas une clé API à l’usage.",
+   "de": "Aufklappen, Region China oder International wählen und den Abo-Schlüssel für den Token Plan sichern. Kein nutzungsbasierter API-Schlüssel.",
+   "pt-BR": "Expanda para escolher a região China ou internacional e salve a chave de assinatura do Token Plan. Não é uma chave de API pré-paga por uso."
+  },
+  "已关闭": {
+   "zh-Hant": "已關閉",
+   "en": "Off",
+   "ja": "オフ",
+   "ko": "꺼짐",
+   "es": "Desactivado",
+   "fr": "Désactivé",
+   "de": "Aus",
+   "pt-BR": "Desativado"
+  },
+  "已发现 Antigravity 本地服务，但它没有返回可用配额；请在官方应用中打开额度页面后重试。": {
+   "zh-Hant": "已發現 Antigravity 本機服務，但它沒有回傳可用配額；請在官方 App 中開啟額度頁面後重試。",
+   "en": "Found Antigravity's local service, but it returned no usable quota. Open the quota page in the official app and try again.",
+   "ja": "Antigravity のローカルサービスは見つかりましたが、使える利用枠を返しませんでした。公式アプリで利用枠ページを開いてから再試行してください。",
+   "ko": "Antigravity 로컬 서비스를 찾았지만 사용 가능한 한도를 반환하지 않았습니다. 공식 앱에서 한도 페이지를 연 뒤 다시 시도하세요.",
+   "es": "Se encontró el servicio local de Antigravity, pero no devolvió una cuota utilizable. Abre la página de cuotas en la app oficial y reinténtalo.",
+   "fr": "Service local d’Antigravity trouvé, mais aucun quota exploitable renvoyé. Ouvrez la page des quotas dans l’app officielle puis réessayez.",
+   "de": "Lokaler Antigravity-Dienst gefunden, aber ohne nutzbares Kontingent. Kontingentseite in der offiziellen App öffnen und erneut versuchen.",
+   "pt-BR": "O serviço local do Antigravity foi encontrado, mas não retornou cota utilizável. Abra a página de cotas no app oficial e tente de novo."
+  },
+  "已安排下次查询；当前没有已验证的可用缓存。": {
+   "zh-Hant": "已排定下次查詢；目前沒有已驗證的可用快取。",
+   "en": "The next query is scheduled; there is no verified cache to show yet.",
+   "ja": "次の照会を予定しています。現在、確認済みのキャッシュはありません。",
+   "ko": "다음 조회가 예약되었습니다. 현재 확인된 캐시가 없습니다.",
+   "es": "La próxima consulta está programada; aún no hay una caché verificada.",
+   "fr": "La prochaine requête est planifiée ; aucun cache vérifié pour l’instant.",
+   "de": "Nächste Abfrage geplant; noch kein geprüfter Cache vorhanden.",
+   "pt-BR": "A próxima consulta está agendada; ainda não há cache verificado."
+  },
+  "已导出，不包含凭证。": {
+   "zh-Hant": "已匯出，不含憑證。",
+   "en": "Exported, without credentials.",
+   "ja": "書き出しました（認証情報は含みません）。",
+   "ko": "내보냈습니다. 자격 증명은 포함되지 않습니다.",
+   "es": "Exportado, sin credenciales.",
+   "fr": "Exporté, sans identifiants.",
+   "de": "Exportiert, ohne Zugangsdaten.",
+   "pt-BR": "Exportado, sem credenciais."
+  },
+  "已开启": {
+   "zh-Hant": "已開啟",
+   "en": "On",
+   "ja": "オン",
+   "ko": "켜짐",
+   "es": "Activado",
+   "fr": "Activé",
+   "de": "Ein",
+   "pt-BR": "Ativado"
+  },
+  "已恢复默认显示与排序，保留已启用账号和显示语言。": {
+   "zh-Hant": "已恢復預設顯示與排序，保留已啟用的帳號和顯示語言。",
+   "en": "Default display and order restored; enabled accounts and the display language are kept.",
+   "ja": "表示と並び順を既定に戻しました。有効なアカウントと表示言語はそのままです。",
+   "ko": "표시와 순서를 기본값으로 되돌렸습니다. 활성화된 계정과 표시 언어는 유지됩니다.",
+   "es": "Se restauraron la pantalla y el orden predeterminados; se conservan las cuentas activadas y el idioma.",
+   "fr": "Affichage et ordre par défaut restaurés ; comptes activés et langue conservés.",
+   "de": "Standardanzeige und -reihenfolge wiederhergestellt; aktivierte Konten und Sprache bleiben.",
+   "pt-BR": "Exibição e ordem padrão restauradas; contas ativadas e idioma são mantidos."
+  },
+  "已暂停查询，等待下次检查。": {
+   "zh-Hant": "已暫停查詢，等待下次檢查。",
+   "en": "Queries are paused until the next check.",
+   "ja": "照会を一時停止しています。次の確認を待っています。",
+   "ko": "조회를 일시 중지했습니다. 다음 확인을 기다립니다.",
+   "es": "Consultas en pausa hasta la próxima comprobación.",
+   "fr": "Requêtes en pause jusqu’à la prochaine vérification.",
+   "de": "Abfragen pausiert bis zur nächsten Prüfung.",
+   "pt-BR": "Consultas pausadas até a próxima verificação."
+  },
+  "已移除本区域 MiniMax Key。": {
+   "zh-Hant": "已移除本區域 MiniMax Key。",
+   "en": "Removed the MiniMax key for this region.",
+   "ja": "この地域の MiniMax キーを削除しました。",
+   "ko": "이 지역의 MiniMax 키를 삭제했습니다.",
+   "es": "Se quitó la clave de MiniMax de esta región.",
+   "fr": "Clé MiniMax de cette région supprimée.",
+   "de": "MiniMax-Schlüssel dieser Region entfernt.",
+   "pt-BR": "Chave do MiniMax desta região removida."
+  },
+  "已连接": {
+   "zh-Hant": "已連線",
+   "en": "Connected",
+   "ja": "接続済み",
+   "ko": "연결됨",
+   "es": "Conectado",
+   "fr": "Connecté",
+   "de": "Verbunden",
+   "pt-BR": "Conectado"
+  },
+  "已连接 Cline 账号，但响应中没有 ClinePass 套餐窗口。": {
+   "zh-Hant": "已連線 Cline 帳號，但回應中沒有 ClinePass 方案視窗。",
+   "en": "Cline account connected, but the response has no ClinePass plan windows.",
+   "ja": "Cline アカウントに接続しましたが、応答に ClinePass のプランウィンドウがありません。",
+   "ko": "Cline 계정에 연결했지만 응답에 ClinePass 플랜 창이 없습니다.",
+   "es": "Cuenta de Cline conectada, pero la respuesta no tiene ventanas del plan ClinePass.",
+   "fr": "Compte Cline connecté, mais la réponse ne contient aucune fenêtre de forfait ClinePass.",
+   "de": "Cline-Konto verbunden, aber die Antwort enthält keine ClinePass-Planfenster.",
+   "pt-BR": "Conta Cline conectada, mas a resposta não traz janelas do plano ClinePass."
+  },
+  "已连接 Cline 账号，但没有 ClinePass 订阅记录；按量 Credits 不是套餐额度。": {
+   "zh-Hant": "已連線 Cline 帳號，但沒有 ClinePass 訂閱記錄；按量 Credits 不是方案額度。",
+   "en": "Cline account connected, but there is no ClinePass subscription; pay-as-you-go Credits are not plan quota.",
+   "ja": "Cline アカウントに接続しましたが、ClinePass のサブスクリプション記録がありません。従量課金の Credits はプランの枠ではありません。",
+   "ko": "Cline 계정에 연결했지만 ClinePass 구독 기록이 없습니다. 종량제 Credits는 플랜 한도가 아닙니다.",
+   "es": "Cuenta de Cline conectada, pero sin suscripción a ClinePass; los Credits de pago por uso no son cuota del plan.",
+   "fr": "Compte Cline connecté, mais sans abonnement ClinePass ; les Credits à l’usage ne sont pas un quota de forfait.",
+   "de": "Cline-Konto verbunden, aber kein ClinePass-Abo; nutzungsbasierte Credits sind kein Plankontingent.",
+   "pt-BR": "Conta Cline conectada, mas sem assinatura do ClinePass; Credits por uso não são cota do plano."
+  },
+  "已连接 Cursor；官方套餐上限为 0，没有可计算的套餐剩余百分比。": {
+   "zh-Hant": "已連線 Cursor；官方方案上限為 0，沒有可計算的方案剩餘百分比。",
+   "en": "Cursor is connected; the official plan limit is 0, so there is no plan percentage to compute.",
+   "ja": "Cursor に接続しました。公式のプラン上限が 0 のため、残りのパーセントは計算できません。",
+   "ko": "Cursor에 연결되었습니다. 공식 플랜 한도가 0이라 남은 비율을 계산할 수 없습니다.",
+   "es": "Cursor conectado; el límite oficial del plan es 0, así que no hay porcentaje que calcular.",
+   "fr": "Cursor est connecté ; la limite officielle du forfait est 0, aucun pourcentage à calculer.",
+   "de": "Cursor verbunden; das offizielle Limit ist 0, daher kein Prozentwert berechenbar.",
+   "pt-BR": "Cursor conectado; o limite oficial do plano é 0, então não há porcentagem a calcular."
+  },
+  "已选择 MiniMax 区域；两地订阅凭据独立保存。": {
+   "zh-Hant": "已選擇 MiniMax 區域；兩地訂閱憑證分開儲存。",
+   "en": "MiniMax region selected; each region's subscription credential is stored separately.",
+   "ja": "MiniMax の地域を選択しました。地域ごとのサブスクリプション認証情報は別々に保存されます。",
+   "ko": "MiniMax 지역을 선택했습니다. 지역별 구독 자격 증명은 따로 저장됩니다.",
+   "es": "Región de MiniMax seleccionada; la credencial de cada región se guarda por separado.",
+   "fr": "Région MiniMax choisie ; l’identifiant de chaque région est enregistré séparément.",
+   "de": "MiniMax-Region gewählt; die Zugangsdaten jeder Region werden getrennt gespeichert.",
+   "pt-BR": "Região do MiniMax selecionada; a credencial de cada região é salva separadamente."
+  },
+  "已通过官方 OAuth 接口自动续期。": {
+   "zh-Hant": "已透過官方 OAuth 介面自動續期。",
+   "en": "Renewed automatically through the official OAuth endpoint.",
+   "ja": "公式の OAuth エンドポイントで自動更新しました。",
+   "ko": "공식 OAuth 엔드포인트로 자동 갱신했습니다.",
+   "es": "Renovado automáticamente mediante el endpoint OAuth oficial.",
+   "fr": "Renouvelé automatiquement via le point d’accès OAuth officiel.",
+   "de": "Automatisch über den offiziellen OAuth-Endpunkt erneuert.",
+   "pt-BR": "Renovado automaticamente pelo endpoint OAuth oficial."
+  },
+  "应用状态不可读取或格式已变化；未推算额度。": {
+   "zh-Hant": "App 狀態無法讀取或格式已變更；未推算額度。",
+   "en": "The app state is unreadable or changed format; no quota was inferred.",
+   "ja": "アプリの状態を読み取れないか形式が変わったため、利用枠は推定していません。",
+   "ko": "앱 상태를 읽을 수 없거나 형식이 바뀌어 한도를 추정하지 않았습니다.",
+   "es": "El estado de la app no se puede leer o cambió de formato; no se infirió ninguna cuota.",
+   "fr": "L’état de l’app est illisible ou a changé de format ; aucun quota déduit.",
+   "de": "Der App-Status ist unlesbar oder hat ein neues Format; kein Kontingent abgeleitet.",
+   "pt-BR": "O estado do app está ilegível ou mudou de formato; nenhuma cota foi inferida."
+  },
+  "应用状态文件过大或正在切换，已停止读取。": {
+   "zh-Hant": "App 狀態檔過大或正在切換，已停止讀取。",
+   "en": "The app state file is too large or being swapped; reading stopped.",
+   "ja": "アプリの状態ファイルが大きすぎるか切り替え中のため、読み取りを中止しました。",
+   "ko": "앱 상태 파일이 너무 크거나 교체 중이라 읽기를 중단했습니다.",
+   "es": "El archivo de estado de la app es demasiado grande o se está sustituyendo; se detuvo la lectura.",
+   "fr": "Le fichier d’état de l’app est trop volumineux ou en cours de remplacement ; lecture arrêtée.",
+   "de": "Die App-Statusdatei ist zu groß oder wird gerade ersetzt; Lesen gestoppt.",
+   "pt-BR": "O arquivo de estado do app é grande demais ou está sendo trocado; a leitura parou."
+  },
+  "当前 5 小时": {
+   "zh-Hant": "目前 5 小時",
+   "en": "Current 5 hours",
+   "ja": "現在の5時間",
+   "ko": "현재 5시간",
+   "es": "5 horas actuales",
+   "fr": "5 heures en cours",
+   "de": "Aktuelle 5 Stunden",
+   "pt-BR": "5 horas atuais"
+  },
+  "当前接口未提供可量化额度；不伪造 5 小时或每周窗口。": {
+   "zh-Hant": "目前介面未提供可量化額度；不偽造 5 小時或每週視窗。",
+   "en": "The endpoint gives no measurable quota; no 5-hour or weekly window is invented.",
+   "ja": "エンドポイントから数値化できる利用枠が提供されていません。5時間や週のウィンドウを作り出すことはありません。",
+   "ko": "엔드포인트가 수치화할 수 있는 한도를 제공하지 않습니다. 5시간 또는 주간 창을 만들어 내지 않습니다.",
+   "es": "El endpoint no da una cuota medible; no se inventa ninguna ventana de 5 horas ni semanal.",
+   "fr": "Le point d’accès ne fournit aucun quota mesurable ; aucune fenêtre de 5 heures ou hebdomadaire n’est inventée.",
+   "de": "Der Endpunkt liefert kein messbares Kontingent; es werden keine 5-Stunden- oder Wochenfenster erfunden.",
+   "pt-BR": "O endpoint não dá cota mensurável; nenhuma janela de 5 horas ou semanal é inventada."
+  },
+  "当前是 API Key 登录，不是 ChatGPT Coding Plan；不推算 5 小时或每周额度。": {
+   "zh-Hant": "目前是 API Key 登入，不是 ChatGPT Coding Plan；不推算 5 小時或每週額度。",
+   "en": "Signed in with an API key, not a ChatGPT Coding Plan; no 5-hour or weekly quota is inferred.",
+   "ja": "現在は API キーでログインしており、ChatGPT Coding Plan ではありません。5時間・週間の枠は推定しません。",
+   "ko": "현재 API 키로 로그인되어 있으며 ChatGPT Coding Plan이 아닙니다. 5시간 또는 주간 한도를 추정하지 않습니다.",
+   "es": "Sesión iniciada con una clave de API, no con un ChatGPT Coding Plan; no se infiere cuota de 5 horas ni semanal.",
+   "fr": "Connecté avec une clé API, pas un ChatGPT Coding Plan ; aucun quota sur 5 heures ou hebdomadaire n’est déduit.",
+   "de": "Mit API-Schlüssel angemeldet, nicht mit einem ChatGPT Coding Plan; kein 5-Stunden- oder Wochenkontingent abgeleitet.",
+   "pt-BR": "Conectado com chave de API, não com um ChatGPT Coding Plan; nenhuma cota de 5 horas ou semanal é inferida."
+  },
+  "当前用户无法读取此应用的状态；不会自动修改系统权限。": {
+   "zh-Hant": "目前使用者無法讀取此 App 的狀態；不會自動修改系統權限。",
+   "en": "This user cannot read the app's state; system permissions are never changed automatically.",
+   "ja": "現在のユーザーはこのアプリの状態を読み取れません。システムの権限を自動で変更することはありません。",
+   "ko": "현재 사용자는 이 앱의 상태를 읽을 수 없습니다. 시스템 권한을 자동으로 바꾸지 않습니다.",
+   "es": "Este usuario no puede leer el estado de la app; los permisos del sistema nunca se cambian automáticamente.",
+   "fr": "Cet utilisateur ne peut pas lire l’état de l’app ; les autorisations système ne sont jamais modifiées automatiquement.",
+   "de": "Dieser Benutzer kann den App-Status nicht lesen; Systemberechtigungen werden nie automatisch geändert.",
+   "pt-BR": "Este usuário não consegue ler o estado do app; as permissões do sistema nunca são alteradas automaticamente."
+  },
+  "当前磁盘不支持快速快照且应用数据库较大，未读取聊天内容或改写原数据库。": {
+   "zh-Hant": "目前磁碟不支援快速快照且 App 資料庫較大，未讀取聊天內容或改寫原資料庫。",
+   "en": "This disk does not support fast snapshots and the app database is large; chat content was not read and the original database was not changed.",
+   "ja": "このディスクは高速スナップショットに対応しておらず、アプリのデータベースも大きいため、チャット内容の読み取りや元のデータベースの書き換えは行っていません。",
+   "ko": "이 디스크는 빠른 스냅샷을 지원하지 않고 앱 데이터베이스가 커서 채팅 내용을 읽거나 원래 데이터베이스를 바꾸지 않았습니다.",
+   "es": "Este disco no admite instantáneas rápidas y la base de datos es grande; no se leyó el contenido de los chats ni se modificó la base original.",
+   "fr": "Ce disque ne prend pas en charge les instantanés rapides et la base est volumineuse ; le contenu des conversations n’a pas été lu ni la base d’origine modifiée.",
+   "de": "Diese Festplatte unterstützt keine schnellen Snapshots und die App-Datenbank ist groß; Chatinhalte wurden nicht gelesen, die Originaldatenbank blieb unverändert.",
+   "pt-BR": "Este disco não suporta snapshots rápidos e o banco do app é grande; o conteúdo das conversas não foi lido nem o banco original alterado."
+  },
+  "当前窗口": {
+   "zh-Hant": "目前視窗",
+   "en": "current window",
+   "ja": "現在のウィンドウ",
+   "ko": "현재 창",
+   "es": "ventana actual",
+   "fr": "fenêtre en cours",
+   "de": "aktuelles Fenster",
+   "pt-BR": "janela atual"
+  },
+  "当前账号尚未重新验证。": {
+   "zh-Hant": "目前帳號尚未重新驗證。",
+   "en": "The current account has not been re-verified yet.",
+   "ja": "現在のアカウントはまだ再確認されていません。",
+   "ko": "현재 계정은 아직 재확인되지 않았습니다.",
+   "es": "La cuenta actual aún no se ha vuelto a verificar.",
+   "fr": "Le compte actuel n’a pas encore été revérifié.",
+   "de": "Das aktuelle Konto wurde noch nicht erneut geprüft.",
+   "pt-BR": "A conta atual ainda não foi reverificada."
+  },
+  "当前账号采用 token 计费，接口没有提供可量化的套餐百分比。": {
+   "zh-Hant": "目前帳號採用 token 計費，介面沒有提供可量化的方案百分比。",
+   "en": "This account is billed by token; the endpoint gives no measurable plan percentage.",
+   "ja": "このアカウントはトークン課金のため、エンドポイントから数値化できるプランのパーセントは提供されません。",
+   "ko": "이 계정은 token 단위로 과금되어 엔드포인트가 수치화할 수 있는 플랜 비율을 제공하지 않습니다.",
+   "es": "Esta cuenta se factura por tokens; el endpoint no da un porcentaje de plan medible.",
+   "fr": "Ce compte est facturé au token ; le point d’accès ne fournit aucun pourcentage mesurable.",
+   "de": "Dieses Konto wird nach Tokens abgerechnet; der Endpunkt liefert keinen messbaren Prozentsatz.",
+   "pt-BR": "Esta conta é cobrada por token; o endpoint não dá porcentagem de plano mensurável."
+  },
+  "待检查": {
+   "zh-Hant": "待檢查",
+   "en": "Pending check",
+   "ja": "確認待ち",
+   "ko": "확인 대기",
+   "es": "Pendiente",
+   "fr": "À vérifier",
+   "de": "Ausstehend",
+   "pt-BR": "Pendente"
+  },
+  "恢复默认": {
+   "zh-Hant": "恢復預設",
+   "en": "Restore defaults",
+   "ja": "既定に戻す",
+   "ko": "기본값 복원",
+   "es": "Restaurar",
+   "fr": "Restaurer",
+   "de": "Wiederherstellen",
+   "pt-BR": "Restaurar"
+  },
+  "恢复默认显示与排序": {
+   "zh-Hant": "恢復預設顯示與排序",
+   "en": "Restore default display and order",
+   "ja": "表示と並び順を既定に戻す",
+   "ko": "표시와 순서를 기본값으로 복원",
+   "es": "Restaurar pantalla y orden predeterminados",
+   "fr": "Restaurer l’affichage et l’ordre par défaut",
+   "de": "Standardanzeige und -reihenfolge wiederherstellen",
+   "pt-BR": "Restaurar exibição e ordem padrão"
+  },
+  "恢复默认显示与排序？已启用账号及 Key 保持不变。": {
+   "zh-Hant": "恢復預設顯示與排序？已啟用的帳號及 Key 保持不變。",
+   "en": "Restore default display and order? Enabled accounts and keys stay unchanged.",
+   "ja": "表示と並び順を既定に戻しますか？有効なアカウントとキーは変わりません。",
+   "ko": "표시와 순서를 기본값으로 되돌릴까요? 활성화된 계정과 키는 그대로 유지됩니다.",
+   "es": "¿Restaurar la pantalla y el orden predeterminados? Las cuentas activadas y las claves no cambian.",
+   "fr": "Restaurer l’affichage et l’ordre par défaut ? Les comptes activés et les clés restent inchangés.",
+   "de": "Standardanzeige und -reihenfolge wiederherstellen? Aktivierte Konten und Schlüssel bleiben unverändert.",
+   "pt-BR": "Restaurar exibição e ordem padrão? Contas ativadas e chaves permanecem iguais."
+  },
+  "打开应用": {
+   "zh-Hant": "開啟 App",
+   "en": "Open app",
+   "ja": "アプリを開く",
+   "ko": "앱 열기",
+   "es": "Abrir app",
+   "fr": "Ouvrir l’app",
+   "de": "App öffnen",
+   "pt-BR": "Abrir app"
+  },
+  "打开数据目录": {
+   "zh-Hant": "開啟資料目錄",
+   "en": "Open data folder",
+   "ja": "データフォルダを開く",
+   "ko": "데이터 폴더 열기",
+   "es": "Abrir carpeta de datos",
+   "fr": "Ouvrir le dossier de données",
+   "de": "Datenordner öffnen",
+   "pt-BR": "Abrir pasta de dados"
+  },
+  "打开面板时更新过期数据": {
+   "zh-Hant": "開啟面板時更新過期資料",
+   "en": "Update stale data when the panel opens",
+   "ja": "パネルを開いたときに古いデータを更新",
+   "ko": "패널을 열 때 오래된 데이터 업데이트",
+   "es": "Actualizar datos antiguos al abrir el panel",
+   "fr": "Mettre à jour les données anciennes à l’ouverture",
+   "de": "Veraltete Daten beim Öffnen aktualisieren",
+   "pt-BR": "Atualizar dados antigos ao abrir o painel"
+  },
+  "拒绝未授权的凭证目标地址。": {
+   "zh-Hant": "拒絕未授權的憑證目標位址。",
+   "en": "Refused an unauthorized destination for the credential.",
+   "ja": "認証情報の未許可の送信先を拒否しました。",
+   "ko": "허용되지 않은 자격 증명 대상 주소를 거부했습니다.",
+   "es": "Se rechazó un destino no autorizado para la credencial.",
+   "fr": "Destination non autorisée pour l’identifiant refusée.",
+   "de": "Nicht erlaubtes Ziel für Zugangsdaten abgelehnt.",
+   "pt-BR": "Destino não autorizado para a credencial recusado."
+  },
+  "拒绝符号链接形式的应用数据库。": {
+   "zh-Hant": "拒絕符號連結形式的 App 資料庫。",
+   "en": "Refused an app database that is a symbolic link.",
+   "ja": "シンボリックリンクのアプリデータベースは拒否しました。",
+   "ko": "심볼릭 링크 형태의 앱 데이터베이스를 거부했습니다.",
+   "es": "Se rechazó una base de datos de app que es un enlace simbólico.",
+   "fr": "Base de données d’app sous forme de lien symbolique refusée.",
+   "de": "App-Datenbank als symbolischer Link abgelehnt.",
+   "pt-BR": "Banco de dados de app em link simbólico recusado."
+  },
+  "拒绝读取无关的应用状态条目。": {
+   "zh-Hant": "拒絕讀取無關的 App 狀態項目。",
+   "en": "Refused to read an unrelated app state entry.",
+   "ja": "無関係なアプリ状態の項目の読み取りを拒否しました。",
+   "ko": "관련 없는 앱 상태 항목 읽기를 거부했습니다.",
+   "es": "Se rechazó leer una entrada de estado de app no relacionada.",
+   "fr": "Lecture d’une entrée d’état d’app sans rapport refusée.",
+   "de": "Lesen eines fremden App-Statuseintrags verweigert.",
+   "pt-BR": "Leitura de uma entrada de estado de app não relacionada recusada."
+  },
+  "拒绝读取无关钥匙串条目。": {
+   "zh-Hant": "拒絕讀取無關的鑰匙圈項目。",
+   "en": "Refused to read an unrelated Keychain item.",
+   "ja": "無関係なキーチェーン項目の読み取りを拒否しました。",
+   "ko": "관련 없는 키체인 항목 읽기를 거부했습니다.",
+   "es": "Se rechazó leer un elemento del Llavero no relacionado.",
+   "fr": "Lecture d’un élément de trousseau sans rapport refusée.",
+   "de": "Lesen eines fremden Schlüsselbundeintrags verweigert.",
+   "pt-BR": "Leitura de um item das Chaves não relacionado recusada."
+  },
+  "拒绝非本机额度服务。": {
+   "zh-Hant": "拒絕非本機的額度服務。",
+   "en": "Refused a quota service that is not on this Mac.",
+   "ja": "この Mac 以外の利用枠サービスは拒否しました。",
+   "ko": "이 Mac이 아닌 한도 서비스를 거부했습니다.",
+   "es": "Se rechazó un servicio de cuotas que no está en este Mac.",
+   "fr": "Service de quotas extérieur à ce Mac refusé.",
+   "de": "Kontingentdienst außerhalb dieses Mac abgelehnt.",
+   "pt-BR": "Serviço de cotas fora deste Mac recusado."
+  },
+  "拖动 {0}": {
+   "zh-Hant": "拖曳 {0}",
+   "en": "Drag {0}",
+   "ja": "{0} をドラッグ",
+   "ko": "{0} 드래그",
+   "es": "Arrastrar {0}",
+   "fr": "Faire glisser {0}",
+   "de": "{0} ziehen",
+   "pt-BR": "Arrastar {0}"
+  },
+  "拖动以排序": {
+   "zh-Hant": "拖曳以排序",
+   "en": "Drag to reorder",
+   "ja": "ドラッグして並べ替え",
+   "ko": "드래그하여 순서 변경",
+   "es": "Arrastra para ordenar",
+   "fr": "Glisser pour réordonner",
+   "de": "Zum Sortieren ziehen",
+   "pt-BR": "Arraste para ordenar"
+  },
+  "拖动或用箭头排序；开关决定是否显示并查询。菜单栏按此顺序显示前 {0} 个已启用的套餐。": {
+   "zh-Hant": "拖曳或用箭頭排序；開關決定是否顯示並查詢。選單列依此順序顯示前 {0} 個已啟用的方案。",
+   "en": "Drag or use the arrows to reorder; the switch decides whether a plan is shown and queried. The menu bar shows the first {0} enabled plans in this order.",
+   "ja": "ドラッグまたは矢印で並べ替えます。スイッチで表示と照会を切り替えます。メニューバーにはこの順で有効なプランが最大 {0} 件表示されます。",
+   "ko": "드래그하거나 화살표로 순서를 바꾸세요. 스위치로 표시 및 조회 여부를 정합니다. 메뉴 막대에는 이 순서대로 활성화된 플랜이 최대 {0}개 표시됩니다.",
+   "es": "Arrastra o usa las flechas para ordenar; el interruptor decide si el plan se muestra y consulta. La barra de menús muestra los primeros {0} planes activados en este orden.",
+   "fr": "Glissez ou utilisez les flèches pour réordonner ; l’interrupteur décide si un forfait est affiché et interrogé. La barre des menus affiche les {0} premiers forfaits activés dans cet ordre.",
+   "de": "Zum Sortieren ziehen oder die Pfeile nutzen; der Schalter bestimmt, ob ein Plan angezeigt und abgefragt wird. Die Menüleiste zeigt die ersten {0} aktivierten Pläne in dieser Reihenfolge.",
+   "pt-BR": "Arraste ou use as setas para ordenar; o botão define se o plano é exibido e consultado. A barra de menus mostra os primeiros {0} planos ativados nesta ordem."
+  },
+  "按接口实际的 5 小时、周、MCP 等窗口显示；两个区域的凭证不混用。": {
+   "zh-Hant": "依介面實際的 5 小時、週、MCP 等視窗顯示；兩個區域的憑證不混用。",
+   "en": "Shown in the endpoint's real windows (5-hour, weekly, MCP and so on); the two regions' credentials are never mixed.",
+   "ja": "エンドポイントの実際のウィンドウ（5時間、週、MCP など）で表示します。2つの地域の認証情報は混用しません。",
+   "ko": "엔드포인트의 실제 창(5시간, 주간, MCP 등)으로 표시하며 두 지역의 자격 증명을 섞지 않습니다.",
+   "es": "Se muestra en las ventanas reales del endpoint (5 horas, semanal, MCP, etc.); las credenciales de las dos regiones no se mezclan.",
+   "fr": "Affiché selon les fenêtres réelles du point d’accès (5 heures, hebdomadaire, MCP…) ; les identifiants des deux régions ne sont jamais mélangés.",
+   "de": "Anzeige in den echten Fenstern des Endpunkts (5 Stunden, Woche, MCP usw.); die Zugangsdaten beider Regionen werden nie vermischt.",
+   "pt-BR": "Exibido nas janelas reais do endpoint (5 horas, semanal, MCP etc.); as credenciais das duas regiões nunca se misturam."
+  },
+  "按时间均匀使用的参考位置，不是服务商预测": {
+   "zh-Hant": "依時間平均使用的參考位置，不是服務商預測",
+   "en": "Even-pace reference, not a provider forecast",
+   "ja": "時間どおり均等に使った場合の目安で、サービス側の予測ではありません",
+   "ko": "시간에 따라 균등하게 사용할 때의 기준선이며 서비스 예측이 아님",
+   "es": "Referencia de uso uniforme, no una previsión del proveedor",
+   "fr": "Repère d’usage régulier, pas une prévision du fournisseur",
+   "de": "Referenz für gleichmäßige Nutzung, keine Anbieterprognose",
+   "pt-BR": "Referência de uso uniforme, não uma previsão do provedor"
+  },
+  "接口未提供可识别的 Coding Plan 窗口。": {
+   "zh-Hant": "介面未提供可辨識的 Coding Plan 視窗。",
+   "en": "The endpoint reported no recognizable Coding Plan window.",
+   "ja": "エンドポイントから認識できる Coding Plan のウィンドウが提供されませんでした。",
+   "ko": "엔드포인트가 인식 가능한 Coding Plan 창을 제공하지 않았습니다.",
+   "es": "El endpoint no informó una ventana de Coding Plan reconocible.",
+   "fr": "Le point d’accès n’a fourni aucune fenêtre Coding Plan reconnaissable.",
+   "de": "Der Endpunkt meldete kein erkennbares Fenster für den Coding Plan.",
+   "pt-BR": "O endpoint não informou janela de Coding Plan reconhecível."
+  },
+  "接口的 0% 已使用不是 100% 可用；不将零额度池、免费账号或按量消费预算当成有剩余的订阅套餐。": {
+   "zh-Hant": "介面的 0% 已使用不是 100% 可用；不將零額度池、免費帳號或按量消費預算當成有剩餘的訂閱方案。",
+   "en": "The endpoint's 0% used does not mean 100% available; zero-capacity pools, free accounts and pay-as-you-go budgets are not treated as a subscription with quota left.",
+   "ja": "エンドポイントの「0% 使用」は「100% 利用可能」を意味しません。容量ゼロのプール、無料アカウント、従量課金の予算を残量のあるサブスクリプションとして扱いません。",
+   "ko": "엔드포인트의 0% 사용은 100% 사용 가능을 뜻하지 않습니다. 한도가 0인 풀, 무료 계정, 종량제 예산을 남은 한도가 있는 구독으로 취급하지 않습니다.",
+   "es": "El 0 % usado del endpoint no significa 100 % disponible; las bolsas sin capacidad, las cuentas gratuitas y los presupuestos por uso no cuentan como suscripción con cuota restante.",
+   "fr": "Les 0 % utilisés du point d’accès ne signifient pas 100 % disponibles ; les réserves vides, comptes gratuits et budgets à l’usage ne sont pas traités comme un abonnement avec quota restant.",
+   "de": "0 % genutzt am Endpunkt heißt nicht 100 % verfügbar; Pools ohne Kapazität, Gratiskonten und nutzungsbasierte Budgets gelten nicht als Abo mit Restkontingent.",
+   "pt-BR": "O 0% usado do endpoint não significa 100% disponível; reservas sem capacidade, contas gratuitas e orçamentos por uso não contam como assinatura com cota restante."
+  },
+  "操作额度": {
+   "zh-Hant": "操作額度",
+   "en": "Action quota",
+   "ja": "アクションの枠",
+   "ko": "작업 한도",
+   "es": "Cuota de acciones",
+   "fr": "Quota d’actions",
+   "de": "Aktionskontingent",
+   "pt-BR": "Cota de ações"
+  },
+  "整数": {
+   "zh-Hant": "整數",
+   "en": "Whole numbers",
+   "ja": "整数",
+   "ko": "정수",
+   "es": "Enteros",
+   "fr": "Entiers",
+   "de": "Ganze Zahlen",
+   "pt-BR": "Inteiros"
+  },
+  "新增套餐": {
+   "zh-Hant": "新增方案",
+   "en": "New plans",
+   "ja": "新しいプラン",
+   "ko": "새 플랜",
+   "es": "Planes nuevos",
+   "fr": "Nouveaux forfaits",
+   "de": "Neue Pläne",
+   "pt-BR": "Novos planos"
+  },
+  "无法保存连接元数据，未更新 Key。": {
+   "zh-Hant": "無法儲存連線中繼資料，未更新 Key。",
+   "en": "Could not save the connection metadata; the key was not updated.",
+   "ja": "接続のメタデータを保存できなかったため、キーは更新されていません。",
+   "ko": "연결 메타데이터를 저장하지 못해 키를 업데이트하지 않았습니다.",
+   "es": "No se pudieron guardar los metadatos de conexión; la clave no se actualizó.",
+   "fr": "Impossible d’enregistrer les métadonnées de connexion ; la clé n’a pas été mise à jour.",
+   "de": "Verbindungsmetadaten konnten nicht gesichert werden; der Schlüssel wurde nicht aktualisiert.",
+   "pt-BR": "Não foi possível salvar os metadados da conexão; a chave não foi atualizada."
+  },
+  "无法启动本地采集程序。": {
+   "zh-Hant": "無法啟動本機採集程式。",
+   "en": "Could not start the local collector.",
+   "ja": "ローカルの収集プログラムを起動できません。",
+   "ko": "로컬 수집 프로그램을 시작할 수 없습니다.",
+   "es": "No se pudo iniciar el recopilador local.",
+   "fr": "Impossible de démarrer le collecteur local.",
+   "de": "Der lokale Collector konnte nicht starten.",
+   "pt-BR": "Não foi possível iniciar o coletor local."
+  },
+  "无法打开登录入口，请在官方终端登录。": {
+   "zh-Hant": "無法開啟登入入口，請在官方終端機登入。",
+   "en": "Could not open the sign-in entry. Sign in from the official CLI in Terminal.",
+   "ja": "ログイン画面を開けませんでした。ターミナルで公式 CLI からログインしてください。",
+   "ko": "로그인 화면을 열 수 없습니다. 터미널에서 공식 CLI로 로그인하세요.",
+   "es": "No se pudo abrir el acceso de inicio de sesión. Inicia sesión desde la CLI oficial en Terminal.",
+   "fr": "Impossible d’ouvrir l’entrée de connexion. Connectez-vous depuis la CLI officielle dans Terminal.",
+   "de": "Der Anmeldeeinstieg ließ sich nicht öffnen. Über die offizielle CLI im Terminal anmelden.",
+   "pt-BR": "Não foi possível abrir a entrada de login. Entre pela CLI oficial no Terminal."
+  },
+  "无法检查当前用户的 Antigravity 进程，请稍后重试。": {
+   "zh-Hant": "無法檢查目前使用者的 Antigravity 程序，請稍後重試。",
+   "en": "Could not check this user's Antigravity process. Try again later.",
+   "ja": "現在のユーザーの Antigravity プロセスを確認できません。後でもう一度お試しください。",
+   "ko": "현재 사용자의 Antigravity 프로세스를 확인할 수 없습니다. 나중에 다시 시도하세요.",
+   "es": "No se pudo comprobar el proceso de Antigravity de este usuario. Inténtalo más tarde.",
+   "fr": "Impossible de vérifier le processus Antigravity de cet utilisateur. Réessayez plus tard.",
+   "de": "Antigravity-Prozess dieses Benutzers nicht prüfbar. Später erneut versuchen.",
+   "pt-BR": "Não foi possível verificar o processo do Antigravity deste usuário. Tente mais tarde."
+  },
+  "无法读取所需本地文件，请检查当前用户的文件权限。": {
+   "zh-Hant": "無法讀取所需本機檔案，請檢查目前使用者的檔案權限。",
+   "en": "Could not read a required local file. Check this user's file permissions.",
+   "ja": "必要なローカルファイルを読み取れません。現在のユーザーのファイル権限を確認してください。",
+   "ko": "필요한 로컬 파일을 읽을 수 없습니다. 현재 사용자의 파일 권한을 확인하세요.",
+   "es": "No se pudo leer un archivo local necesario. Revisa los permisos de archivo de este usuario.",
+   "fr": "Impossible de lire un fichier local nécessaire. Vérifiez les autorisations de fichiers de cet utilisateur.",
+   "de": "Eine benötigte lokale Datei ist nicht lesbar. Dateiberechtigungen dieses Benutzers prüfen.",
+   "pt-BR": "Não foi possível ler um arquivo local necessário. Verifique as permissões de arquivo deste usuário."
+  },
+  "显示与刷新": {
+   "zh-Hant": "顯示與重新整理",
+   "en": "Display",
+   "ja": "表示と更新",
+   "ko": "표시",
+   "es": "Pantalla",
+   "fr": "Affichage",
+   "de": "Anzeige",
+   "pt-BR": "Exibição"
+  },
+  "显示哪些额度": {
+   "zh-Hant": "顯示哪些額度",
+   "en": "Quotas to show",
+   "ja": "表示する利用枠",
+   "ko": "표시할 한도",
+   "es": "Cuotas que mostrar",
+   "fr": "Quotas à afficher",
+   "de": "Angezeigte Kontingente",
+   "pt-BR": "Cotas exibidas"
+  },
+  "显示套餐名称": {
+   "zh-Hant": "顯示方案名稱",
+   "en": "Show plan name",
+   "ja": "プラン名を表示",
+   "ko": "플랜 이름 표시",
+   "es": "Mostrar nombre del plan",
+   "fr": "Afficher le nom du forfait",
+   "de": "Plannamen anzeigen",
+   "pt-BR": "Mostrar nome do plano"
+  },
+  "显示官方品牌标志": {
+   "zh-Hant": "顯示官方品牌標誌",
+   "en": "Show official logos",
+   "ja": "公式ロゴを表示",
+   "ko": "공식 로고 표시",
+   "es": "Mostrar logotipos oficiales",
+   "fr": "Afficher les logos officiels",
+   "de": "Offizielle Logos anzeigen",
+   "pt-BR": "Mostrar logotipos oficiais"
+  },
+  "显示官方本月包含额度；不把团队余额或按量付费上限并入个人套餐。不续期凭据、不扫描浏览器。": {
+   "zh-Hant": "顯示官方本月包含額度；不把團隊餘額或按量付費上限併入個人方案。不續期憑證、不掃描瀏覽器。",
+   "en": "Shows the official included quota for this month; team balances and pay-as-you-go limits are not merged into the personal plan. Credentials are not renewed and browsers are not scanned.",
+   "ja": "公式の今月の含まれる枠を表示します。チーム残高や従量課金の上限を個人プランに合算しません。認証情報の更新やブラウザのスキャンは行いません。",
+   "ko": "공식 이번 달 포함 한도를 표시합니다. 팀 잔액이나 종량제 상한을 개인 플랜에 합치지 않으며 자격 증명을 갱신하거나 브라우저를 검사하지 않습니다.",
+   "es": "Muestra la cuota incluida oficial de este mes; no suma saldos de equipo ni límites de pago por uso al plan personal. No renueva credenciales ni examina navegadores.",
+   "fr": "Affiche le quota inclus officiel du mois ; les soldes d’équipe et plafonds à l’usage ne sont pas ajoutés au forfait personnel. Aucun renouvellement d’identifiant ni analyse de navigateur.",
+   "de": "Zeigt das offizielle enthaltene Kontingent dieses Monats; Team-Guthaben und nutzungsbasierte Limits werden nicht zum persönlichen Plan addiert. Keine Erneuerung von Zugangsdaten, kein Browser-Scan.",
+   "pt-BR": "Mostra a cota incluída oficial deste mês; saldos de equipe e limites por uso não entram no plano pessoal. Sem renovar credenciais nem varrer navegadores."
+  },
+  "显示并查询此套餐": {
+   "zh-Hant": "顯示並查詢此方案",
+   "en": "Show and query this plan",
+   "ja": "このプランを表示して照会",
+   "ko": "이 플랜 표시 및 조회",
+   "es": "Mostrar y consultar este plan",
+   "fr": "Afficher et interroger ce forfait",
+   "de": "Diesen Plan anzeigen und abfragen",
+   "pt-BR": "Exibir e consultar este plano"
+  },
+  "显示按时间均匀使用参考线": {
+   "zh-Hant": "顯示依時間平均使用的參考線",
+   "en": "Show even-pace marker",
+   "ja": "均等ペースの目安線を表示",
+   "ko": "균등 사용 기준선 표시",
+   "es": "Mostrar referencia de uso uniforme",
+   "fr": "Afficher le repère d’usage régulier",
+   "de": "Referenz für gleichmäßige Nutzung anzeigen",
+   "pt-BR": "Mostrar referência de uso uniforme"
+  },
+  "显示最后更新时间": {
+   "zh-Hant": "顯示最後更新時間",
+   "en": "Show last update time",
+   "ja": "最終更新時刻を表示",
+   "ko": "마지막 업데이트 시각 표시",
+   "es": "Mostrar última actualización",
+   "fr": "Afficher la dernière mise à jour",
+   "de": "Letzte Aktualisierung anzeigen",
+   "pt-BR": "Mostrar última atualização"
+  },
+  "显示语言": {
+   "zh-Hant": "顯示語言",
+   "en": "Display language",
+   "ja": "表示言語",
+   "ko": "표시 언어",
+   "es": "Idioma de la interfaz",
+   "fr": "Langue d’affichage",
+   "de": "Anzeigesprache",
+   "pt-BR": "Idioma de exibição"
+  },
+  "暂无历史数据": {
+   "zh-Hant": "尚無歷史資料",
+   "en": "No history yet",
+   "ja": "履歴なし",
+   "ko": "기록 없음",
+   "es": "Sin historial",
+   "fr": "Aucun historique",
+   "de": "Noch kein Verlauf",
+   "pt-BR": "Sem histórico"
+  },
+  "暂无可显示额度": {
+   "zh-Hant": "暫無可顯示額度",
+   "en": "No quota to show yet",
+   "ja": "表示できる利用枠はまだありません",
+   "ko": "표시할 한도 없음",
+   "es": "Aún no hay cuotas que mostrar",
+   "fr": "Aucun quota à afficher",
+   "de": "Noch keine Kontingente anzuzeigen",
+   "pt-BR": "Nenhuma cota para mostrar"
+  },
+  "暂时离线": {
+   "zh-Hant": "暫時離線",
+   "en": "Offline",
+   "ja": "一時的にオフライン",
+   "ko": "일시적으로 오프라인",
+   "es": "Sin conexión",
+   "fr": "Hors ligne",
+   "de": "Offline",
+   "pt-BR": "Offline"
+  },
+  "更新于 {0}": {
+   "zh-Hant": "更新於 {0}",
+   "en": "Updated {0}",
+   "ja": "{0} に更新",
+   "ko": "{0} 업데이트",
+   "es": "Actualizado {0}",
+   "fr": "Mis à jour {0}",
+   "de": "Aktualisiert {0}",
+   "pt-BR": "Atualizado {0}"
+  },
+  "更新间隔 · 约{0}分钟后可查询": {
+   "zh-Hant": "更新間隔 · 約 {0} 分鐘後可查詢",
+   "en": "Interval · next check in about {0} min",
+   "ja": "更新間隔 · 約{0}分後に確認可能",
+   "ko": "업데이트 간격 · 약 {0}분 후 조회 가능",
+   "es": "Intervalo · próxima consulta en unos {0} min",
+   "fr": "Intervalle · prochaine vérification dans ~{0} min",
+   "de": "Intervall · nächste Prüfung in ca. {0} Min.",
+   "pt-BR": "Intervalo · próxima consulta em cerca de {0} min"
+  },
+  "最后成功：{0}；非实时。": {
+   "zh-Hant": "最後成功：{0}；非即時。",
+   "en": "Last success: {0}. Not live.",
+   "ja": "最終成功：{0}。リアルタイムではありません。",
+   "ko": "마지막 성공: {0}. 실시간 아님.",
+   "es": "Último éxito: {0}. No en vivo.",
+   "fr": "Dernier succès : {0}. Pas en direct.",
+   "de": "Zuletzt erfolgreich: {0}. Nicht live.",
+   "pt-BR": "Último sucesso: {0}. Não em tempo real."
+  },
+  "最大高度": {
+   "zh-Hant": "最大高度",
+   "en": "Maximum height",
+   "ja": "最大の高さ",
+   "ko": "최대 높이",
+   "es": "Altura máxima",
+   "fr": "Hauteur maximale",
+   "de": "Maximale Höhe",
+   "pt-BR": "Altura máxima"
+  },
+  "月度套餐": {
+   "zh-Hant": "月度方案",
+   "en": "Monthly plan",
+   "ja": "月間プラン",
+   "ko": "월간 플랜",
+   "es": "Plan mensual",
+   "fr": "Forfait mensuel",
+   "de": "Monatsplan",
+   "pt-BR": "Plano mensal"
+  },
+  "月度额度池": {
+   "zh-Hant": "月度額度池",
+   "en": "Monthly pools",
+   "ja": "月間枠プール",
+   "ko": "월간 한도 풀",
+   "es": "Bolsas mensuales",
+   "fr": "Réserves mensuelles",
+   "de": "Monatliche Pools",
+   "pt-BR": "Reservas mensais"
+  },
+  "服务商拒绝当前登录凭证，请检查对应官方客户端登录。": {
+   "zh-Hant": "服務商拒絕目前的登入憑證，請檢查對應官方用戶端的登入。",
+   "en": "The provider rejected the current sign-in. Check the sign-in in the official client.",
+   "ja": "サービス側が現在のログイン情報を拒否しました。公式クライアントのログインを確認してください。",
+   "ko": "서비스가 현재 로그인 자격 증명을 거부했습니다. 공식 클라이언트의 로그인을 확인하세요.",
+   "es": "El proveedor rechazó la sesión actual. Revisa el inicio de sesión en el cliente oficial.",
+   "fr": "Le fournisseur a refusé la connexion actuelle. Vérifiez la connexion dans le client officiel.",
+   "de": "Der Anbieter hat die aktuelle Anmeldung abgelehnt. Anmeldung im offiziellen Client prüfen.",
+   "pt-BR": "O provedor recusou o login atual. Verifique o login no cliente oficial."
+  },
+  "服务商拒绝访问，请检查账号权限或套餐；不是额度耗尽。": {
+   "zh-Hant": "服務商拒絕存取，請檢查帳號權限或方案；不是額度用盡。",
+   "en": "The provider denied access. Check the account's permissions or plan; this is not exhausted quota.",
+   "ja": "サービス側がアクセスを拒否しました。アカウントの権限やプランを確認してください。利用枠の使い切りではありません。",
+   "ko": "서비스가 접근을 거부했습니다. 계정 권한이나 플랜을 확인하세요. 한도 소진이 아닙니다.",
+   "es": "El proveedor denegó el acceso. Revisa los permisos o el plan de la cuenta; no es cuota agotada.",
+   "fr": "Le fournisseur a refusé l’accès. Vérifiez les autorisations ou le forfait du compte ; ce n’est pas un quota épuisé.",
+   "de": "Der Anbieter hat den Zugriff verweigert. Kontoberechtigungen oder Plan prüfen; das Kontingent ist nicht aufgebraucht.",
+   "pt-BR": "O provedor negou o acesso. Verifique as permissões ou o plano da conta; não é cota esgotada."
+  },
+  "服务商暂时限制额度查询，已暂停请求；到时自动检查。": {
+   "zh-Hant": "服務商暫時限制額度查詢，已暫停請求；屆時自動檢查。",
+   "en": "The provider is limiting quota queries for now; requests are paused and will resume automatically.",
+   "ja": "サービス側が利用枠の照会を一時的に制限しているため、リクエストを停止しました。時間になれば自動で確認します。",
+   "ko": "서비스가 한도 조회를 일시적으로 제한해 요청을 중지했습니다. 때가 되면 자동으로 확인합니다.",
+   "es": "El proveedor está limitando las consultas por ahora; las solicitudes están en pausa y se reanudarán solas.",
+   "fr": "Le fournisseur limite temporairement les requêtes ; elles sont en pause et reprendront automatiquement.",
+   "de": "Der Anbieter begrenzt Kontingentabfragen vorübergehend; Anfragen sind pausiert und laufen automatisch weiter.",
+   "pt-BR": "O provedor está limitando as consultas por ora; as solicitações estão pausadas e voltam sozinhas."
+  },
+  "服务商窗口": {
+   "zh-Hant": "服務商視窗",
+   "en": "Provider window",
+   "ja": "サービス側のウィンドウ",
+   "ko": "서비스 창",
+   "es": "Ventana del proveedor",
+   "fr": "Fenêtre du fournisseur",
+   "de": "Anbieterfenster",
+   "pt-BR": "Janela do provedor"
+  },
+  "服务商窗口缓存": {
+   "zh-Hant": "服務商視窗快取",
+   "en": "Provider window cache",
+   "ja": "サービス側ウィンドウのキャッシュ",
+   "ko": "서비스 창 캐시",
+   "es": "Caché de la ventana del proveedor",
+   "fr": "Cache de la fenêtre du fournisseur",
+   "de": "Cache des Anbieterfensters",
+   "pt-BR": "Cache da janela do provedor"
+  },
+  "服务商返回了无法识别的额度结构。": {
+   "zh-Hant": "服務商回傳了無法辨識的額度結構。",
+   "en": "The provider returned an unrecognized quota structure.",
+   "ja": "サービスから認識できない利用枠の構造が返されました。",
+   "ko": "서비스가 인식할 수 없는 한도 구조를 반환했습니다.",
+   "es": "El proveedor devolvió una estructura de cuota no reconocida.",
+   "fr": "Le fournisseur a renvoyé une structure de quota non reconnue.",
+   "de": "Der Anbieter lieferte eine unbekannte Kontingentstruktur.",
+   "pt-BR": "O provedor retornou uma estrutura de cota não reconhecida."
+  },
+  "未分配": {
+   "zh-Hant": "未分配",
+   "en": "Unassigned",
+   "ja": "未割り当て",
+   "ko": "미지정",
+   "es": "Sin asignar",
+   "fr": "Non attribué",
+   "de": "Nicht zugewiesen",
+   "pt-BR": "Não atribuído"
+  },
+  "未启用套餐，点击打开设置": {
+   "zh-Hant": "未啟用方案，按一下開啟設定",
+   "en": "No plans enabled. Click to open Settings",
+   "ja": "有効なプランがありません。クリックして設定を開きます",
+   "ko": "활성화된 플랜 없음, 클릭해 설정 열기",
+   "es": "Ningún plan activado. Haz clic para abrir Ajustes",
+   "fr": "Aucun forfait activé. Cliquez pour ouvrir les réglages",
+   "de": "Keine Pläne aktiviert. Klicken, um Einstellungen zu öffnen",
+   "pt-BR": "Nenhum plano ativado. Clique para abrir os ajustes"
+  },
+  "未就绪": {
+   "zh-Hant": "未就緒",
+   "en": "Not ready",
+   "ja": "準備中",
+   "ko": "준비 안 됨",
+   "es": "No disponible",
+   "fr": "Pas prêt",
+   "de": "Nicht bereit",
+   "pt-BR": "Indisponível"
+  },
+  "未找到 Cline CLI；也可以在 VS Code 的 Cline 扩展中登录 Cline 账号。": {
+   "zh-Hant": "找不到 Cline CLI；也可以在 VS Code 的 Cline 擴充功能中登入 Cline 帳號。",
+   "en": "Cline CLI not found. You can also sign in to your Cline account in the Cline extension for VS Code.",
+   "ja": "Cline CLI が見つかりません。VS Code の Cline 拡張機能から Cline アカウントにログインすることもできます。",
+   "ko": "Cline CLI를 찾을 수 없습니다. VS Code의 Cline 확장에서 Cline 계정에 로그인할 수도 있습니다.",
+   "es": "No se encontró Cline CLI. También puedes iniciar sesión con tu cuenta de Cline en la extensión de Cline para VS Code.",
+   "fr": "Cline CLI introuvable. Vous pouvez aussi vous connecter à votre compte Cline dans l’extension Cline pour VS Code.",
+   "de": "Cline-CLI nicht gefunden. Die Anmeldung beim Cline-Konto geht auch in der Cline-Erweiterung für VS Code.",
+   "pt-BR": "Cline CLI não encontrada. Você também pode entrar na sua conta Cline pela extensão Cline do VS Code."
+  },
+  "未找到 Cline 账号登录。请先在 Cline（VS Code 扩展或 CLI）登录 Cline 账号，再启用 ClinePass。": {
+   "zh-Hant": "找不到 Cline 帳號登入。請先在 Cline（VS Code 擴充功能或 CLI）登入 Cline 帳號，再啟用 ClinePass。",
+   "en": "No Cline account sign-in found. Sign in to your Cline account in Cline (VS Code extension or CLI) first, then enable ClinePass.",
+   "ja": "Cline アカウントのログインが見つかりません。先に Cline（VS Code 拡張機能または CLI）で Cline アカウントにログインしてから ClinePass を有効にしてください。",
+   "ko": "Cline 계정 로그인을 찾을 수 없습니다. 먼저 Cline(VS Code 확장 또는 CLI)에서 Cline 계정에 로그인한 뒤 ClinePass를 활성화하세요.",
+   "es": "No se encontró una sesión de cuenta de Cline. Inicia sesión primero en Cline (extensión de VS Code o CLI) y luego activa ClinePass.",
+   "fr": "Aucune connexion de compte Cline trouvée. Connectez-vous d’abord dans Cline (extension VS Code ou CLI), puis activez ClinePass.",
+   "de": "Keine Cline-Kontoanmeldung gefunden. Zuerst in Cline (VS-Code-Erweiterung oder CLI) anmelden, dann ClinePass aktivieren.",
+   "pt-BR": "Nenhum login de conta Cline encontrado. Entre antes no Cline (extensão do VS Code ou CLI) e depois ative o ClinePass."
+  },
+  "未找到 Codex CLI，请先安装官方客户端。": {
+   "zh-Hant": "找不到 Codex CLI，請先安裝官方用戶端。",
+   "en": "Codex CLI not found. Install the official client first.",
+   "ja": "Codex CLI が見つかりません。先に公式クライアントをインストールしてください。",
+   "ko": "Codex CLI를 찾을 수 없습니다. 먼저 공식 클라이언트를 설치하세요.",
+   "es": "No se encontró Codex CLI. Instala primero el cliente oficial.",
+   "fr": "Codex CLI introuvable. Installez d’abord le client officiel.",
+   "de": "Codex-CLI nicht gefunden. Zuerst den offiziellen Client installieren.",
+   "pt-BR": "Codex CLI não encontrada. Instale antes o cliente oficial."
+  },
+  "未找到 Kimi CLI，请先安装官方客户端。": {
+   "zh-Hant": "找不到 Kimi CLI，請先安裝官方用戶端。",
+   "en": "Kimi CLI not found. Install the official client first.",
+   "ja": "Kimi CLI が見つかりません。先に公式クライアントをインストールしてください。",
+   "ko": "Kimi CLI를 찾을 수 없습니다. 먼저 공식 클라이언트를 설치하세요.",
+   "es": "No se encontró Kimi CLI. Instala primero el cliente oficial.",
+   "fr": "Kimi CLI introuvable. Installez d’abord le client officiel.",
+   "de": "Kimi-CLI nicht gefunden. Zuerst den offiziellen Client installieren.",
+   "pt-BR": "Kimi CLI não encontrada. Instale antes o cliente oficial."
+  },
+  "未找到 OpenCode CLI，请先安装官方客户端，或在 OpenCode 中运行 /connect。": {
+   "zh-Hant": "找不到 OpenCode CLI，請先安裝官方用戶端，或在 OpenCode 中執行 /connect。",
+   "en": "OpenCode CLI not found. Install the official client first, or run /connect inside OpenCode.",
+   "ja": "OpenCode CLI が見つかりません。公式クライアントをインストールするか、OpenCode 内で /connect を実行してください。",
+   "ko": "OpenCode CLI를 찾을 수 없습니다. 공식 클라이언트를 설치하거나 OpenCode에서 /connect를 실행하세요.",
+   "es": "No se encontró OpenCode CLI. Instala primero el cliente oficial o ejecuta /connect dentro de OpenCode.",
+   "fr": "OpenCode CLI introuvable. Installez d’abord le client officiel ou lancez /connect dans OpenCode.",
+   "de": "OpenCode-CLI nicht gefunden. Zuerst den offiziellen Client installieren oder /connect in OpenCode ausführen.",
+   "pt-BR": "OpenCode CLI não encontrada. Instale antes o cliente oficial ou execute /connect dentro do OpenCode."
+  },
+  "未找到 OpenCode Go 登录。请在 OpenCode 中运行 /connect（或 opencode auth login），选择 OpenCode Go 并粘贴订阅 Key。": {
+   "zh-Hant": "找不到 OpenCode Go 登入。請在 OpenCode 中執行 /connect（或 opencode auth login），選擇 OpenCode Go 並貼上訂閱 Key。",
+   "en": "No OpenCode Go sign-in found. In OpenCode, run /connect (or opencode auth login), choose OpenCode Go and paste your subscription key.",
+   "ja": "OpenCode Go のログインが見つかりません。OpenCode で /connect（または opencode auth login）を実行し、OpenCode Go を選んでサブスクリプションキーを貼り付けてください。",
+   "ko": "OpenCode Go 로그인을 찾을 수 없습니다. OpenCode에서 /connect(또는 opencode auth login)를 실행해 OpenCode Go를 선택하고 구독 키를 붙여 넣으세요.",
+   "es": "No se encontró la sesión de OpenCode Go. En OpenCode, ejecuta /connect (u opencode auth login), elige OpenCode Go y pega tu clave de suscripción.",
+   "fr": "Aucune connexion OpenCode Go trouvée. Dans OpenCode, lancez /connect (ou opencode auth login), choisissez OpenCode Go et collez votre clé d’abonnement.",
+   "de": "Keine OpenCode-Go-Anmeldung gefunden. In OpenCode /connect (oder opencode auth login) ausführen, OpenCode Go wählen und den Abo-Schlüssel einfügen.",
+   "pt-BR": "Nenhum login do OpenCode Go encontrado. No OpenCode, execute /connect (ou opencode auth login), escolha OpenCode Go e cole sua chave de assinatura."
+  },
+  "未找到 kiro-cli；请先安装官方 CLI 并登录。": {
+   "zh-Hant": "找不到 kiro-cli；請先安裝官方 CLI 並登入。",
+   "en": "kiro-cli not found. Install the official CLI and sign in first.",
+   "ja": "kiro-cli が見つかりません。先に公式 CLI をインストールしてログインしてください。",
+   "ko": "kiro-cli를 찾을 수 없습니다. 먼저 공식 CLI를 설치하고 로그인하세요.",
+   "es": "No se encontró kiro-cli. Instala primero la CLI oficial e inicia sesión.",
+   "fr": "kiro-cli introuvable. Installez d’abord la CLI officielle et connectez-vous.",
+   "de": "kiro-cli nicht gefunden. Zuerst die offizielle CLI installieren und anmelden.",
+   "pt-BR": "kiro-cli não encontrado. Instale antes a CLI oficial e entre."
+  },
+  "未找到官方应用的本地状态，请先安装并登录对应应用。": {
+   "zh-Hant": "找不到官方 App 的本機狀態，請先安裝並登入對應的 App。",
+   "en": "No local state from the official app was found. Install and sign in to that app first.",
+   "ja": "公式アプリのローカル状態が見つかりません。先に該当アプリをインストールしてログインしてください。",
+   "ko": "공식 앱의 로컬 상태를 찾을 수 없습니다. 먼저 해당 앱을 설치하고 로그인하세요.",
+   "es": "No se encontró el estado local de la app oficial. Instala la app e inicia sesión primero.",
+   "fr": "Aucun état local de l’app officielle trouvé. Installez l’app et connectez-vous d’abord.",
+   "de": "Kein lokaler Status der offiziellen App gefunden. Zuerst die App installieren und anmelden.",
+   "pt-BR": "Nenhum estado local do app oficial encontrado. Instale o app e entre antes."
+  },
+  "未找到对应区域的 GLM 套餐凭据。可使用已保存的凭据，或按文档配置该区域的环境变量；独立 Key 配置卡已移除。": {
+   "zh-Hant": "找不到對應區域的 GLM 方案憑證。可使用已儲存的憑證，或依文件設定該區域的環境變數；獨立 Key 設定卡已移除。",
+   "en": "No GLM plan credential for this region was found. Use a saved credential or set the region's environment variable as documented; the separate key card was removed.",
+   "ja": "この地域の GLM プランの認証情報が見つかりません。保存済みの認証情報を使うか、ドキュメントに従って地域の環境変数を設定してください。個別のキー設定欄は削除されました。",
+   "ko": "이 지역의 GLM 플랜 자격 증명을 찾을 수 없습니다. 저장된 자격 증명을 사용하거나 문서대로 해당 지역의 환경 변수를 설정하세요. 별도 키 설정 카드는 제거되었습니다.",
+   "es": "No se encontró la credencial del plan GLM para esta región. Usa una credencial guardada o define la variable de entorno de la región según la documentación; se quitó la tarjeta de clave aparte.",
+   "fr": "Aucun identifiant de forfait GLM pour cette région. Utilisez un identifiant enregistré ou définissez la variable d’environnement de la région comme documenté ; la carte de clé séparée a été supprimée.",
+   "de": "Keine GLM-Plan-Zugangsdaten für diese Region gefunden. Gespeicherte Zugangsdaten nutzen oder die Umgebungsvariable laut Doku setzen; die separate Schlüsselkarte wurde entfernt.",
+   "pt-BR": "Nenhuma credencial do plano GLM para esta região. Use uma credencial salva ou defina a variável de ambiente da região conforme a documentação; o cartão de chave separado foi removido."
+  },
+  "未找到所需官方客户端或本地辅助程序。": {
+   "zh-Hant": "找不到所需的官方用戶端或本機輔助程式。",
+   "en": "The required official client or local helper was not found.",
+   "ja": "必要な公式クライアントまたはローカル補助プログラムが見つかりません。",
+   "ko": "필요한 공식 클라이언트 또는 로컬 도우미를 찾을 수 없습니다.",
+   "es": "No se encontró el cliente oficial ni el asistente local necesarios.",
+   "fr": "Client officiel ou assistant local requis introuvable.",
+   "de": "Benötigter offizieller Client oder lokaler Helfer nicht gefunden.",
+   "pt-BR": "O cliente oficial ou auxiliar local necessário não foi encontrado."
+  },
+  "未找到有效的 Kimi Code 登录。请点击连接，或在官方 CLI 中运行 kimi login。": {
+   "zh-Hant": "找不到有效的 Kimi Code 登入。請按一下連線，或在官方 CLI 中執行 kimi login。",
+   "en": "No valid Kimi Code sign-in found. Click Connect, or run kimi login in the official CLI.",
+   "ja": "有効な Kimi Code のログインが見つかりません。「接続」をクリックするか、公式 CLI で kimi login を実行してください。",
+   "ko": "유효한 Kimi Code 로그인을 찾을 수 없습니다. 연결을 누르거나 공식 CLI에서 kimi login을 실행하세요.",
+   "es": "No se encontró una sesión válida de Kimi Code. Pulsa Conectar o ejecuta kimi login en la CLI oficial.",
+   "fr": "Aucune connexion Kimi Code valide. Cliquez sur Connecter ou exécutez kimi login dans la CLI officielle.",
+   "de": "Keine gültige Kimi-Code-Anmeldung gefunden. Auf Verbinden klicken oder kimi login in der offiziellen CLI ausführen.",
+   "pt-BR": "Nenhum login válido do Kimi Code. Clique em Conectar ou execute kimi login na CLI oficial."
+  },
+  "未提供 5 小时额度": {
+   "zh-Hant": "未提供 5 小時額度",
+   "en": "No 5-hour quota reported",
+   "ja": "5時間枠の提供なし",
+   "ko": "5시간 한도 정보 없음",
+   "es": "Sin cuota de 5 horas",
+   "fr": "Aucun quota sur 5 heures",
+   "de": "Kein 5-Stunden-Kontingent",
+   "pt-BR": "Sem cota de 5 horas"
+  },
+  "未提供额度": {
+   "zh-Hant": "未提供額度",
+   "en": "No quota reported",
+   "ja": "利用枠の提供なし",
+   "ko": "한도 정보 없음",
+   "es": "Sin cuota informada",
+   "fr": "Aucun quota fourni",
+   "de": "Kein Kontingent gemeldet",
+   "pt-BR": "Sem cota informada"
+  },
+  "未查询": {
+   "zh-Hant": "未查詢",
+   "en": "Not queried",
+   "ja": "未照会",
+   "ko": "조회 안 함",
+   "es": "Sin consultar",
+   "fr": "Non interrogé",
+   "de": "Nicht abgefragt",
+   "pt-BR": "Não consultado"
+  },
+  "未能读取 Claude 登录凭证（系统状态 {0}）。": {
+   "zh-Hant": "未能讀取 Claude 登入憑證（系統狀態 {0}）。",
+   "en": "Could not read the Claude sign-in (system status {0}).",
+   "ja": "Claude のログイン情報を読み取れませんでした（システム状態 {0}）。",
+   "ko": "Claude 로그인 자격 증명을 읽지 못했습니다(시스템 상태 {0}).",
+   "es": "No se pudo leer la sesión de Claude (estado del sistema {0}).",
+   "fr": "Impossible de lire la connexion Claude (état système {0}).",
+   "de": "Claude-Anmeldung konnte nicht gelesen werden (Systemstatus {0}).",
+   "pt-BR": "Não foi possível ler o login do Claude (status do sistema {0})."
+  },
+  "未读到 Claude 订阅登录。先授权钥匙串；仍不可用时请在官方 CLI 运行 claude auth login。": {
+   "zh-Hant": "未讀到 Claude 訂閱登入。請先授權鑰匙圈；仍無法使用時請在官方 CLI 執行 claude auth login。",
+   "en": "No Claude subscription sign-in was read. Authorize Keychain access first; if it still fails, run claude auth login in the official CLI.",
+   "ja": "Claude のサブスクリプションのログインを読み取れませんでした。先にキーチェーンを許可し、それでも使えない場合は公式 CLI で claude auth login を実行してください。",
+   "ko": "Claude 구독 로그인을 읽지 못했습니다. 먼저 키체인을 허용하고, 그래도 안 되면 공식 CLI에서 claude auth login을 실행하세요.",
+   "es": "No se leyó ninguna sesión de suscripción de Claude. Autoriza primero el Llavero; si sigue fallando, ejecuta claude auth login en la CLI oficial.",
+   "fr": "Aucune connexion d’abonnement Claude lue. Autorisez d’abord le trousseau ; si cela échoue encore, exécutez claude auth login dans la CLI officielle.",
+   "de": "Keine Claude-Abo-Anmeldung gelesen. Zuerst Schlüsselbundzugriff erlauben; wenn es weiter scheitert, claude auth login in der offiziellen CLI ausführen.",
+   "pt-BR": "Nenhum login de assinatura do Claude foi lido. Autorize antes o acesso às Chaves; se ainda falhar, execute claude auth login na CLI oficial."
+  },
+  "本地缓存": {
+   "zh-Hant": "本機快取",
+   "en": "Local cache",
+   "ja": "ローカルキャッシュ",
+   "ko": "로컬 캐시",
+   "es": "Caché local",
+   "fr": "Cache local",
+   "de": "Lokaler Cache",
+   "pt-BR": "Cache local"
+  },
+  "本地缓存，非实时额度。": {
+   "zh-Hant": "本機快取，非即時額度。",
+   "en": "Local cache, not live quota.",
+   "ja": "ローカルキャッシュで、リアルタイムの利用枠ではありません。",
+   "ko": "로컬 캐시이며 실시간 한도가 아닙니다.",
+   "es": "Caché local, no es una cuota en vivo.",
+   "fr": "Cache local, pas un quota en direct.",
+   "de": "Lokaler Cache, kein Live-Kontingent.",
+   "pt-BR": "Cache local, não é cota em tempo real."
+  },
+  "本地适配器遇到 {0}，已暂停查询。": {
+   "zh-Hant": "本機轉接器遇到 {0}，已暫停查詢。",
+   "en": "The local adapter hit {0}; queries are paused.",
+   "ja": "ローカルのアダプタで {0} が発生したため、照会を一時停止しました。",
+   "ko": "로컬 어댑터에서 {0} 오류가 발생해 조회를 일시 중지했습니다.",
+   "es": "El adaptador local encontró {0}; las consultas están en pausa.",
+   "fr": "L’adaptateur local a rencontré {0} ; les requêtes sont en pause.",
+   "de": "Der lokale Adapter meldete {0}; Abfragen sind pausiert.",
+   "pt-BR": "O adaptador local encontrou {0}; as consultas estão pausadas."
+  },
+  "本月": {
+   "zh-Hant": "本月",
+   "en": "this month",
+   "ja": "今月",
+   "ko": "이번 달",
+   "es": "este mes",
+   "fr": "ce mois-ci",
+   "de": "diesen Monat",
+   "pt-BR": "este mês"
+  },
+  "本机数据": {
+   "zh-Hant": "本機資料",
+   "en": "Local data",
+   "ja": "このMacのデータ",
+   "ko": "로컬 데이터",
+   "es": "Datos locales",
+   "fr": "Données locales",
+   "de": "Lokale Daten",
+   "pt-BR": "Dados locais"
+  },
+  "本机没有 Claude Code 的登录条目。请在官方 CLI 运行 claude auth login。": {
+   "zh-Hant": "本機沒有 Claude Code 的登入項目。請在官方 CLI 執行 claude auth login。",
+   "en": "This Mac has no Claude Code sign-in item. Run claude auth login in the official CLI.",
+   "ja": "この Mac には Claude Code のログイン項目がありません。公式 CLI で claude auth login を実行してください。",
+   "ko": "이 Mac에 Claude Code 로그인 항목이 없습니다. 공식 CLI에서 claude auth login을 실행하세요.",
+   "es": "Este Mac no tiene una sesión de Claude Code. Ejecuta claude auth login en la CLI oficial.",
+   "fr": "Ce Mac n’a pas d’élément de connexion Claude Code. Exécutez claude auth login dans la CLI officielle.",
+   "de": "Dieser Mac hat keinen Claude-Code-Anmeldeeintrag. In der offiziellen CLI claude auth login ausführen.",
+   "pt-BR": "Este Mac não tem item de login do Claude Code. Execute claude auth login na CLI oficial."
+  },
+  "本机钥匙串/CLI": {
+   "zh-Hant": "本機鑰匙圈／CLI",
+   "en": "local Keychain/CLI",
+   "ja": "ローカルのキーチェーン／CLI",
+   "ko": "로컬 키체인/CLI",
+   "es": "Llavero/CLI local",
+   "fr": "trousseau/CLI local",
+   "de": "lokaler Schlüsselbund/CLI",
+   "pt-BR": "Chaves/CLI local"
+  },
+  "本机额度服务": {
+   "zh-Hant": "本機額度服務",
+   "en": "local quota service",
+   "ja": "ローカルの利用枠サービス",
+   "ko": "로컬 한도 서비스",
+   "es": "servicio local de cuotas",
+   "fr": "service local de quotas",
+   "de": "lokaler Kontingentdienst",
+   "pt-BR": "serviço local de cotas"
+  },
+  "查询冷却中": {
+   "zh-Hant": "查詢冷卻中",
+   "en": "Cooling down",
+   "ja": "クールダウン中",
+   "ko": "조회 대기 중",
+   "es": "En pausa",
+   "fr": "En pause",
+   "de": "Pausiert",
+   "pt-BR": "Em pausa"
+  },
+  "查询暂停 · 约{0}分钟后可查询": {
+   "zh-Hant": "查詢暫停 · 約 {0} 分鐘後可查詢",
+   "en": "Paused · next check in about {0} min",
+   "ja": "一時停止 · 約{0}分後に確認可能",
+   "ko": "조회 일시 중지 · 약 {0}분 후 조회 가능",
+   "es": "En pausa · próxima consulta en unos {0} min",
+   "fr": "En pause · prochaine vérification dans ~{0} min",
+   "de": "Pausiert · nächste Prüfung in ca. {0} Min.",
+   "pt-BR": "Pausado · próxima consulta em cerca de {0} min"
+  },
+  "查询最小间隔": {
+   "zh-Hant": "查詢最小間隔",
+   "en": "Minimum query interval",
+   "ja": "最小照会間隔",
+   "ko": "최소 조회 간격",
+   "es": "Intervalo mínimo de consulta",
+   "fr": "Intervalle minimal de requête",
+   "de": "Minimales Abfrageintervall",
+   "pt-BR": "Intervalo mínimo de consulta"
+  },
+  "查询期间账号状态发生变化；未保存可能属于旧账号的额度。": {
+   "zh-Hant": "查詢期間帳號狀態發生變化；未儲存可能屬於舊帳號的額度。",
+   "en": "The account changed during the query; quota that may belong to the old account was not saved.",
+   "ja": "照会中にアカウントの状態が変わったため、以前のアカウントのものかもしれない利用枠は保存していません。",
+   "ko": "조회 중 계정 상태가 바뀌어 이전 계정의 것일 수 있는 한도는 저장하지 않았습니다.",
+   "es": "La cuenta cambió durante la consulta; no se guardó una cuota que podría ser de la cuenta anterior.",
+   "fr": "Le compte a changé pendant la requête ; un quota pouvant appartenir à l’ancien compte n’a pas été enregistré.",
+   "de": "Das Konto hat sich während der Abfrage geändert; ein möglicherweise fremdes Kontingent wurde nicht gespeichert.",
+   "pt-BR": "A conta mudou durante a consulta; uma cota que pode ser da conta anterior não foi salva."
+  },
+  "检查 Claude 读取": {
+   "zh-Hant": "檢查 Claude 讀取",
+   "en": "Check Claude access",
+   "ja": "Claude の読み取りを確認",
+   "ko": "Claude 읽기 확인",
+   "es": "Comprobar acceso a Claude",
+   "fr": "Vérifier l’accès à Claude",
+   "de": "Claude-Zugriff prüfen",
+   "pt-BR": "Verificar acesso ao Claude"
+  },
+  "检测到 Kimi 自定义服务地址。本版本不向替代服务发送官方登录凭证。": {
+   "zh-Hant": "偵測到 Kimi 自訂服務位址。本版本不會向替代服務傳送官方登入憑證。",
+   "en": "A custom Kimi service address was detected. This version never sends the official sign-in to an alternate service.",
+   "ja": "Kimi のカスタムサービスアドレスを検出しました。このバージョンは公式のログイン情報を代替サービスに送信しません。",
+   "ko": "Kimi 사용자 지정 서비스 주소가 감지되었습니다. 이 버전은 공식 로그인 자격 증명을 대체 서비스로 보내지 않습니다.",
+   "es": "Se detectó una dirección de servicio de Kimi personalizada. Esta versión nunca envía la sesión oficial a un servicio alternativo.",
+   "fr": "Adresse de service Kimi personnalisée détectée. Cette version n’envoie jamais la connexion officielle à un service tiers.",
+   "de": "Benutzerdefinierte Kimi-Dienstadresse erkannt. Diese Version sendet die offizielle Anmeldung nie an einen Ersatzdienst.",
+   "pt-BR": "Endereço de serviço do Kimi personalizado detectado. Esta versão nunca envia o login oficial a um serviço alternativo."
+  },
+  "模型额度": {
+   "zh-Hant": "模型額度",
+   "en": "Model quota",
+   "ja": "モデルの枠",
+   "ko": "모델 한도",
+   "es": "Cuota del modelo",
+   "fr": "Quota du modèle",
+   "de": "Modellkontingent",
+   "pt-BR": "Cota do modelo"
+  },
+  "正在刷新额度…": {
+   "zh-Hant": "正在重新整理額度…",
+   "en": "Refreshing quotas…",
+   "ja": "利用枠を更新中…",
+   "ko": "한도 새로 고치는 중…",
+   "es": "Actualizando cuotas…",
+   "fr": "Actualisation des quotas…",
+   "de": "Kontingente werden aktualisiert…",
+   "pt-BR": "Atualizando cotas…"
+  },
+  "正在检查 Claude 登录凭证读取…": {
+   "zh-Hant": "正在檢查 Claude 登入憑證讀取…",
+   "en": "Checking access to the Claude sign-in…",
+   "ja": "Claude のログイン情報を読み取れるか確認中…",
+   "ko": "Claude 로그인 자격 증명 읽기를 확인하는 중…",
+   "es": "Comprobando el acceso a la sesión de Claude…",
+   "fr": "Vérification de l’accès à la connexion Claude…",
+   "de": "Zugriff auf die Claude-Anmeldung wird geprüft…",
+   "pt-BR": "Verificando o acesso ao login do Claude…"
+  },
+  "正在读取…": {
+   "zh-Hant": "正在讀取…",
+   "en": "Reading…",
+   "ja": "読み取り中…",
+   "ko": "읽는 중…",
+   "es": "Leyendo…",
+   "fr": "Lecture…",
+   "de": "Wird abgerufen…",
+   "pt-BR": "Lendo…"
+  },
+  "此 OpenCode Key 所在工作区没有 OpenCode Go 订阅；Zen 余额不是 Go 套餐额度。": {
+   "zh-Hant": "此 OpenCode Key 所在的工作區沒有 OpenCode Go 訂閱；Zen 餘額不是 Go 方案額度。",
+   "en": "This OpenCode key's workspace has no OpenCode Go subscription; Zen balance is not Go plan quota.",
+   "ja": "この OpenCode キーのワークスペースには OpenCode Go のサブスクリプションがありません。Zen の残高は Go プランの枠ではありません。",
+   "ko": "이 OpenCode 키의 워크스페이스에는 OpenCode Go 구독이 없습니다. Zen 잔액은 Go 플랜 한도가 아닙니다.",
+   "es": "El espacio de trabajo de esta clave de OpenCode no tiene suscripción a OpenCode Go; el saldo de Zen no es cuota del plan Go.",
+   "fr": "L’espace de travail de cette clé OpenCode n’a pas d’abonnement OpenCode Go ; le solde Zen n’est pas un quota Go.",
+   "de": "Der Workspace dieses OpenCode-Schlüssels hat kein Abo für OpenCode Go; Zen-Guthaben ist kein Go-Kontingent.",
+   "pt-BR": "O workspace desta chave do OpenCode não tem assinatura do OpenCode Go; saldo do Zen não é cota do plano Go."
+  },
+  "此账号响应未提供可识别的数值额度；请查看官方用量页。": {
+   "zh-Hant": "此帳號回應未提供可辨識的數值額度；請查看官方用量頁。",
+   "en": "This account's response has no recognizable numeric quota. Check the official usage page.",
+   "ja": "このアカウントの応答には認識できる数値の利用枠がありません。公式の使用量ページを確認してください。",
+   "ko": "이 계정의 응답에 인식할 수 있는 수치 한도가 없습니다. 공식 사용량 페이지를 확인하세요.",
+   "es": "La respuesta de esta cuenta no tiene una cuota numérica reconocible. Consulta la página de uso oficial.",
+   "fr": "La réponse de ce compte ne contient aucun quota chiffré reconnaissable. Consultez la page d’utilisation officielle.",
+   "de": "Die Antwort dieses Kontos enthält kein erkennbares Zahlenkontingent. Offizielle Nutzungsseite prüfen.",
+   "pt-BR": "A resposta desta conta não traz cota numérica reconhecível. Veja a página de uso oficial."
+  },
+  "每周": {
+   "zh-Hant": "每週",
+   "en": "Weekly",
+   "ja": "毎週",
+   "ko": "매주",
+   "es": "Semanal",
+   "fr": "Hebdomadaire",
+   "de": "Wöchentlich",
+   "pt-BR": "Semanal"
+  },
+  "每周额度": {
+   "zh-Hant": "每週額度",
+   "en": "Weekly quota",
+   "ja": "週間の枠",
+   "ko": "주간 한도",
+   "es": "Cuota semanal",
+   "fr": "Quota hebdomadaire",
+   "de": "Wochenkontingent",
+   "pt-BR": "Cota semanal"
+  },
+  "每日额度": {
+   "zh-Hant": "每日額度",
+   "en": "Daily quota",
+   "ja": "日次の枠",
+   "ko": "일일 한도",
+   "es": "Cuota diaria",
+   "fr": "Quota quotidien",
+   "de": "Tageskontingent",
+   "pt-BR": "Cota diária"
+  },
+  "每日额度缓存": {
+   "zh-Hant": "每日額度快取",
+   "en": "Daily quota cache",
+   "ja": "日次枠キャッシュ",
+   "ko": "일일 한도 캐시",
+   "es": "Caché de cuota diaria",
+   "fr": "Cache du quota quotidien",
+   "de": "Tageskontingent-Cache",
+   "pt-BR": "Cache da cota diária"
+  },
+  "每月": {
+   "zh-Hant": "每月",
+   "en": "Monthly",
+   "ja": "毎月",
+   "ko": "매월",
+   "es": "Mensual",
+   "fr": "Mensuel",
+   "de": "Monatlich",
+   "pt-BR": "Mensal"
+  },
+  "每月 Credits": {
+   "zh-Hant": "每月 Credits",
+   "en": "Monthly Credits",
+   "ja": "毎月の Credits",
+   "ko": "월간 Credits",
+   "es": "Credits mensuales",
+   "fr": "Credits mensuels",
+   "de": "Monatliche Credits",
+   "pt-BR": "Credits mensais"
+  },
+  "每月 Premium": {
+   "zh-Hant": "每月 Premium",
+   "en": "Monthly Premium",
+   "ja": "毎月の Premium",
+   "ko": "월간 Premium",
+   "es": "Premium mensual",
+   "fr": "Premium mensuel",
+   "de": "Monatliches Premium",
+   "pt-BR": "Premium mensal"
+  },
+  "没有可量化的主窗口缓存": {
+   "zh-Hant": "沒有可量化的主視窗快取",
+   "en": "No measurable main-window cache",
+   "ja": "数値化できるメイン枠のキャッシュなし",
+   "ko": "수치화할 수 있는 기본 창 캐시 없음",
+   "es": "Sin caché medible de la ventana principal",
+   "fr": "Aucun cache mesurable de la fenêtre principale",
+   "de": "Kein messbarer Cache des Hauptfensters",
+   "pt-BR": "Sem cache mensurável da janela principal"
+  },
+  "没有可量化的月额度": {
+   "zh-Hant": "沒有可量化的月額度",
+   "en": "No measurable monthly quota",
+   "ja": "数値化できる月間枠なし",
+   "ko": "수치화할 수 있는 월간 한도 없음",
+   "es": "Sin cuota mensual medible",
+   "fr": "Aucun quota mensuel mesurable",
+   "de": "Kein messbares Monatskontingent",
+   "pt-BR": "Sem cota mensal mensurável"
+  },
+  "没有遥测，不解析或上传聊天内容。仅在启用后读取对应应用的指定状态；MiniMax 订阅 Key 保存在本机钥匙串，凭证只发给所属服务商。": {
+   "zh-Hant": "沒有遙測，不解析或上傳聊天內容。僅在啟用後讀取對應 App 的指定狀態；MiniMax 訂閱 Key 儲存在本機鑰匙圈，憑證只傳送給所屬服務商。",
+   "en": "No telemetry; chat content is never parsed or uploaded. Only the specific state of enabled apps is read. The MiniMax subscription key stays in this Mac's Keychain, and credentials go only to their own provider.",
+   "ja": "テレメトリはなく、チャット内容を解析・送信することもありません。有効にしたアプリの特定の状態のみを読み取ります。MiniMax のサブスクリプションキーはこの Mac のキーチェーンに保存され、認証情報はそれぞれのサービスにのみ送信されます。",
+   "ko": "원격 분석이 없으며 채팅 내용을 분석하거나 업로드하지 않습니다. 활성화한 앱의 지정된 상태만 읽습니다. MiniMax 구독 키는 이 Mac의 키체인에 저장되며 자격 증명은 해당 서비스에만 전송됩니다.",
+   "es": "Sin telemetría; nunca se analiza ni se sube el contenido de los chats. Solo se lee el estado concreto de las apps activadas. La clave de suscripción de MiniMax se guarda en el Llavero de este Mac y las credenciales solo van a su proveedor.",
+   "fr": "Aucune télémétrie ; le contenu des conversations n’est jamais analysé ni envoyé. Seul l’état précis des apps activées est lu. La clé d’abonnement MiniMax reste dans le trousseau de ce Mac et les identifiants ne vont qu’à leur fournisseur.",
+   "de": "Keine Telemetrie; Chatinhalte werden nie ausgewertet oder hochgeladen. Nur der bestimmte Status aktivierter Apps wird gelesen. Der MiniMax-Abo-Schlüssel liegt im Schlüsselbund dieses Mac, Zugangsdaten gehen nur an ihren Anbieter.",
+   "pt-BR": "Sem telemetria; o conteúdo das conversas nunca é analisado nem enviado. Só o estado específico dos apps ativados é lido. A chave de assinatura do MiniMax fica nas Chaves deste Mac e as credenciais vão apenas ao respectivo provedor."
+  },
+  "消息额度": {
+   "zh-Hant": "訊息額度",
+   "en": "Message quota",
+   "ja": "メッセージの枠",
+   "ko": "메시지 한도",
+   "es": "Cuota de mensajes",
+   "fr": "Quota de messages",
+   "de": "Nachrichtenkontingent",
+   "pt-BR": "Cota de mensagens"
+  },
+  "清除额度缓存": {
+   "zh-Hant": "清除額度快取",
+   "en": "Clear quota cache",
+   "ja": "利用枠のキャッシュを消去",
+   "ko": "한도 캐시 지우기",
+   "es": "Borrar caché de cuotas",
+   "fr": "Effacer le cache des quotas",
+   "de": "Kontingent-Cache leeren",
+   "pt-BR": "Limpar cache de cotas"
+  },
+  "清除额度缓存…": {
+   "zh-Hant": "清除額度快取…",
+   "en": "Clear quota cache…",
+   "ja": "利用枠のキャッシュを消去…",
+   "ko": "한도 캐시 지우기…",
+   "es": "Borrar caché de cuotas…",
+   "fr": "Effacer le cache des quotas…",
+   "de": "Kontingent-Cache leeren…",
+   "pt-BR": "Limpar cache de cotas…"
+  },
+  "点击外部时保持面板": {
+   "zh-Hant": "點擊外部時保持面板",
+   "en": "Keep the panel open when clicking outside",
+   "ja": "外側をクリックしてもパネルを表示",
+   "ko": "바깥을 클릭해도 패널 유지",
+   "es": "Mantener el panel al hacer clic fuera",
+   "fr": "Garder le panneau ouvert en cliquant ailleurs",
+   "de": "Bereich bei Klick außerhalb offen lassen",
+   "pt-BR": "Manter o painel ao clicar fora"
+  },
+  "登录 Mac 时启动": {
+   "zh-Hant": "登入 Mac 時啟動",
+   "en": "Open at login",
+   "ja": "ログイン時に起動",
+   "ko": "로그인 시 열기",
+   "es": "Abrir al iniciar sesión",
+   "fr": "Ouvrir à la connexion",
+   "de": "Beim Anmelden öffnen",
+   "pt-BR": "Abrir ao iniciar sessão"
+  },
+  "登录完成后回到 Monitor 点击刷新。": {
+   "zh-Hant": "登入完成後回到 Monitor 按一下重新整理。",
+   "en": "After signing in, return to Monitor and click refresh.",
+   "ja": "ログインが完了したら Monitor に戻って更新をクリックしてください。",
+   "ko": "로그인을 마친 뒤 Monitor로 돌아와 새로 고침을 누르세요.",
+   "es": "Después de iniciar sesión, vuelve a Monitor y pulsa actualizar.",
+   "fr": "Une fois connecté, revenez dans Monitor et cliquez sur actualiser.",
+   "de": "Nach der Anmeldung zu Monitor zurückkehren und auf Aktualisieren klicken.",
+   "pt-BR": "Depois de entrar, volte ao Monitor e clique em atualizar."
+  },
+  "登录状态": {
+   "zh-Hant": "登入狀態",
+   "en": "Sign-in status",
+   "ja": "ログイン状態",
+   "ko": "로그인 상태",
+   "es": "Estado de inicio de sesión",
+   "fr": "État de connexion",
+   "de": "Anmeldestatus",
+   "pt-BR": "Status de login"
+  },
+  "登录钥匙串已锁定，保留上次读数；解锁后自动恢复，不会弹窗。": {
+   "zh-Hant": "登入鑰匙圈已鎖定，保留上次讀數；解鎖後自動恢復，不會彈窗。",
+   "en": "The login keychain is locked; the last reading is kept. It resumes after unlocking, without prompts.",
+   "ja": "ログインキーチェーンがロックされているため、前回の値を保持します。ロック解除後に自動で再開し、ダイアログは表示しません。",
+   "ko": "로그인 키체인이 잠겨 있어 마지막 측정값을 유지합니다. 잠금 해제 후 팝업 없이 자동으로 다시 시작합니다.",
+   "es": "El llavero de inicio de sesión está bloqueado; se conserva la última lectura. Se reanuda al desbloquearlo, sin avisos.",
+   "fr": "Le trousseau de session est verrouillé ; la dernière valeur est conservée. La lecture reprend après déverrouillage, sans invite.",
+   "de": "Der Anmelde-Schlüsselbund ist gesperrt; der letzte Wert bleibt. Nach dem Entsperren geht es ohne Rückfrage weiter.",
+   "pt-BR": "As chaves de login estão bloqueadas; a última leitura é mantida. Retoma após o desbloqueio, sem avisos."
+  },
+  "登录钥匙串已锁定，解锁后再试；后台不会弹窗。": {
+   "zh-Hant": "登入鑰匙圈已鎖定，解鎖後再試；背景不會彈窗。",
+   "en": "The login keychain is locked. Unlock it and try again; nothing pops up in the background.",
+   "ja": "ログインキーチェーンがロックされています。ロックを解除してからもう一度お試しください。バックグラウンドではダイアログを表示しません。",
+   "ko": "로그인 키체인이 잠겨 있습니다. 잠금을 해제한 뒤 다시 시도하세요. 백그라운드에서는 팝업이 뜨지 않습니다.",
+   "es": "El llavero de inicio de sesión está bloqueado. Desbloquéalo e inténtalo de nuevo; no aparecen avisos en segundo plano.",
+   "fr": "Le trousseau de session est verrouillé. Déverrouillez-le et réessayez ; rien ne s’affiche en arrière-plan.",
+   "de": "Der Anmelde-Schlüsselbund ist gesperrt. Entsperren und erneut versuchen; im Hintergrund erscheint nichts.",
+   "pt-BR": "As chaves de login estão bloqueadas. Desbloqueie e tente de novo; nada aparece em segundo plano."
+  },
+  "登录项设置未成功，请在系统设置中检查。": {
+   "zh-Hant": "登入項目設定未成功，請在系統設定中檢查。",
+   "en": "Could not change the login item. Check System Settings.",
+   "ja": "ログイン項目を設定できませんでした。システム設定を確認してください。",
+   "ko": "로그인 항목을 설정하지 못했습니다. 시스템 설정을 확인하세요.",
+   "es": "No se pudo cambiar el ítem de inicio. Revisa Ajustes del Sistema.",
+   "fr": "Impossible de modifier l’élément de connexion. Vérifiez les Réglages Système.",
+   "de": "Anmeldeobjekt konnte nicht geändert werden. Systemeinstellungen prüfen.",
+   "pt-BR": "Não foi possível alterar o item de início. Verifique os Ajustes do Sistema."
+  },
+  "百分比精度": {
+   "zh-Hant": "百分比精度",
+   "en": "Percentage precision",
+   "ja": "パーセントの精度",
+   "ko": "백분율 정밀도",
+   "es": "Precisión del porcentaje",
+   "fr": "Précision du pourcentage",
+   "de": "Prozentgenauigkeit",
+   "pt-BR": "Precisão da porcentagem"
+  },
+  "移除 Key": {
+   "zh-Hant": "移除 Key",
+   "en": "Remove key",
+   "ja": "キーを削除",
+   "ko": "키 삭제",
+   "es": "Quitar clave",
+   "fr": "Supprimer la clé",
+   "de": "Schlüssel entfernen",
+   "pt-BR": "Remover chave"
+  },
+  "移除本区域 Key": {
+   "zh-Hant": "移除本區域 Key",
+   "en": "Remove this region's key",
+   "ja": "この地域のキーを削除",
+   "ko": "이 지역의 키 삭제",
+   "es": "Quitar la clave de esta región",
+   "fr": "Supprimer la clé de cette région",
+   "de": "Schlüssel dieser Region entfernen",
+   "pt-BR": "Remover a chave desta região"
+  },
+  "窗口长度直接采用官方返回值。登录和续期由 Codex CLI 负责。": {
+   "zh-Hant": "視窗長度直接採用官方回傳值。登入和續期由 Codex CLI 負責。",
+   "en": "Window lengths come straight from the official response. Sign-in and renewal are handled by Codex CLI.",
+   "ja": "ウィンドウの長さは公式の値をそのまま使います。ログインと更新は Codex CLI が行います。",
+   "ko": "창 길이는 공식 응답 값을 그대로 사용합니다. 로그인과 갱신은 Codex CLI가 담당합니다.",
+   "es": "La duración de las ventanas viene directamente de la respuesta oficial. Codex CLI gestiona el inicio de sesión y la renovación.",
+   "fr": "La durée des fenêtres provient directement de la réponse officielle. Codex CLI gère la connexion et le renouvellement.",
+   "de": "Fensterlängen stammen direkt aus der offiziellen Antwort. Anmeldung und Erneuerung übernimmt die Codex-CLI.",
+   "pt-BR": "A duração das janelas vem direto da resposta oficial. O login e a renovação ficam a cargo da Codex CLI."
+  },
+  "等待下次检查": {
+   "zh-Hant": "等待下次檢查",
+   "en": "Waiting for next check",
+   "ja": "次の確認を待機中",
+   "ko": "다음 확인 대기",
+   "es": "Esperando próxima consulta",
+   "fr": "En attente de la prochaine vérification",
+   "de": "Wartet auf nächste Prüfung",
+   "pt-BR": "Aguardando próxima verificação"
+  },
+  "等待读取": {
+   "zh-Hant": "等待讀取",
+   "en": "Waiting to read",
+   "ja": "読み取り待ち",
+   "ko": "읽기 대기",
+   "es": "Esperando lectura",
+   "fr": "En attente de lecture",
+   "de": "Wartet auf Abruf",
+   "pt-BR": "Aguardando leitura"
+  },
+  "等待重置确认": {
+   "zh-Hant": "等待重設確認",
+   "en": "Awaiting reset",
+   "ja": "リセット確認待ち",
+   "ko": "초기화 확인 대기",
+   "es": "Esperando reinicio",
+   "fr": "Réinit. en attente",
+   "de": "Reset ausstehend",
+   "pt-BR": "Aguardando renovação"
+  },
+  "管理套餐": {
+   "zh-Hant": "管理方案",
+   "en": "Manage plans",
+   "ja": "プランを管理",
+   "ko": "플랜 관리",
+   "es": "Gestionar planes",
+   "fr": "Gérer les forfaits",
+   "de": "Pläne verwalten",
+   "pt-BR": "Gerenciar planos"
+  },
+  "系统拒绝了 Monitor Keychain 组件的读取。请在设置 → 账号连接 → Claude 点“检查 Claude 读取”；后台不会弹出钥匙串窗口。": {
+   "zh-Hant": "系統拒絕了 Monitor Keychain 元件的讀取。請在設定 → 帳號連線 → Claude 按「檢查 Claude 讀取」；背景不會彈出鑰匙圈視窗。",
+   "en": "macOS denied the Monitor Keychain helper. Go to Settings → Accounts → Claude and click “Check Claude access”; no Keychain window appears in the background.",
+   "ja": "システムが Monitor Keychain コンポーネントの読み取りを拒否しました。設定 → アカウント → Claude で「Claude の読み取りを確認」をクリックしてください。バックグラウンドではキーチェーンのダイアログを表示しません。",
+   "ko": "시스템이 Monitor Keychain 도우미의 읽기를 거부했습니다. 설정 → 계정 → Claude에서 'Claude 읽기 확인'을 누르세요. 백그라운드에서는 키체인 창이 뜨지 않습니다.",
+   "es": "macOS rechazó el asistente del Llavero de Monitor. Ve a Ajustes → Cuentas → Claude y pulsa «Comprobar acceso a Claude»; no aparece ninguna ventana del Llavero en segundo plano.",
+   "fr": "macOS a refusé l’assistant de trousseau de Monitor. Allez dans Réglages → Comptes → Claude et cliquez sur « Vérifier l’accès à Claude » ; aucune fenêtre de trousseau n’apparaît en arrière-plan.",
+   "de": "macOS hat den Schlüsselbund-Helfer von Monitor abgelehnt. Unter Einstellungen → Konten → Claude auf „Claude-Zugriff prüfen“ klicken; im Hintergrund erscheint kein Schlüsselbundfenster.",
+   "pt-BR": "O macOS recusou o auxiliar das Chaves do Monitor. Vá em Ajustes → Contas → Claude e clique em “Verificar acesso ao Claude”; nenhuma janela das Chaves aparece em segundo plano."
+  },
+  "系统黑白": {
+   "zh-Hant": "系統黑白",
+   "en": "System monochrome",
+   "ja": "システムのモノクロ",
+   "ko": "시스템 흑백",
+   "es": "Monocromo del sistema",
+   "fr": "Monochrome système",
+   "de": "System-Einfarbig",
+   "pt-BR": "Monocromático do sistema"
+  },
+  "紧凑间距": {
+   "zh-Hant": "緊湊間距",
+   "en": "Compact spacing",
+   "ja": "詰めて表示",
+   "ko": "좁은 간격",
+   "es": "Espaciado compacto",
+   "fr": "Espacement compact",
+   "de": "Kompakter Abstand",
+   "pt-BR": "Espaçamento compacto"
+  },
+  "缓存": {
+   "zh-Hant": "快取",
+   "en": "cached",
+   "ja": "キャッシュ",
+   "ko": "캐시",
+   "es": "en caché",
+   "fr": "en cache",
+   "de": "Cache",
+   "pt-BR": "em cache"
+  },
+  "缓存文件 {0}": {
+   "zh-Hant": "快取檔案 {0}",
+   "en": "Cache file {0}",
+   "ja": "キャッシュ {0}",
+   "ko": "캐시 파일 {0}",
+   "es": "Caché {0}",
+   "fr": "Cache {0}",
+   "de": "Cache {0}",
+   "pt-BR": "Cache {0}"
+  },
+  "缓存文件修改时间（不是额度实测时间）：{0}；非实时。": {
+   "zh-Hant": "快取檔案修改時間（不是額度實測時間）：{0}；非即時。",
+   "en": "Cache file modified (not when the quota was measured): {0}. Not live.",
+   "ja": "キャッシュファイルの更新時刻（利用枠の計測時刻ではありません）：{0}。リアルタイムではありません。",
+   "ko": "캐시 파일 수정 시각(한도 측정 시각 아님): {0}. 실시간 아님.",
+   "es": "Archivo de caché modificado (no es la hora de medición): {0}. No en vivo.",
+   "fr": "Fichier de cache modifié (pas l’heure de mesure) : {0}. Pas en direct.",
+   "de": "Cache-Datei geändert (nicht der Messzeitpunkt): {0}. Nicht live.",
+   "pt-BR": "Arquivo de cache modificado (não é a hora da medição): {0}. Não em tempo real."
+  },
+  "缺少 Python 运行环境，请安装开发依赖或使用包含运行时的发行包。": {
+   "zh-Hant": "缺少 Python 執行環境，請安裝開發相依套件或使用包含執行環境的發行套件。",
+   "en": "Python runtime missing. Install the developer dependencies or use a release package that includes the runtime.",
+   "ja": "Python の実行環境がありません。開発用の依存関係をインストールするか、ランタイム同梱の配布パッケージを使ってください。",
+   "ko": "Python 런타임이 없습니다. 개발 의존성을 설치하거나 런타임이 포함된 배포 패키지를 사용하세요.",
+   "es": "Falta el entorno de Python. Instala las dependencias de desarrollo o usa un paquete que incluya el entorno.",
+   "fr": "Environnement Python manquant. Installez les dépendances de développement ou utilisez un paquet qui l’inclut.",
+   "de": "Python-Laufzeit fehlt. Entwicklerabhängigkeiten installieren oder ein Paket mit Laufzeit verwenden.",
+   "pt-BR": "Falta o ambiente Python. Instale as dependências de desenvolvimento ou use um pacote que inclua o ambiente."
+  },
+  "网络连接或 TLS 校验失败；请检查网络后重试。": {
+   "zh-Hant": "網路連線或 TLS 驗證失敗；請檢查網路後重試。",
+   "en": "Network connection or TLS verification failed. Check the network and try again.",
+   "ja": "ネットワーク接続または TLS の検証に失敗しました。ネットワークを確認してから再試行してください。",
+   "ko": "네트워크 연결 또는 TLS 검증에 실패했습니다. 네트워크를 확인한 뒤 다시 시도하세요.",
+   "es": "Falló la conexión de red o la verificación TLS. Revisa la red e inténtalo de nuevo.",
+   "fr": "Échec de la connexion réseau ou de la vérification TLS. Vérifiez le réseau puis réessayez.",
+   "de": "Netzwerkverbindung oder TLS-Prüfung fehlgeschlagen. Netzwerk prüfen und erneut versuchen.",
+   "pt-BR": "Falha na conexão de rede ou na verificação TLS. Verifique a rede e tente de novo."
+  },
+  "自动": {
+   "zh-Hant": "自動",
+   "en": "Automatic",
+   "ja": "自動",
+   "ko": "자동",
+   "es": "Automática",
+   "fr": "Automatique",
+   "de": "Automatisch",
+   "pt-BR": "Automática"
+  },
+  "自动刷新": {
+   "zh-Hant": "自動重新整理",
+   "en": "Auto-refresh",
+   "ja": "自動更新",
+   "ko": "자동 새로 고침",
+   "es": "Actualización automática",
+   "fr": "Actualisation automatique",
+   "de": "Automatisch aktualisieren",
+   "pt-BR": "Atualização automática"
+  },
+  "自动刷新已暂停": {
+   "zh-Hant": "自動重新整理已暫停",
+   "en": "Auto-refresh paused",
+   "ja": "自動更新は一時停止中",
+   "ko": "자동 새로 고침 일시 중지됨",
+   "es": "Actualización automática en pausa",
+   "fr": "Actualisation automatique en pause",
+   "de": "Automatische Aktualisierung pausiert",
+   "pt-BR": "Atualização automática pausada"
+  },
+  "菜单栏图标": {
+   "zh-Hant": "選單列圖示",
+   "en": "Menu bar icon",
+   "ja": "メニューバーアイコン",
+   "ko": "메뉴 막대 아이콘",
+   "es": "Icono de la barra de menús",
+   "fr": "Icône de la barre des menus",
+   "de": "Menüleistensymbol",
+   "pt-BR": "Ícone da barra de menus"
+  },
+  "菜单栏图标预览，仍为黑白": {
+   "zh-Hant": "選單列圖示預覽，仍為黑白",
+   "en": "Menu bar icon preview, still monochrome",
+   "ja": "メニューバーアイコンのプレビュー（モノクロのまま）",
+   "ko": "메뉴 막대 아이콘 미리 보기(흑백 유지)",
+   "es": "Vista previa del icono de la barra de menús, sigue en blanco y negro",
+   "fr": "Aperçu de l’icône de la barre des menus, toujours monochrome",
+   "de": "Vorschau des Menüleistensymbols, weiterhin einfarbig",
+   "pt-BR": "Prévia do ícone da barra de menus, continua monocromático"
+  },
+  "菜单栏按各平台的真实窗口显示：5 小时、月度或每日缓存。已有额度保持清晰实线，缓存时间见悬停提示和面板；虚线表示暂无额度读数。": {
+   "zh-Hant": "選單列依各平台的真實視窗顯示：5 小時、月度或每日快取。已有額度保持清晰實線，快取時間見懸停提示和面板；虛線表示暫無額度讀數。",
+   "en": "The menu bar uses each provider's real window: 5 hours, monthly or a daily cache. Known quotas stay solid; cache times are in the tooltip and panel. A dashed bar means no reading yet.",
+   "ja": "メニューバーは各サービスの実際のウィンドウ（5時間、月間、日次キャッシュ）で表示します。取得済みの枠は実線のまま表示され、キャッシュ時刻はツールチップとパネルで確認できます。破線はまだ値がないことを示します。",
+   "ko": "메뉴 막대는 각 서비스의 실제 창(5시간, 월간 또는 일일 캐시)을 기준으로 표시합니다. 측정된 한도는 실선으로 유지되며 캐시 시각은 툴팁과 패널에서 볼 수 있습니다. 점선은 아직 값이 없음을 뜻합니다.",
+   "es": "La barra de menús usa la ventana real de cada proveedor: 5 horas, mensual o caché diaria. Las cuotas conocidas se ven sólidas; la hora de caché está en la ayuda y el panel. Una barra discontinua indica que aún no hay lectura.",
+   "fr": "La barre des menus suit la fenêtre réelle de chaque fournisseur : 5 heures, mensuelle ou cache quotidien. Les quotas connus restent pleins ; l’heure du cache figure dans l’infobulle et le panneau. Une barre en pointillés signifie aucune valeur.",
+   "de": "Die Menüleiste nutzt das echte Fenster jedes Anbieters: 5 Stunden, monatlich oder Tages-Cache. Bekannte Kontingente bleiben durchgezogen; Cache-Zeiten stehen im Tooltip und im Bereich. Gestrichelt bedeutet: noch kein Wert.",
+   "pt-BR": "A barra de menus usa a janela real de cada provedor: 5 horas, mensal ou cache diário. Cotas conhecidas ficam sólidas; a hora do cache aparece na dica e no painel. Uma barra tracejada indica que ainda não há leitura."
+  },
+  "菜单栏最多 {0} 条横杠，取排序在前的已启用套餐；其余套餐仍在面板中显示。": {
+   "zh-Hant": "選單列最多 {0} 條橫條，取排序在前的已啟用方案；其餘方案仍在面板中顯示。",
+   "en": "The menu bar shows at most {0} bars, taken from the first enabled plans; all others still appear in the panel.",
+   "ja": "メニューバーには最大 {0} 本のバーを表示し、並び順で先頭の有効なプランを使います。その他のプランはパネルに表示されます。",
+   "ko": "메뉴 막대에는 최대 {0}개의 막대가 표시되며 순서상 앞쪽의 활성화된 플랜이 사용됩니다. 나머지 플랜은 패널에 표시됩니다.",
+   "es": "La barra de menús muestra como máximo {0} barras, de los primeros planes activados; los demás siguen en el panel.",
+   "fr": "La barre des menus affiche au plus {0} barres, issues des premiers forfaits activés ; les autres restent dans le panneau.",
+   "de": "Die Menüleiste zeigt höchstens {0} Balken der ersten aktivierten Pläne; alle anderen bleiben im Bereich sichtbar.",
+   "pt-BR": "A barra de menus mostra no máximo {0} barras, dos primeiros planos ativados; os demais continuam no painel."
+  },
+  "菜单栏预览": {
+   "zh-Hant": "選單列預覽",
+   "en": "Menu bar preview",
+   "ja": "メニューバーのプレビュー",
+   "ko": "메뉴 막대 미리 보기",
+   "es": "Vista previa de la barra de menús",
+   "fr": "Aperçu de la barre des menus",
+   "de": "Menüleistenvorschau",
+   "pt-BR": "Prévia da barra de menus"
+  },
+  "计费周期": {
+   "zh-Hant": "計費週期",
+   "en": "billing cycle",
+   "ja": "請求期間",
+   "ko": "청구 주기",
+   "es": "ciclo de facturación",
+   "fr": "cycle de facturation",
+   "de": "Abrechnungszeitraum",
+   "pt-BR": "ciclo de cobrança"
+  },
+  "计费周期按官方响应显示。不限量不等同于 100% 剩余。": {
+   "zh-Hant": "計費週期依官方回應顯示。不限量不等同於 100% 剩餘。",
+   "en": "The billing cycle follows the official response. Unlimited does not mean 100% left.",
+   "ja": "請求期間は公式の応答どおりに表示します。無制限は残り 100% という意味ではありません。",
+   "ko": "청구 주기는 공식 응답대로 표시합니다. 무제한은 100% 남음과 같지 않습니다.",
+   "es": "El ciclo de facturación sigue la respuesta oficial. Ilimitado no significa 100 % restante.",
+   "fr": "Le cycle de facturation suit la réponse officielle. Illimité ne signifie pas 100 % restant.",
+   "de": "Der Abrechnungszeitraum folgt der offiziellen Antwort. Unbegrenzt heißt nicht 100 % übrig.",
+   "pt-BR": "O ciclo de cobrança segue a resposta oficial. Ilimitado não significa 100% restante."
+  },
+  "订阅周期": {
+   "zh-Hant": "訂閱週期",
+   "en": "billing cycle",
+   "ja": "サブスクリプション期間",
+   "ko": "구독 주기",
+   "es": "ciclo de suscripción",
+   "fr": "cycle d’abonnement",
+   "de": "Abozeitraum",
+   "pt-BR": "ciclo da assinatura"
+  },
+  "设置": {
+   "zh-Hant": "設定",
+   "en": "Settings",
+   "ja": "設定",
+   "ko": "설정",
+   "es": "Ajustes",
+   "fr": "Réglages",
+   "de": "Einstellungen",
+   "pt-BR": "Ajustes"
+  },
+  "设置分类": {
+   "zh-Hant": "設定分類",
+   "en": "Settings section",
+   "ja": "設定の分類",
+   "ko": "설정 분류",
+   "es": "Sección de ajustes",
+   "fr": "Section des réglages",
+   "de": "Einstellungsbereich",
+   "pt-BR": "Seção de ajustes"
+  },
+  "该 MiniMax Key 未对应有效 Token Plan；积分余额不代表套餐额度。": {
+   "zh-Hant": "該 MiniMax Key 未對應有效 Token Plan；點數餘額不代表方案額度。",
+   "en": "This MiniMax key has no active Token Plan; a credit balance is not plan quota.",
+   "ja": "この MiniMax キーには有効な Token Plan がありません。クレジット残高はプランの枠ではありません。",
+   "ko": "이 MiniMax 키에 유효한 Token Plan이 없습니다. 크레딧 잔액은 플랜 한도가 아닙니다.",
+   "es": "Esta clave de MiniMax no tiene un Token Plan activo; el saldo de créditos no es cuota del plan.",
+   "fr": "Cette clé MiniMax n’a pas de Token Plan actif ; un solde de crédits n’est pas un quota de forfait.",
+   "de": "Zu diesem MiniMax-Schlüssel gibt es keinen aktiven Token Plan; ein Guthaben ist kein Plankontingent.",
+   "pt-BR": "Esta chave do MiniMax não tem Token Plan ativo; saldo de créditos não é cota do plano."
+  },
+  "语言": {
+   "zh-Hant": "語言",
+   "en": "Language",
+   "ja": "言語",
+   "ko": "언어",
+   "es": "Idioma",
+   "fr": "Langue",
+   "de": "Sprache",
+   "pt-BR": "Idioma"
+  },
+  "请先使用官方 kiro-cli login 登录。": {
+   "zh-Hant": "請先使用官方 kiro-cli login 登入。",
+   "en": "Sign in first with the official kiro-cli login.",
+   "ja": "先に公式の kiro-cli login でログインしてください。",
+   "ko": "먼저 공식 kiro-cli login으로 로그인하세요.",
+   "es": "Inicia sesión primero con el comando oficial kiro-cli login.",
+   "fr": "Connectez-vous d’abord avec la commande officielle kiro-cli login.",
+   "de": "Zuerst mit dem offiziellen kiro-cli login anmelden.",
+   "pt-BR": "Entre antes com o comando oficial kiro-cli login."
+  },
+  "请先在 Cursor 官方应用登录，再启用此套餐。": {
+   "zh-Hant": "請先在 Cursor 官方 App 登入，再啟用此方案。",
+   "en": "Sign in to the official Cursor app first, then enable this plan.",
+   "ja": "先に公式の Cursor アプリでログインしてから、このプランを有効にしてください。",
+   "ko": "먼저 공식 Cursor 앱에 로그인한 뒤 이 플랜을 활성화하세요.",
+   "es": "Inicia sesión primero en la app oficial de Cursor y luego activa este plan.",
+   "fr": "Connectez-vous d’abord à l’app officielle Cursor, puis activez ce forfait.",
+   "de": "Zuerst in der offiziellen Cursor-App anmelden, dann diesen Plan aktivieren.",
+   "pt-BR": "Entre antes no app oficial do Cursor e depois ative este plano."
+  },
+  "请先安装对应官方应用，再启用套餐。": {
+   "zh-Hant": "請先安裝對應的官方 App，再啟用方案。",
+   "en": "Install the official app first, then enable the plan.",
+   "ja": "先に公式アプリをインストールしてから、プランを有効にしてください。",
+   "ko": "먼저 공식 앱을 설치한 뒤 플랜을 활성화하세요.",
+   "es": "Instala primero la app oficial y luego activa el plan.",
+   "fr": "Installez d’abord l’app officielle, puis activez le forfait.",
+   "de": "Zuerst die offizielle App installieren, dann den Plan aktivieren.",
+   "pt-BR": "Instale antes o app oficial e depois ative o plano."
+  },
+  "请先安装并登录官方 Codex CLI。": {
+   "zh-Hant": "請先安裝並登入官方 Codex CLI。",
+   "en": "Install and sign in to the official Codex CLI first.",
+   "ja": "先に公式の Codex CLI をインストールしてログインしてください。",
+   "ko": "먼저 공식 Codex CLI를 설치하고 로그인하세요.",
+   "es": "Instala e inicia sesión primero en la CLI oficial de Codex.",
+   "fr": "Installez la CLI officielle Codex et connectez-vous d’abord.",
+   "de": "Zuerst die offizielle Codex-CLI installieren und anmelden.",
+   "pt-BR": "Instale e entre antes na CLI oficial do Codex."
+  },
+  "请先打开 Windsurf 并登录，让官方应用更新套餐缓存。": {
+   "zh-Hant": "請先開啟 Windsurf 並登入，讓官方 App 更新方案快取。",
+   "en": "Open and sign in to Windsurf first so the official app updates its plan cache.",
+   "ja": "先に Windsurf を開いてログインし、公式アプリにプランのキャッシュを更新させてください。",
+   "ko": "먼저 Windsurf를 열고 로그인해 공식 앱이 플랜 캐시를 업데이트하게 하세요.",
+   "es": "Abre Windsurf e inicia sesión primero para que la app oficial actualice la caché del plan.",
+   "fr": "Ouvrez Windsurf et connectez-vous d’abord pour que l’app officielle mette à jour le cache du forfait.",
+   "de": "Zuerst Windsurf öffnen und anmelden, damit die offizielle App den Plan-Cache aktualisiert.",
+   "pt-BR": "Abra o Windsurf e entre antes para o app oficial atualizar o cache do plano."
+  },
+  "请先用 GitHub CLI 登录，或配置可访问 Copilot 额度的账号。": {
+   "zh-Hant": "請先用 GitHub CLI 登入，或設定可存取 Copilot 額度的帳號。",
+   "en": "Sign in with GitHub CLI first, or set up an account that can read Copilot quota.",
+   "ja": "先に GitHub CLI でログインするか、Copilot の利用枠にアクセスできるアカウントを設定してください。",
+   "ko": "먼저 GitHub CLI로 로그인하거나 Copilot 한도에 접근할 수 있는 계정을 설정하세요.",
+   "es": "Inicia sesión primero con GitHub CLI o configura una cuenta que pueda leer la cuota de Copilot.",
+   "fr": "Connectez-vous d’abord avec GitHub CLI ou configurez un compte pouvant lire le quota Copilot.",
+   "de": "Zuerst mit GitHub CLI anmelden oder ein Konto einrichten, das das Copilot-Kontingent lesen darf.",
+   "pt-BR": "Entre antes com a GitHub CLI ou configure uma conta que possa ler a cota do Copilot."
+  },
+  "请在系统设置的登录项中允许 Monitor。": {
+   "zh-Hant": "請在系統設定的登入項目中允許 Monitor。",
+   "en": "Allow Monitor under Login Items in System Settings.",
+   "ja": "システム設定のログイン項目で Monitor を許可してください。",
+   "ko": "시스템 설정의 로그인 항목에서 Monitor를 허용하세요.",
+   "es": "Permite Monitor en Ítems de inicio de Ajustes del Sistema.",
+   "fr": "Autorisez Monitor dans Ouverture à la connexion des Réglages Système.",
+   "de": "Monitor in den Systemeinstellungen unter Anmeldeobjekte erlauben.",
+   "pt-BR": "Permita o Monitor em Itens de Início nos Ajustes do Sistema."
+  },
+  "请在终端运行 kiro-cli login；登录完成后返回刷新。": {
+   "zh-Hant": "請在終端機執行 kiro-cli login；登入完成後返回重新整理。",
+   "en": "Run kiro-cli login in Terminal, then come back and refresh.",
+   "ja": "ターミナルで kiro-cli login を実行し、ログイン後に戻って更新してください。",
+   "ko": "터미널에서 kiro-cli login을 실행하고 로그인한 뒤 돌아와 새로 고치세요.",
+   "es": "Ejecuta kiro-cli login en Terminal y luego vuelve y actualiza.",
+   "fr": "Exécutez kiro-cli login dans Terminal, puis revenez et actualisez.",
+   "de": "kiro-cli login im Terminal ausführen, dann zurückkehren und aktualisieren.",
+   "pt-BR": "Execute kiro-cli login no Terminal, depois volte e atualize."
+  },
+  "请在设置 → 账号连接 → Claude 点“检查 Claude 读取”以启用读取。读取走系统 security 工具，后台不会弹出钥匙串窗口。": {
+   "zh-Hant": "請在設定 → 帳號連線 → Claude 按「檢查 Claude 讀取」以啟用讀取。讀取透過系統 security 工具，背景不會彈出鑰匙圈視窗。",
+   "en": "Go to Settings → Accounts → Claude and click “Check Claude access” to enable reading. Reads use the system security tool; no Keychain window appears in the background.",
+   "ja": "設定 → アカウント → Claude で「Claude の読み取りを確認」をクリックして読み取りを有効にしてください。読み取りにはシステムの security ツールを使い、バックグラウンドではキーチェーンのダイアログを表示しません。",
+   "ko": "설정 → 계정 → Claude에서 'Claude 읽기 확인'을 눌러 읽기를 활성화하세요. 읽기는 시스템 security 도구를 사용하며 백그라운드에서는 키체인 창이 뜨지 않습니다.",
+   "es": "Ve a Ajustes → Cuentas → Claude y pulsa «Comprobar acceso a Claude» para habilitar la lectura. Se usa la herramienta security del sistema; no aparece ninguna ventana del Llavero en segundo plano.",
+   "fr": "Allez dans Réglages → Comptes → Claude et cliquez sur « Vérifier l’accès à Claude » pour activer la lecture. Elle passe par l’outil security du système ; aucune fenêtre de trousseau n’apparaît en arrière-plan.",
+   "de": "Unter Einstellungen → Konten → Claude auf „Claude-Zugriff prüfen“ klicken, um das Lesen zu aktivieren. Es läuft über das System-Tool security; im Hintergrund erscheint kein Schlüsselbundfenster.",
+   "pt-BR": "Vá em Ajustes → Contas → Claude e clique em “Verificar acesso ao Claude” para ativar a leitura. Ela usa a ferramenta security do sistema; nenhuma janela das Chaves aparece em segundo plano."
+  },
+  "请打开并登录 Antigravity；关闭官方应用后本地额度服务不可用。": {
+   "zh-Hant": "請開啟並登入 Antigravity；關閉官方 App 後本機額度服務無法使用。",
+   "en": "Open and sign in to Antigravity; its local quota service is unavailable while the official app is closed.",
+   "ja": "Antigravity を開いてログインしてください。公式アプリを閉じるとローカルの利用枠サービスは使えません。",
+   "ko": "Antigravity를 열고 로그인하세요. 공식 앱을 닫으면 로컬 한도 서비스를 사용할 수 없습니다.",
+   "es": "Abre Antigravity e inicia sesión; su servicio local de cuotas no está disponible con la app oficial cerrada.",
+   "fr": "Ouvrez Antigravity et connectez-vous ; son service local de quotas est indisponible quand l’app officielle est fermée.",
+   "de": "Antigravity öffnen und anmelden; der lokale Kontingentdienst ist bei geschlossener App nicht verfügbar.",
+   "pt-BR": "Abra o Antigravity e entre; o serviço local de cotas fica indisponível com o app oficial fechado."
+  },
+  "请等待本轮刷新结束。": {
+   "zh-Hant": "請等待本輪重新整理結束。",
+   "en": "Wait for the current refresh to finish.",
+   "ja": "現在の更新が終わるまでお待ちください。",
+   "ko": "현재 새로 고침이 끝날 때까지 기다리세요.",
+   "es": "Espera a que termine la actualización actual.",
+   "fr": "Attendez la fin de l’actualisation en cours.",
+   "de": "Warten, bis die laufende Aktualisierung fertig ist.",
+   "pt-BR": "Aguarde o fim da atualização atual."
+  },
+  "读取 Cline 自己保存的登录，不续期、不写入其配置；Cline 未运行时令牌可能过期。": {
+   "zh-Hant": "讀取 Cline 自己儲存的登入，不續期、不寫入其設定；Cline 未執行時權杖可能過期。",
+   "en": "Reads the sign-in Cline saved itself, without renewing it or writing to its settings; the token may expire while Cline is not running.",
+   "ja": "Cline 自身が保存したログインを読み取ります。更新や設定への書き込みは行いません。Cline が起動していないとトークンが期限切れになることがあります。",
+   "ko": "Cline이 직접 저장한 로그인을 읽으며 갱신하거나 설정에 쓰지 않습니다. Cline이 실행 중이 아니면 토큰이 만료될 수 있습니다.",
+   "es": "Lee la sesión que guardó Cline, sin renovarla ni escribir en su configuración; el token puede caducar si Cline no se está ejecutando.",
+   "fr": "Lit la connexion enregistrée par Cline, sans la renouveler ni écrire dans ses réglages ; le jeton peut expirer quand Cline ne tourne pas.",
+   "de": "Liest die von Cline gespeicherte Anmeldung, ohne sie zu erneuern oder in die Einstellungen zu schreiben; das Token kann ablaufen, wenn Cline nicht läuft.",
+   "pt-BR": "Lê o login que o próprio Cline salvou, sem renová-lo nem gravar nas configurações; o token pode expirar com o Cline fechado."
+  },
+  "账号区域": {
+   "zh-Hant": "帳號區域",
+   "en": "Account region",
+   "ja": "アカウントの地域",
+   "ko": "계정 지역",
+   "es": "Región de la cuenta",
+   "fr": "Région du compte",
+   "de": "Kontoregion",
+   "pt-BR": "Região da conta"
+  },
+  "账号接口未提供可量化的额度。": {
+   "zh-Hant": "帳號介面未提供可量化的額度。",
+   "en": "The account endpoint reported no measurable quota.",
+   "ja": "アカウントのエンドポイントから数値化できる利用枠が提供されませんでした。",
+   "ko": "계정 엔드포인트가 수치화할 수 있는 한도를 제공하지 않았습니다.",
+   "es": "El endpoint de la cuenta no informó una cuota medible.",
+   "fr": "Le point d’accès du compte n’a fourni aucun quota mesurable.",
+   "de": "Der Konto-Endpunkt meldete kein messbares Kontingent.",
+   "pt-BR": "O endpoint da conta não informou cota mensurável."
+  },
+  "账号连接": {
+   "zh-Hant": "帳號連線",
+   "en": "Accounts",
+   "ja": "アカウント",
+   "ko": "계정",
+   "es": "Cuentas",
+   "fr": "Comptes",
+   "de": "Konten",
+   "pt-BR": "Contas"
+  },
+  "跟随系统": {
+   "zh-Hant": "跟隨系統",
+   "en": "System",
+   "ja": "システムに合わせる",
+   "ko": "시스템 설정",
+   "es": "Sistema",
+   "fr": "Système",
+   "de": "System",
+   "pt-BR": "Sistema"
+  },
+  "返回额度": {
+   "zh-Hant": "返回額度",
+   "en": "Back to quotas",
+   "ja": "利用枠に戻る",
+   "ko": "한도로 돌아가기",
+   "es": "Volver a las cuotas",
+   "fr": "Retour aux quotas",
+   "de": "Zurück zu den Kontingenten",
+   "pt-BR": "Voltar às cotas"
+  },
+  "这里只展示模拟数据，未发起真实查询。": {
+   "zh-Hant": "這裡只顯示模擬資料，未發出真實查詢。",
+   "en": "Only sample data is shown here; no real query was made.",
+   "ja": "ここではサンプルデータのみ表示しており、実際の照会は行っていません。",
+   "ko": "여기에는 샘플 데이터만 표시되며 실제 조회는 하지 않았습니다.",
+   "es": "Aquí solo se muestran datos de ejemplo; no se hizo ninguna consulta real.",
+   "fr": "Seules des données d’exemple sont affichées ; aucune requête réelle n’a été faite.",
+   "de": "Hier werden nur Beispieldaten gezeigt; keine echte Abfrage.",
+   "pt-BR": "Aqui só aparecem dados de exemplo; nenhuma consulta real foi feita."
+  },
+  "连接": {
+   "zh-Hant": "連線",
+   "en": "Connect",
+   "ja": "接続",
+   "ko": "연결",
+   "es": "Conectar",
+   "fr": "Connecter",
+   "de": "Verbinden",
+   "pt-BR": "Conectar"
+  },
+  "连接与诊断": {
+   "zh-Hant": "連線與診斷",
+   "en": "Connection & diagnostics",
+   "ja": "接続と診断",
+   "ko": "연결 및 진단",
+   "es": "Conexión y diagnóstico",
+   "fr": "Connexion et diagnostic",
+   "de": "Verbindung & Diagnose",
+   "pt-BR": "Conexão e diagnóstico"
+  },
+  "退出 AI Monitor": {
+   "zh-Hant": "結束 AI Monitor",
+   "en": "Quit AI Monitor",
+   "ja": "AI Monitor を終了",
+   "ko": "AI Monitor 종료",
+   "es": "Salir de AI Monitor",
+   "fr": "Quitter AI Monitor",
+   "de": "AI Monitor beenden",
+   "pt-BR": "Sair do AI Monitor"
+  },
+  "选择 Cline 账号登录（ClinePass 使用 Cline 账号）。": {
+   "zh-Hant": "選擇以 Cline 帳號登入（ClinePass 使用 Cline 帳號）。",
+   "en": "Choose to sign in with a Cline account (ClinePass uses your Cline account).",
+   "ja": "Cline アカウントでのログインを選んでください（ClinePass は Cline アカウントを使います）。",
+   "ko": "Cline 계정 로그인을 선택하세요(ClinePass는 Cline 계정을 사용합니다).",
+   "es": "Elige iniciar sesión con una cuenta de Cline (ClinePass usa tu cuenta de Cline).",
+   "fr": "Choisissez la connexion avec un compte Cline (ClinePass utilise votre compte Cline).",
+   "de": "Anmeldung mit einem Cline-Konto wählen (ClinePass nutzt das Cline-Konto).",
+   "pt-BR": "Escolha entrar com uma conta Cline (o ClinePass usa sua conta Cline)."
+  },
+  "部分数据": {
+   "zh-Hant": "部分資料",
+   "en": "Partial data",
+   "ja": "一部のデータ",
+   "ko": "일부 데이터",
+   "es": "Datos parciales",
+   "fr": "Données partielles",
+   "de": "Teildaten",
+   "pt-BR": "Dados parciais"
+  },
+  "采集未完成（退出码 {0}）。详细状态见连接设置。": {
+   "zh-Hant": "採集未完成（結束代碼 {0}）。詳細狀態見連線設定。",
+   "en": "Collection did not finish (exit code {0}). See Accounts for details.",
+   "ja": "収集が完了しませんでした（終了コード {0}）。詳しくはアカウント設定を確認してください。",
+   "ko": "수집을 완료하지 못했습니다(종료 코드 {0}). 자세한 상태는 계정 설정에서 확인하세요.",
+   "es": "La recopilación no terminó (código de salida {0}). Consulta los detalles en Cuentas.",
+   "fr": "La collecte n’a pas abouti (code de sortie {0}). Détails dans Comptes.",
+   "de": "Abruf nicht abgeschlossen (Exit-Code {0}). Details unter Konten.",
+   "pt-BR": "A coleta não terminou (código de saída {0}). Veja os detalhes em Contas."
+  },
+  "采集程序缺失，请重新安装。": {
+   "zh-Hant": "採集程式遺失，請重新安裝。",
+   "en": "The collector is missing. Please reinstall.",
+   "ja": "収集プログラムが見つかりません。再インストールしてください。",
+   "ko": "수집 프로그램이 없습니다. 다시 설치하세요.",
+   "es": "Falta el recopilador. Reinstala la app.",
+   "fr": "Le collecteur est manquant. Réinstallez l’app.",
+   "de": "Der Collector fehlt. Bitte neu installieren.",
+   "pt-BR": "O coletor está ausente. Reinstale o app."
+  },
+  "重新检查连接": {
+   "zh-Hant": "重新檢查連線",
+   "en": "Check connections again",
+   "ja": "接続を再確認",
+   "ko": "연결 다시 확인",
+   "es": "Volver a comprobar conexiones",
+   "fr": "Revérifier les connexions",
+   "de": "Verbindungen erneut prüfen",
+   "pt-BR": "Verificar conexões novamente"
+  },
+  "重置于 {0}": {
+   "zh-Hant": "重設於 {0}",
+   "en": "Resets at {0}",
+   "ja": "{0} にリセット",
+   "ko": "{0}에 초기화",
+   "es": "Se reinicia el {0}",
+   "fr": "Réinitialisation le {0}",
+   "de": "Zurückgesetzt am {0}",
+   "pt-BR": "Renova em {0}"
+  },
+  "重置时间": {
+   "zh-Hant": "重設時間",
+   "en": "Reset time",
+   "ja": "リセット時刻",
+   "ko": "초기화 시간",
+   "es": "Hora de reinicio",
+   "fr": "Heure de réinitialisation",
+   "de": "Reset-Zeit",
+   "pt-BR": "Hora de renovação"
+  },
+  "钥匙串组件忙或读取超时；并非授权被拒绝，保留上次读数并稍后重试。": {
+   "zh-Hant": "鑰匙圈元件忙碌或讀取逾時；並非授權被拒絕，保留上次讀數並稍後重試。",
+   "en": "The Keychain helper was busy or timed out; this is not a denial. The last reading is kept and the query will retry later.",
+   "ja": "キーチェーンの補助コンポーネントが使用中またはタイムアウトしました。拒否ではありません。前回の値を保持し、後で再試行します。",
+   "ko": "키체인 도우미가 사용 중이거나 시간 초과되었습니다. 거부된 것은 아니며 마지막 측정값을 유지하고 나중에 다시 시도합니다.",
+   "es": "El asistente del Llavero estaba ocupado o agotó el tiempo; no es un rechazo. Se conserva la última lectura y se reintentará más tarde.",
+   "fr": "L’assistant de trousseau était occupé ou a expiré ; ce n’est pas un refus. La dernière valeur est conservée et une nouvelle tentative suivra.",
+   "de": "Der Schlüsselbund-Helfer war belegt oder zu langsam; keine Ablehnung. Der letzte Wert bleibt, es wird später erneut versucht.",
+   "pt-BR": "O auxiliar das Chaves estava ocupado ou expirou; não é uma recusa. A última leitura é mantida e haverá nova tentativa."
+  },
+  "钥匙串组件忙或超时，未判定为拒绝。稍后再试。": {
+   "zh-Hant": "鑰匙圈元件忙碌或逾時，未判定為拒絕。稍後再試。",
+   "en": "The Keychain helper was busy or timed out; this is not a denial. Try again later.",
+   "ja": "キーチェーンの補助コンポーネントが使用中またはタイムアウトしました。拒否ではありません。後でもう一度お試しください。",
+   "ko": "키체인 도우미가 사용 중이거나 시간 초과되었습니다. 거부된 것은 아닙니다. 나중에 다시 시도하세요.",
+   "es": "El asistente del Llavero estaba ocupado o agotó el tiempo; no es un rechazo. Inténtalo más tarde.",
+   "fr": "L’assistant de trousseau était occupé ou a expiré ; ce n’est pas un refus. Réessayez plus tard.",
+   "de": "Der Schlüsselbund-Helfer war belegt oder hat das Zeitlimit erreicht; keine Ablehnung. Später erneut versuchen.",
+   "pt-BR": "O auxiliar das Chaves estava ocupado ou expirou; não é uma recusa. Tente mais tarde."
+  },
+  "钥匙串辅助组件暂不可用，不等同于缺少授权。": {
+   "zh-Hant": "鑰匙圈輔助元件暫時無法使用，不等同於缺少授權。",
+   "en": "The Keychain helper is temporarily unavailable; this does not mean permission is missing.",
+   "ja": "キーチェーンの補助コンポーネントは一時的に使用できません。権限がないという意味ではありません。",
+   "ko": "키체인 도우미를 일시적으로 사용할 수 없습니다. 권한이 없다는 뜻은 아닙니다.",
+   "es": "El asistente del Llavero no está disponible por ahora; no significa que falte permiso.",
+   "fr": "L’assistant de trousseau est momentanément indisponible ; cela ne signifie pas qu’une autorisation manque.",
+   "de": "Der Schlüsselbund-Helfer ist vorübergehend nicht verfügbar; das bedeutet keine fehlende Berechtigung.",
+   "pt-BR": "O auxiliar das Chaves está temporariamente indisponível; isso não significa falta de permissão."
+  },
+  "隐藏": {
+   "zh-Hant": "隱藏",
+   "en": "Hidden",
+   "ja": "非表示",
+   "ko": "숨김",
+   "es": "Oculta",
+   "fr": "Masquée",
+   "de": "Ausgeblendet",
+   "pt-BR": "Oculta"
+  },
+  "隐藏此套餐": {
+   "zh-Hant": "隱藏此方案",
+   "en": "Hide this plan",
+   "ja": "このプランを非表示",
+   "ko": "이 플랜 숨기기",
+   "es": "Ocultar este plan",
+   "fr": "Masquer ce forfait",
+   "de": "Diesen Plan ausblenden",
+   "pt-BR": "Ocultar este plano"
+  },
+  "需要授权": {
+   "zh-Hant": "需要授權",
+   "en": "Permission needed",
+   "ja": "許可が必要",
+   "ko": "권한 필요",
+   "es": "Requiere permiso",
+   "fr": "Autorisation requise",
+   "de": "Berechtigung nötig",
+   "pt-BR": "Permissão necessária"
+  },
+  "需要登录": {
+   "zh-Hant": "需要登入",
+   "en": "Sign-in needed",
+   "ja": "ログインが必要",
+   "ko": "로그인 필요",
+   "es": "Requiere inicio de sesión",
+   "fr": "Connexion requise",
+   "de": "Anmeldung nötig",
+   "pt-BR": "Login necessário"
+  },
+  "非实时": {
+   "zh-Hant": "非即時",
+   "en": "not live",
+   "ja": "リアルタイムではありません",
+   "ko": "실시간 아님",
+   "es": "no en vivo",
+   "fr": "pas en direct",
+   "de": "nicht live",
+   "pt-BR": "não em tempo real"
+  },
+  "面板宽度": {
+   "zh-Hant": "面板寬度",
+   "en": "Panel width",
+   "ja": "パネルの幅",
+   "ko": "패널 너비",
+   "es": "Ancho del panel",
+   "fr": "Largeur du panneau",
+   "de": "Breite",
+   "pt-BR": "Largura do painel"
+  },
+  "额度响应过大，已中止解析。": {
+   "zh-Hant": "額度回應過大，已中止解析。",
+   "en": "The quota response was too large; parsing stopped.",
+   "ja": "利用枠の応答が大きすぎるため、解析を中止しました。",
+   "ko": "한도 응답이 너무 커서 분석을 중단했습니다.",
+   "es": "La respuesta de cuotas era demasiado grande; se detuvo el análisis.",
+   "fr": "La réponse de quota était trop volumineuse ; analyse arrêtée.",
+   "de": "Die Kontingentantwort war zu groß; Auswertung abgebrochen.",
+   "pt-BR": "A resposta de cotas era grande demais; a análise parou."
+  },
+  "额度接口发生重定向；为保护凭证，已停止请求。": {
+   "zh-Hant": "額度介面發生重新導向；為保護憑證，已停止請求。",
+   "en": "The quota endpoint redirected; the request was stopped to protect the credential.",
+   "ja": "利用枠のエンドポイントがリダイレクトしたため、認証情報を守るためにリクエストを中止しました。",
+   "ko": "한도 엔드포인트가 리디렉션되어 자격 증명을 보호하려고 요청을 중단했습니다.",
+   "es": "El endpoint de cuotas redirigió; se detuvo la solicitud para proteger la credencial.",
+   "fr": "Le point d’accès des quotas a redirigé ; la requête a été arrêtée pour protéger l’identifiant.",
+   "de": "Der Kontingent-Endpunkt hat umgeleitet; die Anfrage wurde zum Schutz der Zugangsdaten gestoppt.",
+   "pt-BR": "O endpoint de cotas redirecionou; a solicitação foi interrompida para proteger a credencial."
+  },
+  "额度接口暂时不可用，已暂停重试。": {
+   "zh-Hant": "額度介面暫時無法使用，已暫停重試。",
+   "en": "The quota endpoint is temporarily unavailable; retries are paused.",
+   "ja": "利用枠のエンドポイントは一時的に利用できないため、再試行を一時停止しました。",
+   "ko": "한도 엔드포인트를 일시적으로 사용할 수 없어 재시도를 중지했습니다.",
+   "es": "El endpoint de cuotas no está disponible por ahora; los reintentos están en pausa.",
+   "fr": "Le point d’accès des quotas est momentanément indisponible ; les nouvelles tentatives sont en pause.",
+   "de": "Der Kontingent-Endpunkt ist vorübergehend nicht verfügbar; Wiederholungen pausiert.",
+   "pt-BR": "O endpoint de cotas está temporariamente indisponível; as novas tentativas estão pausadas."
+  },
+  "额度接口未返回有效 JSON；未把未知结果当成可用额度。": {
+   "zh-Hant": "額度介面未回傳有效 JSON；未把未知結果當成可用額度。",
+   "en": "The quota endpoint did not return valid JSON; an unknown result is not treated as available quota.",
+   "ja": "利用枠のエンドポイントが有効な JSON を返しませんでした。不明な結果を利用可能な枠として扱いません。",
+   "ko": "한도 엔드포인트가 유효한 JSON을 반환하지 않았습니다. 알 수 없는 결과를 사용 가능한 한도로 취급하지 않습니다.",
+   "es": "El endpoint de cuotas no devolvió un JSON válido; un resultado desconocido no se toma como cuota disponible.",
+   "fr": "Le point d’accès des quotas n’a pas renvoyé de JSON valide ; un résultat inconnu n’est pas considéré comme du quota disponible.",
+   "de": "Der Kontingent-Endpunkt lieferte kein gültiges JSON; ein unbekanntes Ergebnis gilt nicht als verfügbares Kontingent.",
+   "pt-BR": "O endpoint de cotas não retornou JSON válido; um resultado desconhecido não é tratado como cota disponível."
+  },
+  "额度接口返回 HTTP {0}，未记录响应正文。": {
+   "zh-Hant": "額度介面回傳 HTTP {0}，未記錄回應內容。",
+   "en": "The quota endpoint returned HTTP {0}; the response body was not logged.",
+   "ja": "利用枠のエンドポイントが HTTP {0} を返しました。応答本文は記録していません。",
+   "ko": "한도 엔드포인트가 HTTP {0}을(를) 반환했습니다. 응답 본문은 기록하지 않았습니다.",
+   "es": "El endpoint de cuotas devolvió HTTP {0}; no se registró el cuerpo de la respuesta.",
+   "fr": "Le point d’accès des quotas a renvoyé HTTP {0} ; le corps de la réponse n’a pas été consigné.",
+   "de": "Der Kontingent-Endpunkt antwortete mit HTTP {0}; der Antwortinhalt wurde nicht protokolliert.",
+   "pt-BR": "O endpoint de cotas retornou HTTP {0}; o corpo da resposta não foi registrado."
+  },
+  "额度组": {
+   "zh-Hant": "額度組",
+   "en": "Quota group",
+   "ja": "枠グループ",
+   "ko": "한도 그룹",
+   "es": "Grupo de cuota",
+   "fr": "Groupe de quota",
+   "de": "Kontingentgruppe",
+   "pt-BR": "Grupo de cota"
+  },
+  "额度缓存已清除；账号、钥匙串与防限流等待时间保持不变。": {
+   "zh-Hant": "額度快取已清除；帳號、鑰匙圈與防限流等待時間保持不變。",
+   "en": "Quota cache cleared; accounts, Keychain items and rate-limit waits are unchanged.",
+   "ja": "利用枠のキャッシュを消去しました。アカウント、キーチェーン、レート制限の待ち時間は変わりません。",
+   "ko": "한도 캐시를 지웠습니다. 계정, 키체인, 속도 제한 대기 시간은 그대로입니다.",
+   "es": "Caché de cuotas borrada; cuentas, Llavero y esperas por límite no cambian.",
+   "fr": "Cache des quotas effacé ; comptes, trousseau et délais de limitation inchangés.",
+   "de": "Kontingent-Cache geleert; Konten, Schlüsselbund und Wartezeiten bleiben unverändert.",
+   "pt-BR": "Cache de cotas limpo; contas, Chaves e esperas de limite não mudam."
+  },
+  "额度面板固定为白色；单色图标仍随系统菜单栏明暗变化。": {
+   "zh-Hant": "額度面板固定為白色；單色圖示仍隨系統選單列明暗變化。",
+   "en": "The quota panel stays white; the monochrome icon still follows the light or dark menu bar.",
+   "ja": "利用枠パネルは常に白です。モノクロのアイコンはメニューバーの明暗に合わせて変わります。",
+   "ko": "한도 패널은 항상 흰색이며, 흑백 아이콘은 메뉴 막대의 밝기에 따라 바뀝니다.",
+   "es": "El panel de cuotas es siempre blanco; el icono monocromo sigue la barra de menús clara u oscura.",
+   "fr": "Le panneau des quotas reste blanc ; l’icône monochrome suit la barre des menus claire ou sombre.",
+   "de": "Der Kontingentbereich bleibt weiß; das einfarbige Symbol folgt der hellen oder dunklen Menüleiste.",
+   "pt-BR": "O painel de cotas fica branco; o ícone monocromático acompanha a barra de menus clara ou escura."
+  },
+  "额度项目已隐藏": {
+   "zh-Hant": "額度項目已隱藏",
+   "en": "Quota items are hidden",
+   "ja": "利用枠の項目は非表示です",
+   "ko": "한도 항목이 숨겨져 있음",
+   "es": "Los elementos de cuota están ocultos",
+   "fr": "Les éléments de quota sont masqués",
+   "de": "Kontingentelemente ausgeblendet",
+   "pt-BR": "Os itens de cota estão ocultos"
+  }
+ }
+}

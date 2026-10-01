@@ -4,7 +4,11 @@ For downloading and running the app, use the [installation guide](INSTALL.md). R
 
 ## Requirements
 
-macOS 14 or later, Apple Command Line Tools, Swift 5.9 or later, and a working `/usr/bin/python3`. The published v1.9.4 download targets Apple Silicon. The UI is currently mainly Chinese; README translations do not add application-language settings.
+macOS 14 or later, Apple Command Line Tools, Swift 5.9 or later, and a working `/usr/bin/python3`. The published v1.9.4 download targets Apple Silicon and its UI is mainly Chinese. From 1.10.0 the app has a display-language setting with nine languages.
+
+## Translations
+
+`Resources/Localization/Localizable.json` maps each Simplified Chinese source string to eight other languages; `L10n.tr` in `Sources/MonitorCore/Localization.swift` looks it up. Collector messages stay in their source form and are translated at display time, including text assembled from known parts (`general · 当前窗口`) and `{0}` templates. Do not add brand names, plan names or upstream English terms (Session, Weekly, Premium, Credits …) as keys. `tests/test_localization.py` fails when a displayed string or collector message has no translation, a language is missing, placeholders differ or a protected term is translated. `AIMonitor --render-preview <dir> --language en` renders the fixture views in one language.
 
 ```bash
 bash scripts/test.sh

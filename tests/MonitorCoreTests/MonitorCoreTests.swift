@@ -37,7 +37,7 @@ final class MonitorCoreTests {
     }
     func testMCPNeverUsedForMainFiveHours() { var p=provider("glm");p.windows[0].unit="MCP";checkNil(slots([p])[0].percent) }
     func testOrderNormalizesDuplicateAndUnknownIDs() {
-        checkEqual(DisplayPreferences.normalizedOrder(["claude","unknown","claude","kimi"]),["claude","kimi","codex","glm","copilot","antigravity","cursor","minimax","windsurf","kiro"])
+        checkEqual(DisplayPreferences.normalizedOrder(["claude","unknown","claude","kimi"]),["claude","kimi","codex","glm","copilot","antigravity","cursor","minimax","windsurf","kiro","opencode","cline"])
     }
     func testMoveUpAndDown() {
         var p=DisplayPreferences();p.move("claude",by:-2);checkEqual(p.providerOrder.first,"claude")

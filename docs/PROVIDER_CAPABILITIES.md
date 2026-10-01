@@ -9,12 +9,12 @@ This table describes the checked-in adapters, not a guarantee of current upstrea
 | MiniMax | Reported Token Plan 5-hour/weekly windows | Region-specific subscription key; remaining-count semantics validated; no wallet or concurrency-limit substitution. |
 | Windsurf | Local application cached daily/weekly allowance or legacy counts | Always non-real-time; cache file modification time is not quota measurement time. |
 | Kiro | Official CLI monthly credit usage and cap | No inference request; plan-only output stays unavailable; estimates are labeled; CLI may refresh its own login. |
-| DeepSeek / Kimi API / SiliconFlow | Reported balance | No invented daily spend from balance differences. Region/currency must match. |
-| OpenRouter | Key usage/limits or management-account credits, according to configured mode | Key limits and the account wallet are different measures. |
-| OpenAI API / Claude API | Implemented organization cost endpoints | Requires suitable organization/admin billing access; not an individual model key wallet. |
-| Google AI Studio | Key access check and official billing link | Numeric balance and daily cost are not implemented. |
+| OpenCode Go | Server-computed 5-hour, weekly and subscription-month used percentages from `GET /zen/go/v1/usage` | Uses the key OpenCode saved with `/connect`; a workspace without Go is reported as unsupported, and Zen balance is never shown as plan quota. |
+| ClinePass | 5-hour, weekly and monthly `percentUsed` windows from Cline's account usage-limits endpoint | Undocumented endpoint used by Cline's own dashboard; reads Cline's sign-in without refreshing it, so an expired token keeps the last reading marked as cached until Cline renews it. Pay-as-you-go credits are not plan quota. |
 
-Daily-cost presentation follows the adapters' UTC-day convention. Missing, stale, paginated-incomplete or permission-denied data must remain distinguishable from measured zero. Local display budgets do not prevent upstream charges.
+Missing, stale or permission-denied data must remain distinguishable from measured zero.
+
+API balance and daily-cost adapters (DeepSeek, Kimi API, OpenAI/Claude organization costs, SiliconFlow, OpenRouter, Google AI Studio) and their key management were removed in 1.10.0. Pi has no plan of its own; its Claude, ChatGPT/Codex, Copilot and Gemini/Antigravity logins are the subscriptions already covered above. See `PLAN_RESEARCH_2026_10.md`.
 
 Original providers retain their existing quota semantics. New 1.9.0 adapters use mocked fixtures and temporary official-state-shaped databases rather than live account validation. Revalidate provider endpoints and permissions against official documentation before each public release.
 

@@ -28,6 +28,7 @@ public struct DisplayPreferences: Codable, Equatable {
     public var refreshOnOpen = true
     public var refreshOnWake = true
     public var keepPopoverOpen = false
+    public var language = AppLanguage.system.rawValue
     public init() {}
     public mutating func normalize() {
         providerOrder = Self.normalizedOrder(providerOrder)
@@ -37,6 +38,7 @@ public struct DisplayPreferences: Codable, Equatable {
         if !["smart", "whole", "one"].contains(precision) { precision = "smart" }
         if !["relative", "absolute", "hidden"].contains(resetMode) { resetMode = "relative" }
         lowThreshold = min(50, max(1, lowThreshold))
+        if AppLanguage(rawValue: language) == nil { language = AppLanguage.system.rawValue }
     }
     public static func normalizedOrder(_ input: [String]) -> [String] {
         var seen = Set<String>()
@@ -100,7 +102,7 @@ public struct MenuBarSlot: Codable, Equatable {
     public var period: String?
     public var measuredAt: Double?
     public var reason: String
-    public init(providerID: String? = nil, name: String = "未分配", percent: Double? = nil, state: String = "empty", reason: String = "未分配", period: String? = nil, measuredAt: Double? = nil) {
+    public init(providerID: String? = nil, name: String = L10n.tr("未分配"), percent: Double? = nil, state: String = "empty", reason: String = L10n.tr("未分配"), period: String? = nil, measuredAt: Double? = nil) {
         self.providerID = providerID; self.name = name; self.percent = percent; self.state = state; self.reason = reason; self.period = period; self.measuredAt = measuredAt
     }
 }
@@ -114,7 +116,7 @@ public enum MenuBarMapping {
         let slots = selected.map { id -> MenuBarSlot in
             let name = ProviderInfo.all.first { $0.id == id }?.name ?? id
             guard let provider = snapshot?.providers.first(where: { $0.id == id }) else {
-                return MenuBarSlot(providerID: id, name: name, state: "unknown", reason: "等待读取")
+                return MenuBarSlot(providerID: id, name: name, state: "unknown", reason: L10n.tr("等待读取"))
             }
             guard ["ok", "partial", "stale"].contains(provider.status), let measuredAt = provider.fetchedAt else {
                 return MenuBarSlot(providerID:id, name:name, state:"unknown", reason:provider.statusLabel)
@@ -155,12 +157,12 @@ public enum MenuBarMapping {
             }
             let percentages = candidates.compactMap(\.safePercent)
             guard let percent = percentages.min() else {
-                return MenuBarSlot(providerID:id, name:name, state:"unknown", reason:["cursor", "kiro", "copilot"].contains(id) ? "没有可量化的月额度" : id == "windsurf" ? "没有可量化的主窗口缓存" : "未提供 5 小时额度")
+                return MenuBarSlot(providerID:id, name:name, state:"unknown", reason:L10n.tr(["cursor", "kiro", "copilot"].contains(id) ? "没有可量化的月额度" : id == "windsurf" ? "没有可量化的主窗口缓存" : "未提供 5 小时额度"))
             }
             let resetPassed = candidates.contains { ($0.resetAt ?? Double.infinity) <= now && measuredAt < ($0.resetAt ?? 0) }
             let cached = provider.isStale(now:now,maxAge:maxAge) || resetPassed || provider.queryStatus == "cooldown"
-            var reason = label + (percentages.count > 1 ? "多个池最低余量" : "剩余")
-            if cached { reason += " · " + provider.lastValueLabel + "（非实时）" }
+            var reason = L10n.tr(percentages.count > 1 ? "{0}多个池最低余量" : "{0}剩余", L10n.tr(label))
+            if cached { reason += " · " + L10n.tr("{0}（非实时）", provider.lastValueLabel) }
             return MenuBarSlot(providerID:id, name:name, percent:percent, state:cached ? "cached" : "known", reason:reason, period:period, measuredAt:measuredAt)
 
         }

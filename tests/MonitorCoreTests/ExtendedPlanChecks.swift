@@ -6,11 +6,11 @@ extension MonitorCoreTests {
         ProviderResult(id: id, name: id, status: status, fetchedAt: now, windows: windows)
     }
     func testExpandedRegistryKeepsOriginalOrder() {
-        checkEqual(ProviderInfo.defaultOrder, ["kimi", "codex", "claude", "glm", "copilot", "antigravity", "cursor", "minimax", "windsurf", "kiro"])
-        checkEqual(Set(ProviderInfo.defaultOrder).count, 10)
+        checkEqual(ProviderInfo.defaultOrder, ["kimi", "codex", "claude", "glm", "copilot", "antigravity", "cursor", "minimax", "windsurf", "kiro", "opencode", "cline"])
+        checkEqual(Set(ProviderInfo.defaultOrder).count, 12)
     }
     func testExpandedGeometryIsReadable() {
-        for count in 7...10 {
+        for count in 7...ProviderInfo.all.count {
             let rows = MenuBarGeometry.rows(count: count)
             checkEqual(rows.count, MenuBarGeometry.maxRows)
             for row in rows { checkTrue(row.height >= 1.2); checkTrue(row.y >= 0); checkTrue(row.y + row.height <= 20) }
@@ -54,11 +54,33 @@ extension MonitorCoreTests {
         defaults.set(["kimi"],forKey:"enabled")
         var preferences = DisplayPreferences(); preferences.providerOrder = ["kimi", "claude"]
         preferences.save(to:defaults)
-        checkEqual(DisplayPreferences.load(from:defaults).providerOrder.count,10)
+        checkEqual(DisplayPreferences.load(from:defaults).providerOrder.count,ProviderInfo.all.count)
         checkEqual(defaults.stringArray(forKey:"enabled"),["kimi"])
     }
     func testEmptyExpandedProviderNotFullAllowance() {
-        for id in ["cursor", "minimax", "windsurf", "kiro"] { checkNil(slots([expanded(id,[])])[0].percent) }
+        for id in ["cursor", "minimax", "windsurf", "kiro", "opencode", "cline"] { checkNil(slots([expanded(id,[])])[0].percent) }
+    }
+    func testAgentPlansUseTheirFiveHourWindow() {
+        for id in ["opencode", "cline"] {
+            let p = expanded(id, [QuotaWindow(id:id+"-monthly",label:"每月",remainingPercent:90,kind:"monthly"),
+                                  QuotaWindow(id:id+"-weekly",label:"每周",remainingPercent:70,durationMinutes:10080),
+                                  QuotaWindow(id:id+"-5h",label:"当前 5 小时",remainingPercent:35,durationMinutes:300)])
+            let slot = slots([p])[0]
+            checkEqual(slot.percent,35); checkEqual(slot.period,"5h"); checkEqual(slot.state,"known")
+        }
+    }
+    func testAgentPlanMonthlyNeverStandsInForFiveHours() {
+        for id in ["opencode", "cline"] {
+            let p = expanded(id, [QuotaWindow(id:id+"-monthly",label:"每月",remainingPercent:90,kind:"monthly")])
+            checkNil(slots([p])[0].percent)
+            checkEqual(p.windows[0].shortLabel,"每月")
+        }
+    }
+    func testAgentPlanConnectionHintsAndWebsites() {
+        for id in ["opencode", "cline"] {
+            let info = ProviderInfo.all.first { $0.id == id }
+            checkTrue(info != nil); checkTrue(!(info?.connectionHint.isEmpty ?? true)); checkTrue(info?.website.hasPrefix("https://") ?? false)
+        }
     }
     func testOfficialEstimateVisibleInMenuHint() {
         let p = expanded("kiro", [QuotaWindow(id:"kiro-monthly",label:"套餐 Credits · 本月（官方估计）",remainingPercent:75,kind:"monthly")], status:"partial")

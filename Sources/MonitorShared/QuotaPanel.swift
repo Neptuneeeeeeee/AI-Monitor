@@ -14,46 +14,37 @@ enum MonitorPalette {
 
 struct MonitorPanel: View {
     @ObservedObject var store: MonitorStore
-    @ObservedObject var api: APIBalanceStore
-    init(store: MonitorStore) { self.store = store; self.api = store.api }
     var body: some View {
         VStack(spacing: 0) {
             HStack(spacing: 4) {
                 if store.showSettings {
-                    ToolbarButton(symbol: "chevron.left", title: "返回额度", identifier: "toolbar.back") { store.backFromSettings() }
+                    ToolbarButton(symbol: "chevron.left", title: L10n.tr("返回额度"), identifier: "toolbar.back") { store.backFromSettings() }
                 }
-                Text(store.showSettings ? (store.apiMode ? "API 设置" : "设置") : (store.apiMode ? "API 余额" : "AI Monitor")).font(.system(size: 12, weight: .semibold))
+                Text(store.showSettings ? L10n.tr("设置") : "AI Monitor").font(.system(size: 12, weight: .semibold))
                     .padding(.leading, store.showSettings ? 0 : 4)
                 if !AppRuntime.profile.badge.isEmpty { Text(AppRuntime.profile.badge).font(.system(size:8,weight:.bold)).padding(.horizontal,4).padding(.vertical,2).background(Capsule().fill(Color.orange.opacity(0.15))) }
                 Spacer(minLength: 4)
                 if !store.preferences.autoRefresh {
-                    Image(systemName: "pause.circle").foregroundStyle(MonitorPalette.secondary).help("自动刷新已暂停")
+                    Image(systemName: "pause.circle").foregroundStyle(MonitorPalette.secondary).help(L10n.tr("自动刷新已暂停"))
                 }
-                ToolbarButton(symbol: "arrow.clockwise", title: "安全刷新 · 冷却中的套餐不重复查询", identifier: "toolbar.refresh", busy: store.apiMode ? api.refreshing : store.refreshing) {
+                ToolbarButton(symbol: "arrow.clockwise", title: L10n.tr("安全刷新 · 冷却中的套餐不重复查询"), identifier: "toolbar.refresh", busy: store.refreshing) {
                     store.refreshCurrent()
-                }.disabled(store.apiMode ? api.refreshing : store.refreshing)
-                Button { store.toggleAPI() } label: {
-                    Text(store.apiMode ? "Plan" : "API").font(.system(size:10,weight:.semibold)).frame(width:28,height:28)
-                }.buttonStyle(ResponsiveButtonStyle()).background(RoundedRectangle(cornerRadius:6).fill(store.apiMode ? MonitorPalette.blue.opacity(0.10) : Color.clear))
-                    .foregroundStyle(store.apiMode ? MonitorPalette.blue : MonitorPalette.secondary)
-                    .accessibilityLabel(store.apiMode ? "返回订阅套餐" : "切换 API 余额").accessibilityIdentifier("toolbar.api").help(store.apiMode ? "返回订阅套餐" : "切换 API 余额")
+                }.disabled(store.refreshing)
                 if !store.showSettings {
-                    ToolbarButton(symbol: "gearshape", title: "设置", identifier: "toolbar.settings") { store.openSettings() }
+                    ToolbarButton(symbol: "gearshape", title: L10n.tr("设置"), identifier: "toolbar.settings") { store.openSettings() }
                 }
-                ToolbarButton(symbol: "xmark", title: "关闭面板", identifier: "toolbar.close") { store.dismissPanel?() }
+                ToolbarButton(symbol: "xmark", title: L10n.tr("关闭面板"), identifier: "toolbar.close") { store.dismissPanel?() }
             }.foregroundStyle(MonitorPalette.secondary).font(.system(size: 12))
                 .padding(.horizontal, 10).frame(height: 42)
             if store.showSettings {
-                if store.apiMode { APISettingsPanel(api: api) } else { SettingsPanel(store: store) }
-            } else if store.apiMode {
-                APIBalancePanel(api: api, preferences: store.preferences) { store.openAPISettings($0) }
+                SettingsPanel(store: store)
             } else {
                 ScrollView {
                     VStack(spacing: store.preferences.compact ? 15 : 20) {
                         if store.visibleProviders.isEmpty {
                             VStack(spacing: 9) {
-                                Text(store.activeProviders.isEmpty ? "尚未启用套餐" : "暂无可显示额度").font(.system(size: 12)).foregroundStyle(MonitorPalette.secondary)
-                                Button("管理套餐") { store.openSettings("order") }.font(.system(size: 12)).buttonStyle(ResponsiveButtonStyle())
+                                Text(store.activeProviders.isEmpty ? L10n.tr("尚未启用套餐") : L10n.tr("暂无可显示额度")).font(.system(size: 12)).foregroundStyle(MonitorPalette.secondary)
+                                Button(L10n.tr("管理套餐")) { store.openSettings("order") }.font(.system(size: 12)).buttonStyle(ResponsiveButtonStyle())
                             }.padding(.vertical, 50)
                         }
                         ForEach(store.visibleProviders) { info in
@@ -62,7 +53,7 @@ struct MonitorPanel: View {
                     }.padding(.horizontal, 13).padding(.top, 6).padding(.bottom, 12)
                 }.scrollIndicators(.automatic).frame(maxWidth: .infinity, maxHeight: .infinity)
                 if store.preferences.showUpdatedAt, let updated = store.snapshot?.generatedAt {
-                    HStack { Spacer(); Text("更新于 " + Date(timeIntervalSince1970: updated).formatted(date: .omitted, time: .shortened)).font(.system(size: 10)).foregroundStyle(MonitorPalette.secondary) }
+                    HStack { Spacer(); Text(L10n.tr("更新于 {0}", Date(timeIntervalSince1970: updated).formatted(date: .omitted, time: .shortened))).font(.system(size: 10)).foregroundStyle(MonitorPalette.secondary) }
                         .padding(.horizontal, 15).padding(.bottom, 9)
                 }
             }
@@ -95,8 +86,8 @@ struct ProviderSection: View {
                 }
                 Spacer(minLength: 0)
                 if stale {
-                    Label(result?.lastValueLabel ?? "上次读数", systemImage: "clock").font(.system(size: 9)).foregroundStyle(MonitorPalette.secondary)
-                        .help(result?.fetchedAt.map { (info.id == "windsurf" ? "缓存文件修改时间（不是额度实测时间）：" : "最后成功：") + Date(timeIntervalSince1970: $0).formatted() + "；非实时。" } ?? "尚未重新验证")
+                    Label(result?.lastValueLabel ?? L10n.tr("上次读数"), systemImage: "clock").font(.system(size: 9)).foregroundStyle(MonitorPalette.secondary)
+                        .help(result?.fetchedAt.map { L10n.tr(info.id == "windsurf" ? "缓存文件修改时间（不是额度实测时间）：{0}；非实时。" : "最后成功：{0}；非实时。", Date(timeIntervalSince1970: $0).formatted()) } ?? L10n.tr("尚未重新验证"))
                 }
             }.padding(.horizontal, 3)
             if !rows.isEmpty {
@@ -122,23 +113,23 @@ struct ProviderSection: View {
                         }
                     }
                     Spacer()
-                    Button("设置") { store.openSettings("connections") }.buttonStyle(ResponsiveButtonStyle()).font(.system(size: 11)).foregroundStyle(MonitorPalette.blue)
+                    Button(L10n.tr("设置")) { store.openSettings("connections") }.buttonStyle(ResponsiveButtonStyle()).font(.system(size: 11)).foregroundStyle(MonitorPalette.blue)
                 }.padding(.horizontal, 11).padding(.vertical, 12)
                     .background(store.preferences.useBrandColors ? brand.wash : MonitorPalette.card).clipShape(RoundedRectangle(cornerRadius: 10))
             }
         }
         .contextMenu {
-            Button("官方用量") { store.openWebsite(info.id) }
-            Button("连接与诊断") { store.openSettings("connections") }
+            Button(L10n.tr("官方用量")) { store.openWebsite(info.id) }
+            Button(L10n.tr("连接与诊断")) { store.openSettings("connections") }
             Divider()
-            Button("上移") { store.move(info.id, by: -1) }.disabled(store.orderedProviders.first?.id == info.id)
-            Button("下移") { store.move(info.id, by: 1) }.disabled(store.orderedProviders.last?.id == info.id)
-            Button("隐藏此套餐") { store.enabled.remove(info.id) }
+            Button(L10n.tr("上移")) { store.move(info.id, by: -1) }.disabled(store.orderedProviders.first?.id == info.id)
+            Button(L10n.tr("下移")) { store.move(info.id, by: 1) }.disabled(store.orderedProviders.last?.id == info.id)
+            Button(L10n.tr("隐藏此套餐")) { store.enabled.remove(info.id) }
         }
     }
     private var emptyText: String {
-        guard let result else { return store.refreshing ? "正在读取…" : "等待读取" }
-        if ["ok", "partial"].contains(result.status), !result.windows.isEmpty { return "额度项目已隐藏" }
+        guard let result else { return store.refreshing ? L10n.tr("正在读取…") : L10n.tr("等待读取") }
+        if ["ok", "partial"].contains(result.status), !result.windows.isEmpty { return L10n.tr("额度项目已隐藏") }
         return result.statusLabel
     }
 }
@@ -171,7 +162,7 @@ struct QuotaRow: View {
                         if preferences.showPaceMarker, let expected = window.expectedRemaining(now: now), window.safePercent != nil {
                             RoundedRectangle(cornerRadius: 1).fill(MonitorPalette.secondary).frame(width: 2, height: 10)
                                 .offset(x: min(proxy.size.width - 2, max(0, proxy.size.width * expected / 100 - 1)))
-                                .help("按时间均匀使用的参考位置，不是服务商预测")
+                                .help(L10n.tr("按时间均匀使用的参考位置，不是服务商预测"))
                         }
                     }
                 }.frame(height: 5)
@@ -183,6 +174,6 @@ struct QuotaRow: View {
             }.font(.system(size: preferences.compact ? 11 : 12)).monospacedDigit().lineLimit(1)
         }
         .accessibilityElement(children: .combine)
-        .help(window.resetAt.map { "重置于 " + Date(timeIntervalSince1970: $0).formatted() } ?? "")
+        .help(window.resetAt.map { L10n.tr("重置于 {0}", Date(timeIntervalSince1970: $0).formatted()) } ?? "")
     }
 }

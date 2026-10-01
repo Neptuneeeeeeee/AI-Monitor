@@ -46,8 +46,8 @@ def collect_codex():
             if process.poll() is not None: raise MonitorError('auth_required', 'Codex 官方额度服务提前退出，请检查 codex login 状态。')
             left = deadline - time.monotonic()
             if left <= 0:
-                stage = {1: '初始化', 2: '账号状态', 3: '额度接口'}[request_id]
-                raise MonitorError('network_error', 'Codex ' + stage + '查询超时；未创建模型会话。')
+                raise MonitorError('network_error', {1: 'Codex 初始化查询超时；未创建模型会话。', 2: 'Codex 账号状态查询超时；未创建模型会话。',
+                                                     3: 'Codex 额度接口查询超时；未创建模型会话。'}[request_id])
             if not selector.select(timeout=min(left, 1)): continue
             chunk = os.read(process.stdout.fileno(), 65536)
             if not chunk: raise MonitorError('error', 'Codex 官方服务没有返回完整额度响应。')

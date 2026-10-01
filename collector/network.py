@@ -15,6 +15,7 @@ ALLOWED_REMOTE = {
     ('api.kimi.com', '/coding/v1/usages'), ('auth.kimi.com', '/api/oauth/token'),
     ('api.anthropic.com', '/api/oauth/usage'), ('api.github.com', '/copilot_internal/user'),
     ('open.bigmodel.cn', '/api/monitor/usage/quota/limit'), ('api.z.ai', '/api/monitor/usage/quota/limit'),
+    ('opencode.ai', '/zen/go/v1/usage'), ('api.cline.bot', '/api/v1/users/me/plan/usage-limits'),
 }
 
 class NoRedirect(urllib.request.HTTPRedirectHandler):

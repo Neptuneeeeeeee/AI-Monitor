@@ -32,8 +32,10 @@ Closing a preview or a panel is not uninstalling the app. To quit, use **设置 
 | Windsurf | Official application's cached plan state; readings are explicitly non-live. |
 | Kiro | Official kiro-cli installed and logged in; estimates remain labeled as estimates. |
 | GLM | A supported existing regional subscription credential or documented environment configuration. |
+| OpenCode Go | The Go subscription key saved by OpenCode itself (`/connect` or `opencode auth login` → OpenCode Go). |
+| ClinePass | A Cline account signed in through the Cline VS Code extension or CLI. Cline renews its own login; while Cline has not run for a while the last reading stays marked as cached. |
 
-No quota is inferred from an absent account. The app does not run a model prompt to test an allowance. Rate limits and cache timestamps are displayed honestly. Not every provider exposes every type of quota, API balance, or daily cost.
+No quota is inferred from an absent account. The app does not run a model prompt to test an allowance. Rate limits and cache timestamps are displayed honestly. Not every provider exposes every type of quota window.
 
 ## 中文快速说明
 

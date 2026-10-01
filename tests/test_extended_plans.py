@@ -265,7 +265,7 @@ class LocalStateTests(unittest.TestCase):
 class IntegrationGuards(unittest.TestCase):
     def test_registries_agree(self):
         self.assertEqual(set(MIN_INTERVAL), set(monitor.NAMES))
-        self.assertEqual(len(monitor.NAMES), 10)
+        self.assertEqual(len(monitor.NAMES), 12)
         swift = (ROOT/'Sources/MonitorCore/Models.swift').read_text()
         for name in monitor.NAMES: self.assertIn('ProviderInfo(id: "' + name + '"', swift)
     def test_removed_key_cards_not_removed_providers(self):
@@ -278,7 +278,7 @@ class IntegrationGuards(unittest.TestCase):
     def test_no_default_new_accounts(self):
         self.assertEqual(json.loads((ROOT/'Config/profile.json').read_text())['defaultEnabledProviders'], [])
     def test_allowlisted_hosts_only(self):
-        for url in ['https://cursor.com/api/usage-summary', *E.MINIMAX_ENDPOINTS.values()]: validate_url(url)
+        for url in ['https://cursor.com/api/usage-summary', *E.MINIMAX_ENDPOINTS.values(), E.OPENCODE_USAGE, E.CLINE_USAGE]: validate_url(url)
         for url in ['https://evil.example/v1/token_plan/remains', 'https://www.minimaxi.com/v1/token_plan/remains?key=x', 'http://cursor.com/api/usage-summary']:
             with self.assertRaises(MonitorError): validate_url(url)
     def test_changed_context_suppresses_old_account_cache(self):

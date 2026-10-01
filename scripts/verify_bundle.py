@@ -20,7 +20,7 @@ def verify(app:Path,channel:str)->dict:
     if info['CFBundleIdentifier']!=expected or profile['bundleID']!=expected or profile['channel']!=channel:raise ValueError('Cross-edition app/profile')
     if profile!=json.loads((r/'collector/runtime.json').read_text()):raise ValueError('Swift/Python profile drift')
     if channel=='public' and profile['experimentalModules']:raise ValueError('Private experiments in public bundle')
-    permitted={'RuntimeProfile.json','collector','BrandAssets','AppIcon.icns','AuthBridge','APIVault','Python','Distribution.json','Notices'}
+    permitted={'RuntimeProfile.json','collector','BrandAssets','AppIcon.icns','AuthBridge','Localization','Python','Distribution.json','Notices'}
     if {f.name for f in r.iterdir()}-permitted:raise ValueError('Unexpected top-level resource')
     for f in app.rglob('*'):
         if f.is_symlink():raise ValueError('Unexpected symlink in candidate')
@@ -35,7 +35,7 @@ def verify(app:Path,channel:str)->dict:
         smoke=json.loads(call([executable,'--self-test-runtime']))
         if not smoke.get('passed') or smoke.get('systemPythonUsed') is not False:raise ValueError('Bundled runtime failed its native launch test')
     helpers=[]
-    for sub,label,exe,suffix in [('AuthBridge','Keychain','MonitorKeychain','.Keychain.v1'),('APIVault','API Vault','MonitorAPIVault','.APIVault.v1')]:
+    for sub,label,exe,suffix in [('AuthBridge','Keychain','MonitorKeychain','.Keychain.v1')]:
         folder=r/sub;bundle=folder/(profile['displayName']+' '+label+'.app');binary=bundle/'Contents/MacOS'/exe
         metadata=json.loads((folder/'identity.json').read_text());helper_info=plistlib.loads((bundle/'Contents/Info.plist').read_bytes())
         if metadata.get('bundleID')!=expected+suffix or metadata.get('channel')!=channel or helper_info['CFBundleIdentifier']!=expected+suffix:raise ValueError('Wrong helper identity')

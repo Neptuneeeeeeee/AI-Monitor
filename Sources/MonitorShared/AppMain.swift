@@ -24,7 +24,6 @@ import MonitorCore
         popover.contentSize = layoutSize
         popover.contentViewController = MonitorViewController(store: store)
         store.onChange = { [weak self] in self?.updatePresentation() }
-        store.api.onChange = { [weak self] in self?.updatePresentation() }
         store.dismissPanel = { [weak self] in self?.dismissPanel() }
         keyboardMonitor = NSEvent.addLocalMonitorForEvents(matching: .keyDown) { [weak self] event in
             guard let self, self.popover.isShown || self.dashboardWindow?.isKeyWindow == true else { return event }
@@ -38,8 +37,7 @@ import MonitorCore
         }
         updatePresentation()
         if store.preferences.autoRefresh { store.refresh() }
-        if CommandLine.arguments.contains("--show-api") { store.apiMode = true; store.api.refresh() }
-        if CommandLine.arguments.contains("--show") || CommandLine.arguments.contains("--show-api") { DispatchQueue.main.asyncAfter(deadline: .now() + 0.6) { self.showDashboard() } }
+        if CommandLine.arguments.contains("--show") { DispatchQueue.main.asyncAfter(deadline: .now() + 0.6) { self.showDashboard() } }
     }
     private func updatePresentation() {
         guard let button = statusItem?.button else { return }
@@ -47,7 +45,7 @@ import MonitorCore
         button.title = ""; button.imagePosition = .imageOnly
         button.image = MenuBarIcon.make(slots: store.iconSlots, style: store.preferences.iconStyle, threshold: store.preferences.lowThreshold)
         button.toolTip = store.iconHelp
-        button.setAccessibilityLabel("\(AppRuntime.profile.displayName)，\(store.iconSlots.count) 个套餐的剩余额度，按各平台实际窗口显示")
+        button.setAccessibilityLabel(L10n.tr("{0}，{1} 个套餐的剩余额度，按各平台实际窗口显示", AppRuntime.profile.displayName, store.iconSlots.count))
         button.setAccessibilityValue(store.iconHelp)
         popover.behavior = store.preferences.keepPopoverOpen || store.showSettings ? .applicationDefined : .transient
         DispatchQueue.main.async { [weak self] in self?.resizePanels() }
@@ -69,7 +67,7 @@ import MonitorCore
         guard let image = statusItem.button?.image else { return }
         let slotData = (try? JSONEncoder().encode(store.iconSlots)) ?? Data("[]".utf8)
         let slots = (try? JSONSerialization.jsonObject(with: slotData)) ?? []
-        let state: [String: Any] = ["version":AppRuntime.profile.version, "channel":AppRuntime.profile.channel, "bundleID":AppRuntime.profile.bundleID, "apiMode":store.apiMode, "apiAccountCount":store.api.accounts.count, "apiConfiguredCount":store.api.accounts.filter { $0.configured }.count, "apiToolbarPosition":"refresh-api-settings", "updatedAt":Date().timeIntervalSince1970,
+        let state: [String: Any] = ["version":AppRuntime.profile.version, "channel":AppRuntime.profile.channel, "bundleID":AppRuntime.profile.bundleID, "updatedAt":Date().timeIntervalSince1970,
             "buttonTitle":statusItem.button?.title ?? "", "itemLength":statusItem.length,
             "imageWidth":image.size.width, "imageHeight":image.size.height, "imageTemplate":image.isTemplate,
             "providerOrder":store.preferences.providerOrder, "enabled":Array(store.enabled).sorted(), "iconSlots":slots,
@@ -109,7 +107,6 @@ import MonitorCore
         refreshOnOpen()
     }
     private func refreshOnOpen() {
-        if store.apiMode { store.api.refresh(); return }
         guard store.preferences.autoRefresh && store.preferences.refreshOnOpen else { return }
         if store.snapshot == nil || store.now - (store.snapshot?.generatedAt ?? 0) > Double(store.refreshSeconds) { store.refresh() }
     }

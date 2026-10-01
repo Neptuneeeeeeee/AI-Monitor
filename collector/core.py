@@ -6,6 +6,7 @@ import json
 import math
 import os
 from pathlib import Path
+import re
 import signal
 import subprocess
 import tempfile
@@ -33,8 +34,11 @@ def timestamp(value):
     n = number(value)
     if n is not None: return n / 1000 if n > 10**11 else n
     if not isinstance(value, str): return None
+    text = value.strip().replace('Z', '+00:00')
+    # Python 3.9 only parses 3 or 6 fractional digits; providers also send 1-9.
+    text = re.sub(r'(T\d{2}:\d{2}:\d{2})\.(\d{1,9})', lambda m: m.group(1) + '.' + (m.group(2) + '000000')[:6], text, count=1)
     try:
-        result = dt.datetime.fromisoformat(value.strip().replace('Z', '+00:00'))
+        result = dt.datetime.fromisoformat(text)
         if result.tzinfo is None: result = result.replace(tzinfo=dt.timezone.utc)
         return result.timestamp()
     except (ValueError, OverflowError): return None

@@ -5,8 +5,6 @@ import ServiceManagement
 import MonitorCore
 
 @MainActor final class MonitorStore: ObservableObject {
-    let api: APIBalanceStore
-    @Published var apiMode = false { didSet { onChange?() } }
     @Published var snapshot: Snapshot?
     @Published var refreshing = false
     @Published var authorizingClaude = false
@@ -16,7 +14,10 @@ import MonitorCore
     @Published var showSettings = false { didSet { onChange?() } }
     @Published var settingsTab = "order"
     @Published var preferences: DisplayPreferences {
-        didSet { preferences.save(to: defaults); if oldValue.autoRefresh != preferences.autoRefresh { reschedule() }; onChange?() }
+        didSet {
+            preferences.save(to: defaults); L10n.setLanguage(preferences.language)
+            if oldValue.autoRefresh != preferences.autoRefresh { reschedule() }; onChange?()
+        }
     }
     @Published var refreshSeconds: Int { didSet { defaults.set(refreshSeconds, forKey: "refreshSeconds"); reschedule() } }
     @Published var enabled: Set<String> {
@@ -50,8 +51,9 @@ import MonitorCore
 
     init(defaults: UserDefaults = AppRuntime.defaults, servicesEnabled: Bool = true) {
         self.defaults = defaults; self.servicesEnabled = servicesEnabled
-        self.api = APIBalanceStore(servicesEnabled: servicesEnabled)
-        preferences = DisplayPreferences.load(from: defaults)
+        let loaded = DisplayPreferences.load(from: defaults)
+        L10n.setLanguage(loaded.language)
+        preferences = loaded
         refreshSeconds = max(300, defaults.object(forKey: "refreshSeconds") as? Int ?? 300)
         enabled = Set(defaults.stringArray(forKey: "enabled") ?? AppRuntime.profile.defaultEnabledProviders)
         glmRegion = defaults.string(forKey: "glmRegion") ?? "cn"
@@ -69,7 +71,7 @@ import MonitorCore
         try? FileManager.default.createDirectory(at: support, withIntermediateDirectories: true, attributes: [.posixPermissions: 0o700])
         if let data = try? Data(contentsOf: support.appendingPathComponent("snapshot.json")), let old = try? JSONDecoder().decode(Snapshot.self, from: data) { snapshot = old }
         // Revalidate new-account context before reusing a disk snapshot at launch.
-        snapshot?.providers.removeAll { ["cursor", "minimax", "windsurf", "kiro"].contains($0.id) }
+        snapshot?.providers.removeAll { ["cursor", "minimax", "windsurf", "kiro", "opencode", "cline"].contains($0.id) }
         reschedule()
         clock = Timer.scheduledTimer(withTimeInterval: 30, repeats: true) { [weak self] _ in
             Task { @MainActor in self?.objectWillChange.send(); self?.onChange?() }
@@ -79,7 +81,6 @@ import MonitorCore
         }
     }
     func shutdown() {
-        api.shutdown()
         timer?.invalidate(); clock?.invalidate(); enableRefresh?.cancel()
         if let wakeObserver { NSWorkspace.shared.notificationCenter.removeObserver(wakeObserver) }
         guard let process, process.isRunning else { return }
@@ -195,10 +196,15 @@ import MonitorCore
             NSWorkspace.shared.openApplication(at: URL(fileURLWithPath: "/Applications/Antigravity.app"), configuration: NSWorkspace.OpenConfiguration()) { _, _ in }
             banner = "在 Antigravity 登录后点击刷新。"; return
         }
-        let commands = ["kimi": "if command -v kimi >/dev/null 2>&1; then kimi login; else printf '未找到 Kimi CLI，请先安装官方客户端。\\n'; fi", "codex": "if command -v codex >/dev/null 2>&1; then codex login; else printf '未找到 Codex CLI，请先安装官方客户端。\\n'; fi"]
+        // Translated text is shell-quoted and printed with %s, never used as a format.
+        func say(_ key: String) -> String { "printf '%s\\n' '" + L10n.tr(key).replacingOccurrences(of: "'", with: "'\\''") + "'" }
+        let commands = ["kimi": "if command -v kimi >/dev/null 2>&1; then kimi login; else \(say("未找到 Kimi CLI，请先安装官方客户端。")); fi",
+                        "codex": "if command -v codex >/dev/null 2>&1; then codex login; else \(say("未找到 Codex CLI，请先安装官方客户端。")); fi",
+                        "opencode": "if command -v opencode >/dev/null 2>&1; then \(say("在列表中选择 OpenCode Go，并粘贴订阅 Key。")); opencode auth login; else \(say("未找到 OpenCode CLI，请先安装官方客户端，或在 OpenCode 中运行 /connect。")); fi",
+                        "cline": "if command -v cline >/dev/null 2>&1; then \(say("选择 Cline 账号登录（ClinePass 使用 Cline 账号）。")); cline auth; else \(say("未找到 Cline CLI；也可以在 VS Code 的 Cline 扩展中登录 Cline 账号。")); fi"]
         guard let command = commands[id] else { openSettings("connections"); return }
         let file = support.appendingPathComponent("login-\(id).command")
-        let body = "#!/bin/zsh\nexport PATH=\"$HOME/.kimi-code/bin:$HOME/.local/bin:/opt/homebrew/bin:/usr/local/bin:$PATH\"\ncd \"$HOME\"\n\(command)\nprintf '\\n登录完成后回到 Monitor 点击刷新。\\n'\n"
+        let body = "#!/bin/zsh\nexport PATH=\"$HOME/.kimi-code/bin:$HOME/.opencode/bin:$HOME/.local/bin:/opt/homebrew/bin:/usr/local/bin:$PATH\"\ncd \"$HOME\"\n\(command)\nprintf '\\n'; \(say("登录完成后回到 Monitor 点击刷新。"))\n"
         do {
             try body.write(to: file, atomically: true, encoding: .utf8)
             try FileManager.default.setAttributes([.posixPermissions: 0o700], ofItemAtPath: file.path); NSWorkspace.shared.open(file)
@@ -210,7 +216,7 @@ import MonitorCore
     }
     func diagnostic() {
         guard servicesEnabled else { banner = "交互预览不执行账号连接、系统设置或真实数据操作。"; return }
-        let panel = NSSavePanel(); panel.nameFieldStringValue = "Monitor-diagnostics.json"; panel.title = "导出脱敏诊断"
+        let panel = NSSavePanel(); panel.nameFieldStringValue = "Monitor-diagnostics.json"; panel.title = L10n.tr("导出脱敏诊断")
         if panel.runModal() == .OK, let url = panel.url, let snapshot {
             let encoder = JSONEncoder(); encoder.outputFormatting = [.prettyPrinted, .sortedKeys]
             do { try encoder.encode(snapshot).write(to: url, options: .atomic); banner = "已导出，不包含凭证。" } catch { banner = "导出失败。" }
@@ -229,7 +235,7 @@ import MonitorCore
     func move(_ id: String, to target: String) { preferences.move(id, to: target) }
     var iconSlots: [MenuBarSlot] { MenuBarMapping.slots(order: preferences.providerOrder, enabled: enabled, snapshot: snapshot, now: now, maxAge: staleAge) }
     var iconHelp: String {
-        if iconSlots.isEmpty { return "未启用套餐，点击打开设置" }
+        if iconSlots.isEmpty { return L10n.tr("未启用套餐，点击打开设置") }
         return iconSlots.enumerated().map { index, slot in
             let value = slot.percent.map { String(format: "%.1f%%", $0) } ?? "—"
             return "\(index + 1). \(slot.name) · \(slot.reason) \(value)"
@@ -243,13 +249,11 @@ import MonitorCore
         let height = max(300, screen.visibleFrame.height - 64)
         if height != availablePanelHeight { availablePanelHeight = height }
     }
-    func openSettings(_ tab: String = "order") { settingsTab = tab; api.editingID = nil; showSettings = true }
-    func openAPISettings(_ id: String?) { apiMode = true; api.editingID = id; showSettings = true }
-    func toggleAPI() { showSettings = false; api.editingID = nil; apiMode.toggle(); if apiMode { api.refresh() } }
-    func backFromSettings() { if apiMode && api.editingID != nil { api.editingID=nil } else { showSettings=false } }
+    func openSettings(_ tab: String = "order") { settingsTab = tab; showSettings = true }
+    func backFromSettings() { showSettings = false }
     func refreshCurrent() {
         guard servicesEnabled else { banner = "这里只展示模拟数据，未发起真实查询。"; return }
-        if apiMode { api.refresh() } else { refresh(force:true) }
+        refresh(force:true)
     }
     func clearQuotaCache() {
         guard servicesEnabled else { banner = "交互预览不执行账号连接、系统设置或真实数据操作。"; return }
@@ -258,6 +262,7 @@ import MonitorCore
         snapshot = nil; banner = "额度缓存已清除；账号、钥匙串与防限流等待时间保持不变。"; onChange?(); refresh(force: true)
     }
     func resetAppearance() {
-        preferences = DisplayPreferences(); banner = "已恢复默认显示与排序，保留已启用账号。"
+        var standard = DisplayPreferences(); standard.language = preferences.language
+        preferences = standard; banner = L10n.tr("已恢复默认显示与排序，保留已启用账号和显示语言。")
     }
 }

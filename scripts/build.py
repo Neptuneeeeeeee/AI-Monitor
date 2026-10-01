@@ -18,7 +18,7 @@ import uuid
 from git_provenance import repository_state
 
 PUBLIC = Path(__file__).resolve().parents[1]
-PROVIDERS = {'claude','kimi','codex','glm','copilot','antigravity','cursor','minimax','windsurf','kiro'}
+PROVIDERS = {'claude','kimi','codex','glm','copilot','antigravity','cursor','minimax','windsurf','kiro','opencode','cline'}
 
 def digest(path: Path) -> str:
     return hashlib.sha256(path.read_bytes()).hexdigest()
@@ -170,9 +170,10 @@ def main() -> int:
             if f.is_symlink():raise ValueError('Symlinked asset rejected')
             clean_copy(f,assets/f.name)
         clean_copy(PUBLIC/'Resources/AppIcon.icns',resources/'AppIcon.icns')
+        localization=resources/'Localization';localization.mkdir()
+        clean_copy(PUBLIC/'Resources/Localization/Localizable.json',localization/'Localizable.json')
         for template,exe,suffix,label,destination in [
-            ('KeychainBridge.swift','MonitorKeychain','.Keychain.v1','Keychain','AuthBridge'),
-            ('APIVault.swift','MonitorAPIVault','.APIVault.v1','API Vault','APIVault')]:
+            ('KeychainBridge.swift','MonitorKeychain','.Keychain.v1','Keychain','AuthBridge')]:
             bundle,metadata=helper(template,exe,suffix,label,profile,cache,env,arch)
             target=resources/destination;target.mkdir()
             shutil.copytree(bundle,target/bundle.name,copy_function=clean_copy)

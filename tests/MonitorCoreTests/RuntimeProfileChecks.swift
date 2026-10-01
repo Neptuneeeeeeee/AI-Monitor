@@ -16,7 +16,7 @@ extension MonitorCoreTests {
     }
     func testRuntimeLocalIdentitySeparate() throws {
         let a = try runtimeFixture(), b = try runtimeFixture(channel:"local");try b.validate(expectedChannel:"local")
-        checkTrue(a.bundleID != b.bundleID);checkTrue(a.keychainHelperID != b.keychainHelperID);checkTrue(a.apiHelperID != b.apiHelperID)
+        checkTrue(a.bundleID != b.bundleID);checkTrue(a.keychainHelperID != b.keychainHelperID)
         checkTrue(a.supportURL(home:URL(fileURLWithPath:"/synthetic")) != b.supportURL(home:URL(fileURLWithPath:"/synthetic")))
     }
     func testRuntimeCrossChannelRejected() throws {

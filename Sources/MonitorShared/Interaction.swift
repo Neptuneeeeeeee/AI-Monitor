@@ -1,5 +1,6 @@
 import AppKit
 import SwiftUI
+import MonitorCore
 
 // Accessory apps normally consume a click merely activating the hosting view.
 // The status action also activates the app; this makes the very first click work.
@@ -53,7 +54,7 @@ struct ToolbarButton: View {
             }.frame(width: 28, height: 28).contentShape(Rectangle())
         }
         .buttonStyle(ResponsiveButtonStyle())
-        .accessibilityLabel(title).accessibilityIdentifier(identifier).help(busy ? "正在刷新额度…" : title)
+        .accessibilityLabel(title).accessibilityIdentifier(identifier).help(busy ? L10n.tr("正在刷新额度…") : title)
     }
 }
 
@@ -79,11 +80,11 @@ struct SettingsToggle: View {
     var body: some View {
         Button { isOn.toggle() } label: {
             HStack(spacing: 10) {
-                Text(title).frame(maxWidth: .infinity, alignment: .leading)
+                Text(L10n.tr(title)).frame(maxWidth: .infinity, alignment: .leading)
                 SwitchGlyph(on: isOn)
             }.frame(minHeight: 32).contentShape(Rectangle())
         }.buttonStyle(ResponsiveButtonStyle(minimum: 32))
-            .accessibilityLabel(title).accessibilityValue(isOn ? "已开启" : "已关闭")
+            .accessibilityLabel(L10n.tr(title)).accessibilityValue(isOn ? L10n.tr("已开启") : L10n.tr("已关闭"))
             .accessibilityIdentifier(identifier.isEmpty ? "toggle." + title : identifier)
     }
 }

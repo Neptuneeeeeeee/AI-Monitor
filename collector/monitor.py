@@ -16,12 +16,13 @@ from kimi_provider import collect_kimi, kimi_home
 from codex_provider import collect_codex
 from other_providers import collect_claude, collect_glm, collect_copilot
 from antigravity_provider import collect_antigravity, official_processes
-from extended_plans import collect_cursor, collect_minimax, collect_windsurf, collect_kiro, DB_PATHS, NEW_IDS
+from extended_plans import (collect_cursor, collect_minimax, collect_windsurf, collect_kiro, collect_opencode, collect_cline,
+                            opencode_identity, cline_identity, DB_PATHS, NEW_IDS)
 from scheduling import GateBook, interval_for
 from rate_limits import RATE_MESSAGE
 from last_good import choose, historical, update_record, TRANSIENT, measured
 
-NAMES = {'kimi': 'Kimi Code', 'codex': 'Codex', 'claude': 'Claude Code', 'glm': 'GLM Coding Plan', 'copilot': 'GitHub Copilot', 'antigravity': 'Antigravity', 'cursor': 'Cursor', 'minimax': 'MiniMax', 'windsurf': 'Windsurf', 'kiro': 'Kiro'}
+NAMES = {'kimi': 'Kimi Code', 'codex': 'Codex', 'claude': 'Claude Code', 'glm': 'GLM Coding Plan', 'copilot': 'GitHub Copilot', 'antigravity': 'Antigravity', 'cursor': 'Cursor', 'minimax': 'MiniMax', 'windsurf': 'Windsurf', 'kiro': 'Kiro', 'opencode': 'OpenCode Go', 'cline': 'ClinePass'}
 PUBLIC_KEYS = {'id', 'name', 'status', 'source', 'message', 'plan', 'fetchedAt', 'attemptedAt', 'windows', 'note', 'nextQueryAt', 'pollIntervalSeconds', 'queryStatus', 'liveStatus', 'historical'}
 
 
@@ -32,6 +33,9 @@ def generation(pid, region):
         from local_plan_store import read_app_value
         token, _ = read_app_value(HOME / DB_PATHS['cursor'], 'cursorAuth/accessToken')
         return hashlib.sha256(token.encode()).hexdigest() if token else None
+    # Key/account digests only: Cline rewrites its settings file on every token refresh.
+    if pid == 'opencode': return opencode_identity()
+    if pid == 'cline': return cline_identity()
     # File metadata is a conservative cache-invalidation guard, not proof of identity.
     # Unknown or local Antigravity identity: never reuse a failed fetch as current data.
     if pid == 'antigravity':
@@ -122,7 +126,8 @@ def collect_one(pid, region, previous, state, force=False, *, gates, requested=3
         return with_schedule(value, gate, pid, requested, query_status), record
     functions = {'kimi': collect_kimi, 'codex': collect_codex, 'claude': collect_claude,
                  'glm': lambda: collect_glm(region), 'copilot': collect_copilot, 'antigravity': collect_antigravity,
-                 'cursor': collect_cursor, 'minimax': collect_minimax, 'windsurf': collect_windsurf, 'kiro': collect_kiro}
+                 'cursor': collect_cursor, 'minimax': collect_minimax, 'windsurf': collect_windsurf, 'kiro': collect_kiro,
+                 'opencode': collect_opencode, 'cline': collect_cline}
     try:
         value = public_result(functions[pid]())
         updated = gates.success(pid, requested)
@@ -137,7 +142,7 @@ def collect_one(pid, region, previous, state, force=False, *, gates, requested=3
         return value, update_record(record, value, generation=after, region=region, success=True)
     except MonitorError as error: pass_error = error
     except Exception as error:
-        pass_error = MonitorError('error', '本地适配器遇到 ' + type(error).__name__ + '，已暂停查询。')
+        pass_error = MonitorError('error', '本地适配器遇到 %s，已暂停查询。' % type(error).__name__)
     updated = gates.failure(pid, pass_error, requested)
     try: after = generation(pid, region)
     except MonitorError: after = None

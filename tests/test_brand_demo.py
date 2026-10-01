@@ -16,10 +16,16 @@ class BrandDemoTests(unittest.TestCase):
             self.assertEqual(hashlib.sha256(data).hexdigest(),row['sha256'])
             self.assertEqual(data[:8],b'\x89PNG\r\n\x1a\n')
             w,h=struct.unpack('>II',data[16:24]);self.assertGreaterEqual(min(w,h),32)
+    def test_agent_plan_marks_have_source_records(self):
+        rows={row['id']:row for row in json.loads((ROOT/'Resources/BrandAssets/sources.json').read_text())}
+        for key,origin in {'opencode':'opencode.ai','cline':'saoudrizwan.claude-dev'}.items():
+            row=rows[key];self.assertIn(origin,row['source']+row['sourcePage'])
+            data=(ROOT/'Resources/BrandAssets'/row['file']).read_bytes()
+            self.assertEqual(hashlib.sha256(data).hexdigest(),row['sha256']);self.assertEqual(data[:8],b'\x89PNG\r\n\x1a\n')
     def test_each_new_mark_is_registered(self):
         text=(ROOT/'Sources/MonitorShared/BrandStyle.swift').read_text()
         ids=re.search(r'static let ids = \[(.*?)\]',text).group(1)
-        for key in ('cursor','minimax','windsurf','kiro'):self.assertIn('"'+key+'"',ids)
+        for key in ('cursor','minimax','windsurf','kiro','opencode','cline'):self.assertIn('"'+key+'"',ids)
     def test_demo_uses_real_views_and_isolated_defaults(self):
         text=(ROOT/'Sources/MonitorShared/DemoSupport.swift').read_text()
         self.assertIn('MonitorPanel(store: store)',text)
@@ -32,11 +38,6 @@ class BrandDemoTests(unittest.TestCase):
         facade=text[text.index('public enum MonitorApplication'):]
         self.assertLess(facade.index('DemoSupport.run('),facade.index('let delegate = AppDelegate()'))
         self.assertIn('DemoSupport.run(args: args); return',facade)
-    def test_disconnected_account_actions_fail_closed(self):
-        text=(ROOT/'Sources/MonitorShared/APIBalanceStore.swift').read_text()
-        for name in ('save','removeKey','grant','openBilling'):
-            header=re.search(r'func '+name+r'\([^\n]+\{\n\s*([^\n]+)',text)
-            self.assertIsNotNone(header,name);self.assertIn('guard servicesEnabled',header.group(1))
     def test_disconnected_plan_actions_fail_closed(self):
         text=(ROOT/'Sources/MonitorShared/MonitorStore.swift').read_text()
         for name in ('toggleLogin','grantClaude','openWebsite','reconnect','diagnostic','clearQuotaCache','openDataDirectory','refreshCurrent'):

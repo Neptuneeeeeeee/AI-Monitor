@@ -1,5 +1,15 @@
 # 1.9.1 — Official-source icons and disconnected interactive preview
 
+## 1.10.0 — Plan quotas only; OpenCode Go and ClinePass
+
+- Remove the API balance view and its key management: the API/Plan toolbar switch, API settings and key editor, the separate API Vault helper and the DeepSeek, Kimi API, OpenAI/Claude cost, SiliconFlow, OpenRouter and Google AI Studio balance adapters. Existing `API/` and `APIAuth/` folders are no longer read; keys saved through that view stay in the login keychain until removed there. The MiniMax Token Plan key editor stays, since that key is the plan's own credential.
+- Add OpenCode Go: 5-hour, weekly and subscription-month windows from `opencode.ai/zen/go/v1/usage`, using the key OpenCode saved with `/connect`.
+- Add ClinePass: 5-hour, weekly and monthly windows from Cline's account usage-limits endpoint, using the Cline sign-in without refreshing it. An expired token keeps the last reading marked as cached.
+- Parse ISO timestamps with 1–9 fractional digits on the system Python 3.9 runtime.
+- Pi has no plan of its own and Kilo Pass is prepaid credit, so neither gets an adapter; see `docs/PLAN_RESEARCH_2026_10.md`.
+- Add a display-language setting (Settings → Display): follow the system, Simplified or Traditional Chinese, English, Japanese, Korean, Spanish, French, German or Brazilian Portuguese. Brand and plan names and upstream English terms such as Session and Weekly stay untranslated. Collector messages are translated at display time from `Resources/Localization/Localizable.json`, so a switch applies immediately.
+- Remove the "bar N" labels from the plan ordering list.
+
 ## 1.9.5 — Menu bar limited to four quota bars
 
 - Draw at most four bars in the status item. A selection of four or fewer is unchanged; a longer one keeps the first plans in the user's own order, so reordering in Settings decides which plans reach the menu bar.

@@ -15,34 +15,14 @@ import MonitorCore
         let store = MonitorStore(defaults: defaults, servicesEnabled: false)
         let now = Date().timeIntervalSince1970
         store.previewNow = now
-        var providers = PreviewSupport.expandedFixtures(now: now).providers + PreviewSupport.fixtures(now: now).providers
+        var providers = PreviewSupport.expandedFixtures(now: now).providers + PreviewSupport.fixtures(now: now).providers + PreviewSupport.agentPlanFixtures(now: now).providers
         providers.append(ProviderResult(id: "copilot", name: "Copilot", plan: "Pro", fetchedAt: now,
             windows: [QuotaWindow(id: "premium_interactions", label: "Premium · 每月", remainingPercent: 72, resetAt: now + 12 * 86400, kind: "monthly")]))
         providers.append(ProviderResult(id: "antigravity", name: "Antigravity", fetchedAt: now,
             windows: [QuotaWindow(id: "group-demo", label: "Claude · 5 小时", remainingPercent: 54, resetAt: now + 10800, durationMinutes: 300)]))
         for i in providers.indices { providers[i].source = "交互预览 · 合成数据，不是实际账号" }
         store.snapshot = Snapshot(generatedAt: now, providers: providers)
-        populateAPI(store.api, now: now)
         return store
-    }
-    static func populateAPI(_ api: APIBalanceStore, now: Double) {
-        let balances: [APIProvider: Double] = [.deepseek: 82.4, .kimi: 120, .siliconflow: 88.88, .openrouter: 18.5]
-        let spent: [APIProvider: Double] = [.openai: 4.2, .claude: 1.35, .openrouter: 3.2]
-        var observations: [APIObservation] = []
-        for i in api.accounts.indices {
-            var account = api.accounts[i]
-            account.credentialRevision = "synthetic-interactive-demo"
-            if account.provider.supportsDailyCost { account.dailyBudget = 10 }
-            if [.deepseek, .kimi, .siliconflow].contains(account.provider) { account.balanceReference = 200 }
-            api.accounts[i] = account
-            observations.append(APIObservation(id: account.id, context: account.context,
-                status: account.provider == .google ? "unsupported" : "ok", currency: account.selectedCurrency,
-                balance: balances[account.provider], balanceLabel: account.provider == .openrouter ? "Key 剩余额度" : "账户余额",
-                dailySpent: spent[account.provider], dayUTC: APIObservation.day(Date(timeIntervalSince1970: now)),
-                keyLimit: account.provider == .openrouter ? 20 : nil, fetchedAt: now,
-                source: "交互预览 · 合成数据", message: "模拟展示，不是你的实际余额。"))
-        }
-        api.snapshot = APIBalanceSnapshot(generatedAt: now, accounts: observations)
     }
     static func run(args: [String]) {
         let delegate = DemoDelegate(args: args)
@@ -56,18 +36,18 @@ import MonitorCore
     var body: some View {
         VStack(spacing: 0) {
             VStack(alignment: .leading, spacing: 7) {
-                Label("交互预览 · 模拟数据", systemImage: "eye")
+                Label(L10n.tr("交互预览 · 模拟数据"), systemImage: "eye")
                     .font(.system(size: 12, weight: .semibold))
-                Text("不连接账号，不保存密钥，不改变正式设置。")
+                Text(L10n.tr("不连接账号，不保存密钥，不改变正式设置。"))
                     .font(.system(size: 10)).foregroundStyle(.secondary)
                 HStack {
-                    Button("新增套餐") { store.enabled = ["cursor", "minimax", "windsurf", "kiro"]; store.apiMode = false; store.showSettings = false }
+                    Button(L10n.tr("新增套餐")) { store.enabled = ["cursor", "minimax", "windsurf", "kiro"]; store.showSettings = false }
                         .accessibilityIdentifier("demo.new-plans")
-                    Button("全部套餐") { store.enabled = Set(ProviderInfo.defaultOrder); store.apiMode = false; store.showSettings = false }
+                    Button(L10n.tr("全部套餐")) { store.enabled = Set(ProviderInfo.defaultOrder); store.showSettings = false }
                         .accessibilityIdentifier("demo.all-plans")
                     Spacer()
                     Image(nsImage: MenuBarIcon.make(slots: store.iconSlots, style: "mono", threshold: 25))
-                        .help("菜单栏图标预览，仍为黑白")
+                        .help(L10n.tr("菜单栏图标预览，仍为黑白"))
                 }.buttonStyle(.bordered).controlSize(.small)
             }.padding(12).frame(maxWidth: .infinity, alignment: .leading).background(Color(nsColor: .controlBackgroundColor))
             Divider()
@@ -98,7 +78,7 @@ import MonitorCore
         let root = DemoRoot(store: store)
         let host = FirstClickHostingView(rootView: root)
         window = NSWindow(contentRect: NSRect(origin: .zero, size: host.fittingSize), styleMask: [.titled, .closable, .miniaturizable], backing: .buffered, defer: false)
-        window.title = "AI Monitor · 交互预览（模拟数据）"
+        window.title = L10n.tr("AI Monitor · 交互预览（模拟数据）")
         window.isReleasedWhenClosed = false
         window.appearance = NSAppearance(named: .aqua)
         window.backgroundColor = .white
@@ -106,7 +86,6 @@ import MonitorCore
         window.delegate = self
         store.dismissPanel = { NSApp.terminate(nil) }
         store.onChange = { [weak self] in self?.fit() }
-        store.api.onChange = { [weak self] in self?.fit() }
         keyMonitor = NSEvent.addLocalMonitorForEvents(matching: .keyDown) { [weak self] event in
             guard let self, self.window.isKeyWindow, event.modifierFlags.contains(.command) else { return event }
             switch event.charactersIgnoringModifiers {
@@ -137,7 +116,6 @@ import MonitorCore
         let info: [String: Any] = ["mode": "synthetic-demo", "status": status, "pid": ProcessInfo.processInfo.processIdentifier,
             "windowTitle": window?.title ?? "", "windowVisible": window?.isVisible ?? false,
             "windowNumber": window?.windowNumber ?? 0, "servicesEnabled": store?.servicesEnabled ?? false,
-            "apiServicesEnabled": store?.api.servicesEnabled ?? false,
             "suite": suite, "checkCount": checks ?? 0, "updatedAt": Date().timeIntervalSince1970]
         guard let bytes = try? JSONSerialization.data(withJSONObject: info, options: [.prettyPrinted, .sortedKeys]) else { return }
         if let path = receiptURL { try? bytes.write(to: path, options: .atomic); try? FileManager.default.setAttributes([.posixPermissions: 0o600], ofItemAtPath: path.path) }
@@ -150,33 +128,25 @@ import MonitorCore
             guard good else { fputs("DEMO_CHECK_FAILED: \(label)\n", stderr); cleanup(); exit(1) }
             count += 1
         }
-        check(!store.servicesEnabled && !store.api.servicesEnabled, "real services disabled")
+        check(!store.servicesEnabled, "real services disabled")
         check(window.isVisible && !window.title.isEmpty, "visible demo window")
-        check(store.snapshot?.providers.count == 10, "all ten synthetic providers")
+        check(store.snapshot?.providers.count == ProviderInfo.all.count, "every provider has synthetic data")
         check(store.enabled.count == 4, "new plans first")
         for id in ProviderInfo.defaultOrder { check(BrandAssets.image(id) != nil, "official bundled logo \(id)") }
-        let apiBefore = store.api.accounts
         store.toggleLogin(true); check(!store.launchAtLogin, "login item mutation blocked")
         store.grantClaude(); check(!store.authorizingClaude, "keychain grant blocked")
         for id in ProviderInfo.defaultOrder { store.reconnect(id); store.openWebsite(id) }
         store.refresh(force: true); check(!store.refreshing, "no plan collector")
-        store.api.refresh(); check(!store.api.refreshing, "no API collector")
-        let account = store.api.accounts[0]
-        let saved = await store.api.save(account, key: "synthetic-demo-only")
-        check(!saved, "API secret save rejected")
-        await store.api.removeKey(account.id); await store.api.grant(account.id); store.api.openBilling(account)
-        check(store.api.accounts == apiBefore, "account secret operations leave state unchanged")
         let planSaved = await store.saveMiniMaxCredential("synthetic-demo-only")
         check(!planSaved, "plan secret save rejected")
         store.clearQuotaCache(); check(store.snapshot != nil, "real cache deletion blocked")
-        store.toggleAPI(); check(store.apiMode, "API navigation works")
-        store.openAPISettings(account.id); check(store.showSettings && store.api.editingID == account.id, "API editor navigation works")
-        store.backFromSettings(); store.backFromSettings(); store.toggleAPI(); check(!store.apiMode, "return to plans")
+        store.openSettings("connections"); check(store.showSettings && store.settingsTab == "connections", "settings navigation works")
+        store.backFromSettings(); check(!store.showSettings, "return to plans")
         store.enabled = Set(ProviderInfo.defaultOrder); check(store.iconSlots.count == MenuBarGeometry.maxRows, "menu bars capped at four")
         store.move("kiro", by: -1); check(store.preferences.providerOrder.contains("kiro"), "ordering works")
         store.preferences.compact.toggle(); check(!store.preferences.compact, "display setting works")
         check(MenuBarIcon.make(slots: store.iconSlots, style: "mono", threshold: 25).isTemplate, "monochrome menu icon")
-        store.banner = ""; store.api.message = ""
+        store.banner = ""
         writeReceipt(status: "checks-passed", checks: count)
         print("DEMO_CHECKS_PASSED \(count)"); fflush(stdout)
         NSApp.terminate(nil)

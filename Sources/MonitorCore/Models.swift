@@ -21,7 +21,8 @@ public struct QuotaWindow: Codable, Identifiable, Equatable {
     }
     public var isExtra: Bool { kind == "extra" || id == "extra_usage" }
     public var isScoped: Bool { kind == "model" || id.hasPrefix("seven_day_") || id.hasPrefix("model-") }
-    public var shortLabel: String {
+    /// Untranslated source label; the views pass it through L10n.
+    public var sourceShortLabel: String {
         if isExtra { return "Extra Usage" }
         if id.hasPrefix("minimax-") || id.hasPrefix("windsurf-") { return label }
         if id.hasPrefix("seven_day_") { return "Weekly · " + id.replacingOccurrences(of: "seven_day_", with: "").replacingOccurrences(of: "_", with: " ").capitalized }
@@ -29,22 +30,23 @@ public struct QuotaWindow: Codable, Identifiable, Equatable {
         if durationMinutes == 10080 { return id.hasPrefix("group-") ? label.replacingOccurrences(of: "Claude / GPT", with: "Claude") : "Weekly" }
         return label.replacingOccurrences(of: " · 计费周期", with: "").replacingOccurrences(of: "当前 ", with: "")
     }
+    public var shortLabel: String { L10n.tr(sourceShortLabel) }
     public var safePercent: Double? {
         guard isUnlimited != true, let p = remainingPercent, p.isFinite, p >= 0, p <= 100 else { return nil }
         return p
     }
     public func percentText(_ precision: String = "smart") -> String {
-        guard let p = safePercent else { return isUnlimited == true ? "不限量" : "—" }
+        guard let p = safePercent else { return isUnlimited == true ? L10n.tr("不限量") : "—" }
         let decimal = precision == "one" || (precision == "smart" && abs(p - p.rounded()) > 0.05)
         if precision == "whole" && p > 0 && p < 1 { return "<1%" }
         return String(format: decimal ? "%.1f%%" : "%.0f%%", p)
     }
     public func remainingText(_ precision: String = "smart") -> String {
-        if isUnlimited == true { return "不限量" }
+        if isUnlimited == true { return L10n.tr("不限量") }
         if isExtra, let amount = remaining, amount.isFinite, let currency {
-            return Self.money(max(0, amount), currency: currency) + " 剩余"
+            return L10n.tr("{0} 剩余", Self.money(max(0, amount), currency: currency))
         }
-        return safePercent == nil ? "—" : percentText(precision) + " 剩余"
+        return safePercent == nil ? "—" : L10n.tr("{0} 剩余", percentText(precision))
     }
     public static func money(_ amount: Double, currency: String) -> String {
         let f = NumberFormatter(); f.locale = Locale(identifier: "en_US"); f.numberStyle = .currency
@@ -52,17 +54,17 @@ public struct QuotaWindow: Codable, Identifiable, Equatable {
         return f.string(from: NSNumber(value: amount)) ?? String(format: "%@ %.2f", currency, amount)
     }
     public func resetText(mode: String = "relative", now: Double = Date().timeIntervalSince1970) -> String {
-        if isExtra, let limit, let currency { return Self.money(limit, currency: currency) + " 上限" }
+        if isExtra, let limit, let currency { return L10n.tr("{0} 上限", Self.money(limit, currency: currency)) }
         guard mode != "hidden", let resetAt, resetAt.isFinite else { return "" }
-        if resetAt <= now { return "等待重置确认" }
+        if resetAt <= now { return L10n.tr("等待重置确认") }
         if mode == "absolute" {
-            let f = DateFormatter(); f.locale = Locale(identifier: "zh_CN"); f.dateFormat = "M/d HH:mm"
-            return f.string(from: Date(timeIntervalSince1970: resetAt)) + " 重置"
+            let f = DateFormatter(); f.locale = Locale(identifier: "en_US_POSIX"); f.dateFormat = "M/d HH:mm"
+            return L10n.tr("{0} 重置", f.string(from: Date(timeIntervalSince1970: resetAt)))
         }
         let minutes = max(1, Int(ceil((resetAt - now) / 60)))
-        if minutes >= 1440 { return "\(minutes / 1440)d \((minutes % 1440) / 60)h 后重置" }
-        if minutes >= 60 { return "\(minutes / 60)h \(minutes % 60)m 后重置" }
-        return "\(minutes)m 后重置"
+        if minutes >= 1440 { return L10n.tr("{0} 后重置", "\(minutes / 1440)d \((minutes % 1440) / 60)h") }
+        if minutes >= 60 { return L10n.tr("{0} 后重置", "\(minutes / 60)h \(minutes % 60)m") }
+        return L10n.tr("{0} 后重置", "\(minutes)m")
     }
     // A pacing reference, NOT a forecast of future consumption or provider policy.
     public func expectedRemaining(now: Double) -> Double? {
@@ -99,38 +101,38 @@ public struct ProviderResult: Codable, Identifiable, Equatable {
     }
     public var statusLabel: String {
         switch status {
-        case "ok": return "已连接"
-        case "partial": return "部分数据"
-        case "stale": return id == "windsurf" ? "本地缓存" : "上次读数"
-        case "auth_required": return "需要登录"
-        case "permission_required": return "需要授权"
-        case "network_error": return "暂时离线"
-        case "rate_limited": return "查询冷却中"
-        case "unsupported": return "未提供额度"
-        case "unavailable": return "未就绪"
-        default: return "待检查"
+        case "ok": return L10n.tr("已连接")
+        case "partial": return L10n.tr("部分数据")
+        case "stale": return L10n.tr(id == "windsurf" ? "本地缓存" : "上次读数")
+        case "auth_required": return L10n.tr("需要登录")
+        case "permission_required": return L10n.tr("需要授权")
+        case "network_error": return L10n.tr("暂时离线")
+        case "rate_limited": return L10n.tr("查询冷却中")
+        case "unsupported": return L10n.tr("未提供额度")
+        case "unavailable": return L10n.tr("未就绪")
+        default: return L10n.tr("待检查")
         }
     }
     public var lastValueLabel: String {
-        guard let fetchedAt else { return "暂无历史数据" }
-        let f = DateFormatter(); f.locale = Locale(identifier:"zh_CN"); f.dateFormat = "M/d HH:mm"
-        return (id == "windsurf" ? "缓存文件 " : "上次 ") + f.string(from: Date(timeIntervalSince1970:fetchedAt))
+        guard let fetchedAt else { return L10n.tr("暂无历史数据") }
+        let f = DateFormatter(); f.locale = Locale(identifier:"en_US_POSIX"); f.dateFormat = "M/d HH:mm"
+        return L10n.tr(id == "windsurf" ? "缓存文件 {0}" : "上次 {0}", f.string(from: Date(timeIntervalSince1970:fetchedAt)))
     }
     public func queryScheduleText(now: Double) -> String {
         guard let deadline = nextQueryAt, deadline.isFinite else { return "" }
-        if deadline <= now { return "等待下次检查" }
+        if deadline <= now { return L10n.tr("等待下次检查") }
         let date = Date(timeIntervalSince1970: deadline)
-        let format = DateFormatter(); format.locale = Locale(identifier: "zh_CN"); format.dateFormat = "HH:mm"
-        return "下次可查询 " + format.string(from: date)
+        let format = DateFormatter(); format.locale = Locale(identifier: "en_US_POSIX"); format.dateFormat = "HH:mm"
+        return L10n.tr("下次可查询 {0}", format.string(from: date))
     }
     public func queryWaitingText(now: Double) -> String {
         guard let deadline = nextQueryAt, deadline.isFinite, deadline > now else { return statusLabel }
         let minutes = max(1, Int(ceil((deadline - now) / 60)))
-        return (queryStatus == "cooldown" ? "查询暂停 · " : "更新间隔 · ") + "约\(minutes)分钟后可查询"
+        return L10n.tr(queryStatus == "cooldown" ? "查询暂停 · 约{0}分钟后可查询" : "更新间隔 · 约{0}分钟后可查询", minutes)
     }
     public var friendlyPlan: String? {
         guard let text = plan?.trimmingCharacters(in: .whitespacesAndNewlines), !text.isEmpty, !text.hasPrefix("LEVEL_") else { return nil }
-        let names = ["pro":"Pro", "max":"Max", "free":"Free", "team":"Team", "enterprise":"Enterprise", "individual":"个人", "plus":"Plus"]
+        let names = ["pro":"Pro", "max":"Max", "free":"Free", "team":"Team", "enterprise":"Enterprise", "individual":L10n.tr("个人"), "plus":"Plus"]
         return names[text.lowercased()] ?? text.replacingOccurrences(of: "_", with: " ").capitalized
     }
     public func isStale(now: Double, maxAge: Double) -> Bool {
@@ -163,16 +165,21 @@ public struct ProviderInfo: Identifiable, Equatable {
         ProviderInfo(id: "cursor", name: "Cursor", symbol: "cursorarrow", website: "https://cursor.com/dashboard"),
         ProviderInfo(id: "minimax", name: "MiniMax", symbol: "waveform", website: "https://platform.minimax.cn/subscribe/token-plan"),
         ProviderInfo(id: "windsurf", name: "Windsurf", symbol: "wind", website: "https://windsurf.com/subscription"),
-        ProviderInfo(id: "kiro", name: "Kiro", symbol: "k.square", website: "https://app.kiro.dev/account/usage")
+        ProviderInfo(id: "kiro", name: "Kiro", symbol: "k.square", website: "https://app.kiro.dev/account/usage"),
+        ProviderInfo(id: "opencode", name: "OpenCode Go", symbol: "curlybraces", website: "https://opencode.ai/auth"),
+        ProviderInfo(id: "cline", name: "ClinePass", symbol: "c.square", website: "https://app.cline.bot/dashboard/subscription?personal=true")
     ]
-    public var connectionHint: String {
+    public var connectionHint: String { L10n.tr(sourceConnectionHint) }
+    var sourceConnectionHint: String {
         switch id {
         case "cursor": return "先在 Cursor 应用登录；仅提取其登录状态并查询官方月度额度，不读取浏览器 Cookie。"
-        case "minimax": return "展开后选择中国/国际区域并保存 Token Plan 订阅 Key；普通 API 余额与此独立。"
+        case "minimax": return "展开后选择中国/国际区域并保存 Token Plan 订阅 Key；不是普通按量计费 API Key。"
         case "windsurf": return "只读取 Windsurf 应用的套餐缓存，始终标为非实时；请先打开官方应用更新。"
         case "kiro": return "先运行 kiro-cli login；查询仅使用官方 /usage 命令。官方 CLI 可能自行续期登录。"
         case "kimi": return "使用官方 Kimi CLI 登录；已有本机订阅 Key 保持可用。"
         case "glm": return "使用本机已有套餐凭据或对应区域的环境变量；原独立 Key 配置块已移除。"
+        case "opencode": return "先在 OpenCode 运行 /connect 选择 OpenCode Go 并粘贴订阅 Key；只读取 OpenCode 保存的这把 Key 查询官方 Go 用量。"
+        case "cline": return "先在 Cline（VS Code 扩展或 CLI）登录 Cline 账号；只读取其登录状态，不代为续期。Cline 长时间未运行时令牌可能过期。"
         default: return "只读取你已启用的套餐。没有可量化额度时不显示猜测值。"
         }
     }
