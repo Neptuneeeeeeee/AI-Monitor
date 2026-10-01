@@ -5,8 +5,8 @@
   "displayName": "AI Monitor",
   "dataDirectoryName": "AI Monitor",
   "executableName": "AIMonitor",
-  "version": "1.10.0",
-  "buildNumber": "19",
+  "version": "1.11.0",
+  "buildNumber": "20",
   "defaultEnabledProviders": [],
   "badge": "",
   "experimentalModules": []

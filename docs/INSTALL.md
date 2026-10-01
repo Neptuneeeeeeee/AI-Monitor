@@ -2,7 +2,7 @@
 
 ## Download the application, not the source archive
 
-Use **AI-Monitor-v1.9.4-macos-arm64.dmg** (recommended) or the matching `.zip` in this GitHub Release's **Assets** section. GitHub's automatic `Source code (zip)` is source code, not an installed application.
+Use **AI-Monitor-v1.11.0-macos-arm64.dmg** (recommended) or the matching `.zip` in this GitHub Release's **Assets** section. GitHub's automatic `Source code (zip)` is source code, not an installed application.
 
 **Requirements:** Apple Silicon (M-series), macOS 14 Sonoma or later. This release is not an Intel Mac or Windows build. The interface is currently primarily Chinese.
 
@@ -22,7 +22,7 @@ Closing a preview or a panel is not uninstalling the app. To quit, use **设置 
 
 | Provider | What must already be available |
 |---|---|
-| Claude | Your official Claude Code login; approve this app's specific credential-read request when needed. |
+| Claude | The Claude desktop app signed in: in **账号连接 → Claude** click **检查 Claude 读取** and choose **Always Allow** once, so its sign-in is used. Otherwise your official Claude Code CLI login. Terminal CLIs ignore the macOS system proxy; if your network needs one, sign in with `HTTPS_PROXY=http://host:port claude auth login`. |
 | Kimi | Official Kimi CLI login or your existing subscription credential. |
 | Codex | Official Codex CLI with the account whose quota you want to view. An API-key login is not a subscription plan. |
 | Copilot | GitHub CLI login with a suitable Copilot account. |
@@ -41,7 +41,7 @@ No quota is inferred from an absent account. The app does not run a model prompt
 
 本包适用于 **Apple Silicon（M 系列）Mac、macOS 14 及以上**。双击 DMG，把 **AI Monitor.app** 拖进 **Applications / 应用程序**，推出磁盘映像后再打开应用。ZIP 也可使用；不要下载 GitHub 自动生成的 Source code 当作安装包。
 
-**已经内置 Python**，无需安装 Xcode、Python、Homebrew 或编译源码。但读取 Claude、Kimi、Codex 等套餐仍需对应官方客户端及你自己的有效登录。首次打开在 **设置 → 套餐排序** 中启用需要的平台；菜单栏只显示已选择的平台。
+**已经内置 Python**，无需安装 Xcode、Python、Homebrew 或编译源码。但读取 Claude、Kimi、Codex 等套餐仍需对应官方客户端及你自己的有效登录。首次打开在 **设置 → 套餐排序** 中启用需要的平台；菜单栏只显示已选择的平台。Claude 推荐在 **设置 → 账号连接 → Claude** 点 **检查 Claude 读取**，在系统窗口中选择 **始终允许**，之后读取桌面版 Claude 的登录；否则使用终端 claude CLI 的登录。
 
 这是**未经过 Apple 公证的预发布版**，不是无提示的正式签名发行。macOS 首次拦截时，先核对来源和 SHA-256，并确认你愿意信任此预览版，再按 Apple 指引在 **系统设置 → 隐私与安全 → 仍要打开** 中对这个应用单独确认。不要关闭系统整体安全保护。企业管理设备可能不允许打开此类软件。
 

@@ -1,5 +1,12 @@
 # 1.9.1 — Official-source icons and disconnected interactive preview
 
+## 1.11.0 — Claude: desktop sign-in and a clear expired-login state
+
+- Read Claude's quota with the Claude desktop app's sign-in once you allow it (Settings → 账号连接 → 检查 Claude 读取, one macOS keychain prompt). The desktop app keeps that login current, so Claude no longer goes stale whenever the terminal CLI has not run for a few hours. Only the Keychain helper decrypts it and returns one `user:profile` token; the CLI login stays the fallback. See PRIVACY.md.
+- Recognise an expired Claude CLI login from its stored expiry before querying. The card now says the login expired (it used to say the query was rate limited), no request is spent on it, and a button offers the fix: use the desktop sign-in, or run the official `claude auth login`.
+- Pass the macOS system proxy to CLIs started from the app's sign-in scripts. Terminal CLIs ignore the system proxy, so without a TUN a sign-in or token renewal could leave from a blocked region and fail with 403.
+- Run background reads of another app's keychain item with keychain UI disabled; the no-UI query flags alone still let macOS show the access dialog.
+
 ## 1.10.0 — Plan quotas only; OpenCode Go and ClinePass
 
 - Remove the API balance view and its key management: the API/Plan toolbar switch, API settings and key editor, the separate API Vault helper and the DeepSeek, Kimi API, OpenAI/Claude cost, SiliconFlow, OpenRouter and Google AI Studio balance adapters. Existing `API/` and `APIAuth/` folders are no longer read; keys saved through that view stay in the login keychain until removed there. The MiniMax Token Plan key editor stays, since that key is the plan's own credential.
